@@ -29,6 +29,11 @@ const columns = [
         width: '110'
     },
     {
+        field: 'assignTo',
+        headerName: 'Assign TO',
+        width: '110'
+    },
+    {
         field: 'urgencyLevel',
         headerName: 'Urgency Level',
         width: '110'
@@ -36,6 +41,21 @@ const columns = [
     {
         field: 'status',
         headerName: 'Status',
+        width: '110'
+    },
+    {
+        field: 'projectIdentificationNumber',
+        headerName: 'Project Identification Number',
+        width: '110'
+    },
+    {
+        field: 'callBackNumber',
+        headerName: 'Callback Number',
+        width: '110'
+    },
+    {
+        field: 'chatLink',
+        headerName: 'Chat Link',
         width: '110'
     },
     {
@@ -48,32 +68,12 @@ const columns = [
         headerName: 'Comment',
         width: '110'
     },
-    {
-        field: 'assignTo',
-        headerName: 'Assign TO',
-        width: '110'
-    },
-    {
-        field: 'projectIdentificationNumber',
-        headerName: 'Project Identification Number',
-        width: '110'
-    },
-    {
-        field: 'callbackNumber',
-        headerName: 'Callback Number',
-        width: '110'
-    },
-    {
-        field: 'chatLink',
-        headerName: 'Chat Link',
-        width: '110'
-    }
 ]
 
 //Asynchronous method to fetch data from API
 const fetchData = async () => {
     try{
-        const response = await fetch('http://localhost:8080/task');
+        const response = await fetch('https://localhost:44328/api/Tasks');
         const data = await response.json();
         return data;
     }
@@ -98,8 +98,8 @@ function ListTask(){
                 console.error(error);
                 throw error;
             }
-            fetchRow();
         }
+        fetchRow();
     }, [])
 
 
@@ -114,10 +114,11 @@ function ListTask(){
                 initialState={{
                         pagination: {
                             paginationModel:{
-                                pageSize: 10,
+                                pageSize: 5,
                             },
                         },
                     }}
+                pageSizeOptions={[5]}
                 disableRowSelectionOnClick    
             /> 
         </Box>
