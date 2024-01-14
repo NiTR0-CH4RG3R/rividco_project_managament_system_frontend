@@ -208,7 +208,7 @@ export default function Customer(props) {
           >
             <Button
               variant="contained"
-              sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+              sx={{ width: "8.5rem", margin: "1em 0.5em !important" ,backgroundColor:"#d32f2f"}}
               color="secondary"
               startIcon={<ClearAllIcon />}
               onClick={() => clearData()}
@@ -223,7 +223,7 @@ export default function Customer(props) {
               loadingPosition="start"
               startIcon={<SaveIcon />}
               variant="contained"
-              sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+              sx={{ width: "8.5rem", margin: "1em 0.5em !important",backgroundColor:'#4caf50' }}
             >
               <span>Save</span>
             </LoadingButton>
