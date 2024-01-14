@@ -6,7 +6,6 @@ import Grid from "@mui/material/Grid";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import Button from "@mui/material/Button";
-import ClearIcon from '@mui/icons-material/Clear';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 
 const currencies = [
@@ -20,7 +19,7 @@ const currencies = [
   },
 ];
 
-export default function Add_Customer() {
+export default function Customer() {
   const [loading, setLoading] = React.useState(false);
   function handleClick() {
     setLoading(true);
