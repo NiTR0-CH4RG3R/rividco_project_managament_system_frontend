@@ -1,10 +1,18 @@
-import Add_Customer from "./Pages/Customers/Add_View_Edit/Add_Customer";
-
+import Customer from "./Pages/Customer/Customer";
+import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      {/*<Add_Customer/>*/}{/*create routes for this page */}
+      <Router>
+        <Routes>
+          <Route path="customer">
+            <Route path="add" element={<Customer type="add"/>}/>
+            <Route path="view/:id" element={<Customer type="view"/>}/>
+            <Route path="update/:id" element={<Customer type="update"/>}/>
+          </Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
