@@ -1,8 +1,9 @@
+import Add_Customer from "./Pages/Customers/Add_View_Edit/Add_Customer";
+
 function App() {
   return (
     <div className="App">
-      <h1>React App</h1>
-      <h1>This line is added to the master branch</h1>
+      <Add_Customer/>
     </div>
   );
 }
