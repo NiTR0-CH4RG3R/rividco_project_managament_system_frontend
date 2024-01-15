@@ -29,37 +29,33 @@ export default function Customer(props) {
   const [loading, setLoading] = React.useState(false);
 
   //set initial values in formik
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit ,handleReset} =
-    useFormik({
-      initialValues: {
-        firstName: "",
-        lastName: "",
-        address: "",
-        email: "",
-        category: "",
-        mobileNumber: "",
-        officeNumber: "",
-        comment: "",
-      },
-      validationSchema: customerValidation,
-      onSubmit:values=>{
-        sendData(values);
-
-      },
-    });
-  
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    handleReset,
+  } = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      address: "",
+      email: "",
+      category: "",
+      mobileNumber: "",
+      officeNumber: "",
+      comment: "",
+    },
+    validationSchema: customerValidation,
+    onSubmit: (values) => {
+      sendData(values);
+    },
+  });
 
   //
-  const [data, setData] = React.useState({
-    firstName: "",
-    lastName: "",
-    address: "",
-    email: "",
-    category: "",
-    mobileNumber: "",
-    officeNumber: "",
-    comment: "",
-  });
+
   const { id } = useParams();
   const navi = useNavigate();
 
@@ -78,21 +74,10 @@ export default function Customer(props) {
 
   function sendData(data) {
     //addhere
+    setLoading(true);
     console.log(data);
     clearData();
-    
-  }
-
-  function handleClick() {
-    setLoading(true);
-  }
-
-  function onChangeDateSet(id, value) {
-    setData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
-    console.log(data);
+    setLoading(false);
   }
 
   function clearData() {
