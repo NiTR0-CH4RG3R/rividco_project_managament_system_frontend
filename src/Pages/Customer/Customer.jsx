@@ -12,6 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 //add formik
 import { useFormik } from "formik";
+import { customerValidation } from "../../Validation/CustomerValidation";
 
 const currencies = [
   {
@@ -28,7 +29,7 @@ export default function Customer(props) {
   const [loading, setLoading] = React.useState(false);
 
   //set initial values in formik
-  const {values,handleBlur,handleChange} = useFormik({
+  const {values,handleBlur,handleChange,handleSubmit} = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
@@ -39,6 +40,8 @@ export default function Customer(props) {
       officeNumber: "",
       comment: "",
     },
+    validationSchema:customerValidation,
+    sendData,
   });
   console.log(values);
 
@@ -75,6 +78,7 @@ export default function Customer(props) {
 
   function sendData() {
     //addhere
+    console.log("Submited");
   }
 
   function handleClick() {
@@ -270,7 +274,8 @@ export default function Customer(props) {
 
             <LoadingButton
               color="secondary"
-              onClick={sendData}
+              //onClick={sendData}
+              onClick={handleSubmit}
               loading={loading}
               loadingPosition="start"
               startIcon={<SaveIcon />}
