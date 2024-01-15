@@ -79,6 +79,8 @@ export default function Customer(props) {
   function sendData(data) {
     //addhere
     console.log(data);
+    clearData();
+    
   }
 
   function handleClick() {
