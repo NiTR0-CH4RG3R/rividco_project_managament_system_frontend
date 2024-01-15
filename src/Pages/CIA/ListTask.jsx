@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import * as React from 'react';
 
@@ -6,67 +6,60 @@ const columns = [
     {
         field: 'taskId',
         headerName: 'Task Id',
-        width: '110'
     },
     {
         field: 'category',
         headerName: 'Category',
-        width: '110'
     },
     {
         field: 'requestedBy',
         headerName: 'Requsted By',
-        width: '110'
     },
     {
         field: 'addedBy',
         headerName: 'Added By',
-        width: '110'
     },
     {
         field: 'addedDate',
         headerName: 'Added Date',
-        width: '110'
     },
     {
         field: 'assignTo',
         headerName: 'Assign TO',
-        width: '110'
     },
     {
         field: 'urgencyLevel',
         headerName: 'Urgency Level',
-        width: '110'
     },
     {
         field: 'status',
         headerName: 'Status',
-        width: '110'
     },
     {
         field: 'projectIdentificationNumber',
         headerName: 'Project Identification Number',
-        width: '110'
     },
     {
         field: 'callBackNumber',
         headerName: 'Callback Number',
-        width: '110'
     },
     {
         field: 'chatLink',
         headerName: 'Chat Link',
-        width: '110'
+        width: '200',
+        renderCell: (params) => (
+            <Link href={params.value} target="_blank" rel="noopener noreferrer" >
+                {params.value}
+            </Link>
+        ),
     },
     {
         field: 'description',
         headerName: 'Description',
-        width: '110'
     },
     {
         field: 'comment',
         headerName: 'Comment',
-        width: '110'
     },
 ]
 
