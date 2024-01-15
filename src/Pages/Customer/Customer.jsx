@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { customerValidation } from "../../Validation/CustomerValidation";
 
+
 const currencies = [
   {
     value: "Customer",
@@ -133,6 +134,8 @@ export default function Customer(props) {
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                   onBlur={handleBlur}
+                  className={errors.firstName ? "input-error" : ""}
+                  helperText={errors.firstName}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -147,6 +150,8 @@ export default function Customer(props) {
                   //onChange={(e) => onChangeDateSet("lastName", e.target.value)}
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
+                  className={errors.lastName ? "input-error" : ""}
+                  helperText={errors.lastName}
                 />
               </Grid>
 
@@ -164,6 +169,8 @@ export default function Customer(props) {
                   //onChange={(e) => onChangeDateSet("address", e.target.value)}
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
+                  className={errors.address ? "input-error" : ""}
+                  helperText={errors.address}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -178,6 +185,10 @@ export default function Customer(props) {
                   //onChange={(e) => onChangeDateSet("email", e.target.value)}
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
+                  className={errors.email ? "input-error" : ""}
+                  style={{ borderColor: errors.email ? "red !important" : "" }}
+                  helperText={errors.email}
+ 
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -192,6 +203,8 @@ export default function Customer(props) {
                   //onChange={(e) => onChangeDateSet("category", e.target.value)}
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
+                  className={errors.category ? "input-error" : ""}
+                  helperText={errors.category}
                 >
                   {currencies.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -214,6 +227,8 @@ export default function Customer(props) {
                   }*/
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
+                  className={errors.mobileNumber ? "input-error" : ""}
+                  helperText={errors.mobileNumber}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -230,6 +245,8 @@ export default function Customer(props) {
                   }*/
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
+                  className={errors.officeNumber ? "input-error" : ""}
+                  helperText={errors.officeNumber}
                 />
               </Grid>
               <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
