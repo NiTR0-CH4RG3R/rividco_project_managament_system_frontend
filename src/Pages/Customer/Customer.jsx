@@ -8,7 +8,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import Button from "@mui/material/Button";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useParams } from "react-router-dom";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 //add formik
 import { useFormik } from "formik";
@@ -26,6 +26,22 @@ const currencies = [
 
 export default function Customer(props) {
   const [loading, setLoading] = React.useState(false);
+
+  //set initial values in formik
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      address: "",
+      email: "",
+      category: "",
+      mobileNumber: "",
+      officeNumber: "",
+      comment: "",
+    },
+  });
+
+  //
   const [data, setData] = React.useState({
     firstName: "",
     lastName: "",
@@ -37,7 +53,7 @@ export default function Customer(props) {
     comment: "",
   });
   const { id } = useParams();
-  const navi=useNavigate();
+  const navi = useNavigate();
 
   React.useEffect(() => {
     console.log(props);
@@ -100,7 +116,8 @@ export default function Customer(props) {
                   id="c_first_name"
                   label="First Name *"
                   sx={{ width: "100%" }}
-                  value={data.firstName}
+                  //value={data.firstName}
+                  value={formik.values.firstName}//set value using formik 
                   onChange={(e) => onChangeDateSet("firstName", e.target.value)}
                   disabled={props.type === "view"}
                 />
@@ -111,7 +128,8 @@ export default function Customer(props) {
                   id="c_last_name"
                   label="Last Name *"
                   sx={{ width: "100%" }}
-                  value={data.lastName}
+                  //value={data.lastName}
+                  value={formik.values.lastName}//set value using formik 
                   onChange={(e) => onChangeDateSet("lastName", e.target.value)}
                   disabled={props.type === "view"}
                 />
@@ -125,7 +143,8 @@ export default function Customer(props) {
                   multiline
                   maxRows={4}
                   sx={{ width: "100%" }}
-                  value={data.address}
+                  //value={data.address}
+                  value={formik.values.address}//set value using formik 
                   onChange={(e) => onChangeDateSet("address", e.target.value)}
                   disabled={props.type === "view"}
                 />
@@ -136,7 +155,8 @@ export default function Customer(props) {
                   id="c_email"
                   label="Email *"
                   sx={{ width: "100%" }}
-                  value={data.email}
+                  //value={data.email}
+                  value={formik.values.email}//set value using formik 
                   onChange={(e) => onChangeDateSet("email", e.target.value)}
                   disabled={props.type === "view"}
                 />
@@ -147,7 +167,8 @@ export default function Customer(props) {
                   select
                   label="Category *"
                   sx={{ width: "100%" }}
-                  value={data.category}
+                  //value={data.category}
+                  value={formik.values.category}//set value using formik 
                   onChange={(e) => onChangeDateSet("category", e.target.value)}
                   disabled={props.type === "view"}
                 >
@@ -164,7 +185,8 @@ export default function Customer(props) {
                   id="c_mobile_no"
                   label="Mobile No *"
                   sx={{ width: "100%" }}
-                  value={data.mobileNumber}
+                  //value={data.mobileNumber}
+                  value={formik.values.mobileNumber}//set value using formik 
                   onChange={(e) =>
                     onChangeDateSet("mobileNumber", e.target.value)
                   }
@@ -177,7 +199,8 @@ export default function Customer(props) {
                   id="c_office_no"
                   label="Office No"
                   sx={{ width: "100%" }}
-                  value={data.officeNumber}
+                  //value={data.officeNumber}
+                  value={formik.values.officeNumber}//set value using formik 
                   onChange={(e) =>
                     onChangeDateSet("officeNumber", e.target.value)
                   }
@@ -192,7 +215,8 @@ export default function Customer(props) {
                   multiline
                   rows={4}
                   sx={{ width: "100%" }}
-                  value={data.comment}
+                  //value={data.comment}
+                  value={formik.values.comment}//set value using formik 
                   onChange={(e) => onChangeDateSet("comment", e.target.value)}
                   disabled={props.type === "view"}
                 />
@@ -210,7 +234,11 @@ export default function Customer(props) {
           >
             <Button
               variant="contained"
-              sx={{ width: "8.5rem", margin: "1em 0.5em !important" ,backgroundColor:"#d32f2f"}}
+              sx={{
+                width: "8.5rem",
+                margin: "1em 0.5em !important",
+                backgroundColor: "#d32f2f",
+              }}
               color="secondary"
               startIcon={<ClearAllIcon />}
               onClick={() => clearData()}
@@ -225,7 +253,11 @@ export default function Customer(props) {
               loadingPosition="start"
               startIcon={<SaveIcon />}
               variant="contained"
-              sx={{ width: "8.5rem", margin: "1em 0.5em !important",backgroundColor:'#4caf50' }}
+              sx={{
+                width: "8.5rem",
+                margin: "1em 0.5em !important",
+                backgroundColor: "#4caf50",
+              }}
             >
               <span>Save</span>
             </LoadingButton>
