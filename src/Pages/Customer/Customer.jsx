@@ -29,7 +29,7 @@ export default function Customer(props) {
   const [loading, setLoading] = React.useState(false);
 
   //set initial values in formik
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit ,handleReset} =
     useFormik({
       initialValues: {
         firstName: "",
@@ -42,10 +42,12 @@ export default function Customer(props) {
         comment: "",
       },
       validationSchema: customerValidation,
-      sendData,
+      onSubmit:values=>{
+        sendData(values);
+
+      },
     });
-  console.log(values);
-  console.log(errors);
+  
 
   //
   const [data, setData] = React.useState({
@@ -74,9 +76,9 @@ export default function Customer(props) {
     //add here
   }
 
-  function sendData() {
+  function sendData(data) {
     //addhere
-    console.log("Submited");
+    console.log(data);
   }
 
   function handleClick() {
@@ -92,21 +94,12 @@ export default function Customer(props) {
   }
 
   function clearData() {
-    setData({
-      firstName: "",
-      lastName: "",
-      address: "",
-      email: "",
-      category: "",
-      mobileNumber: "",
-      officeNumber: "",
-      comment: "",
-    });
+    handleReset();
   }
 
   return (
     <div>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <div className="">
           <Box
             component="form"
