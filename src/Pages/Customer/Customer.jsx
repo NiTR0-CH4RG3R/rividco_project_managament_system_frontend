@@ -14,8 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { customerValidation } from "../../Validation/CustomerValidation";
 
-
-const currencies = [
+const categoryType = [
   {
     value: "Customer",
     label: "Customer",
@@ -30,26 +29,23 @@ export default function Customer(props) {
   const [loading, setLoading] = React.useState(false);
 
   //set initial values in formik
-  const {values,errors,touched,handleBlur,handleChange,handleSubmit} = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      address: "",
-      email: "",
-      category: "",
-      mobileNumber: "",
-      officeNumber: "",
-      comment: "",
-    },
-    validationSchema:customerValidation,
-    sendData,
-  });
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        firstName: "",
+        lastName: "",
+        address: "",
+        email: "",
+        category: "",
+        mobileNumber: "",
+        officeNumber: "",
+        comment: "",
+      },
+      validationSchema: customerValidation,
+      sendData,
+    });
   console.log(values);
   console.log(errors);
-
- 
-
-  
 
   //
   const [data, setData] = React.useState({
@@ -128,13 +124,11 @@ export default function Customer(props) {
                   name="firstName"
                   label="First Name *"
                   sx={{ width: "100%" }}
-                  //value={data.firstName}
-                  value={values.firstName}//set value using formik 
-                  //onChange={(e) => onChangeDateSet("firstName", e.target.value)}
-                  onChange={handleChange}//get onchange value using formik
+                  value={values.firstName} //set value using formik
+                  onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
                   onBlur={handleBlur}
-                  className={errors.firstName && touched.firstName ? "input-error" : ""}
+                  error={errors.firstName}
                   helperText={errors.firstName}
                 />
               </Grid>
@@ -145,12 +139,10 @@ export default function Customer(props) {
                   name="lastName"
                   label="Last Name *"
                   sx={{ width: "100%" }}
-                  //value={data.lastName}
-                  value={values.lastName}//set value using formik 
-                  //onChange={(e) => onChangeDateSet("lastName", e.target.value)}
-                  onChange={handleChange}//get onchange value using formik
+                  value={values.lastName} //set value using formik
+                  onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.lastName && touched.lastName ? "input-error" : ""}
+                  error={errors.lastName}
                   helperText={errors.lastName}
                 />
               </Grid>
@@ -164,12 +156,10 @@ export default function Customer(props) {
                   multiline
                   maxRows={4}
                   sx={{ width: "100%" }}
-                  //value={data.address}
-                  value={values.address}//set value using formik 
-                  //onChange={(e) => onChangeDateSet("address", e.target.value)}
-                  onChange={handleChange}//get onchange value using formik
+                  value={values.address} //set value using formik
+                  onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.address && touched.address ? "input-error" : ""}
+                  error={errors.address}
                   helperText={errors.address}
                 />
               </Grid>
@@ -180,15 +170,12 @@ export default function Customer(props) {
                   name="email"
                   label="Email *"
                   sx={{ width: "100%" }}
-                  //value={data.email}
-                  value={values.email}//set value using formik 
-                  //onChange={(e) => onChangeDateSet("email", e.target.value)}
-                  onChange={handleChange}//get onchange value using formik
+                  value={values.email} //set value using formik
+                  onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.email ? "input-error" : ""}
-                  style={{ borderColor: errors.email && touched.email ? "red !important" : "" }}
+                  className={errors.email && touched.email ? "input-error" : ""}
+                  error={errors.email}
                   helperText={errors.email}
- 
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -198,15 +185,13 @@ export default function Customer(props) {
                   select
                   label="Category *"
                   sx={{ width: "100%" }}
-                  //value={data.category}
-                  value={values.category}//set value using formik 
-                  //onChange={(e) => onChangeDateSet("category", e.target.value)}
-                  onChange={handleChange}//get onchange value using formik
+                  value={values.category} //set value using formik
+                  onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.category && touched.category? "input-error" : ""}
+                  error={errors.category}
                   helperText={errors.category}
                 >
-                  {currencies.map((option) => (
+                  {categoryType.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.label}
                     </MenuItem>
@@ -219,15 +204,12 @@ export default function Customer(props) {
                   id="c_mobile_no"
                   name="mobileNumber"
                   label="Mobile No *"
+                  ß
                   sx={{ width: "100%" }}
-                  //value={data.mobileNumber}
-                  value={values.mobileNumber}//set value using formik 
-                  /*onChange={(e) =>
-                    onChangeDateSet("mobileNumber", e.target.value)
-                  }*/
-                  onChange={handleChange}//get onchange value using formik
+                  value={values.mobileNumber} //set value using formik
+                  onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.mobileNumber && touched.mobileNumber ? "input-error" : ""}
+                  error={errors.mobileNumber}
                   helperText={errors.mobileNumber}
                 />
               </Grid>
@@ -238,14 +220,10 @@ export default function Customer(props) {
                   name="officeNumber"
                   label="Office No"
                   sx={{ width: "100%" }}
-                  //value={data.officeNumber}
-                  value={values.officeNumber}//set value using formik 
-                  /*onChange={(e) =>
-                    onChangeDateSet("officeNumber", e.target.value)
-                  }*/
-                  onChange={handleChange}//get onchange value using formik
+                  value={values.officeNumber} //set value using formik
+                  onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.officeNumber && touched.officeNumber? "input-error" : ""}
+                  error={errors.officeNumberß}
                   helperText={errors.officeNumber}
                 />
               </Grid>
@@ -258,10 +236,8 @@ export default function Customer(props) {
                   multiline
                   rows={4}
                   sx={{ width: "100%" }}
-                  //value={data.comment}
-                  value={values.comment}//set value using formik 
-                  //onChange={(e) => onChangeDateSet("comment", e.target.value)}
-                  onChange={handleChange}//get onchange value using formik
+                  value={values.comment} //set value using formikß
+                  onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -292,8 +268,8 @@ export default function Customer(props) {
 
             <LoadingButton
               color="secondary"
-              //onClick={sendData}
-              onClick={handleSubmit}
+              type="submit"
+              //onClick={handleSubmit}
               loading={loading}
               loadingPosition="start"
               startIcon={<SaveIcon />}
