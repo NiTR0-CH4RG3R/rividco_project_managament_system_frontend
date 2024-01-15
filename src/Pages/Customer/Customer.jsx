@@ -28,7 +28,7 @@ export default function Customer(props) {
   const [loading, setLoading] = React.useState(false);
 
   //set initial values in formik
-  const formik = useFormik({
+  const {values,handleBlur,handleChange} = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
@@ -40,6 +40,11 @@ export default function Customer(props) {
       comment: "",
     },
   });
+  console.log(values);
+
+ 
+
+  
 
   //
   const [data, setData] = React.useState({
@@ -114,25 +119,28 @@ export default function Customer(props) {
                 <TextField
                   placeholder="Please Enter Your First Name"
                   id="c_first_name"
+                  name="firstName"
                   label="First Name *"
                   sx={{ width: "100%" }}
                   //value={data.firstName}
-                  value={formik.values.firstName}//set value using formik 
+                  value={values.firstName}//set value using formik 
                   //onChange={(e) => onChangeDateSet("firstName", e.target.value)}
-                  onChange={formik.handleChange}//get onchange value using formik
+                  onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
+                  onBlur={handleBlur}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
                   placeholder="Please Enter Your Last Name"
                   id="c_last_name"
+                  name="lastName"
                   label="Last Name *"
                   sx={{ width: "100%" }}
                   //value={data.lastName}
-                  value={formik.values.lastName}//set value using formik 
+                  value={values.lastName}//set value using formik 
                   //onChange={(e) => onChangeDateSet("lastName", e.target.value)}
-                  onChange={formik.handleChange}//get onchange value using formik
+                  onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -141,14 +149,15 @@ export default function Customer(props) {
                 <TextField
                   placeholder="No: 00 , road ,city"
                   id="c_address"
+                  name="address"
                   label="Address *"
                   multiline
                   maxRows={4}
                   sx={{ width: "100%" }}
                   //value={data.address}
-                  value={formik.values.address}//set value using formik 
+                  value={values.address}//set value using formik 
                   //onChange={(e) => onChangeDateSet("address", e.target.value)}
-                  onChange={formik.handleChange}//get onchange value using formik
+                  onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -156,25 +165,27 @@ export default function Customer(props) {
                 <TextField
                   placeholder="example@.com"
                   id="c_email"
+                  name="email"
                   label="Email *"
                   sx={{ width: "100%" }}
                   //value={data.email}
-                  value={formik.values.email}//set value using formik 
+                  value={values.email}//set value using formik 
                   //onChange={(e) => onChangeDateSet("email", e.target.value)}
-                  onChange={formik.handleChange}//get onchange value using formik
+                  onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
                   id="c_category"
+                  name="category"
                   select
                   label="Category *"
                   sx={{ width: "100%" }}
                   //value={data.category}
-                  value={formik.values.category}//set value using formik 
+                  value={values.category}//set value using formik 
                   //onChange={(e) => onChangeDateSet("category", e.target.value)}
-                  onChange={formik.handleChange}//get onchange value using formik
+                  onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 >
                   {currencies.map((option) => (
@@ -188,14 +199,15 @@ export default function Customer(props) {
                 <TextField
                   placeholder="07xxxxxxxx"
                   id="c_mobile_no"
+                  name="mobileNumber"
                   label="Mobile No *"
                   sx={{ width: "100%" }}
                   //value={data.mobileNumber}
-                  value={formik.values.mobileNumber}//set value using formik 
+                  value={values.mobileNumber}//set value using formik 
                   /*onChange={(e) =>
                     onChangeDateSet("mobileNumber", e.target.value)
                   }*/
-                  onChange={formik.handleChange}//get onchange value using formik
+                  onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -203,14 +215,15 @@ export default function Customer(props) {
                 <TextField
                   placeholder="0xxxxxxxxx"
                   id="c_office_no"
+                  name="officeNumber"
                   label="Office No"
                   sx={{ width: "100%" }}
                   //value={data.officeNumber}
-                  value={formik.values.officeNumber}//set value using formik 
+                  value={values.officeNumber}//set value using formik 
                   /*onChange={(e) =>
                     onChangeDateSet("officeNumber", e.target.value)
                   }*/
-                  onChange={formik.handleChange}//get onchange value using formik
+                  onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -218,14 +231,15 @@ export default function Customer(props) {
                 <TextField
                   placeholder="Please Enter Your Comment"
                   id="c_comment"
+                  name="comment"
                   label="Comment"
                   multiline
                   rows={4}
                   sx={{ width: "100%" }}
                   //value={data.comment}
-                  value={formik.values.comment}//set value using formik 
+                  value={values.comment}//set value using formik 
                   //onChange={(e) => onChangeDateSet("comment", e.target.value)}
-                  onChange={formik.handleChange}//get onchange value using formik
+                  onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
