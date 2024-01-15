@@ -118,7 +118,8 @@ export default function Customer(props) {
                   sx={{ width: "100%" }}
                   //value={data.firstName}
                   value={formik.values.firstName}//set value using formik 
-                  onChange={(e) => onChangeDateSet("firstName", e.target.value)}
+                  //onChange={(e) => onChangeDateSet("firstName", e.target.value)}
+                  onChange={formik.handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -130,7 +131,8 @@ export default function Customer(props) {
                   sx={{ width: "100%" }}
                   //value={data.lastName}
                   value={formik.values.lastName}//set value using formik 
-                  onChange={(e) => onChangeDateSet("lastName", e.target.value)}
+                  //onChange={(e) => onChangeDateSet("lastName", e.target.value)}
+                  onChange={formik.handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -145,7 +147,8 @@ export default function Customer(props) {
                   sx={{ width: "100%" }}
                   //value={data.address}
                   value={formik.values.address}//set value using formik 
-                  onChange={(e) => onChangeDateSet("address", e.target.value)}
+                  //onChange={(e) => onChangeDateSet("address", e.target.value)}
+                  onChange={formik.handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -157,7 +160,8 @@ export default function Customer(props) {
                   sx={{ width: "100%" }}
                   //value={data.email}
                   value={formik.values.email}//set value using formik 
-                  onChange={(e) => onChangeDateSet("email", e.target.value)}
+                  //onChange={(e) => onChangeDateSet("email", e.target.value)}
+                  onChange={formik.handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -169,7 +173,8 @@ export default function Customer(props) {
                   sx={{ width: "100%" }}
                   //value={data.category}
                   value={formik.values.category}//set value using formik 
-                  onChange={(e) => onChangeDateSet("category", e.target.value)}
+                  //onChange={(e) => onChangeDateSet("category", e.target.value)}
+                  onChange={formik.handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 >
                   {currencies.map((option) => (
@@ -187,9 +192,10 @@ export default function Customer(props) {
                   sx={{ width: "100%" }}
                   //value={data.mobileNumber}
                   value={formik.values.mobileNumber}//set value using formik 
-                  onChange={(e) =>
+                  /*onChange={(e) =>
                     onChangeDateSet("mobileNumber", e.target.value)
-                  }
+                  }*/
+                  onChange={formik.handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -201,9 +207,10 @@ export default function Customer(props) {
                   sx={{ width: "100%" }}
                   //value={data.officeNumber}
                   value={formik.values.officeNumber}//set value using formik 
-                  onChange={(e) =>
+                  /*onChange={(e) =>
                     onChangeDateSet("officeNumber", e.target.value)
-                  }
+                  }*/
+                  onChange={formik.handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
@@ -217,7 +224,8 @@ export default function Customer(props) {
                   sx={{ width: "100%" }}
                   //value={data.comment}
                   value={formik.values.comment}//set value using formik 
-                  onChange={(e) => onChangeDateSet("comment", e.target.value)}
+                  //onChange={(e) => onChangeDateSet("comment", e.target.value)}
+                  onChange={formik.handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                 />
               </Grid>
