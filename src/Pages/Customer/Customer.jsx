@@ -30,7 +30,7 @@ export default function Customer(props) {
   const [loading, setLoading] = React.useState(false);
 
   //set initial values in formik
-  const {values,errors,handleBlur,handleChange,handleSubmit} = useFormik({
+  const {values,errors,touched,handleBlur,handleChange,handleSubmit} = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
@@ -134,7 +134,7 @@ export default function Customer(props) {
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                   onBlur={handleBlur}
-                  className={errors.firstName ? "input-error" : ""}
+                  className={errors.firstName && touched.firstName ? "input-error" : ""}
                   helperText={errors.firstName}
                 />
               </Grid>
@@ -150,7 +150,7 @@ export default function Customer(props) {
                   //onChange={(e) => onChangeDateSet("lastName", e.target.value)}
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.lastName ? "input-error" : ""}
+                  className={errors.lastName && touched.lastName ? "input-error" : ""}
                   helperText={errors.lastName}
                 />
               </Grid>
@@ -169,7 +169,7 @@ export default function Customer(props) {
                   //onChange={(e) => onChangeDateSet("address", e.target.value)}
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.address ? "input-error" : ""}
+                  className={errors.address && touched.address ? "input-error" : ""}
                   helperText={errors.address}
                 />
               </Grid>
@@ -186,7 +186,7 @@ export default function Customer(props) {
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
                   className={errors.email ? "input-error" : ""}
-                  style={{ borderColor: errors.email ? "red !important" : "" }}
+                  style={{ borderColor: errors.email && touched.email ? "red !important" : "" }}
                   helperText={errors.email}
  
                 />
@@ -203,7 +203,7 @@ export default function Customer(props) {
                   //onChange={(e) => onChangeDateSet("category", e.target.value)}
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.category ? "input-error" : ""}
+                  className={errors.category && touched.category? "input-error" : ""}
                   helperText={errors.category}
                 >
                   {currencies.map((option) => (
@@ -227,7 +227,7 @@ export default function Customer(props) {
                   }*/
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.mobileNumber ? "input-error" : ""}
+                  className={errors.mobileNumber && touched.mobileNumber ? "input-error" : ""}
                   helperText={errors.mobileNumber}
                 />
               </Grid>
@@ -245,7 +245,7 @@ export default function Customer(props) {
                   }*/
                   onChange={handleChange}//get onchange value using formik
                   disabled={props.type === "view"}
-                  className={errors.officeNumber ? "input-error" : ""}
+                  className={errors.officeNumber && touched.officeNumber? "input-error" : ""}
                   helperText={errors.officeNumber}
                 />
               </Grid>
