@@ -203,7 +203,7 @@ export default function Customer(props) {
                   value={values.officeNumber} //set value using formik
                   onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  error={errors.officeNumberß}
+                  error={errors.officeNumber}
                   helperText={errors.officeNumber}
                 />
               </Grid>
