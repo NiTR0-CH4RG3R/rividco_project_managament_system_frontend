@@ -29,7 +29,7 @@ export default function Customer(props) {
   const [loading, setLoading] = React.useState(false);
 
   //set initial values in formik
-  const {values,handleBlur,handleChange,handleSubmit} = useFormik({
+  const {values,errors,handleBlur,handleChange,handleSubmit} = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
@@ -44,6 +44,7 @@ export default function Customer(props) {
     sendData,
   });
   console.log(values);
+  console.log(errors);
 
  
 
