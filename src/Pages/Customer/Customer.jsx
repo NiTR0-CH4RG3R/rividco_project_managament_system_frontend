@@ -240,7 +240,7 @@ export default function Customer(props) {
             <Button
               variant="contained"
               sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
-              color="secondary"
+              color="primary"
               startIcon={<EditIcon />}
               onClick={() => navi(`/customer/update/${id}`)}
             >
