@@ -4,7 +4,8 @@ import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <Router>
+      {/*<Router>
+        customer page need this kind route 
         <Routes>
           <Route path="customer">
             <Route path="add" element={<Customer type="add"/>}/>
@@ -12,7 +13,9 @@ function App() {
             <Route path="update/:id" element={<Customer type="update"/>}/>
           </Route>
         </Routes>
-      </Router>
+        
+  </Router>*/}
+
     </div>
   );
 }
