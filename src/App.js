@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       {/*<Router>
-        customer page need this kind route 
+        
         <Routes>
           <Route path="customer">
             <Route path="add" element={<Customer type="add"/>}/>
