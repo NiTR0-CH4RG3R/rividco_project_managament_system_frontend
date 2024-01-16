@@ -108,8 +108,8 @@ export default function Customer(props) {
                   onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
                   onBlur={handleBlur}
-                  error={errors.firstName}
-                  helperText={errors.firstName}
+                  error={touched.firstName && errors.firstName}
+                  helperText={touched.firstName ? errors.firstName : ""}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -122,8 +122,9 @@ export default function Customer(props) {
                   value={values.lastName} //set value using formik
                   onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  error={errors.lastName}
-                  helperText={errors.lastName}
+                  onBlur={handleBlur}
+                  error={touched.lastName && errors.lastName}
+                  helperText={touched.lastName ? errors.lastName : ""}
                 />
               </Grid>
 
@@ -139,8 +140,9 @@ export default function Customer(props) {
                   value={values.address} //set value using formik
                   onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  error={errors.address}
-                  helperText={errors.address}
+                  onBlur={handleBlur}
+                  error={touched.address && errors.address}
+                  helperText={touched.address ? errors.address : ""}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -154,8 +156,9 @@ export default function Customer(props) {
                   onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
                   className={errors.email && touched.email ? "input-error" : ""}
-                  error={errors.email}
-                  helperText={errors.email}
+                  onBlur={handleBlur}
+                  error={touched.email && errors.email}
+                  helperText={touched.email ? errors.email : ""}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -168,8 +171,9 @@ export default function Customer(props) {
                   value={values.category} //set value using formik
                   onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  error={errors.category}
-                  helperText={errors.category}
+                  onBlur={handleBlur}
+                  error={touched.category && errors.category}
+                  helperText={touched.category ? errors.category : ""}
                 >
                   {categoryType.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -184,13 +188,13 @@ export default function Customer(props) {
                   id="c_mobile_no"
                   name="mobileNumber"
                   label="Mobile No *"
-                  ß
                   sx={{ width: "100%" }}
                   value={values.mobileNumber} //set value using formik
                   onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  error={errors.mobileNumber}
-                  helperText={errors.mobileNumber}
+                  onBlur={handleBlur}
+                  error={touched.mobileNumber && errors.mobileNumber}
+                  helperText={touched.mobileNumber ? errors.mobileNumber : ""}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -203,8 +207,9 @@ export default function Customer(props) {
                   value={values.officeNumber} //set value using formik
                   onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
-                  error={errors.officeNumber}
-                  helperText={errors.officeNumber}
+                  onBlur={handleBlur}
+                  error={touched.officeNumber && errors.officeNumber}
+                  helperText={touched.officeNumber ? errors.officeNumber : ""}
                 />
               </Grid>
               <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
