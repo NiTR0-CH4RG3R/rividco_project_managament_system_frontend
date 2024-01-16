@@ -1,11 +1,11 @@
 import * as yup from "yup";
 
 export const vendorValidation = yup.object().shape({
-  firstName: yup.string().required("Required"),
-  lastName: yup.string().required("Required"),
+  name: yup.string().required("Required"),
+  
   address: yup.string().required("Required"),
   email: yup.string().email("Please enter a valid email").required("Required"),
-  category: yup.string().required("Required"),
+  
   mobileNumber: yup
     .string()
     .matches(
