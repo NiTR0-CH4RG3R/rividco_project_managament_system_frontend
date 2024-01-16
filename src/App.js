@@ -5,7 +5,7 @@ import Vendor from "./Pages/Vendor/Vendor";
 function App() {
   return (
     <div className="App">
-      <Router>
+      {/*<Router>
         
         <Routes>
           <Route path="customer">
@@ -20,7 +20,7 @@ function App() {
           </Route>
         </Routes>
         
-  </Router>
+  </Router>*/}
 
     </div>
   );
