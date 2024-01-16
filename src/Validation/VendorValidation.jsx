@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const customerValidation = yup.object().shape({
+export const vendorValidation = yup.object().shape({
   firstName: yup.string().required("Required"),
   lastName: yup.string().required("Required"),
   address: yup.string().required("Required"),
