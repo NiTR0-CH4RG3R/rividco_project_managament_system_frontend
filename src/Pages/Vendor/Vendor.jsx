@@ -95,8 +95,8 @@ export default function Vendor(props) {
                   onChange={handleChange} //get onchange value using formik
                   disabled={props.type === "view"}
                   onBlur={handleBlur}
-                  error={errors.name}
-                  helperText={errors.name}
+                  error={touched.name && errors.name}
+                  helperText={touched.name ? errors.name : ""}
                 />
               </Grid>
 
@@ -109,11 +109,12 @@ export default function Vendor(props) {
                   multiline
                   maxRows={4}
                   sx={{ width: "100%" }}
-                  value={values.address} //set value using formik
-                  onChange={handleChange} //get onchange value using formik
+                  value={values.address}
+                  onChange={handleChange}
                   disabled={props.type === "view"}
-                  error={errors.address}
-                  helperText={errors.address}
+                  onBlur={handleBlur}
+                  error={touched.address && errors.address}
+                  helperText={touched.address ? errors.address : ""}
                 />
               </Grid>
               <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -124,12 +125,12 @@ export default function Vendor(props) {
                   name="email"
                   label="Email *"
                   sx={{ width: "100%" }}
-                  value={values.email} //set value using formik
-                  onChange={handleChange} //get onchange value using formik
+                  value={values.email}
+                  onChange={handleChange}
                   disabled={props.type === "view"}
-                  className={errors.email && touched.email ? "input-error" : ""}
-                  error={errors.email}
-                  helperText={errors.email}
+                  onBlur={handleBlur}
+                  error={touched.email && errors.email}
+                  helperText={touched.email ? errors.email : ""}
                 />
               </Grid>
 
@@ -139,13 +140,13 @@ export default function Vendor(props) {
                   id="v_mobile_no"
                   name="mobileNumber"
                   label="Mobile No *"
-                  ß
                   sx={{ width: "100%" }}
-                  value={values.mobileNumber} //set value using formik
-                  onChange={handleChange} //get onchange value using formik
+                  value={values.mobileNumber}
+                  onChange={handleChange}
                   disabled={props.type === "view"}
-                  error={errors.mobileNumber}
-                  helperText={errors.mobileNumber}
+                  onBlur={handleBlur}
+                  error={touched.mobileNumber && errors.mobileNumber}
+                  helperText={touched.mobileNumber ? errors.mobileNumber : ""}
                 />
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -155,11 +156,12 @@ export default function Vendor(props) {
                   name="officeNumber"
                   label="Office No"
                   sx={{ width: "100%" }}
-                  value={values.officeNumber} //set value using formik
-                  onChange={handleChange} //get onchange value using formik
+                  value={values.officeNumber}
+                  onChange={handleChange}
                   disabled={props.type === "view"}
-                  error={errors.officeNumber}
-                  helperText={errors.officeNumber}
+                  onBlur={handleBlur}
+                  error={touched.officeNumber && errors.officeNumber}
+                  helperText={touched.officeNumber ? errors.officeNumber : ""}
                 />
               </Grid>
               <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
