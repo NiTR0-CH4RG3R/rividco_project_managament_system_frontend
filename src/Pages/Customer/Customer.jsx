@@ -99,10 +99,11 @@ export default function Customer(props) {
             <Grid container spacing={2} sx={{ width: "100vw" }}>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   placeholder="Please Enter Your First Name"
                   id="c_first_name"
                   name="firstName"
-                  label="First Name *"
+                  label="First Name "
                   sx={{ width: "100%" }}
                   value={values.firstName} //set value using formik
                   onChange={handleChange} //get onchange value using formik
@@ -114,10 +115,11 @@ export default function Customer(props) {
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   placeholder="Please Enter Your Last Name"
                   id="c_last_name"
                   name="lastName"
-                  label="Last Name *"
+                  label="Last Name "
                   sx={{ width: "100%" }}
                   value={values.lastName} //set value using formik
                   onChange={handleChange} //get onchange value using formik
@@ -130,10 +132,11 @@ export default function Customer(props) {
 
               <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   placeholder="No: 00 , road ,city"
                   id="c_address"
                   name="address"
-                  label="Address *"
+                  label="Address "
                   multiline
                   maxRows={4}
                   sx={{ width: "100%" }}
@@ -147,10 +150,11 @@ export default function Customer(props) {
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   placeholder="example@.com"
                   id="c_email"
                   name="email"
-                  label="Email *"
+                  label="Email "
                   sx={{ width: "100%" }}
                   value={values.email} //set value using formik
                   onChange={handleChange} //get onchange value using formik
@@ -163,10 +167,11 @@ export default function Customer(props) {
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   id="c_category"
                   name="category"
                   select
-                  label="Category *"
+                  label="Category "
                   sx={{ width: "100%" }}
                   value={values.category} //set value using formik
                   onChange={handleChange} //get onchange value using formik
@@ -184,10 +189,11 @@ export default function Customer(props) {
               </Grid>
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   placeholder="07xxxxxxxx"
                   id="c_mobile_no"
                   name="mobileNumber"
-                  label="Mobile No *"
+                  label="Mobile No "
                   sx={{ width: "100%" }}
                   value={values.mobileNumber} //set value using formik
                   onChange={handleChange} //get onchange value using formik
