@@ -1,168 +1,209 @@
-import React, { useState, useEffect } from 'react'
-import { Button,TextField,Grid,MenuItem,Box } from '@mui/material'
-import ClearAllIcon from '@mui/icons-material/ClearAll'
-import SaveIcon from '@mui/icons-material/Save'
+import React, { useEffect } from 'react';
+import { Button, TextField, Grid, MenuItem, Box } from '@mui/material';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import SaveIcon from '@mui/icons-material/Save';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
+const validationSchema = yup.object().shape({
+  addedBy: yup.string().required('AddedBy is required'),
+  addedDate: yup.date().required('AddedDate is required'),
+  comment: yup.string().required('Comment is required'),
+});
+
+const uploadFile = async (file, category) => {
+    // Replace this with your actual file storage logic (e.g., API request to your server)
+    console.log(`Uploading file to category ${category}:`, file.name);
+  
+    // Simulating an asynchronous operation (e.g., API call) with setTimeout
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log(`File uploaded successfully to category ${category}.`);
+        resolve({ success: true });
+      }, 2000);
+    });
+  };
 
 const AddTaskResources = () => {
+  const formik = useFormik({
+    initialValues: {
+      taskId: '',
+      selectedPath: '',
+      selectedFile: null,
+      addedBy: '',
+      addedDate: '',
+      comment: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      try {
+        await validationSchema.validate(values, { abortEarly: false });
 
-    const [taskId, setTaskId] = useState('');
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [selectedPath, setSelectedPath] = useState('');
+        // Add form submission logic here
+        console.log('Form submitted with values:', values);
 
-    useEffect(() => {
-        const fetchTaskId = async () => {
-          try {
-            const response = await fetch('http://localhost:3001/taskId'); // Replace with actual endpoint
-            const data = await response.json();
-            setTaskId(data.taskId);
-          } catch (error) {
-            console.error('Error fetching TaskId:', error.message);
-          }
-        };
-    
-        fetchTaskId();
-      }, []);
+      } catch (error) {
+        console.error('Validation Error:', error.message);
+      }
+    },
+  });
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        setSelectedFile(file);
+  useEffect(() => {
+    const fetchTaskId = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/taskId');
+        const data = await response.json();
+        formik.setFieldValue('taskId', data.taskId);
+      } catch (error) {
+        console.error('Error fetching TaskId:', error.message);
+      }
     };
 
-    const handlePathChange = (event) => {
-        const path = event.target.value;
-        setSelectedPath(path);
-    };
+    fetchTaskId();
+  }, [formik]);
 
-    const handleUpload = async () => {
-        try {
-          if (!selectedFile) {
-            alert('Please select a file.');
-            return;
-          }
-    
-          const formData = new FormData();
-          formData.append('file', selectedFile);
-          formData.append('category', selectedPath);
-    
-          // Make an API request to the server
-          const response = await fetch('http://localhost:3001/upload', {
-            method: 'POST',
-            body: formData,
-          });
-    
-          const data = await response.json();
-          console.log(data);
-    
-          setSelectedFile(null);
-          setSelectedPath('images');
-        } catch (error) {
-          console.error('Error uploading file:', error.message);
-        }
-      };
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    formik.setFieldValue('selectedFile', file);
+  };
 
-        const [loading, setLoading] = React.useState(false);
-        function handleClick() {
-            setLoading(true);
-        };
-    
+  const handlePathChange = (event) => {
+    const path = event.target.value;
+    formik.setFieldValue('selectedPath', path);
+  };
+
+  const handleUpload = async () => {
+    const { selectedFile, selectedPath } = formik.values;
+
+    try {
+      if (!selectedFile) {
+        alert('Please select a file.');
+        return;
+      }
+
+      const uploadResponse = await uploadFile(selectedFile, selectedPath);
+
+      if (uploadResponse.success) {
+        console.log('File uploaded successfully.');
+      } else {
+        console.error('File upload failed.');
+      }
+
+      formik.setFieldValue('selectedFile', null);
+
+    } catch (error) {
+      console.error('Error uploading file:', error.message);
+    }
+  };
+
+  const handleClear = () => {
+    formik.resetForm();
+  };
 
   return (
     <div>
-        <form>
+      <form onSubmit={formik.handleSubmit}>
         <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 1 },
-            }}
-            noValidate
-            autoComplete="off"
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
         >
-
-        <Grid container spacing={2} sx={{ width: "100vw" }}>
+          <Grid container spacing={2} sx={{ width: "100vw" }}>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                <TextField 
-                    id="component-disabled" 
-                    value={taskId} 
-                    variant='outlined' 
-                    size='small' 
-                    disabled 
-                    label='TaskId'
-                    sx={{ width: "100%" }}
-                />
+              <TextField
+                id="taskId"
+                variant='outlined'
+                size='small'
+                disabled
+                label='TaskId'
+                sx={{ width: "100%" }}
+                {...formik.getFieldProps('taskId')}
+              />
             </Grid>
 
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                <TextField
-                    select
-                    value={selectedPath}
-                    variant='outlined'
-                    onChange={handlePathChange}
-                    label="Category"
-                    size='small'
-                    sx={{ width: "100%" }}
-                >
-                    <MenuItem value='images'>Image</MenuItem>
-                    <MenuItem value='documents'>Document</MenuItem>
-                    <MenuItem value='others'>Other</MenuItem>
-                </TextField>
-            </Grid>
-            
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                <TextField 
-                    type="file" 
-                    onChange={handleFileChange} 
-                    size='small'
-                    sx={{ width: "100%" }}
-                />
-
+              <TextField
+                select
+                variant='outlined'
+                {...formik.getFieldProps('selectedPath')}
+                onChange={handlePathChange}
+                label="Category"
+                size='small'
+                sx={{ width: "100%" }}
+              >
+                <MenuItem value='images'>Image</MenuItem>
+                <MenuItem value='documents'>Document</MenuItem>
+                <MenuItem value='others'>Other</MenuItem>
+              </TextField>
             </Grid>
 
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                <Button variant="contained" color="success" onClick={handleUpload} >
-                    Upload
-                </Button>
+              <TextField
+                type="file"
+                size='small'
+                sx={{ width: "100%" }}
+                {...formik.getFieldProps('selectedFile')}
+                onChange={handleFileChange}
+              />
             </Grid>
 
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                <TextField
-                   variant='outlined'
-                   label="AddedBy"
-                   sx={{ width: "100%" }}
-                   size='small'
-                   placeholder='Add a consumer'
-                />
+              <Button variant="contained" color="success" onClick={handleUpload}>
+                Upload
+              </Button>
             </Grid>
 
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                <TextField
-                   variant='outlined'
-                   type='date'
-                   defaultValue=""
-                   label="AddedDate"
-                   InputLabelProps={{
-                    shrink: true,
-                  }}
-                   sx={{ width: "100%" }}
-                   size='small'
-                />
+              <TextField
+                variant='outlined'
+                label="AddedBy"
+                sx={{ width: "100%" }}
+                size='small'
+                placeholder='Add a consumer'
+                {...formik.getFieldProps('addedBy')}
+                error={formik.touched.addedBy && Boolean(formik.errors.addedBy)}
+                helperText={formik.touched.addedBy && formik.errors.addedBy}
+              />
+            </Grid>
+
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                variant='outlined'
+                type='date'
+                defaultValue=""
+                label="AddedDate"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                sx={{ width: "100%" }}
+                size='small'
+                {...formik.getFieldProps('addedDate')}
+                error={formik.touched.addedDate && Boolean(formik.errors.addedDate)}
+                helperText={formik.touched.addedDate && formik.errors.addedDate}
+              />
             </Grid>
 
             <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                <TextField
-                   variant='outlined'
-                   label="Comment"
-                   sx={{ width: "100%" }}
-                   size='small'
-                   multiline
-                   rows={4}
-                   placeholder='Add a comment'
-                />
+              <TextField
+                variant='outlined'
+                label="Comment"
+                sx={{ width: "100%" }}
+                size='small'
+                multiline
+                rows={4}
+                placeholder='Add a comment'
+                {...formik.getFieldProps('comment')}
+                error={formik.touched.comment && Boolean(formik.errors.comment)}
+                helperText={formik.touched.comment && formik.errors.comment}
+              />
             </Grid>
 
-        </Grid>    
-
+          </Grid>
         </Box>
+
         <div
           style={{
             display: "flex",
@@ -170,31 +211,31 @@ const AddTaskResources = () => {
             padding: "1em 2em 0em 2em !important",
           }}
         >
-            <Button
-                variant="contained"
-                sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
-                color="primary"
-                startIcon={<ClearAllIcon/>}
-            >
-                Clear
-            </Button>
+          <Button
+            variant="contained"
+            sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+            color="primary"
+            startIcon={<ClearAllIcon />}
+            onClick={handleClear}
+          >
+            Clear
+          </Button>
 
-            <Button
-                color='primary'
-                onClick={handleClick}
-                loading={loading}
-                loadingPosition='start'
-                startIcon={<SaveIcon/>}
-                variant='contained'
-                sx={{width: "8.5rem", margin: "1em 0.5em !important"}}
-            >
-                Save
-            </Button>
-
+          <Button
+            color='primary'
+            onClick={formik.submitForm}
+            loading={formik.isSubmitting}
+            loadingPosition='start'
+            startIcon={<SaveIcon />}
+            variant='contained'
+            sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+          >
+            Save
+          </Button>
         </div>
-        </form>
+      </form>
     </div>
-  )
+  );
 }
 
-export default AddTaskResources
+export default AddTaskResources;
