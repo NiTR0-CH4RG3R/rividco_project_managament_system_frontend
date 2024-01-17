@@ -16,7 +16,7 @@ export const menus = [
             {
                 name: "Add Customer",
                 path : "/customer/add",
-                component: <Customer />
+                component: <Customer type="add" />
             }
         ]
     },
