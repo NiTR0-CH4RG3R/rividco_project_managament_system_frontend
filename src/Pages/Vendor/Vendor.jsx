@@ -86,10 +86,11 @@ export default function Vendor(props) {
             <Grid container spacing={2} sx={{ width: "100vw" }}>
               <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   placeholder="Please Enter Vendor Name"
                   id="v_name"
                   name="name"
-                  label="Name *"
+                  label="Name "
                   sx={{ width: "100%" }}
                   value={values.name} //set value using formik
                   onChange={handleChange} //get onchange value using formik
@@ -102,10 +103,11 @@ export default function Vendor(props) {
 
               <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   placeholder="No: 00 , road ,city"
                   id="v_address"
                   name="address"
-                  label="Address *"
+                  label="Address "
                   multiline
                   maxRows={4}
                   sx={{ width: "100%" }}
@@ -119,11 +121,12 @@ export default function Vendor(props) {
               </Grid>
               <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   placeholder="example@.com"
                   id="v_email"
                   type="email"
                   name="email"
-                  label="Email *"
+                  label="Email "
                   sx={{ width: "100%" }}
                   value={values.email}
                   onChange={handleChange}
@@ -136,10 +139,11 @@ export default function Vendor(props) {
 
               <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                 <TextField
+                  required
                   placeholder="07xxxxxxxx"
                   id="v_mobile_no"
                   name="mobileNumber"
-                  label="Mobile No *"
+                  label="Mobile No "
                   sx={{ width: "100%" }}
                   value={values.mobileNumber}
                   onChange={handleChange}
