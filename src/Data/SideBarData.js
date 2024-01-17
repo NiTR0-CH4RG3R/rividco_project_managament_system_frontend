@@ -3,6 +3,9 @@ import { PersonOutline, Person2Outlined, Shop2Outlined, WorkOutline, HelpCenterO
 
 import Customer from "../Pages/Customer/Customer";
 import Vendor from "../Pages/Vendor/Vendor";
+import SystemUser from "../Pages/SystemUser/SystemUser";
+import ListTask from "../Pages/CIA/ListTask";
+import Task from "../Pages/CIA/Task";
 
 export const menus = [
     {
@@ -70,10 +73,12 @@ export const menus = [
             {
                 name: "List Tasks",
                 path : "/cia/list",
+                component: <ListTask />
             },
             {
                 name: "Add Task",
                 path : "/cia/add",
+                component: <Task />
             }
         ]
     },
@@ -89,6 +94,7 @@ export const menus = [
             {
                 name: "Add User",
                 path : "/user/add",
+                component: <SystemUser />
             }
         ]
     },
