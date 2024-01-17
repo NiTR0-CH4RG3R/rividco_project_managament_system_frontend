@@ -2,6 +2,7 @@
 import { PersonOutline, Person2Outlined, Shop2Outlined, WorkOutline, HelpCenterOutlined } from "@mui/icons-material";
 
 import Customer from "../Pages/Customer/Customer";
+import Vendor from "../Pages/Vendor/Vendor";
 
 export const menus = [
     {
@@ -31,6 +32,7 @@ export const menus = [
             {
                 name: "Add Vendor",
                 path : "/vendor/add",
+                component: <Vendor type="add" />
             },
             {
                 name: "List Vendor Items",
