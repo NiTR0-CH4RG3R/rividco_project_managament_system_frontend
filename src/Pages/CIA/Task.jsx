@@ -79,7 +79,6 @@ export default function Task() {
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('')
   const [callbacknumber, setCallbackNumber] = useState('')
-  const [chatlink, setChatLink] = useState('')
   const [status, setStatus] = useState('')
   const [urgency, setUrgency] = useState('')
   const [comment, setComment] = useState('')
@@ -201,7 +200,6 @@ export default function Task() {
     setDescription('')
     setCategory('')
     setCallbackNumber('')
-    setChatLink('')
     setStatus('')
     setUrgency('')
     setComment('')
@@ -392,19 +390,22 @@ export default function Task() {
 
   return (
     <div>
-      <form action="">
+      <form>
         <Box
           component="form"
           sx={{
-            //border: '2px solid black',
             '& .MuiTextField-root': { m: 1 },
             '& .MuiButton-root': { m: 1 },
-            justifyContent: 'flex-end',
           }}
           noValidate
           autoComplete="off"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+          flexDirection="column"
         >
-          <Grid container spacing={1} sx={{ width: '100vw' }}>
+          <Grid container spacing={2} sx={{ width: '70%' }}>
             <Grid item xs={12}>
               <TextField
                 id="description"
@@ -476,18 +477,16 @@ export default function Task() {
                 }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
-                id="chatlink"
-                label="Chat Link"
-                placeholder="Enter whatsapp chat link"
+                id="assigned_to"
+                placeholder="Assigned To"
+                helperText="Employee Identification Number"
                 variant="outlined"
                 fullWidth
-                value={chatlink}
-                onChange={(e) => setChatLink(e.target.value)}
+                onClick={OpenModalWindowEmp}
               />
             </Grid>
-
             <Grid item xs={6}>
               <TextField
                 id="status"
@@ -524,16 +523,7 @@ export default function Task() {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="assigned_to"
-                placeholder="Assigned To"
-                helperText="Employee Identification Number"
-                variant="outlined"
-                fullWidth
-                onClick={OpenModalWindowEmp}
-              />
-            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 id="comment"
