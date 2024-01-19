@@ -20,7 +20,7 @@ const vendorcategoryType = [
     label: "Vendor1",
   },
   {
-    value: "Vendor2",
+    value: "Vendor1",
     label: "Vendor2",
   },
 ];
@@ -283,7 +283,7 @@ export default function Vendoritem(props) {
                   sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
                   color="primary"
                   startIcon={<EditIcon />}
-                  onClick={() => navi(`/customer/update/${id}`)}
+                  onClick={() => navi(`/vendor/update/${id}`)}
                 >
                   Edit
                 </Button>
