@@ -154,10 +154,10 @@ function ListTask(){
                 />
             </Box>
             
-            <Box sx={{height: 100, mt: 10, display: 'flex', justifyContent: 'flex-end'}}>
+            <Box sx={{height: 100, mt: 10, display: 'flex', justifyContent: 'flex-start'}}>
                 <Stack direction="row" spacing={1}>
                     <IconButton arisl-aria-label='add-button'>
-                        <AddBoxOutlined color='primary' style={{fontSize: 50}}/>
+                        <AddBoxOutlined color='primary' style={{fontSize: 50}} />
                     </IconButton>
                 </Stack>
             </Box>
