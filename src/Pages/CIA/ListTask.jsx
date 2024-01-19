@@ -130,6 +130,7 @@ function ListTask(){
     }, [])
 
 
+    //Map taskId as unique identifier in the data grid
     const getRowId = (row) => row.taskId;
 
     return(
@@ -160,7 +161,7 @@ function ListTask(){
                     </IconButton>
                 </Stack>
             </Box>
-
+    
         </Box>
     )
 }
