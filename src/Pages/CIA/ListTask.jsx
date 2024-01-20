@@ -12,6 +12,12 @@ const columns = [
         headerAlign: 'center'
     },
     {
+        field: 'companyId',
+        headerName: 'Company Id',
+        align: 'center',
+        headerAlign: 'center'
+    },
+    {
         field: 'category',
         headerName: 'Category',
         align: 'center',
@@ -129,14 +135,13 @@ function ListTask(){
         fetchRow();
     }, [])
 
-
     //Map taskId as unique identifier in the data grid
     const getRowId = (row) => row.taskId;
 
     return(
-        <Box sx={{ height: 500, width: '100%', mt: 10}}>
+        <Box sx={{ mt: 10, width: '84%', marginLeft: -80, paddingInlineStart: 80}}>
 
-            <Box sx={{ height: 400 }}>
+            <Box sx={{ height: 400}}>
                 <DataGrid 
                     columns={columns}
                     rows={task}
@@ -148,8 +153,9 @@ function ListTask(){
                                 },
                             },
                         }}
-                    pageSizeOptions={[5, 10]}
-                    disableRowSelectionOnClick
+                    pageSizeOptions={[5]}
+                    disableSelectionOnClick = {true}
+                    disableColumnFilter={true}
                     autoWidth = {true}    
                 />
             </Box>
