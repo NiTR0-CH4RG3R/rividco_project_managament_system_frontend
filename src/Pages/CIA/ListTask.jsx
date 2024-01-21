@@ -1,7 +1,8 @@
+import * as React from 'react';
 import { AddBoxOutlined } from '@mui/icons-material';
 import { Box, IconButton, Link, Stack } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //Initialize columns of the data grid
 const columns = [
@@ -53,7 +54,29 @@ const columns = [
         headerName: 'Urgency Level',
         align: 'center',
         headerAlign: 'center',
-        width: '150'
+        width: '150',
+        //Urgency levels should be changed later
+        renderCell: (params) => {
+            let color;
+            switch(params.value){
+                case "High":
+                    color = "red";
+                    break;
+                case "Medium":
+                    color = "blue";
+                    break;
+                case "Low":
+                    color = "green";
+                    break;
+                default:
+                    color = "inherit";   
+            }
+            return (
+                <div style={{ textShadow: `1px 1px 1px ${color}`, padding: '5px' }}>
+                  {params.value}
+                </div>
+              );
+        }
     },
     {
         field: 'status',
@@ -92,14 +115,14 @@ const columns = [
         headerName: 'Description',
         align: 'center',
         headerAlign: 'center',
-        width: '200'
+        width: '250'
     },
     {
         field: 'comment',
         headerName: 'Comment',
         align: 'center',
         headerAlign: 'center',
-        width: '150'
+        width: '250'
     },
 ]
 
@@ -120,6 +143,21 @@ const fetchData = async () => {
 function ListTask(){
 
     const [task, setTask] = React.useState([]);
+    const [selectedRow, setselecctedRow] = React.useState([]);
+    const nav = useNavigate();
+
+    //Navigate to add task page
+    const handleClick = () => {
+        nav('/cia/add');
+    }
+
+    //Function to navigate to view task page when double click on a row 
+    const handleRowDoubleClick = () => {
+        if (selectedRow.length > 0){
+            const selectedtask = task.find((row) => row.taskId === selectedRow[0])
+            nav('/cia/add',{state: {taskdata: selectedtask}});
+        }
+    }
 
     React.useEffect(() =>{
         const fetchRow = async () =>{
@@ -154,15 +192,17 @@ function ListTask(){
                             },
                         }}
                     pageSizeOptions={[5]}
-                    disableSelectionOnClick = {true}
+                    disableSelectionOnClick={true}
                     disableColumnFilter={true}
-                    autoWidth = {true}    
+                    autoWidth = {true}
+                    onRowSelectionModelChange={(newSelection) => setselecctedRow(newSelection)}
+                    onRowDoubleClick={handleRowDoubleClick}    
                 />
             </Box>
             
             <Box sx={{height: 100, mt: 10, display: 'flex', justifyContent: 'flex-start'}}>
                 <Stack direction="row" spacing={1}>
-                    <IconButton arisl-aria-label='add-button'>
+                    <IconButton arisl-aria-label='add-button' onClick={handleClick}>
                         <AddBoxOutlined color='primary' style={{fontSize: 50}} />
                     </IconButton>
                 </Stack>
