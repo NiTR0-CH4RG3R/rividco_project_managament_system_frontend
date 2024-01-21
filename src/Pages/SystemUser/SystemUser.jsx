@@ -1,7 +1,8 @@
 import React from 'react'
 import { Box, TextField, Grid, MenuItem, Button } from '@mui/material';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
+//import Modal from '@mui/material/Modal';
+import { useFormik } from 'formik';
+import SystemUserValidation from '../../Validation/SystemUserValidation';
 
 const currencies = [
   {
@@ -14,8 +15,7 @@ const currencies = [
   },
  
 ];
-
-const style = {
+/*const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -27,14 +27,36 @@ const style = {
   p: 4,
 };
 
-
+*/
 export default function SystemUser() {
+    const formik = useFormik({
+    initialValues: {
+      FirstName: '',
+      LastName: '',
+      Address: '',
+      OfficeNo: '',
+      Email: '',
+      MobileNo: '',
+      UserName: '',
+      Password: '',
+      Comment: '',
+      Role: '',
+    },
+    validationSchema: SystemUserValidation,
+    onSubmit: (values) => {
+      console.log('Form submitted successfully:', values);
+      // You can handle the form submission logic here
+    },
+  });
+
+
+/*
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => setOpen(false);*/
   return (
     <div>
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <Box
                 component="form"
                     sx={{
@@ -51,8 +73,11 @@ export default function SystemUser() {
                         placeholder="First Name"
                         //multiline
                         variant="outlined"
-                        required
+                        {...formik.getFieldProps('FirstName')}
                     />
+                    {formik.touched.FirstName && formik.errors.FirstName ? (
+                        <div style={{ color: 'red' }}>{formik.errors.FirstName}</div>
+                    ) : null}      
                 </Grid>
                       
                 <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -62,9 +87,12 @@ export default function SystemUser() {
                         placeholder="Last Name"
                         //multiline
                         variant="outlined"
-                        required
                         sx={{ width: '100%' }}
+                        {...formik.getFieldProps('LastName')}
                     />
+                    {formik.touched.LastName && formik.errors.LastName ? (
+                        <div style={{ color: 'red' }}>{formik.errors.LastName}</div>
+                    ) : null}  
                 </Grid>
                 <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                     <TextField
@@ -73,9 +101,12 @@ export default function SystemUser() {
                         placeholder="Address"
                         //multiline
                         variant="outlined"
-                        required
+                        {...formik.getFieldProps('Address')}
                     />
-                      </Grid>
+                    {formik.touched.Address && formik.errors.Address ? (
+                              <div style={{ color: 'red' }}>{formik.errors.Address}</div>
+                    ) : null}      
+                </Grid>
                 <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                     <TextField
                         id="OfficeNo"
@@ -83,9 +114,12 @@ export default function SystemUser() {
                         placeholder="Office No:"
                         //multiline
                         variant="outlined"
-                        required
+                        {...formik.getFieldProps('OfficeNo')}
                     />
-                      </Grid>
+                    {formik.touched.OfficeNo && formik.errors.OfficeNo ? (
+                              <div style={{ color: 'red' }}>{formik.errors.OfficeNo}</div>
+                    ) : null}
+                </Grid>
                 <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                     <TextField
                         id="Email"
@@ -93,9 +127,12 @@ export default function SystemUser() {
                         placeholder="E-mail"
                         //multiline
                         variant="outlined"
-                        required
+                        {...formik.getFieldProps('Email')}
                     />
-                      </Grid>
+                    {formik.touched.Email && formik.errors.Email ? (
+                        <div style={{ color: 'red' }}>{formik.errors.Email}</div>
+                    ): null}  
+                    </Grid>
                 <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                     <TextField
                         id="MobileNo"
@@ -103,35 +140,37 @@ export default function SystemUser() {
                         placeholder="Mobile No:"
                         //multiline
                         variant="outlined"
-                        required
+                        {...formik.getFieldProps('MobileNo')}      
                     />
-                      </Grid>
+                    {formik.touched.MobileNo && formik.errors.MobileNo ? (
+                        <div style={{ color: 'red' }}>{formik.errors.MobileNo}</div>
+                    ) : null}
+                    </Grid>
                 <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                     <TextField
                         id="UserName"
                         label="Username"
                         placeholder="Username"
                         variant="outlined"
-                        required
-                    />
-                      </Grid>
+                        {...formik.getFieldProps('UserName')}      
+                          />
+                          {formik.touched.UserName && formik.errors.UserName ? (
+                                <div style={{ color: 'red' }}>{formik.errors.UserName}</div>
+                            ) : null}
+                </Grid>
                 <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                     <TextField
-                        id="Role"
-                        select
-                        label="Role"
-                        defaultValue="EUR"
-                        helperText="Please select the Role"
+                        id="Password"
+                        label="password"
+                        placeholder="password"
                         variant="outlined"
-                        required
-                    >
-                    {currencies.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                        </MenuItem>
-                        ))}
-                    </TextField>
+                        {...formik.getFieldProps('Password')}
+                          />
+                          {formik.touched.Password && formik.errors.Password ? (
+                                <div style={{ color: 'red' }}>{formik.errors.Password}</div>
+                            ) : null}
                 </Grid>
+                
                 <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                     <TextField
                         id="Comment"
@@ -140,16 +179,34 @@ export default function SystemUser() {
                         multiline
                         variant="outlined"          
                         rows={4}
-                    />
+                        {...formik.getFieldProps('Comment')}
+                          />
+                          {formik.touched.Comment && formik.errors.Comment ? (  
+                                <div style={{ color: 'red' }}>{formik.errors.Comment}</div>
+                            ) : null}   
                 </Grid>       
                 <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                     <TextField
-                        id="filled-textarea"
-                        label="password"
-                        placeholder="password"
+                        id="Role"
+                        select
+                        label="Role"
+                        defaultValue="EUR"
+                        helperText="Please select the Role"
                         variant="outlined"
-                    />
-                </Grid>     
+                        {...formik.getFieldProps('Role')}
+                              
+                    >
+                          
+                    {currencies.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                        </MenuItem>
+                        ))}
+                          </TextField>
+                    {formik.touched.Role && formik.errors.Role ? (
+                                <div style={{ color: 'red' }}>{formik.errors.Role}</div>
+                            ) : null}
+                </Grid>    
                   
             </Grid>    
         
@@ -166,21 +223,23 @@ export default function SystemUser() {
                     Clear
                 </Button>
 
-                <Button onClick={handleOpen}>Save</Button>
+                <Button onClick={formik.submitForm}>Save</Button>
+                {/*
                 <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
                     //aria-describedby="modal-modal-description"
-                >
+                >  
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Save Successfully Completed!!!
                     </Typography>
                     
                 </Box>
-                </Modal>
-
+                </Modal> 
+                */}
+                
             </div>
         </form>
     </div>
