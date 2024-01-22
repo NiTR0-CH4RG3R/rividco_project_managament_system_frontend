@@ -8,7 +8,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function SideBarMenu({ name, icon, subMenu }) {
+export default function SideNavigationPanelMenu({ name, icon, subMenu }) {
     const [open, setOpen] = useState(false);
 
     const navigate = useNavigate();
