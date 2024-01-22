@@ -8,7 +8,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function SideBarMenu( { name, icon, subMenu } ) {
+export default function SideBarMenu({ name, icon, subMenu }) {
     const [open, setOpen] = useState(false);
 
     const navigate = useNavigate();
@@ -32,7 +32,21 @@ export default function SideBarMenu( { name, icon, subMenu } ) {
                     {
                         subMenu.map((subItem) => (
                             <ListItemButton onClick={() => (navigate(subItem.path))} selected={location.pathname === subItem.path}>
-                                <ListItemText primary={subItem.name} />
+                                <ListItemText
+                                    primaryTypographyProps={{
+                                        variant: 'body2',
+                                        sx: {
+                                            display: 'flex',
+                                            justifyContent: 'flex-end'
+                                        }
+                                    }}
+                                    secondaryTypographyProps={{
+                                        sx: {
+                                            display: 'flex',
+                                            justifyContent: 'flex-end'
+                                        }
+                                    }}
+                                    primary={subItem.name} />
                             </ListItemButton>
                         ))
                     }
