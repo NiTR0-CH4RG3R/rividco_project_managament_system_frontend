@@ -6,16 +6,15 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 const validationSchema = yup.object().shape({
-  addedBy: yup.string().required('AddedBy is required'),
-  addedDate: yup.date().required('AddedDate is required'),
-  comment: yup.string().required('Comment is required'),
+  addedBy: yup.string().required('Required'),
+  addedDate: yup.date().required('Required'),
+  comment: yup.string().required('Required'),
 });
 
 const uploadFile = async (file, category) => {
-    // Replace this with your actual file storage logic (e.g., API request to your server)
+    // Replace this with actual file storage
     console.log(`Uploading file to category ${category}:`, file.name);
   
-    // Simulating an asynchronous operation (e.g., API call) with setTimeout
     return new Promise((resolve) => {
       setTimeout(() => {
         console.log(`File uploaded successfully to category ${category}.`);
