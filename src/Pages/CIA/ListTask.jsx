@@ -60,19 +60,19 @@ const columns = [
             let color;
             switch(params.value){
                 case "High":
-                    color = "red";
+                    color = "rgba(255, 0, 0, 1.0)";
                     break;
                 case "Medium":
-                    color = "blue";
+                    color = "rgba(0, 0, 255, 1.0)";
                     break;
                 case "Low":
-                    color = "green";
+                    color = "rgba(0, 128, 0, 1.0)";
                     break;
                 default:
                     color = "inherit";   
             }
             return (
-                <div style={{ textShadow: `1px 1px 1px ${color}`, padding: '5px' }}>
+                <div style={{ color: color, padding: '5px' }}>
                   {params.value}
                 </div>
               );
@@ -177,9 +177,9 @@ function ListTask(){
     const getRowId = (row) => row.taskId;
 
     return(
-        <Box sx={{ mt: 10, width: '84%', marginLeft: -80, paddingInlineStart: 80}}>
+        <Box sx={{ mt: 10, width: '100%', marginLeft: -30, paddingInlineStart: 30}}>
 
-            <Box sx={{ height: 400}}>
+            <Box sx={{ height: 400, ml: 2}}>
                 <DataGrid 
                     columns={columns}
                     rows={task}
@@ -200,7 +200,7 @@ function ListTask(){
                 />
             </Box>
             
-            <Box sx={{height: 100, mt: 10, display: 'flex', justifyContent: 'flex-start'}}>
+            <Box sx={{height: 100, mt: 10, ml:2, display: 'flex', justifyContent: 'flex-start'}}>
                 <Stack direction="row" spacing={1}>
                     <IconButton arisl-aria-label='add-button' onClick={handleClick}>
                         <AddBoxOutlined color='primary' style={{fontSize: 50}} />
