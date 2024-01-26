@@ -3,13 +3,14 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import { Link, MenuItem } from '@mui/material'
+import { IconButton, Link, MenuItem } from '@mui/material'
 import { useFormik } from 'formik'
 import CustomerModal from '../../Components/ModalWindow/CustomerModal'
 import ProjectModal from '../../Components/ModalWindow/ProjectModal'
 import EmployeeModal from '../../Components/ModalWindow/EmployeeModal'
 import { categories, statuses, urgencies } from './TaskData'
 import { taskValidation } from '../../Validation/TaskValidation'
+import { GridClearIcon } from '@mui/x-data-grid'
 
 export default function Task() {
   const formik = useFormik({
@@ -18,21 +19,22 @@ export default function Task() {
       category: '',
       callbacknumber: '',
       selectedCustomer: {
-        participantid: null,
-        firstname: null,
-        lastname: null,
-        addresss: null,
-        contactno: null,
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
       },
       selectedProject: {
-        projectid: null,
-        location: null,
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
       },
       selectedEmployee: {
-        participantid: null,
-        firstname: null,
-        lastname: null,
-        role: null,
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
       },
       status: '',
       urgency: '',
@@ -134,8 +136,23 @@ export default function Task() {
                 helperText="Customer Name"
                 variant="outlined"
                 fullWidth
-                onClick={() => setOpenCustomer(true)}
-                value={formik.values.selectedCustomer?.firstname ?? ''}
+                onClick={() => {
+                  if (!formik.values.selectedCustomer?.title) {
+                    setOpenCustomer(true)
+                  }
+                }}
+                value={formik.values.selectedCustomer?.title ?? ''}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() =>
+                        formik.setFieldValue('selectedCustomer', '')
+                      }
+                    >
+                      <GridClearIcon />
+                    </IconButton>
+                  ),
+                }}
               />
             </Grid>
 
@@ -146,7 +163,7 @@ export default function Task() {
                 </Link>
               </Grid>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <TextField
                 id="project_regarding"
                 name="project_regarding"
@@ -154,12 +171,27 @@ export default function Task() {
                 helperText="Project Location"
                 variant="outlined"
                 fullWidth
-                onClick={() => setOpenProject(true)}
-                value={formik.values.selectedProject?.location ?? ''}
+                onClick={() => {
+                  if (!formik.values.selectedProject?.title) {
+                    setOpenProject(true)
+                  }
+                }}
+                value={formik.values.selectedProject?.title ?? ''}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() =>
+                        formik.setFieldValue('selectedProject', '')
+                      }
+                    >
+                      <GridClearIcon />
+                    </IconButton>
+                  ),
+                }}
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <TextField
                 id="assigned_to"
                 name="assigned_to"
@@ -167,8 +199,23 @@ export default function Task() {
                 helperText="Employee Name"
                 variant="outlined"
                 fullWidth
-                onClick={() => setOpenEmployee(true)}
-                value={formik.values.selectedEmployee?.firstname ?? ''}
+                onClick={() => {
+                  if (!formik.values.selectedEmployee?.title) {
+                    setOpenEmployee(true)
+                  }
+                }}
+                value={formik.values.selectedEmployee?.title ?? ''}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() =>
+                        formik.setFieldValue('selectedEmployee', '')
+                      }
+                    >
+                      <GridClearIcon />
+                    </IconButton>
+                  ),
+                }}
               />
             </Grid>
             <Grid item xs={6}>
