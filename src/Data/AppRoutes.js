@@ -7,6 +7,7 @@ import AddTaskResources from '../Pages/CIA/AddTaskResources'
 import Vendoritem from '../Pages/Vendoritem/Vendoritem'
 import SystemUserList from '../Pages/SystemUser/SystemUserList'
 import TaskStatus from '../Pages/CIA/TaskStatus'
+import Project from "../Pages/Project/Project";
 
 export const AppRoutes = {
   /* Customer related routes */
@@ -37,11 +38,11 @@ export const AppRoutes = {
   vendor_item_edit: { path: '/vendor/item/edit/id', component: <></> },
 
   /* Project related routes */
-  project_list: { path: '/project/list', component: <></> },
-  project_add: { path: '/project/add', component: <></> },
-  project_view: { path: '/project/view/id', component: <></> },
-  project_edit: { path: '/project/edit/id', component: <></> },
-  project_services_list: { path: '/project/services/list', component: <></> },
+  project_list: { path: "/project/list", component: <></> },
+  project_add: { path: "/project/add", component: <Project type="add"/> },
+  project_view: { path: "/project/view/id", component: <Project type="view"/> },
+  project_edit: { path: "/project/edit/id", component: <Project type="edit"/> },
+  project_services_list: { path: "/project/services/list", component: <></> },
 
   /* CIA related routes */
   cia_list: { path: '/cia/list', component: <ListTask /> },
