@@ -7,6 +7,33 @@ import axios from 'axios'
 export default function CustomerModal(props) {
   const { openCustomer, setOpenCustomer, formik } = props
 
+  const customercols = [
+    {
+      field: 'userId',
+      headerName: 'User ID',
+      align: 'center',
+      headerAlign: 'center',
+    },
+    {
+      field: 'id',
+      headerName: 'ID',
+      align: 'center',
+      headerAlign: 'center',
+    },
+    {
+      field: 'title',
+      headerName: 'Title',
+      align: 'center',
+      headerAlign: 'center',
+    },
+    {
+      field: 'completed',
+      headerName: 'Completed',
+      align: 'center',
+      headerAlign: 'center',
+    },
+  ]
+
   const handleClose = () => {
     setOpenCustomer(false)
   }
@@ -16,7 +43,7 @@ export default function CustomerModal(props) {
   useEffect(() => {
     // Fetch data from REST endpoint using axios
     axios
-      .get('url to get customer data')
+      .get('https://jsonplaceholder.typicode.com/todos')
       .then((response) => {
         setRows(response.data)
       })
@@ -41,29 +68,25 @@ export default function CustomerModal(props) {
         }}
       >
         <Typography variant="h6">Customer Modal</Typography>
-        <DataGrid
-          rows={rows}
-          columns={[
-            { field: 'participantid' },
-            { field: 'firstname' },
-            { field: 'lastname' },
-            { field: 'address' },
-            { field: 'contactno' },
-          ]}
-          disableColumnFilter
-          disableColumnSelector
-          disableDensitySelector
-          slots={{ toolbar: GridToolbar }}
-          slotProps={{
-            toolbar: {
-              showQuickFilter: true,
-            },
-          }}
-          onRowClick={({ row }) => {
-            formik.setFieldValue('selectedCustomer', row)
-            setOpenCustomer(false)
-          }}
-        />
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid
+            rows={rows}
+            columns={customercols}
+            disableColumnFilter
+            disableColumnSelector
+            disableDensitySelector
+            slots={{ toolbar: GridToolbar }}
+            slotProps={{
+              toolbar: {
+                showQuickFilter: true,
+              },
+            }}
+            onRowClick={({ row }) => {
+              formik.setFieldValue('selectedCustomer', row)
+              setOpenCustomer(false)
+            }}
+          />
+        </div>
       </Box>
     </Modal>
   )
