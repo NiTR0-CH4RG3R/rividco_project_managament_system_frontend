@@ -3,245 +3,281 @@ import { Box, TextField, Grid, MenuItem, Button } from '@mui/material';
 //import Modal from '@mui/material/Modal';
 import { useFormik } from 'formik';
 import SystemUserValidation from '../../Validation/SystemUserValidation';
+//import { useParams } from 'react-router-dom';
 
-const currencies = [
+ 
+const role = [
   {
-    value: 'Ad',
+    value: 'Admin',
     label: 'Admin',
   },
   {
-    value: 'us',
+    value: 'User',
     label: 'User',
   },
  
 ];
-/*const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
-*/
+
+
+
 export default function SystemUser() {
-    const formik = useFormik({
-    initialValues: {
-      FirstName: '',
-      LastName: '',
-      Address: '',
-      OfficeNo: '',
-      Email: '',
-      MobileNo: '',
-      UserName: '',
-      Password: '',
-      Comment: '',
-      Role: '',
-    },
-    validationSchema: SystemUserValidation,
-    onSubmit: (values) => {
-      console.log('Form submitted successfully:', values);
-      // You can handle the form submission logic here
-    },
-  });
+    
+    const {
+        values,
+        errors,
+        touched,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        handleReset,
+    } = useFormik({
+        initialValues: {
+            FirstName: '',
+            LastName: '',
+            Address: '',
+            OfficeNo: '',
+            Email: '',
+            MobileNo: '',
+            UserName: '',
+            Password: '',
+            Comment: '',
+            Role: '',
+        },
+        validationSchema: SystemUserValidation,
+        onSubmit: (values) => {
+            alert('Form submitted successfully:', values);
+            // You can handle the form submission logic here
+        },
+    });
+
+   
 
 
-/*
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);*/
-  return (
-    <div>
-          <form onSubmit={formik.handleSubmit}>
-            <Box
-                component="form"
-                    sx={{
-                        '& .MuiTextField-root': { m: 1, width: '50ch' },
-                }}
-                    noValidate
-                    autoComplete="off"
-            >
-            <Grid container spacing={2} sx={{ width: "100vw" }}>
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="FirstName"
-                        label="First Name"
-                        placeholder="First Name"
-                        //multiline
-                        variant="outlined"
-                        {...formik.getFieldProps('FirstName')}
-                    />
-                    {formik.touched.FirstName && formik.errors.FirstName ? (
-                        <div style={{ color: 'red' }}>{formik.errors.FirstName}</div>
-                    ) : null}      
-                </Grid>
-                      
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="LastName"
-                        label="Last Name"
-                        placeholder="Last Name"
-                        //multiline
-                        variant="outlined"
-                        sx={{ width: '100%' }}
-                        {...formik.getFieldProps('LastName')}
-                    />
-                    {formik.touched.LastName && formik.errors.LastName ? (
-                        <div style={{ color: 'red' }}>{formik.errors.LastName}</div>
-                    ) : null}  
-                </Grid>
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="Address"
-                        label="Address"
-                        placeholder="Address"
-                        //multiline
-                        variant="outlined"
-                        {...formik.getFieldProps('Address')}
-                    />
-                    {formik.touched.Address && formik.errors.Address ? (
-                              <div style={{ color: 'red' }}>{formik.errors.Address}</div>
-                    ) : null}      
-                </Grid>
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="OfficeNo"
-                        label="Office No:"
-                        placeholder="Office No:"
-                        //multiline
-                        variant="outlined"
-                        {...formik.getFieldProps('OfficeNo')}
-                    />
-                    {formik.touched.OfficeNo && formik.errors.OfficeNo ? (
-                              <div style={{ color: 'red' }}>{formik.errors.OfficeNo}</div>
-                    ) : null}
-                </Grid>
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="Email"
-                        label="E-mail"
-                        placeholder="E-mail"
-                        //multiline
-                        variant="outlined"
-                        {...formik.getFieldProps('Email')}
-                    />
-                    {formik.touched.Email && formik.errors.Email ? (
-                        <div style={{ color: 'red' }}>{formik.errors.Email}</div>
-                    ): null}  
-                    </Grid>
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="MobileNo"
-                        label="Mobile No:"
-                        placeholder="Mobile No:"
-                        //multiline
-                        variant="outlined"
-                        {...formik.getFieldProps('MobileNo')}      
-                    />
-                    {formik.touched.MobileNo && formik.errors.MobileNo ? (
-                        <div style={{ color: 'red' }}>{formik.errors.MobileNo}</div>
-                    ) : null}
-                    </Grid>
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="UserName"
-                        label="Username"
-                        placeholder="Username"
-                        variant="outlined"
-                        {...formik.getFieldProps('UserName')}      
-                          />
-                          {formik.touched.UserName && formik.errors.UserName ? (
-                                <div style={{ color: 'red' }}>{formik.errors.UserName}</div>
-                            ) : null}
-                </Grid>
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="Password"
-                        label="password"
-                        placeholder="password"
-                        variant="outlined"
-                        {...formik.getFieldProps('Password')}
-                          />
-                          {formik.touched.Password && formik.errors.Password ? (
-                                <div style={{ color: 'red' }}>{formik.errors.Password}</div>
-                            ) : null}
-                </Grid>
-                
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="Comment"
-                        label="Comment"
-                        placeholder="Please Enter Your Comment"
-                        multiline
-                        variant="outlined"          
-                        rows={4}
-                        {...formik.getFieldProps('Comment')}
-                          />
-                          {formik.touched.Comment && formik.errors.Comment ? (  
-                                <div style={{ color: 'red' }}>{formik.errors.Comment}</div>
-                            ) : null}   
-                </Grid>       
-                <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-                    <TextField
-                        id="Role"
-                        select
-                        label="Role"
-                        defaultValue="EUR"
-                        helperText="Please select the Role"
-                        variant="outlined"
-                        {...formik.getFieldProps('Role')}
-                              
+        return (
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 2},
+                        }}
+                        noValidate
+                        autoComplete="off"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        height="110vh"
+                        flexDirection="column"
                     >
-                          
-                    {currencies.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                        </MenuItem>
-                        ))}
-                          </TextField>
-                    {formik.touched.Role && formik.errors.Role ? (
-                                <div style={{ color: 'red' }}>{formik.errors.Role}</div>
-                            ) : null}
-                </Grid>    
-                  
-            </Grid>    
-        
-            </Box>
-            
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "1em 2em 0em 2em !important",
-                }}
-                >
-                <Button>
-                    Clear
-                </Button>
+                        <Grid container spacing={2} sx={{ width: "70%" }}>
+                            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    required
+                                    id="FirstName"
+                                    label="First Name"
+                                    placeholder="First Name"
+                                    //multiline
+                                    variant="outlined"
+                                    sx={{width: '100%'}}
+                                    value={values.FirstName} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.FirstName && errors.FirstName}
+                                    helperText={touched.FirstName ? errors.FirstName : ""}
+                                />
+                                
+                            </Grid>
+                      
+                            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    required
+                                    id="LastName"
+                                    label="Last Name"
+                                    placeholder="Last Name"
+                                    //multiline
+                                    variant="outlined"
+                                    sx={{ width: '100%' }}
+                                    value={values.LastName} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.LastName && errors.LastName}
+                                    helperText={touched.LastName ? errors.LastName : ""}
+                                />
+                                
+                            </Grid>
+                            
+                            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    required
+                                    id="Address"
+                                    label="Address"
+                                    placeholder="Address"
+                                    multiline
+                                    variant="outlined"
+                                    sx={{ width: '100%' }}
+                                    value={values.Address} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.Address && errors.Address}
+                                    helperText={touched.Address ? errors.Address : ""}
+                                />
+                                
+                            </Grid>
 
-                <Button onClick={formik.submitForm}>Save</Button>
-                {/*
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    //aria-describedby="modal-modal-description"
-                >  
-                <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Save Successfully Completed!!!
-                    </Typography>
-                    
-                </Box>
-                </Modal> 
-                */}
+                            <Grid item xs={8} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    required
+                                    id="Email"
+                                    label="E-mail"
+                                    placeholder="E-mail"
+                                    //multiline
+                                    variant="outlined"
+                                    sx={{ width: '100%'}}
+                                    value={values.Email} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.Email && errors.Email}
+                                    helperText={touched.Email ? errors.Email : ""}
+                                />
+                                
+                            </Grid>
+
+                            <Grid item xs={4} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    required
+                                    select
+                                    id="Role"
+                                    label="Role"
+                                    helperText="Please select the Role"
+                                    variant="outlined"
+                                    sx={{ width: '100%'}}
+                                    //value={values.Role} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.Role && errors.Role}
+                                    
+                                >
+                          
+                                    {role.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                                
+                            </Grid>
+
+                            
+                            
+                            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    required
+                                    id="MobileNo"
+                                    label="Mobile No:"
+                                    placeholder="Mobile No:"
+                                    //multiline
+                                    variant="outlined"
+                                    sx={{width: '100%'}}
+                                    value={values.MobileNo} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.MobileNo && errors.MobileNo}
+                                    helperText={touched.MobileNo ? errors.MobileNo : ""}
+                                />
+                                
+                            </Grid>
+
+                            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    id="OfficeNo"
+                                    label="Office No:"
+                                    placeholder="Office No:"
+                                    //multiline
+                                    variant="outlined"
+                                    sx={{width: '100%'}}
+                                    value={values.OfficeNo} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.OfficeNo && errors.OfficeNo}
+                                    helperText={touched.OfficeNo ? errors.OfficeNo : ""}
+                                />
+                                
+                            </Grid>
+
+                            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    required
+                                    id="UserName"
+                                    label="Username"
+                                    placeholder="Username"
+                                    variant="outlined"
+                                    sx={{width: '100%'}}
+                                    value={values.UserName} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.UserName && errors.UserName}
+                                    helperText={touched.UserName ? errors.UserName : ""}
+                                />
+                                
+                            </Grid>
+                            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    required
+                                    id="Password"
+                                    label="password"
+                                    placeholder="password"
+                                    variant="outlined"
+                                    sx={{width: '100%'}}
+                                    value={values.Password} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.Password && errors.Password}
+                                    helperText={touched.Password ? errors.Password: ""}
+                                />
+                                
+                            </Grid>
                 
+                            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                                <TextField
+                                    id="Comment"
+                                    label="Comment"
+                                    placeholder="Please Enter Your Comment"
+                                    multiline
+                                    variant="outlined"
+                                    sx={{width: '100%'}}
+                                    rows={4}
+                                    value={values.Comment} //set value using formik
+                                    onChange={handleChange} //get onchange value using formik
+                                    onBlur={handleBlur}
+                                    error={touched.Comment && errors.Comment}
+                                    helperText={touched.Comment ? errors.Comment: ""}
+                                />
+                                
+                            </Grid>
+                            
+                            
+                  
+                        </Grid>
+        
+                    </Box>
+            
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            padding: "1em 2em 0em 2em !important",
+                        }}
+                    >
+                        <Button>
+                            Clear
+                        </Button>
+
+                        <Button >Save</Button>
+                        
+                
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-  )
-}
+        )
+};
