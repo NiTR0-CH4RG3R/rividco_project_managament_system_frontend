@@ -7,6 +7,33 @@ import axios from 'axios'
 export default function ProjectModal(props) {
   const { openProject, setOpenProject, formik } = props
 
+  const projectcols = [
+    {
+      field: 'userId',
+      headerName: 'User ID',
+      align: 'center',
+      headerAlign: 'center',
+    },
+    {
+      field: 'id',
+      headerName: 'ID',
+      align: 'center',
+      headerAlign: 'center',
+    },
+    {
+      field: 'title',
+      headerName: 'Title',
+      align: 'center',
+      headerAlign: 'center',
+    },
+    {
+      field: 'completed',
+      headerName: 'Completed',
+      align: 'center',
+      headerAlign: 'center',
+    },
+  ]
+
   const handleClose = () => {
     setOpenProject(false)
   }
@@ -16,7 +43,7 @@ export default function ProjectModal(props) {
   useEffect(() => {
     // Fetch data from REST endpoint using axios
     axios
-      .get('url to get project data')
+      .get('https://jsonplaceholder.typicode.com/todos')
       .then((response) => {
         setRows(response.data)
       })
@@ -41,23 +68,25 @@ export default function ProjectModal(props) {
         }}
       >
         <Typography variant="h6">Project Modal</Typography>
-        <DataGrid
-          rows={rows}
-          columns={[{ field: 'projectid' }, { field: 'location' }]}
-          disableColumnFilter
-          disableColumnSelector
-          disableDensitySelector
-          slots={{ toolbar: GridToolbar }}
-          slotProps={{
-            toolbar: {
-              showQuickFilter: true,
-            },
-          }}
-          onRowClick={({ row }) => {
-            formik.setFieldValue('selectedProject', row)
-            setOpenProject(false)
-          }}
-        />
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid
+            rows={rows}
+            columns={projectcols}
+            disableColumnFilter
+            disableColumnSelector
+            disableDensitySelector
+            slots={{ toolbar: GridToolbar }}
+            slotProps={{
+              toolbar: {
+                showQuickFilter: true,
+              },
+            }}
+            onRowClick={({ row }) => {
+              formik.setFieldValue('selectedProject', row)
+              setOpenProject(false)
+            }}
+          />
+        </div>
       </Box>
     </Modal>
   )
