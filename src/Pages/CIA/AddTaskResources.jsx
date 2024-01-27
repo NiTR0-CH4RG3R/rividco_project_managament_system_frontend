@@ -4,6 +4,7 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 import { useFormik } from 'formik';
 import TaskResourcesValidation from '../../Validation/TaskResourcesValidation';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const uploadFile = async (file, category) => {
@@ -18,7 +19,7 @@ const uploadFile = async (file, category) => {
     });
   };
 
-const AddTaskResources = () => {
+const AddTaskResources = (props) => {
   const formik = useFormik({
     initialValues: {
       taskId: '',
@@ -96,6 +97,9 @@ const AddTaskResources = () => {
   const handleClear = () => {
     formik.resetForm();
   };
+
+  const {id} = useParams('');
+  const navi = useNavigate('');
 
   return (
     <div>
