@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import { IconButton, Link, MenuItem } from '@mui/material'
+import { IconButton, MenuItem } from '@mui/material'
 import { useFormik } from 'formik'
 import CustomerModal from '../../Components/ModalWindow/CustomerModal'
 import ProjectModal from '../../Components/ModalWindow/ProjectModal'
@@ -11,8 +11,9 @@ import EmployeeModal from '../../Components/ModalWindow/EmployeeModal'
 import { categories, statuses, urgencies } from './TaskData'
 import { taskValidation } from '../../Validation/TaskValidation'
 import { GridClearIcon } from '@mui/x-data-grid'
+import { useNavigate, useParams } from 'react-router'
 
-export default function Task() {
+export default function Task(props) {
   const formik = useFormik({
     initialValues: {
       description: '',
@@ -45,6 +46,9 @@ export default function Task() {
     },
     validationSchema: taskValidation,
   })
+
+  const { id } = useParams()
+  const navi = useNavigate()
 
   const [openCustomer, setOpenCustomer] = useState(false)
   const [openProject, setOpenProject] = useState(false)
@@ -85,6 +89,7 @@ export default function Task() {
                 helperText={
                   formik.touched.description ? formik.errors.description : ''
                 }
+                disabled={props.type === 'view'}
               />
             </Grid>
             <Grid item xs={6}>
@@ -98,6 +103,7 @@ export default function Task() {
                 value={formik.values.category}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={props.type === 'view'}
               >
                 {categories.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -126,6 +132,7 @@ export default function Task() {
                     ? formik.errors.callbacknumber
                     : ''
                 }
+                disabled={props.type === 'view'}
               />
             </Grid>
             <Grid item xs={10}>
@@ -153,16 +160,23 @@ export default function Task() {
                     </IconButton>
                   ),
                 }}
+                disabled={props.type === 'view'}
               />
             </Grid>
 
-            <Grid item xs={2}>
-              <Grid container xs={12} sx={{ justifyContent: 'center' }}>
-                <Link to="/customer/add" type="add">
-                  <Button variant="contained">Add Guest</Button>
-                </Link>
+            {(props.type === 'add' || props.type === 'edit') && (
+              <Grid item xs={2}>
+                <Grid container xs={12} sx={{ justifyContent: 'center' }}>
+                  <Button
+                    variant="contained"
+                    onClick={() => navi(`/customer/add/`)}
+                  >
+                    Add Guest
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
+            )}
+
             <Grid item xs={6}>
               <TextField
                 id="project_regarding"
@@ -188,6 +202,7 @@ export default function Task() {
                     </IconButton>
                   ),
                 }}
+                disabled={props.type === 'view'}
               />
             </Grid>
 
@@ -216,6 +231,7 @@ export default function Task() {
                     </IconButton>
                   ),
                 }}
+                disabled={props.type === 'view'}
               />
             </Grid>
             <Grid item xs={6}>
@@ -229,6 +245,7 @@ export default function Task() {
                 value={formik.values.status}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={props.type === 'view'}
               >
                 {statuses.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -249,6 +266,7 @@ export default function Task() {
                 value={formik.values.urgency}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={props.type === 'view'}
               >
                 {urgencies.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -269,29 +287,60 @@ export default function Task() {
                 value={formik.values.comment}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={props.type === 'view'}
               />
             </Grid>
-            {/*Clear , Save Buttons on the form*/}
-            <Grid
-              container
-              spacing={1}
-              sx={{ mt: 3, justifyContent: 'flex-end' }}
-            >
-              <Grid>
-                <Button
-                  variant="contained"
-                  size="large"
-                  onClick={formik.handleReset}
-                >
-                  Clear
-                </Button>
+            {/*Clear , Save Buttons on the add, edit, view forms*/}
+
+            {props.type === 'view' && (
+              <Grid
+                container
+                spacing={1}
+                sx={{ mt: 3, display: 'flex', justifyContent: 'end' }}
+              >
+                <Grid>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={() => navi(`/cia/resource/${id}`)}
+                  >
+                    View Status History
+                  </Button>
+                </Grid>
+                <Grid>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={() => navi(`/cia/edit/${id}`)}
+                  >
+                    Edit
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid>
-                <Button variant="contained" size="large" type="submit">
-                  Save
-                </Button>
+            )}
+
+            {(props.type === 'add' || props.type === 'edit') && (
+              <Grid
+                container
+                spacing={1}
+                sx={{ mt: 3, display: 'flex', justifyContent: 'end' }}
+              >
+                <Grid>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={formik.handleReset}
+                  >
+                    Clear
+                  </Button>
+                </Grid>
+                <Grid>
+                  <Button variant="contained" size="large" type="submit">
+                    Save
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
+            )}
           </Grid>
         </Box>
       </form>
