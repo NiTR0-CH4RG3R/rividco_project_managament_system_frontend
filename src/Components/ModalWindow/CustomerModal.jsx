@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function CustomerModal(props) {
-  const { openCustomer, setOpenCustomer, formik } = props
+  const { openCustomer, setOpenCustomer, sendData } = props
 
   const customercols = [
     {
@@ -82,7 +82,7 @@ export default function CustomerModal(props) {
               },
             }}
             onRowClick={({ row }) => {
-              formik.setFieldValue('selectedCustomer', row)
+              sendData('selectedCustomer', row)
               setOpenCustomer(false)
             }}
           />
