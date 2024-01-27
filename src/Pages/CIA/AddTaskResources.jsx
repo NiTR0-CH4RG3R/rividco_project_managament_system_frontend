@@ -3,13 +3,8 @@ import { Button, TextField, Grid, MenuItem, Box } from '@mui/material';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SaveIcon from '@mui/icons-material/Save';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+import TaskResourcesValidation from '../../Validation/TaskResourcesValidation';
 
-const validationSchema = yup.object().shape({
-  addedBy: yup.string().required('Required'),
-  addedDate: yup.date().required('Required'),
-  comment: yup.string().required('Required'),
-});
 
 const uploadFile = async (file, category) => {
     // Replace this with actual file storage
@@ -33,10 +28,10 @@ const AddTaskResources = () => {
       addedDate: '',
       comment: '',
     },
-    validationSchema: validationSchema,
+    validationSchema: TaskResourcesValidation,
     onSubmit: async (values) => {
       try {
-        await validationSchema.validate(values, { abortEarly: false });
+        await TaskResourcesValidation.validate(values, { abortEarly: false });
 
         // Add form submission logic here
         console.log('Form submitted with values:', values);
@@ -47,6 +42,7 @@ const AddTaskResources = () => {
     },
   });
 
+//TaskID get from the db
   useEffect(() => {
     const fetchTaskId = async () => {
       try {
@@ -61,6 +57,7 @@ const AddTaskResources = () => {
     fetchTaskId();
   }, [formik]);
 
+  //File and file path changing
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     formik.setFieldValue('selectedFile', file);
@@ -71,6 +68,7 @@ const AddTaskResources = () => {
     formik.setFieldValue('selectedPath', path);
   };
 
+//upload file
   const handleUpload = async () => {
     const { selectedFile, selectedPath } = formik.values;
 
@@ -109,8 +107,13 @@ const AddTaskResources = () => {
           }}
           noValidate
           autoComplete="off"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+          flexDirection="column"
         >
-          <Grid container spacing={2} sx={{ width: "100vw" }}>
+          <Grid container spacing={2} sx={{ width: "70%" }}>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 id="taskId"
@@ -201,8 +204,11 @@ const AddTaskResources = () => {
             </Grid>
 
           </Grid>
-        </Box>
 
+        <Box
+           display="flex"
+           width="70%" 
+           justifyContent="flex-end">
         <div
           style={{
             display: "flex",
@@ -232,6 +238,8 @@ const AddTaskResources = () => {
             Save
           </Button>
         </div>
+        </Box>
+        </Box>
       </form>
     </div>
   );
