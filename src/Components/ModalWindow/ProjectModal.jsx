@@ -1,8 +1,9 @@
-import { Modal } from '@mui/material'
-import { Box, Typography } from '@mui/material'
-import { DataGrid, GridToolbar } from '@mui/x-data-grid'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { Modal,Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function ProjectModal(props) {
   const { openProject, setOpenProject, sendData } = props
@@ -35,34 +36,34 @@ export default function ProjectModal(props) {
   ]
 
   const handleClose = () => {
-    setOpenProject(false)
-  }
+    setOpenProject(false);
+  };
 
-  const [rows, setRows] = useState([])
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
     // Fetch data from REST endpoint using axios
     axios
       .get('https://jsonplaceholder.typicode.com/todos')
       .then((response) => {
-        setRows(response.data)
+        setRows(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error)
-      })
-  }, [])
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   return (
     <Modal open={openProject} onClose={handleClose}>
       <Box
         sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
           minWidth: 800,
           minHeight: 400,
-          bgcolor: 'background.paper',
+          bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,
         }}
@@ -89,5 +90,5 @@ export default function ProjectModal(props) {
         </div>
       </Box>
     </Modal>
-  )
+  );
 }
