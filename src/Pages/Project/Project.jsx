@@ -62,6 +62,13 @@ export default function Project(props) {
       contactno: null,
     },
 
+    selectedEmployee: {
+      participantid: null,
+      firstname: null,
+      lastname: null,
+      role: null,
+    },
+
     onSubmit: (values) => {
       sendData(values);
     },
@@ -244,7 +251,9 @@ export default function Project(props) {
                 name="coordinator"
                 label="Coordinator"
                 sx={{ width: "100%" }}
-                value={values.coordinator} //set value using formik
+                //value={values.coordinator} //set value using formik
+                onClick={() => setOpenEmployee(true)}
+                value={values.selectedEmployee?.firstname ?? ''}
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
