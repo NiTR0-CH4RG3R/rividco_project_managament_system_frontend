@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import CustomerModal from '../../Components/ModalWindow/CustomerModal';
 
 const statusType = [
   {
@@ -318,6 +319,13 @@ export default function Project(props) {
           </Box>
         </Box>
       </form>
+
+      <CustomerModal
+      //call customer modal
+        openCustomer={openCustomer}
+        setOpenCustomer={setOpenCustomer}
+        formik={formik}
+      />
     </div>
   );
 }
