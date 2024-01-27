@@ -12,9 +12,26 @@ import { categories, statuses, urgencies } from './TaskData'
 import { taskValidation } from '../../Validation/TaskValidation'
 import { GridClearIcon } from '@mui/x-data-grid'
 import { useNavigate, useParams } from 'react-router'
+import {
+  AddBox,
+  ClearAll,
+  Edit,
+  History,
+  Save,
+  Visibility,
+} from '@mui/icons-material'
 
 export default function Task(props) {
-  const formik = useFormik({
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    handleReset,
+    setFieldValue,
+  } = useFormik({
     initialValues: {
       description: '',
       category: '',
@@ -56,7 +73,7 @@ export default function Task(props) {
 
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Box
           component="form"
           sx={{
@@ -82,13 +99,11 @@ export default function Task(props) {
                 fullWidth
                 multiline
                 required
-                value={formik.values.description}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.description && formik.errors.description}
-                helperText={
-                  formik.touched.description ? formik.errors.description : ''
-                }
+                value={values.description}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.description && errors.description}
+                helperText={touched.description ? errors.description : ''}
                 disabled={props.type === 'view'}
               />
             </Grid>
@@ -100,9 +115,9 @@ export default function Task(props) {
                 select
                 variant="outlined"
                 fullWidth
-                value={formik.values.category}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                value={values.category}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 disabled={props.type === 'view'}
               >
                 {categories.map((option) => (
@@ -121,17 +136,11 @@ export default function Task(props) {
                 variant="outlined"
                 fullWidth
                 required
-                value={formik.values.callbacknumber}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={
-                  formik.touched.callbacknumber && formik.errors.callbacknumber
-                }
-                helperText={
-                  formik.touched.callbacknumber
-                    ? formik.errors.callbacknumber
-                    : ''
-                }
+                value={values.callbacknumber}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.callbacknumber && errors.callbacknumber}
+                helperText={touched.callbacknumber ? errors.callbacknumber : ''}
                 disabled={props.type === 'view'}
               />
             </Grid>
@@ -144,17 +153,20 @@ export default function Task(props) {
                 variant="outlined"
                 fullWidth
                 onClick={() => {
-                  if (!formik.values.selectedCustomer?.title) {
+                  if (!values.selectedCustomer?.title) {
                     setOpenCustomer(true)
                   }
                 }}
-                value={formik.values.selectedCustomer?.title ?? ''}
+                value={values.selectedCustomer?.title ?? ''}
                 InputProps={{
                   endAdornment: (
                     <IconButton
-                      onClick={() =>
-                        formik.setFieldValue('selectedCustomer', '')
-                      }
+                      onClick={() => setFieldValue('selectedCustomer', '')}
+                      sx={{
+                        visibility: values.selectedCustomer?.title
+                          ? 'visible'
+                          : 'hidden',
+                      }}
                     >
                       <GridClearIcon />
                     </IconButton>
@@ -169,7 +181,9 @@ export default function Task(props) {
                 <Grid container xs={12} sx={{ justifyContent: 'center' }}>
                   <Button
                     variant="contained"
+                    color="success"
                     onClick={() => navi(`/customer/add/`)}
+                    startIcon={<AddBox />}
                   >
                     Add Guest
                   </Button>
@@ -186,17 +200,20 @@ export default function Task(props) {
                 variant="outlined"
                 fullWidth
                 onClick={() => {
-                  if (!formik.values.selectedProject?.title) {
+                  if (!values.selectedProject?.title) {
                     setOpenProject(true)
                   }
                 }}
-                value={formik.values.selectedProject?.title ?? ''}
+                value={values.selectedProject?.title ?? ''}
                 InputProps={{
                   endAdornment: (
                     <IconButton
-                      onClick={() =>
-                        formik.setFieldValue('selectedProject', '')
-                      }
+                      onClick={() => setFieldValue('selectedProject', '')}
+                      sx={{
+                        visibility: values.selectedProject?.title
+                          ? 'visible'
+                          : 'hidden',
+                      }}
                     >
                       <GridClearIcon />
                     </IconButton>
@@ -215,17 +232,20 @@ export default function Task(props) {
                 variant="outlined"
                 fullWidth
                 onClick={() => {
-                  if (!formik.values.selectedEmployee?.title) {
+                  if (!values.selectedEmployee?.title) {
                     setOpenEmployee(true)
                   }
                 }}
-                value={formik.values.selectedEmployee?.title ?? ''}
+                value={values.selectedEmployee?.title ?? ''}
                 InputProps={{
                   endAdornment: (
                     <IconButton
-                      onClick={() =>
-                        formik.setFieldValue('selectedEmployee', '')
-                      }
+                      onClick={() => setFieldValue('selectedEmployee', '')}
+                      sx={{
+                        visibility: values.selectedEmployee?.title
+                          ? 'visible'
+                          : 'hidden',
+                      }}
                     >
                       <GridClearIcon />
                     </IconButton>
@@ -242,9 +262,9 @@ export default function Task(props) {
                 select
                 variant="outlined"
                 fullWidth
-                value={formik.values.status}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                value={values.status}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 disabled={props.type === 'view'}
               >
                 {statuses.map((option) => (
@@ -263,9 +283,9 @@ export default function Task(props) {
                 variant="outlined"
                 defaultValue="None"
                 fullWidth
-                value={formik.values.urgency}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                value={values.urgency}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 disabled={props.type === 'view'}
               >
                 {urgencies.map((option) => (
@@ -284,9 +304,9 @@ export default function Task(props) {
                 variant="outlined"
                 fullWidth
                 multiline
-                value={formik.values.comment}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                value={values.comment}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 disabled={props.type === 'view'}
               />
             </Grid>
@@ -302,7 +322,9 @@ export default function Task(props) {
                   <Button
                     variant="contained"
                     size="large"
+                    color="success"
                     onClick={() => navi(`/cia/status`)} //navigate to the taskstatus page
+                    startIcon={<History />}
                   >
                     View Status History
                   </Button>
@@ -311,7 +333,9 @@ export default function Task(props) {
                   <Button
                     variant="contained"
                     size="large"
-                    onClick={() => navi(`/cia/resource`)} //navigate to the view task resouce page
+                    color="success"
+                    onClick={() => navi(`/cia/resource/view/`)} //navigate to the view task resouce page
+                    startIcon={<Visibility />}
                   >
                     View Task Resources
                   </Button>
@@ -321,6 +345,7 @@ export default function Task(props) {
                     variant="contained"
                     size="large"
                     onClick={() => navi(`/cia/edit/${id}`)} //navigate to edit task page
+                    startIcon={<Edit />}
                   >
                     Edit
                   </Button>
@@ -336,9 +361,11 @@ export default function Task(props) {
               >
                 <Grid>
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     size="large"
-                    onClick={() => navi(`/cia/resource`)} //navigate to add task resources
+                    color="success"
+                    onClick={() => navi(`/cia/resource/add/`)} //navigate to add task resources
+                    startIcon={<AddBox />}
                   >
                     Add Task Resources
                   </Button>
@@ -347,13 +374,19 @@ export default function Task(props) {
                   <Button
                     variant="contained"
                     size="large"
-                    onClick={formik.handleReset}
+                    onClick={handleReset}
+                    startIcon={<ClearAll />}
                   >
                     Clear
                   </Button>
                 </Grid>
                 <Grid>
-                  <Button variant="contained" size="large" type="submit">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    type="submit"
+                    startIcon={<Save />}
+                  >
                     Save
                   </Button>
                 </Grid>
@@ -365,17 +398,17 @@ export default function Task(props) {
       <CustomerModal
         openCustomer={openCustomer}
         setOpenCustomer={setOpenCustomer}
-        formik={formik}
+        sendData={setFieldValue}
       />
       <ProjectModal
         openProject={openProject}
         setOpenProject={setOpenProject}
-        formik={formik}
+        sendData={setFieldValue}
       />
       <EmployeeModal
         openEmployee={openEmployee}
         setOpenEmployee={setOpenEmployee}
-        formik={formik}
+        sendData={setFieldValue}
       />
     </div>
   )
