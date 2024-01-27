@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function ProjectModal(props) {
-  const { openProject, setOpenProject, formik } = props
+  const { openProject, setOpenProject, sendData } = props
 
   const projectcols = [
     {
@@ -82,7 +82,7 @@ export default function ProjectModal(props) {
               },
             }}
             onRowClick={({ row }) => {
-              formik.setFieldValue('selectedProject', row)
+              sendData('selectedProject', row)
               setOpenProject(false)
             }}
           />
