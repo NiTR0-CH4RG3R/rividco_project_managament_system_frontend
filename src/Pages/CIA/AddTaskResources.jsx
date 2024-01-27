@@ -118,7 +118,6 @@ const AddTaskResources = () => {
               <TextField
                 id="taskId"
                 variant='outlined'
-                size='small'
                 disabled
                 label='TaskId'
                 sx={{ width: "100%" }}
@@ -133,7 +132,6 @@ const AddTaskResources = () => {
                 {...formik.getFieldProps('selectedPath')}
                 onChange={handlePathChange}
                 label="Category"
-                size='small'
                 sx={{ width: "100%" }}
               >
                 <MenuItem value='images'>Image</MenuItem>
@@ -145,7 +143,6 @@ const AddTaskResources = () => {
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 type="file"
-                size='small'
                 sx={{ width: "100%" }}
                 {...formik.getFieldProps('selectedFile')}
                 onChange={handleFileChange}
@@ -163,7 +160,6 @@ const AddTaskResources = () => {
                 variant='outlined'
                 label="AddedBy"
                 sx={{ width: "100%" }}
-                size='small'
                 placeholder='Add a consumer'
                 {...formik.getFieldProps('addedBy')}
                 error={formik.touched.addedBy && Boolean(formik.errors.addedBy)}
@@ -181,7 +177,6 @@ const AddTaskResources = () => {
                   shrink: true,
                 }}
                 sx={{ width: "100%" }}
-                size='small'
                 {...formik.getFieldProps('addedDate')}
                 error={formik.touched.addedDate && Boolean(formik.errors.addedDate)}
                 helperText={formik.touched.addedDate && formik.errors.addedDate}
@@ -193,7 +188,6 @@ const AddTaskResources = () => {
                 variant='outlined'
                 label="Comment"
                 sx={{ width: "100%" }}
-                size='small'
                 multiline
                 rows={4}
                 placeholder='Add a comment'
