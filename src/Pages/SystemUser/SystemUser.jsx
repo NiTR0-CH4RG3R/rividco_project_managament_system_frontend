@@ -256,27 +256,38 @@ export default function SystemUser() {
                                 
                             </Grid>
                             
-                            
-                  
+                            <Grid
+                                container
+                                spacing={2}
+                                sx={{ mt: 3, justifyContent: "flex-end"}}
+                            >
+                                <Grid item>
+                                    <Button
+                                        variant="contained"
+                                        size="large"
+                                        onClick={handleReset}
+                                    >
+                                        Clear
+                                    </Button>
+                                </Grid> 
+                                
+                                <Grid item>
+                                    <Button
+                                        variant="contained"
+                                        size="large"
+                                        type="submit"
+                                    >
+                                        Save
+                                    </Button>
+                                </Grid>
+
+                            </Grid>
+
                         </Grid>
         
                     </Box>
             
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            padding: "1em 2em 0em 2em !important",
-                        }}
-                    >
-                        <Button>
-                            Clear
-                        </Button>
-
-                        <Button >Save</Button>
-                        
-                
-                    </div>
+                    
                 </form>
             </div>
         )
