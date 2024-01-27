@@ -74,7 +74,7 @@ export default function TaskSt() {
       alignItems="center"
       height="95vh"
       flexDirection="column" 
-      sx={{ height: 650, width: '100%' }}>
+      sx={{ height: 630, width: '90%' }}>
 
         <DataGrid
           rows={rows}
