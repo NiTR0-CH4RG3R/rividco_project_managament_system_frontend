@@ -1,8 +1,9 @@
-import { Modal } from '@mui/material'
+import { Modal,Button} from '@mui/material'
 import { Box, Typography } from '@mui/material'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function EmployeeModal(props) {
   const { openEmployee, setOpenEmployee, sendData } = props
@@ -68,6 +69,7 @@ export default function EmployeeModal(props) {
         }}
       >
         <Typography variant="h6">Employee Modal</Typography>
+
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
             rows={rows}
@@ -87,6 +89,25 @@ export default function EmployeeModal(props) {
             }}
           />
         </div>
+
+        <div
+                style={{
+                  display: "flex",
+                  justifyContent: "end",
+                  padding: "1em 2em 0em 2em !important",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  sx={{ width: "8.5rem", margin: "1em 0.5em !important" ,backgroundColor: "#d32f2f"}}
+                  color="primary"
+                  startIcon={<CloseIcon/>}
+                  onClick={handleClose}
+                >
+                  Close
+                </Button>
+              </div>
+
       </Box>
     </Modal>
   )
