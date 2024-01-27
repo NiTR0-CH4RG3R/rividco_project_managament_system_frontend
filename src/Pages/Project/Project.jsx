@@ -12,7 +12,8 @@ import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import CustomerModal from '../../Components/ModalWindow/CustomerModal';
+import CustomerModal from "../../Components/ModalWindow/CustomerModal";
+import EmployeeModal from '../../Components/ModalWindow/EmployeeModal'
 
 const statusType = [
   {
@@ -124,7 +125,7 @@ export default function Project(props) {
                 sx={{ width: "100%" }}
                 //value={values.customer} //set value using formik
                 onClick={() => setOpenCustomer(true)}
-                value={values.selectedCustomer?.firstname ?? ''}
+                value={values.selectedCustomer?.firstname ?? ""}
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
@@ -164,7 +165,6 @@ export default function Project(props) {
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
-                
                 placeholder="Please Enter Warranty Period"
                 id="p_warrantyPeriod"
                 name="warrantyPeriod"
@@ -330,9 +330,15 @@ export default function Project(props) {
       </form>
 
       <CustomerModal
-      //call customer modal
+        //call customer modal
         openCustomer={openCustomer}
         setOpenCustomer={setOpenCustomer}
+        formik={values}
+      />
+
+      <EmployeeModal
+        openEmployee={openEmployee}
+        setOpenEmployee={setOpenEmployee}
         formik={values}
       />
     </div>
