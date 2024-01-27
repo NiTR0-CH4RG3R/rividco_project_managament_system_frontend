@@ -41,6 +41,8 @@ const rows = [
   { id : 2,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
   { id : 3,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
   { id : 4,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
+  { id : 5,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
+  { id : 6,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
 
 ];
 

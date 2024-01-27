@@ -3,14 +3,6 @@ import React from 'react'
 import TaskTable from './TaskStats/TaskTable'
 
 
-// const columns=[
-//     {id:'task',name:'Task'},
-//     {id:'status',name:'Status'},
-//     {id:'addeddate',name:'Added Date'},
-//     {id:'addby',name:'Added By'},
-//     {id:'cmnt',name:'Comment'}
-//   ]
-
 //   const rows = [
 //     createData('abc', 'abc', 6.0, 24, 4.0),
 //     createData('efg', 'abc', 9.0, 37, 4.3),
