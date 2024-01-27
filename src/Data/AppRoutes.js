@@ -51,7 +51,7 @@ export const AppRoutes = {
 
   /* System User related routes */
   system_user_list: { path: "/user/list", component: <SystemUserList/> },
-  system_user_add: { path: "/user/add", component: <SystemUser /> },
-  system_user_view: { path: "/user/view/id", component: <></> },
-  system_user_edit: { path: "/user/edit/id", component: <></> },
+  system_user_add: { path: "/user/add", component: <SystemUser type="add"/> },
+  system_user_view: { path: "/user/view/id", component: <SystemUser type="view"/> },
+  system_user_edit: { path: "/user/edit/id", component: <SystemUser type="edit"/> },
 };

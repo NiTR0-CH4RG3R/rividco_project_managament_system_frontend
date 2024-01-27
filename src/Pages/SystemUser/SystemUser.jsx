@@ -3,7 +3,7 @@ import { Box, TextField, Grid, MenuItem, Button } from '@mui/material';
 //import Modal from '@mui/material/Modal';
 import { useFormik } from 'formik';
 import SystemUserValidation from '../../Validation/SystemUserValidation';
-//import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 
  
 const role = [
@@ -21,7 +21,7 @@ const role = [
 
 
 
-export default function SystemUser() {
+export default function SystemUser(props) {
     
     const {
         values,
@@ -51,7 +51,8 @@ export default function SystemUser() {
         },
     });
 
-   
+    const { id } = useParams()
+    const navi = useNavigate()
 
 
         return (
@@ -67,7 +68,7 @@ export default function SystemUser() {
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
-                        height="110vh"
+                        height="130vh"
                         flexDirection="column"
                     >
                         <Grid container spacing={2} sx={{ width: "70%" }}>
@@ -83,6 +84,7 @@ export default function SystemUser() {
                                     value={values.FirstName} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.FirstName && errors.FirstName}
                                     helperText={touched.FirstName ? errors.FirstName : ""}
                                 />
@@ -101,6 +103,7 @@ export default function SystemUser() {
                                     value={values.LastName} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.LastName && errors.LastName}
                                     helperText={touched.LastName ? errors.LastName : ""}
                                 />
@@ -119,6 +122,7 @@ export default function SystemUser() {
                                     value={values.Address} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.Address && errors.Address}
                                     helperText={touched.Address ? errors.Address : ""}
                                 />
@@ -137,6 +141,7 @@ export default function SystemUser() {
                                     value={values.Email} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.Email && errors.Email}
                                     helperText={touched.Email ? errors.Email : ""}
                                 />
@@ -155,6 +160,7 @@ export default function SystemUser() {
                                     //value={values.Role} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.Role && errors.Role}
                                     
                                 >
@@ -182,6 +188,7 @@ export default function SystemUser() {
                                     value={values.MobileNo} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.MobileNo && errors.MobileNo}
                                     helperText={touched.MobileNo ? errors.MobileNo : ""}
                                 />
@@ -199,6 +206,7 @@ export default function SystemUser() {
                                     value={values.OfficeNo} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.OfficeNo && errors.OfficeNo}
                                     helperText={touched.OfficeNo ? errors.OfficeNo : ""}
                                 />
@@ -216,6 +224,7 @@ export default function SystemUser() {
                                     value={values.UserName} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.UserName && errors.UserName}
                                     helperText={touched.UserName ? errors.UserName : ""}
                                 />
@@ -232,6 +241,7 @@ export default function SystemUser() {
                                     value={values.Password} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.Password && errors.Password}
                                     helperText={touched.Password ? errors.Password: ""}
                                 />
@@ -250,13 +260,15 @@ export default function SystemUser() {
                                     value={values.Comment} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
+                                    disabled={props.type === 'view'}
                                     error={touched.Comment && errors.Comment}
                                     helperText={touched.Comment ? errors.Comment: ""}
                                 />
                                 
                             </Grid>
                             
-                            <Grid
+                            {(props.type === 'add'||  props.type==='edit') && (
+                                <Grid
                                 container
                                 spacing={2}
                                 sx={{ mt: 3, justifyContent: "flex-end"}}
@@ -283,6 +295,26 @@ export default function SystemUser() {
 
                             </Grid>
 
+                            )}
+
+                            {(props.type === 'view') && (
+                                <Grid
+                                container
+                                spacing={2}
+                                    sx={{ mt: 3, justifyContent: "flex-end" }}
+                                >
+                                    <Grid item>
+                                        <Button
+                                            variant="contained"
+                                            size="large"
+                                            onClick={() => navi(`/user/edit/${id}`)}
+                                        >
+                                            Edit
+                                            </Button>
+                                    </Grid>
+                                </Grid>
+                            )}
+                            
                         </Grid>
         
                     </Box>
