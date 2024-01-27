@@ -150,7 +150,7 @@ const AddTaskResources = () => {
             </Grid>
 
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <Button variant="contained" color="success" onClick={handleUpload}>
+              <Button variant="contained" color="success" onClick={handleUpload} size='large'>
                 Upload
               </Button>
             </Grid>

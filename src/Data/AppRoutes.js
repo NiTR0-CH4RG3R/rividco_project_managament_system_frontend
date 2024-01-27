@@ -5,6 +5,7 @@ import ListTask from "../Pages/CIA/ListTask";
 import Task from "../Pages/CIA/Task";
 import AddTaskResources from "../Pages/CIA/AddTaskResources";
 import Vendoritem from "../Pages/Vendoritem/Vendoritem";
+import SystemUserList from "../Pages/SystemUser/SystemUserList";
 
 export const AppRoutes = {
   /* Customer related routes */
@@ -49,7 +50,7 @@ export const AppRoutes = {
   cia_resources: { path: "/cia/resource", component: <AddTaskResources /> },
 
   /* System User related routes */
-  system_user_list: { path: "/user/list", component: <></> },
+  system_user_list: { path: "/user/list", component: <SystemUserList/> },
   system_user_add: { path: "/user/add", component: <SystemUser /> },
   system_user_view: { path: "/user/view/id", component: <></> },
   system_user_edit: { path: "/user/edit/id", component: <></> },
