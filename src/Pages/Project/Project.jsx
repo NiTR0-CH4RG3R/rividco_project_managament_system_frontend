@@ -26,6 +26,9 @@ const statusType = [
 
 export default function Project(props) {
   const [loading, setLoading] = React.useState(false);
+  //for modal
+  const [openCustomer, setOpenCustomer] = React.useState(false);
+  const [openEmployee, setOpenEmployee] = React.useState(false);
 
   //set initial values in formik
   const {
@@ -56,6 +59,7 @@ export default function Project(props) {
   });
 
   //
+  console.log(values);
 
   const { id } = useParams();
   const navi = useNavigate();
@@ -119,6 +123,7 @@ export default function Project(props) {
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 required
+                type="date"
                 placeholder="Select a Date"
                 id="p_startDate"
                 name="startDate"
@@ -149,7 +154,7 @@ export default function Project(props) {
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
-                required
+                
                 placeholder="Please Enter Warranty Period"
                 id="p_warrantyPeriod"
                 name="warrantyPeriod"
