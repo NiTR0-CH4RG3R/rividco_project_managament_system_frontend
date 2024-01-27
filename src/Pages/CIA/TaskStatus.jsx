@@ -1,7 +1,7 @@
 import { Box , Grid,Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material'
 import React from 'react'
-import TaskTable from './TaskStats/TaskTable'
-import TaskForm from './TaskStats/TaskForm'
+import TaskTable from './TaskStatus/TaskTable'
+import TaskForm from './TaskStatus/TaskForm'
 
 function TaskStatus() {
   return (
