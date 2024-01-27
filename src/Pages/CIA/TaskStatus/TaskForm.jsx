@@ -18,10 +18,10 @@ function TaskForm() {
       }}
       noValidate
         autoComplete="off"
-        display="flex"
-        justifyContent="left"
+        //display="flex"
+        //justifyContent="left"
         //alignItems="center"
-        height="95vh"
+        height="50vh"
         flexDirection="column"
     >   
         {/* ---------------- Task field ------------------ */}
