@@ -53,6 +53,13 @@ export default function Project(props) {
       coordinator: "",
       comment: "",
     },
+    selectedCustomer: {
+      participantid: null,
+      firstname: null,
+      lastname: null,
+      addresss: null,
+      contactno: null,
+    },
 
     onSubmit: (values) => {
       sendData(values);
@@ -115,7 +122,9 @@ export default function Project(props) {
                 name="customer"
                 label="customer"
                 sx={{ width: "100%" }}
-                value={values.customer} //set value using formik
+                //value={values.customer} //set value using formik
+                onClick={() => setOpenCustomer(true)}
+                value={values.selectedCustomer?.firstname ?? ''}
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
@@ -324,7 +333,7 @@ export default function Project(props) {
       //call customer modal
         openCustomer={openCustomer}
         setOpenCustomer={setOpenCustomer}
-        formik={formik}
+        formik={values}
       />
     </div>
   );
