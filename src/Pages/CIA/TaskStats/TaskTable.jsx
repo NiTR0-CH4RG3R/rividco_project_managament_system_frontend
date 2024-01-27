@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'id', headerName: 'ID', width: 100 },
   {
     field: 'task',
     headerName: 'Task',
@@ -19,13 +19,13 @@ const columns = [
   {
     field: 'addDate',
     headerName: 'Add Date',
-    width: 110,
+    width: 150,
     editable: true,
   },
   {
     field: 'addBy',
     headerName: 'Add By',
-    width: 110,
+    width: 150,
     editable: true,
   },
   {
@@ -37,18 +37,36 @@ const columns = [
 ];
 
 const rows = [
-  { id : 1,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
-  { id : 2,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
-  { id : 3,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
-  { id : 4,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
-  { id : 5,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
-  { id : 6,task: 'create task',taskStatus: 'done' , addDate: 10/24 , addBy: 'puna' , comment:'done ok' },
+  { id : 1,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 2,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 3,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 4,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 5,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 6,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 7,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 8,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 9,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 10,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 11,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 12,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 13,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 14,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 15,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 16,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 17,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 18,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 19,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 20,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 21,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 22,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 23,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
+  { id : 24,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
 
 ];
 
 export default function TaskSt() {
   return (
-    <Box sx={{ height: 650, width: '100%' }}>
+    <Box sx={{ height: 650, width: '95%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
