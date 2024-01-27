@@ -98,8 +98,8 @@ const AddTaskResources = (props) => {
     formik.resetForm();
   };
 
-  const {id} = useParams('');
-  const navi = useNavigate('');
+  const {id} = useParams();
+  const navi = useNavigate();
 
   return (
     <div>
@@ -118,6 +118,9 @@ const AddTaskResources = (props) => {
           flexDirection="column"
         >
           <Grid container spacing={2} sx={{ width: "70%" }}>
+
+            {/* ---------------TaskID Field---------------- */}
+
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 id="taskId"
@@ -128,6 +131,8 @@ const AddTaskResources = (props) => {
                 {...formik.getFieldProps('taskId')}
               />
             </Grid>
+
+            {/* ---------------Category Field---------------- */}
 
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
@@ -144,20 +149,33 @@ const AddTaskResources = (props) => {
               </TextField>
             </Grid>
 
+            {/* ---------------FileUpload Field---------------- */}
+
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 type="file"
                 sx={{ width: "100%" }}
                 {...formik.getFieldProps('selectedFile')}
                 onChange={handleFileChange}
+                disabled={props.type === 'view'}
               />
             </Grid>
 
+            {/* ---------------Upload Button---------------- */}
+
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <Button variant="contained" color="success" onClick={handleUpload} size='large'>
+              <Button 
+                variant="contained" 
+                color="success" 
+                onClick={handleUpload} 
+                size='large'
+                disabled={props.type === 'view'}
+              >
                 Upload
               </Button>
             </Grid>
+
+            {/* ---------------AddedBy Field---------------- */}
 
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
@@ -168,8 +186,11 @@ const AddTaskResources = (props) => {
                 {...formik.getFieldProps('addedBy')}
                 error={formik.touched.addedBy && Boolean(formik.errors.addedBy)}
                 helperText={formik.touched.addedBy && formik.errors.addedBy}
+                disabled={props.type === 'view'}
               />
             </Grid>
+
+            {/* ---------------AddedDate Field---------------- */}
 
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
@@ -184,8 +205,11 @@ const AddTaskResources = (props) => {
                 {...formik.getFieldProps('addedDate')}
                 error={formik.touched.addedDate && Boolean(formik.errors.addedDate)}
                 helperText={formik.touched.addedDate && formik.errors.addedDate}
+                disabled={props.type === 'view'}
               />
             </Grid>
+
+            {/* ---------------Comment Field---------------- */}
 
             <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
@@ -198,11 +222,13 @@ const AddTaskResources = (props) => {
                 {...formik.getFieldProps('comment')}
                 error={formik.touched.comment && Boolean(formik.errors.comment)}
                 helperText={formik.touched.comment && formik.errors.comment}
+                disabled={props.type === 'view'}
               />
             </Grid>
 
           </Grid>
-
+        
+        {(props.type === 'add') && (
         <Box
            display="flex"
            width="70%" 
@@ -214,6 +240,7 @@ const AddTaskResources = (props) => {
             padding: "1em 2em 0em 2em !important",
           }}
         >
+          {/* ---------------Clear Button---------------- */}
           <Button
             variant="contained"
             sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
@@ -223,6 +250,8 @@ const AddTaskResources = (props) => {
           >
             Clear
           </Button>
+
+          {/* ---------------Save Button---------------- */}
 
           <Button
             color='primary'
@@ -235,8 +264,52 @@ const AddTaskResources = (props) => {
           >
             Save
           </Button>
+
+
         </div>
         </Box>
+        )}
+
+        {(props.type === 'view') && (
+          <Box
+          display="flex"
+          width="70%" 
+          justifyContent="flex-end">
+       <div
+         style={{
+           display: "flex",
+           justifyContent: "end",
+           padding: "1em 2em 0em 2em !important",
+         }}
+       >
+
+         {/* ---------------AddNewResource Button---------------- */}
+
+         <Button
+           variant="contained"
+           sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+           color="primary"
+           onClick={() => navi(`/cia/resource/add/id`)}
+         >
+           Add New
+         </Button>
+
+
+         {/* ---------------ShowFiles Button---------------- */}
+
+         <Button
+           variant="contained"
+           sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+           color="primary"
+          //  onClick={}
+         >
+           Show Files
+         </Button>
+
+         </div>
+         </Box>
+        )}
+
         </Box>
       </form>
     </div>
