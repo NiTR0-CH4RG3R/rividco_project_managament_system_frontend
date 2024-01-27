@@ -44,7 +44,7 @@ export default function Project(props) {
   } = useFormik({
     initialValues: {
       customer: "",
-      startDate: "",
+      startDate: " ",
       description: "",
       warantyPeriod: "",
       status: "",
@@ -67,6 +67,14 @@ export default function Project(props) {
       firstname: null,
       lastname: null,
       role: null,
+    },
+
+    selectedReferenceBy: {
+      participantid: null,
+      firstname: null,
+      lastname: null,
+      addresss: null,
+      contactno: null,
     },
 
     onSubmit: (values) => {
@@ -151,6 +159,7 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
+                focused
               />
             </Grid>
 
@@ -223,7 +232,9 @@ export default function Project(props) {
                 name="referenceBy"
                 label="Reference By"
                 sx={{ width: "100%" }}
-                value={values.referencedBy} //set value using formik
+                //value={values.referencedBy} //set value using formik
+                onClick={() => setOpenCustomer(true)}
+                value={values.selectedReferenceBy?.firstname ?? ""}
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
