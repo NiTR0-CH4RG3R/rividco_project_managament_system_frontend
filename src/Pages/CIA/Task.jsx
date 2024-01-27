@@ -302,7 +302,7 @@ export default function Task(props) {
                   <Button
                     variant="contained"
                     size="large"
-                    onClick={() => navi(`/cia/resource/${id}`)}
+                    onClick={() => navi(`/cia/status`)} //navigate to the taskstatus page
                   >
                     View Status History
                   </Button>
@@ -311,7 +311,16 @@ export default function Task(props) {
                   <Button
                     variant="contained"
                     size="large"
-                    onClick={() => navi(`/cia/edit/${id}`)}
+                    onClick={() => navi(`/cia/resource`)} //navigate to the view task resouce page
+                  >
+                    View Task Resources
+                  </Button>
+                </Grid>
+                <Grid>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={() => navi(`/cia/edit/${id}`)} //navigate to edit task page
                   >
                     Edit
                   </Button>
@@ -325,6 +334,15 @@ export default function Task(props) {
                 spacing={1}
                 sx={{ mt: 3, display: 'flex', justifyContent: 'end' }}
               >
+                <Grid>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    onClick={() => navi(`/cia/resource`)} //navigate to add task resources
+                  >
+                    Add Task Resources
+                  </Button>
+                </Grid>
                 <Grid>
                   <Button
                     variant="contained"
