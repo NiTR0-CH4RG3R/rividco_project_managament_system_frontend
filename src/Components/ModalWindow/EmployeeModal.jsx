@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function EmployeeModal(props) {
-  const { openEmployee, setOpenEmployee, formik } = props
+  const { openEmployee, setOpenEmployee, sendData } = props
 
   const employeecols = [
     {
@@ -82,7 +82,7 @@ export default function EmployeeModal(props) {
               },
             }}
             onRowClick={({ row }) => {
-              formik.setFieldValue('selectedEmployee', row)
+              sendData('selectedEmployee', row)
               setOpenEmployee(false)
             }}
           />
