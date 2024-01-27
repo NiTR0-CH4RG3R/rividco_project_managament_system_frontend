@@ -10,12 +10,14 @@ function TaskStatus() {
             <Grid container spacing={2} sx={{ width: "100%" }}>
 
                 {/* ---------------- Task Table ------------------ */}
-                <Grid item xs={8} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                <Grid item xs={8} sx={{ padding: "7em 2em 0em 14em !important" }}>
                     <TaskTable/>
                 </Grid>
 
+                
                 {/* ---------------- Task form ------------------ */}
-                <Grid sx={{ padding: "1em 1em 0em 1em !important" }}>
+                <Grid item xs={4} sx={{ padding: "12em 2em 0em 7em !important" }}>
+                <h2>Edit Task Details</h2>
                     <TaskForm/>
                 </Grid>
             </Grid>
