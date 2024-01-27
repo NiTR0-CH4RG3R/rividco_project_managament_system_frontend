@@ -146,19 +146,7 @@ function ListTask(){
     const [selectedRow, setselecctedRow] = React.useState([]);
     const nav = useNavigate();
 
-    //Navigate to add task page
-    const handleClick = () => {
-        nav('/cia/add');
-    }
-
-    //Function to navigate to view task page when double click on a row 
-    const handleRowDoubleClick = () => {
-        if (selectedRow.length > 0){
-            const selectedtask = task.find((row) => row.taskId === selectedRow[0])
-            nav('/cia/add',{state: {taskdata: selectedtask}});
-        }
-    }
-
+    //Fetching data from API
     React.useEffect(() =>{
         const fetchRow = async () =>{
             try{
@@ -172,6 +160,11 @@ function ListTask(){
         }
         fetchRow();
     }, [])
+
+    //Navigate to add task page when click on Add Icon
+    const handleClick = () => {
+        nav('/cia/add');
+    }
 
     //Map taskId as unique identifier in the data grid
     const getRowId = (row) => row.taskId;
@@ -195,8 +188,7 @@ function ListTask(){
                     disableSelectionOnClick={true}
                     disableColumnFilter={true}
                     autoWidth = {true}
-                    onRowSelectionModelChange={(newSelection) => setselecctedRow(newSelection)}
-                    onRowDoubleClick={handleRowDoubleClick}    
+                    onRowSelectionModelChange={(newSelection) => setselecctedRow(newSelection)}    
                 />
             </Box>
             
