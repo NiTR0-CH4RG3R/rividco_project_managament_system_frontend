@@ -17,6 +17,7 @@ import EmployeeModal from "../../Components/ModalWindow/EmployeeModal";
 import { IconButton } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
 import { addProjectValidation } from "../../Validation/AddProjectValidation";
+import ReferenceByModal from "../../Components/ModalWindow/ReferenceByModal";
 
 const statusType = [
   {
@@ -34,6 +35,8 @@ export default function Project(props) {
   //for modal
   const [openCustomer, setOpenCustomer] = React.useState(false);
   const [openEmployee, setOpenEmployee] = React.useState(false);
+  const [openReferenceBy, setOpenReferenceBy] = React.useState(false);
+  
 
   //set initial values in formik
   const {
@@ -281,7 +284,7 @@ export default function Project(props) {
                     !values.selectedReferenceBy?.title &&
                     props.type !== "view"
                   ) {
-                    setOpenCustomer(true);
+                    setOpenReferenceBy(true);
                   }
                 }}
                 value={values.selectedReferenceBy?.title ?? ""}
@@ -445,6 +448,11 @@ export default function Project(props) {
       <EmployeeModal
         openEmployee={openEmployee}
         setOpenEmployee={setOpenEmployee}
+        sendData={setFieldValue}
+      />
+      <ReferenceByModal
+        openReferenceBy={openReferenceBy}
+        setOpenReferenceBy={setOpenReferenceBy}
         sendData={setFieldValue}
       />
     </div>
