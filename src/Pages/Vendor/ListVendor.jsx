@@ -1,177 +1,251 @@
 import React, { useState } from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import TextField from "@mui/material/TextField";
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import { InputAdornment } from "@mui/material";
-//import { useNavigate } from "react-router-dom";
+import { DataGrid } from "@mui/x-data-grid";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
+import SearchRoundedIcon from "@mui/icons-material/Search";
 
 const columns = [
-  { id: "name", label: "Name", minWidth: 170 },
-  { id: "address", label: "Address", minWidth: 100 },
-  { id: "email", label: "Email", minWidth: 100 },
-  { id: "contact_no", label: "Contact no", minWidth: 100 },
+  { field: "id", headerName: "Registration No", width: 150 },
+  { field: "name", headerName: "Name", width: 200 },
+  { field: "address", headerName: "Address", width: 450 },
+  { field: "email", headerName: "E-mail Adress", width: 250 },
+  { field: "contact1", headerName: "Contact No1", type: Number, width: 150 },
 ];
-function createData(name, address, email, contact_no) {
-  return { name, address, email, contact_no };
-}
 
 const rows = [
-  createData(
-    "Perera",
-    "no 262/E,ihala biyanwila,mankada road,kadawatha.",
-    "amali92@gmail.com",
-    760305481
-  ),
-  createData(
-    "Bandara",
-    "no 44/18A, 1st cross street,Pagoda road,nugegoda.",
-    "kamal273@gmail.com",
-    763463784
-  ),
-  createData(
-    "Hewawitharana",
-    "no 262/E,pahala biyanwila,mankada road,kadawatha.",
-    "sonali890@gmail.com",
-    760405481
-  ),
-  createData(
-    "Gunathilaka",
-    "no 300/a,weliwatta,palpathwala,matale.",
-    "indika456@gmail.com",
-    760900481
-  ),
-  createData(
-    "Alwis",
-    "no 262/E,ihala biyanwila,mankada road,kadawatha.",
-    "amali92@gmail.com",
-    760305467
-  ),
-  createData(
-    "Karunarathne",
-    "no 44/18A, 1st cross street,Pagoda road,nugegoda.",
-    "kamal273@gmail.com",
-    766785481
-  ),
-  createData(
-    "Onali",
-    "no 262/E,pahala biyanwila,mankada road,kadawatha.",
-    "sonali890@gmail.com",
-    767895481
-  ),
-  createData(
-    "Sadeesha",
-    "no 300/a,weliwatta,palpathwala,matale.",
-    "indika456@gmail.com",
-    760809481
-  ),
+  {
+    id: "SC1201",
+    name: "Nethmi Nuwanthara",
+    address: "No 262/E,Ihala biyanwila,Mankada road,Kadawatha",
+    email: "indika456@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1202",
+    name: "Udeshi Gamage",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "sonali890@gmail.com",
+    contact1: 760900481,
+  },
+  {
+    id: "SC1203",
+    name: "Sachindu Umayangana",
+    address: "No 262/E,Pahala biyanwila,Mankada road,Kadawatha",
+    email: "amali92@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1204",
+    name: "Buddhima De Soyza",
+    address: "No 300/a,Weliwatta,Palpathwala,Matale",
+    email: "kamal273@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1205",
+    name: "Saymi De Alwis",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "indika456@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1206",
+    name: "Tharushi Kavindya",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "kamal273@gmail.com",
+    contact1: 760900481,
+  },
+  {
+    id: "SC1207",
+    name: "Udesh Kumara",
+    address: "No 300/a,Weliwatta,Palpathwala,Matale",
+    email: "sonali890@gmail.com",
+    contact1: 714686363,
+  },
+  {
+    id: "SC1208",
+    name: "Yashod Gunathilaka",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "indika456@gmail.com",
+    contact1: 766785481,
+  },
+  {
+    id: "SC1209",
+    name: "Yashini Perera",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "indika456@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1210",
+    name: "Nirmal Gunathilaka",
+    address: "No 300/a,Weliwatta,Palpathwala,Matale",
+    email: "sonali890@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1211",
+    name: "Aparna Wijerathne",
+    address: "No 262/E,Ihala biyanwila,Mankada road,Kadawatha",
+    email: "indika456@gmail.com",
+    contact1: 760900481,
+  },
+  {
+    id: "SC1212",
+    name: "Malithi Perera",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "indika456@gmail.com",
+    contact1: 763463784,
+  },
+  {
+    id: "SC1213",
+    name: "Kasuni Gunasena",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "amali92@gmail.com",
+    contact1: 763463784,
+  },
+  {
+    id: "SC1214",
+    name: "Wiharika Niwarthana",
+    address: "No 262/E,Ihala biyanwila,Mankada road,Kadawatha",
+    email: "kamal273@gmail.com",
+    contact1: 718182863,
+  },
+  {
+    id: "SC1201",
+    name: "Nethmi Nuwanthara",
+    address: "No 262/E,Ihala biyanwila,Mankada road,Kadawatha",
+    email: "indika456@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1202",
+    name: "Udeshi Gamage",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "sonali890@gmail.com",
+    contact1: 760900481,
+  },
+  {
+    id: "gSC1203",
+    name: "Sachindu Umayangana",
+    address: "No 262/E,Pahala biyanwila,Mankada road,Kadawatha",
+    email: "amali92@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1204",
+    name: "Buddhima De Soyza",
+    address: "No 300/a,Weliwatta,Palpathwala,Matale",
+    email: "kamal273@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1205",
+    name: "Saymi De Alwis",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "indika456@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1206",
+    name: "Tharushi Kavindya",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "kamal273@gmail.com",
+    contact1: 760900481,
+  },
+  {
+    id: "SC1207",
+    name: "Udesh Kumara",
+    address: "No 300/a,Weliwatta,Palpathwala,Matale",
+    email: "sonali890@gmail.com",
+    contact1: 714686363,
+  },
+  {
+    id: "SC1208",
+    name: "Yashod Gunathilaka",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "indika456@gmail.com",
+    contact1: 766785481,
+  },
+  {
+    id: "SC1209",
+    name: "Yashini Perera",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "indika456@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1210",
+    name: "Nirmal Gunathilaka",
+    address: "No 300/a,Weliwatta,Palpathwala,Matale",
+    email: "sonali890@gmail.com",
+    contact1: 760809481,
+  },
+  {
+    id: "SC1211",
+    name: "Aparna Wijerathne",
+    address: "No 262/E,Ihala biyanwila,Mankada road,Kadawatha",
+    email: "indika456@gmail.com",
+    contact1: 760900481,
+  },
+  {
+    id: "SC1212",
+    name: "Malithi Perera",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "indika456@gmail.com",
+    contact1: 763463784,
+  },
+  {
+    id: "SC1213",
+    name: "Kasuni Gunasena",
+    address: "No 44/18A, 1st cross street,Pagoda road,Nugegoda",
+    email: "amali92@gmail.com",
+    contact1: 763463784,
+  },
+  {
+    id: "SC1214",
+    name: "Wiharika Niwarthana",
+    address: "No 262/E,Ihala biyanwila,Mankada road,Kadawatha",
+    email: "kamal273@gmail.com",
+    contact1: 718182863,
+  },
 ];
 
-export default function ListVendor() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [filter, setFilter] = React.useState("");
-  const [selectedRow, setSelectedRow] = useState(null);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+const ListVendor = () => {
+  const [pageSize, setPageSize] = useState(5);
+  const [page, setPage] = useState(1);
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-  const handleRowClick = (rowData) => {
-    setSelectedRow(rowData);
-    //navigate(/form/${rowData.name});
-  };
-
-  const handleCloseForm = () => {
-    setSelectedRow(null);
-  };
-  const filteredRows = rows.filter((row) =>
-    row.name.toLowerCase().includes(filter.toLowerCase())
-  );
   return (
-    <div>
+    <div style={{ height: 400, width: "100%" }}>
+      <h1>
+        <center>Vendor Datatable</center>
+      </h1>
+
       <TextField
+        variant="standard"
+        reg="search-input"
+        label="Search"
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SearchRoundedIcon />
+              <IconButton>
+                <SearchRoundedIcon />
+              </IconButton>
             </InputAdornment>
           ),
         }}
-        id="filled-basic"
-        label="Filter by Name"
-        variant="filled"
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
       />
-
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredRows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
-                      onClick={() => handleRowClick(row)}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-
-        {selectedRow && (
-          <Viewvendor rowData={selectedRow} onClose={handleCloseForm} />
-        )}
-      </Paper>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={pageSize}
+        page={page}
+        pagination
+        autoHeight
+        onPageChange={(params) => setPage(params.page)}
+        onPageSizeChange={(params) => setPageSize(params.pageSize)}
+      />
     </div>
   );
-}
+};
+
+export default ListVendor;
