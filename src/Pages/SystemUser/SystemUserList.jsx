@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { DataGrid, GridToolbar, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
-import { TextField, Paper, InputAdornment, IconButton } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import { TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchRoundedIcon from '@mui/icons-material/Search';
+import { Box, Stack } from "@mui/material";
+import { AddBoxOutlined } from "@mui/icons-material";
 
 const columns = [
   { field: 'id', headerName: 'Registration No', width: 150 },
@@ -45,9 +47,14 @@ const rows = [
 
 ];
 
-const CustomToolbar = ({ onSearchChange }) => {
+const SytemUserList = () => {
+  const[pageSize,setPageSize]=useState(5);
+  const[page,setPage]=useState(1);
+
   return (
-    <GridToolbarContainer>
+    <div style={{ height: 400, width: '100%' }}>
+    <h1><center>System User Datatable</center></h1>
+    
       <TextField
         variant="standard"
         reg="search-input"
@@ -61,33 +68,8 @@ const CustomToolbar = ({ onSearchChange }) => {
             </InputAdornment>
           ),
         }}
-        onChange={(e) => onSearchChange(e.target.value)}
       />
-      <GridToolbarExport />
-    </GridToolbarContainer>
-  );
-};
-
-const SytemUser = () => {
-  const [pageSize, setPageSize] = useState(5);
-  const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearchChange = (value) => {
-    setPage(2); 
-    setSearchTerm(value);
-  };
-
-  const filteredRows = rows.filter((row) =>
-    Object.values(row).some(
-      (value) => String(value).toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
-
-  return (
-    <div style={{ height: 400, width: '100%' }}>
-      <h1><center>System User Datatable</center></h1>
-      <Paper>
+  
         <DataGrid
           rows={rows}
           columns={columns}
@@ -95,13 +77,20 @@ const SytemUser = () => {
           page={page}
           pagination
           autoHeight
-          components={{
-            Toolbar: () => <CustomToolbar onSearchChange={setSearchTerm} />,
-          }}
           onPageChange={(params) => setPage(params.page)}
           onPageSizeChange={(params) => setPageSize(params.pageSize)}
         />
-      </Paper>
+
+      <Box
+        sx={{ mt: 10, ml: 2, display: "flex", justifyContent: "flex-start" }}
+      >
+        <Stack direction="row" spacing={1}>
+          <IconButton arisl-aria-label="add-button">
+            <AddBoxOutlined color="primary" style={{ fontSize: 50 }} />
+          </IconButton>
+        </Stack>
+      </Box>
+     
     </div>
   );
 };
