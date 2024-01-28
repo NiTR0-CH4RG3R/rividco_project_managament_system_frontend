@@ -48,7 +48,8 @@ export default function Project(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
-    selectedCustomer,
+    submitForm,
+    
   } = useFormik({
     initialValues: {
       //customer: "",
@@ -61,7 +62,7 @@ export default function Project(props) {
       //referencedBy: "",
       //coordinator: "",
       comment: "",
-    },
+    
     selectedCustomer: {
       userId: null,
       id: null,
@@ -82,6 +83,7 @@ export default function Project(props) {
       title: null,
       completed: true,
     },
+  },
   
     validationSchema: addProjectValidation,
 
@@ -91,7 +93,7 @@ export default function Project(props) {
   });
 
   //
-  console.log(values);
+  //console.log(values);
 
   const { id } = useParams();
   const navi = useNavigate();
@@ -399,8 +401,8 @@ export default function Project(props) {
 
                 <LoadingButton
                   color="secondary"
-                  type="submit"
-                  //onClick={handleSubmit}
+                  //type="submit"
+                  onClick={submitForm}
                   loading={loading}
                   loadingPosition="start"
                   startIcon={<SaveIcon />}
