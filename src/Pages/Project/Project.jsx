@@ -13,7 +13,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import CustomerModal from "../../Components/ModalWindow/CustomerModal";
-import EmployeeModal from '../../Components/ModalWindow/EmployeeModal'
+import EmployeeModal from "../../Components/ModalWindow/EmployeeModal";
+import { IconButton } from "@mui/material";
+import { GridClearIcon } from "@mui/x-data-grid";
 
 const statusType = [
   {
@@ -41,10 +43,11 @@ export default function Project(props) {
     handleChange,
     handleSubmit,
     handleReset,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       customer: "",
-      startDate: " ",
+      startDate: "",
       description: "",
       warantyPeriod: "",
       status: "",
@@ -55,26 +58,24 @@ export default function Project(props) {
       comment: "",
     },
     selectedCustomer: {
-      participantid: null,
-      firstname: null,
-      lastname: null,
-      addresss: null,
-      contactno: null,
+      userId: null,
+      id: null,
+      title: null,
+      completed: true,
     },
 
     selectedEmployee: {
-      participantid: null,
-      firstname: null,
-      lastname: null,
-      role: null,
+      userId: null,
+      id: null,
+      title: null,
+      completed: true,
     },
 
     selectedReferenceBy: {
-      participantid: null,
-      firstname: null,
-      lastname: null,
-      addresss: null,
-      contactno: null,
+      userId: null,
+      id: null,
+      title: null,
+      completed: true,
     },
 
     onSubmit: (values) => {
@@ -139,8 +140,28 @@ export default function Project(props) {
                 label="customer"
                 sx={{ width: "100%" }}
                 //value={values.customer} //set value using formik
-                onClick={() => setOpenCustomer(true)}
-                value={values.selectedCustomer?.firstname ?? ""}
+                //onClick={() => setOpenCustomer(true)}
+                //value={values.selectedCustomer?.firstname ?? ""}
+                onClick={() => {
+                  if (!values.selectedCustomer?.title) {
+                    setOpenCustomer(true);
+                  }
+                }}
+                value={values.selectedCustomer?.title ?? ""}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() => setFieldValue("selectedCustomer", "")}
+                      sx={{
+                        visibility: values.selectedCustomer?.title
+                          ? "visible"
+                          : "hidden",
+                      }}
+                    >
+                      <GridClearIcon />
+                    </IconButton>
+                  ),
+                }}
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
@@ -159,7 +180,8 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
-                focused
+                //focused
+                InputLabelProps={{ shrink: true }}
               />
             </Grid>
 
@@ -264,7 +286,7 @@ export default function Project(props) {
                 sx={{ width: "100%" }}
                 //value={values.coordinator} //set value using formik
                 onClick={() => setOpenEmployee(true)}
-                value={values.selectedEmployee?.firstname ?? ''}
+                value={values.selectedEmployee?.firstname ?? ""}
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
@@ -353,13 +375,13 @@ export default function Project(props) {
         //call customer modal
         openCustomer={openCustomer}
         setOpenCustomer={setOpenCustomer}
-        formik={values}
+        sendData={setFieldValue}
       />
 
       <EmployeeModal
         openEmployee={openEmployee}
         setOpenEmployee={setOpenEmployee}
-        formik={values}
+        //formik={formik}
       />
     </div>
   );
