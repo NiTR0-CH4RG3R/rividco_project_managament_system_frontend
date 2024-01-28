@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/Search";
-
+import { Box, Stack } from "@mui/material";
+import { AddBoxOutlined } from "@mui/icons-material";
 const columns = [
   { field: "id", headerName: "Registration No", width: 150 },
   { field: "name", headerName: "Name", width: 200 },
@@ -244,6 +245,15 @@ const ListVendor = () => {
         onPageChange={(params) => setPage(params.page)}
         onPageSizeChange={(params) => setPageSize(params.pageSize)}
       />
+      <Box
+        sx={{ mt: 10, ml: 2, display: "flex", justifyContent: "flex-start" }}
+      >
+        <Stack direction="row" spacing={1}>
+          <IconButton arisl-aria-label="add-button">
+            <AddBoxOutlined color="primary" style={{ fontSize: 50 }} />
+          </IconButton>
+        </Stack>
+      </Box>
     </div>
   );
 };
