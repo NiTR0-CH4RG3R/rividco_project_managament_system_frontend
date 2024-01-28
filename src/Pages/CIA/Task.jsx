@@ -31,6 +31,7 @@ export default function Task(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
+    submitForm,
   } = useFormik({
     initialValues: {
       description: '',
@@ -149,11 +150,14 @@ export default function Task(props) {
                 id="requested_by"
                 name="requested_by"
                 label="Requested Customer"
-                helperText="Customer Name"
                 variant="outlined"
                 fullWidth
+                required
                 onClick={() => {
-                  if (!values.selectedCustomer?.title) {
+                  if (
+                    !values.selectedCustomer?.title &&
+                    props.type !== 'view'
+                  ) {
                     setOpenCustomer(true)
                   }
                 }}
@@ -173,6 +177,15 @@ export default function Task(props) {
                   ),
                 }}
                 disabled={props.type === 'view'}
+                error={
+                  touched.selectedCustomer?.title &&
+                  errors.selectedCustomer?.title
+                }
+                helperText={
+                  touched.selectedCustomer?.title
+                    ? errors.selectedCustomer?.title
+                    : ''
+                }
               />
             </Grid>
 
@@ -196,11 +209,10 @@ export default function Task(props) {
                 id="project_regarding"
                 name="project_regarding"
                 label="Project Regarding"
-                helperText="Project Location"
                 variant="outlined"
                 fullWidth
                 onClick={() => {
-                  if (!values.selectedProject?.title) {
+                  if (!values.selectedProject?.title && props.type !== 'view') {
                     setOpenProject(true)
                   }
                 }}
@@ -228,11 +240,13 @@ export default function Task(props) {
                 id="assigned_to"
                 name="assigned_to"
                 label="Assigned Employee"
-                helperText="Employee Name"
                 variant="outlined"
                 fullWidth
                 onClick={() => {
-                  if (!values.selectedEmployee?.title) {
+                  if (
+                    !values.selectedEmployee?.title &&
+                    props.type !== 'view'
+                  ) {
                     setOpenEmployee(true)
                   }
                 }}
@@ -334,7 +348,7 @@ export default function Task(props) {
                     variant="contained"
                     size="large"
                     color="success"
-                    onClick={() => navi(`/cia/resource/view/`)} //navigate to the view task resouce page
+                    onClick={() => navi(`/cia/resource/view/id`)} //navigate to the view task resouce page
                     startIcon={<Visibility />}
                   >
                     View Task Resources
@@ -344,7 +358,7 @@ export default function Task(props) {
                   <Button
                     variant="contained"
                     size="large"
-                    onClick={() => navi(`/cia/edit/${id}`)} //navigate to edit task page
+                    onClick={() => navi(`/cia/edit/id`)} //navigate to edit task page
                     startIcon={<Edit />}
                   >
                     Edit
@@ -364,7 +378,7 @@ export default function Task(props) {
                     variant="contained"
                     size="large"
                     color="success"
-                    onClick={() => navi(`/cia/resource/add/`)} //navigate to add task resources
+                    onClick={() => navi(`/cia/resource/add/id`)} //navigate to add task resources
                     startIcon={<AddBox />}
                   >
                     Add Task Resources
@@ -384,8 +398,8 @@ export default function Task(props) {
                   <Button
                     variant="contained"
                     size="large"
-                    type="submit"
                     startIcon={<Save />}
+                    onClick={submitForm}
                   >
                     Save
                   </Button>
