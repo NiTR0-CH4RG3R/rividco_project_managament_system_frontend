@@ -9,6 +9,8 @@ export const taskValidation = yup.object().shape({
       'Please enter a valid mobile number'
     )
     .min(10)
-    .max(10)
     .required('Required'),
+  selectedCustomer: yup.object({
+    title: yup.string().required('Required'),
+  }),
 })
