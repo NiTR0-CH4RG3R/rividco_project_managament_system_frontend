@@ -3,6 +3,7 @@ import { AddBoxOutlined } from '@mui/icons-material';
 import { Box, IconButton, Link, Stack } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 //Initialize columns of the data grid
 const columns = [
@@ -101,7 +102,7 @@ const columns = [
     {
         field: 'chatLink',
         headerName: 'Chat Link',
-        width: '200',
+        width: '300',
         align: 'center',
         headerAlign: 'center',
         renderCell: (params) => (
@@ -129,12 +130,12 @@ const columns = [
 //Asynchronous method to fetch data from API
 const fetchData = async () => {
     try{
-        const response = await fetch('https://localhost:44328/api/Tasks');
-        const data = await response.json();
+        const response = await axios.get('https://localhost:44328/api/Tasks');
+        const data = await response.data;
         return data;
     }
     catch(error){
-        console.error('Error in API link: ' ,error);
+        console.error('Error in API link: ' , error);
         throw error;
     }
     
@@ -143,8 +144,7 @@ const fetchData = async () => {
 function ListTask(){
 
     const [task, setTask] = React.useState([]);
-    const [selectedRow, setselecctedRow] = React.useState([]);
-    const nav = useNavigate();
+    const navigate = useNavigate();
 
     //Fetching data from API
     React.useEffect(() =>{
@@ -163,7 +163,7 @@ function ListTask(){
 
     //Navigate to add task page when click on Add Icon
     const handleClick = () => {
-        nav('/cia/add');
+        navigate('/cia/add');
     }
 
     //Map taskId as unique identifier in the data grid
@@ -172,7 +172,7 @@ function ListTask(){
     return(
         <Box sx={{ mt: 10, width: '100%', marginLeft: -30, paddingInlineStart: 30}}>
 
-            <Box sx={{ height: 400, ml: 2}}>
+            <Box sx={{ height: '55vh', ml: 2, mr: 2}}>
                 <DataGrid 
                     columns={columns}
                     rows={task}
@@ -188,11 +188,12 @@ function ListTask(){
                     disableSelectionOnClick={true}
                     disableColumnFilter={true}
                     autoWidth = {true}
-                    onRowSelectionModelChange={(newSelection) => setselecctedRow(newSelection)}    
+                    //onRowSelectionModelChange={(newSelection) => setselecctedRow(newSelection)}    
+                    style={{ border: '1px solid #1976d2' }}
                 />
             </Box>
             
-            <Box sx={{height: 100, mt: 10, ml:2, display: 'flex', justifyContent: 'flex-start'}}>
+            <Box sx={{mt: 10, ml:2, display: 'flex', justifyContent: 'flex-start'}}>
                 <Stack direction="row" spacing={1}>
                     <IconButton arisl-aria-label='add-button' onClick={handleClick}>
                         <AddBoxOutlined color='primary' style={{fontSize: 50}} />
