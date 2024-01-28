@@ -16,6 +16,7 @@ import CustomerModal from "../../Components/ModalWindow/CustomerModal";
 import EmployeeModal from "../../Components/ModalWindow/EmployeeModal";
 import { IconButton } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
+import { addProjectValidation } from "../../Validation/AddProjectValidation";
 
 const statusType = [
   {
@@ -77,6 +78,7 @@ export default function Project(props) {
       title: null,
       completed: true,
     },
+    validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
       sendData(values);
@@ -165,6 +167,8 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
+                error={touched.selectedCustomer?.title && errors.selectedCustomer?.title}
+                helperText={touched.selectedCustomer?.title ? errors.selectedCustomer?.title : ""}
               />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -199,6 +203,8 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
+                error={touched.description && errors.description}
+                helperText={touched.description ?errors.description : ""}
               />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -305,7 +311,10 @@ export default function Project(props) {
                 label="Coordinator"
                 sx={{ width: "100%" }}
                 onClick={() => {
-                  if (!values.selectedEmployee?.title && props.type !== 'view') {
+                  if (
+                    !values.selectedEmployee?.title &&
+                    props.type !== "view"
+                  ) {
                     setOpenEmployee(true);
                   }
                 }}
