@@ -45,17 +45,18 @@ export default function Project(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
+    selectedCustomer,
   } = useFormik({
     initialValues: {
-      customer: "",
+      //customer: "",
       startDate: "",
       description: "",
       warantyPeriod: "",
       status: "",
       estimatedCost: "",
       location: "",
-      referencedBy: "",
-      coordinator: "",
+      //referencedBy: "",
+      //coordinator: "",
       comment: "",
     },
     selectedCustomer: {
@@ -78,6 +79,7 @@ export default function Project(props) {
       title: null,
       completed: true,
     },
+  
     validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
@@ -164,7 +166,8 @@ export default function Project(props) {
                     </IconButton>
                   ),
                 }}
-                onChange={handleChange} //get onchange value using formik
+                //onChange={handleChange} //get onchange value using formik
+                //onChange={(e) => setFieldValue("selectedCustomer.title",e.target.value)}
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
                 //error={touched.selectedCustomer && errors.selectedCustomer}
@@ -296,7 +299,7 @@ export default function Project(props) {
                     </IconButton>
                   ),
                 }}
-                onChange={handleChange} //get onchange value using formik
+                //onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
               />
@@ -348,7 +351,7 @@ export default function Project(props) {
                     </IconButton>
                   ),
                 }}
-                onChange={handleChange} //get onchange value using formik
+                //onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
               />
