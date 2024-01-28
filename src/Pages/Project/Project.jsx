@@ -139,11 +139,11 @@ export default function Project(props) {
                 name="customer"
                 label="customer"
                 sx={{ width: "100%" }}
-                //value={values.customer} //set value using formik
-                //onClick={() => setOpenCustomer(true)}
-                //value={values.selectedCustomer?.firstname ?? ""}
                 onClick={() => {
-                  if (!values.selectedCustomer?.title) {
+                  if (
+                    !values.selectedCustomer?.title &&
+                    props.type !== "view"
+                  ) {
                     setOpenCustomer(true);
                   }
                 }}
@@ -254,9 +254,29 @@ export default function Project(props) {
                 name="referenceBy"
                 label="Reference By"
                 sx={{ width: "100%" }}
-                //value={values.referencedBy} //set value using formik
-                onClick={() => setOpenCustomer(true)}
-                value={values.selectedReferenceBy?.firstname ?? ""}
+                onClick={() => {
+                  if (
+                    !values.selectedReferenceBy?.title &&
+                    props.type !== "view"
+                  ) {
+                    setOpenCustomer(true);
+                  }
+                }}
+                value={values.selectedReferenceBy?.title ?? ""}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() => setFieldValue("selectedReferenceBy", "")}
+                      sx={{
+                        visibility: values.selectedReferenceBy?.title
+                          ? "visible"
+                          : "hidden",
+                      }}
+                    >
+                      <GridClearIcon />
+                    </IconButton>
+                  ),
+                }}
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
@@ -284,9 +304,26 @@ export default function Project(props) {
                 name="coordinator"
                 label="Coordinator"
                 sx={{ width: "100%" }}
-                //value={values.coordinator} //set value using formik
-                onClick={() => setOpenEmployee(true)}
-                value={values.selectedEmployee?.firstname ?? ""}
+                onClick={() => {
+                  if (!values.selectedEmployee?.title && props.type !== 'view') {
+                    setOpenEmployee(true);
+                  }
+                }}
+                value={values.selectedEmployee?.title ?? ""}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() => setFieldValue("selectedEmployee", "")}
+                      sx={{
+                        visibility: values.selectedEmployee?.title
+                          ? "visible"
+                          : "hidden",
+                      }}
+                    >
+                      <GridClearIcon />
+                    </IconButton>
+                  ),
+                }}
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
@@ -381,7 +418,7 @@ export default function Project(props) {
       <EmployeeModal
         openEmployee={openEmployee}
         setOpenEmployee={setOpenEmployee}
-        //formik={formik}
+        sendData={setFieldValue}
       />
     </div>
   );
