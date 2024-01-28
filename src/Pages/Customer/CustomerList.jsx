@@ -95,9 +95,6 @@ const CustomerList = () => {
           page={page}
           pagination
           autoHeight
-          components={{
-            Toolbar: () => <CustomToolbar onSearchChange={setSearchTerm} />,
-          }}
           onPageChange={(params) => setPage(params.page)}
           onPageSizeChange={(params) => setPageSize(params.pageSize)}
         />
