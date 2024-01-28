@@ -5,6 +5,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import { useFormik } from 'formik';
 import TaskResourcesValidation from '../../Validation/TaskResourcesValidation';
 import { useNavigate, useParams } from 'react-router-dom';
+import { AddBox, FileUpload, Visibility, WhatsApp } from '@mui/icons-material';
 
 
 const uploadFile = async (file, category) => {
@@ -98,6 +99,14 @@ const AddTaskResources = (props) => {
     formik.resetForm();
   };
 
+  const openWhatsApp = () => {
+    window.open('https://web.whatsapp.com/', '_blank');
+  };
+
+  const openDrive = () => {
+    window.open('https://drive.google.com/drive/folders/1UAwL8lAT7AZ-75HvAepfpEePNZoHMw-b?usp=sharing','_blank');
+  };
+
   const {id} = useParams();
   const navi = useNavigate();
 
@@ -121,7 +130,7 @@ const AddTaskResources = (props) => {
 
             {/* ---------------TaskID Field---------------- */}
 
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+            <Grid item xs={10} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 id="taskId"
                 variant='outlined'
@@ -130,6 +139,21 @@ const AddTaskResources = (props) => {
                 sx={{ width: "100%" }}
                 {...formik.getFieldProps('taskId')}
               />
+            </Grid>
+
+            {/* ---------------Whatsapp link Button---------------- */}
+
+            <Grid item xs={2} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <Button
+                variant="contained"
+                sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+                color="success"
+                startIcon={<WhatsApp />}
+                onClick={openWhatsApp}
+                disabled={props.type === 'view'}
+              >
+                WhatsApp
+              </Button>
             </Grid>
 
             {/* ---------------Category Field---------------- */}
@@ -141,38 +165,13 @@ const AddTaskResources = (props) => {
                 {...formik.getFieldProps('selectedPath')}
                 onChange={handlePathChange}
                 label="Category"
+                required
                 sx={{ width: "100%" }}
               >
                 <MenuItem value='images'>Image</MenuItem>
                 <MenuItem value='documents'>Document</MenuItem>
                 <MenuItem value='others'>Other</MenuItem>
               </TextField>
-            </Grid>
-
-            {/* ---------------FileUpload Field---------------- */}
-
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                type="file"
-                sx={{ width: "100%" }}
-                {...formik.getFieldProps('selectedFile')}
-                onChange={handleFileChange}
-                disabled={props.type === 'view'}
-              />
-            </Grid>
-
-            {/* ---------------Upload Button---------------- */}
-
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <Button 
-                variant="contained" 
-                color="success" 
-                onClick={handleUpload} 
-                size='large'
-                disabled={props.type === 'view'}
-              >
-                Upload
-              </Button>
             </Grid>
 
             {/* ---------------AddedBy Field---------------- */}
@@ -183,6 +182,7 @@ const AddTaskResources = (props) => {
                 label="AddedBy"
                 sx={{ width: "100%" }}
                 placeholder='Add a consumer'
+                required
                 {...formik.getFieldProps('addedBy')}
                 error={formik.touched.addedBy && Boolean(formik.errors.addedBy)}
                 helperText={formik.touched.addedBy && formik.errors.addedBy}
@@ -192,12 +192,13 @@ const AddTaskResources = (props) => {
 
             {/* ---------------AddedDate Field---------------- */}
 
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+            <Grid item xs={5} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 variant='outlined'
                 type='date'
                 defaultValue=""
                 label="AddedDate"
+                required
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -209,6 +210,35 @@ const AddTaskResources = (props) => {
               />
             </Grid>
 
+            {/* ---------------FileUpload Field---------------- */}
+
+            <Grid item xs={5} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                type="file"
+                sx={{ width: "100%" }}
+                {...formik.getFieldProps('selectedFile')}
+                onChange={handleFileChange}
+                required
+                disabled={props.type === 'view'}
+              />
+            </Grid>
+
+
+            {/* ---------------Upload link Button---------------- */}
+
+            <Grid item xs={2} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <Button
+                variant="contained"
+                sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+                color="success"
+                startIcon={<FileUpload />}
+                onClick={handleUpload}
+                disabled={props.type === 'view'}
+              >
+                Upload
+              </Button>
+            </Grid>
+
             {/* ---------------Comment Field---------------- */}
 
             <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -217,6 +247,7 @@ const AddTaskResources = (props) => {
                 label="Comment"
                 sx={{ width: "100%" }}
                 multiline
+                required
                 rows={4}
                 placeholder='Add a comment'
                 {...formik.getFieldProps('comment')}
@@ -241,6 +272,7 @@ const AddTaskResources = (props) => {
           }}
         >
           {/* ---------------Clear Button---------------- */}
+
           <Button
             variant="contained"
             sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
@@ -264,7 +296,6 @@ const AddTaskResources = (props) => {
           >
             Save
           </Button>
-
 
         </div>
         </Box>
@@ -290,6 +321,7 @@ const AddTaskResources = (props) => {
            sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
            color="primary"
            onClick={() => navi(`/cia/resource/add/id`)}
+           startIcon={<AddBox />}
          >
            Add New
          </Button>
@@ -301,7 +333,8 @@ const AddTaskResources = (props) => {
            variant="contained"
            sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
            color="primary"
-          //  onClick={}
+           startIcon={<Visibility />}
+           onClick={openDrive}
          >
            Show Files
          </Button>
