@@ -6,8 +6,9 @@ import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function CustomerModal(props) {
-<<<<<<< HEAD
-  const { openCustomer, setOpenCustomer, sendData } = props
+
+  const { openCustomer, setOpenCustomer, sendData } = props;
+
 
   const customercols = [
     {
@@ -35,9 +36,6 @@ export default function CustomerModal(props) {
       headerAlign: 'center',
     },
   ]
-=======
-  const { openCustomer, setOpenCustomer, formik } = props;
->>>>>>> Modified Close button color in Customer modal
 
   const handleClose = () => {
     setOpenCustomer(false);
@@ -48,11 +46,9 @@ export default function CustomerModal(props) {
   useEffect(() => {
     // Fetch data from REST endpoint using axios
     axios
-<<<<<<< HEAD
+
       .get('https://jsonplaceholder.typicode.com/todos')
-=======
-      .get("url to get customer data")
->>>>>>> Modified Close button color in Customer modal
+
       .then((response) => {
         setRows(response.data);
       })
