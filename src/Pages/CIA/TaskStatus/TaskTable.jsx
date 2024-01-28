@@ -1,29 +1,22 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 100 },
-  {
-    field: 'task',
-    headerName: 'Task',
-    width: 150,
-    editable: true,
-  },
   {
     field: 'taskStatus',
     headerName: 'Task Status',
-    width: 150,
+    width: 250,
     editable: true,
   },
   {
-    field: 'addDate',
+    field: 'addedDate',
     headerName: 'Add Date',
     width: 150,
     editable: true,
   },
   {
-    field: 'addBy',
+    field: 'addedBy',
     headerName: 'Add By',
     width: 150,
     editable: true,
@@ -31,40 +24,78 @@ const columns = [
   {
     field: 'comment',
     headerName: 'Comment',
-    width: 150,
+    width: 300,
     editable: true,
   }
 ];
 
-const rows = [
-  { id : 1,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 2,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 3,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 4,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 5,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 6,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 7,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 8,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 9,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 10,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 11,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 12,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 13,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 14,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 15,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 16,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 17,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 18,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 19,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 20,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 21,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 22,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 23,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
-  { id : 24,task: 'create task',taskStatus: 'done' ,addDate: '01/10/2024' ,addBy: 'puna' ,comment:'done ok' },
 
+const rows = [
+  { id:'11' ,taskStatus: 'Active', addedDate: '01/10/2024', addedBy: 'Admin 01' ,comment:'Comment 01' },
+  { id:'12' ,taskStatus: 'OnHold', addedDate: '01/10/2024', addedBy: 'Admin 02' ,comment:'Comment 02' },
+  { id:'13' ,taskStatus: 'Reject', addedDate: '01/10/2024', addedBy: 'Admin 01' ,comment:'Comment 03' },
+  { id:'14' ,taskStatus: 'Active', addedDate: '01/10/2024', addedBy: 'Admin 01' ,comment:'Comment 04' },
+  { id:'11' ,taskStatus: 'Wating', addedDate: '01/10/2024', addedBy: 'Admin 07' ,comment:'Comment 05' },
+  { id:'11' ,taskStatus: 'Active', addedDate: '01/10/2024', addedBy: 'Admin 01' ,comment:'Comment 06' },
+  { id:'12' ,taskStatus: 'OnHold', addedDate: '01/10/2024', addedBy: 'Admin 01' ,comment:'Comment 07' },
+  { id:'13' ,taskStatus: 'Reject', addedDate: '01/10/2024', addedBy: 'Admin 09' ,comment:'Comment 08' },
+  { id:'14' ,taskStatus: 'Active', addedDate: '01/10/2024', addedBy: 'Admin 01' ,comment:'Comment 09' },
+  { id:'11' ,taskStatus: 'Wating', addedDate: '01/10/2024', addedBy: 'Admin 08' ,comment:'Comment 10' },
+  
 ];
 
-export default function TaskSt() {
+// const columns = [
+//   {
+//     field: 'userId',
+//     headerName: 'User ID',
+//     align: 'center',
+//     headerAlign: 'center',
+//   },
+//   {
+//     field: 'id',
+//     headerName: 'ID',
+//     align: 'center',
+//     headerAlign: 'center',
+//   },
+//   {
+//     field: 'title',
+//     headerName: 'Title',
+//     align: 'center',
+//     headerAlign: 'center',
+//   },
+//   {
+//     field: 'completed',
+//     headerName: 'Completed',
+//     align: 'center',
+//     headerAlign: 'center',
+//   },
+// ]
+
+// {/* ---------------- add Custom toolbar  ------------------ */}
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarExport />
+    </GridToolbarContainer>
+  );
+}
+
+export default function TaskTable() {
+
+  // const [rows, setRows] = useState([])
+
+  // useEffect(() => {
+  //   // Fetch data from REST endpoint using axios
+  //   axios
+  //     .get('https://jsonplaceholder.typicode.com/todos')
+  //     .then((response) => {
+  //       setRows(response.data)
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data:', error)
+  //     })
+  // }, [])
+
   return (
     <Box 
     noValidate
@@ -72,9 +103,9 @@ export default function TaskSt() {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      height="95vh"
+      height="80vh"
       flexDirection="column" 
-      sx={{ height: 630, width: '90%' }}>
+      sx={{ height: 630, width: '100%' }}>
 
         <DataGrid
           rows={rows}
@@ -86,9 +117,9 @@ export default function TaskSt() {
               },
             },
           }}
-          pageSizeOptions={[5]}
-          checkboxSelection
+          pageSizeOptions={[5, 10, 25]}
           disableRowSelectionOnClick
+          slots={{ toolbar: CustomToolbar }}
         />
     </Box>
   );
