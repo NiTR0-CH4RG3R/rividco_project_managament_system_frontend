@@ -167,8 +167,17 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
-                error={touched.selectedCustomer?.title && errors.selectedCustomer?.title}
-                helperText={touched.selectedCustomer?.title ? errors.selectedCustomer?.title : ""}
+                //error={touched.selectedCustomer && errors.selectedCustomer}
+                //helperText={touched.selectedCustomer ?errors.selectedCustomer : ""}
+                error={
+                  touched.selectedCustomer?.title &&
+                  errors.selectedCustomer?.title
+                }
+                helperText={
+                  touched.selectedCustomer?.title
+                    ? errors.selectedCustomer?.title
+                    : ""
+                }
               />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -186,6 +195,8 @@ export default function Project(props) {
                 onBlur={handleBlur}
                 //focused
                 InputLabelProps={{ shrink: true }}
+                error={touched.startDate && errors.startDate}
+                helperText={touched.startDate ? errors.startDate : ""}
               />
             </Grid>
 
@@ -204,7 +215,7 @@ export default function Project(props) {
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
                 error={touched.description && errors.description}
-                helperText={touched.description ?errors.description : ""}
+                helperText={touched.description ? errors.description : ""}
               />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -232,9 +243,8 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
-                
                 error={touched.status && errors.status}
-                helperText={touched.status ?errors.status : ""}
+                helperText={touched.status ? errors.status : ""}
               >
                 {statusType.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -304,8 +314,7 @@ export default function Project(props) {
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
                 error={touched.location && errors.location}
-                helperText={touched.location ?errors.location : ""}
-                
+                helperText={touched.location ? errors.location : ""}
               />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
