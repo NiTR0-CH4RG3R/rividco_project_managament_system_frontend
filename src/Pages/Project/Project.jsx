@@ -232,6 +232,9 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
+                
+                error={touched.status && errors.status}
+                helperText={touched.status ?errors.status : ""}
               >
                 {statusType.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -300,6 +303,9 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
+                error={touched.location && errors.location}
+                helperText={touched.location ?errors.location : ""}
+                
               />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
