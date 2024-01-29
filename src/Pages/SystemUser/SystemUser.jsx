@@ -3,7 +3,11 @@ import { Box, TextField, Grid, MenuItem, Button } from '@mui/material';
 //import Modal from '@mui/material/Modal';
 import { useFormik } from 'formik';
 import SystemUserValidation from '../../Validation/SystemUserValidation';
-import { useParams,useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import SaveIcon from '@mui/icons-material/Save';
+import EditIcon from '@mui/icons-material/Edit';
+import ClearIcon from '@mui/icons-material/Clear';
+
 
  
 const role = [
@@ -31,6 +35,7 @@ export default function SystemUser(props) {
         handleChange,
         handleSubmit,
         handleReset,
+        submitForm,
     } = useFormik({
         initialValues: {
             FirstName: '',
@@ -278,6 +283,7 @@ export default function SystemUser(props) {
                                         variant="contained"
                                         size="large"
                                         onClick={handleReset}
+                                        startIcon={<ClearIcon />}                                       
                                     >
                                         Clear
                                     </Button>
@@ -285,9 +291,10 @@ export default function SystemUser(props) {
                                 
                                 <Grid item>
                                     <Button
-                                        variant="contained"
-                                        size="large"
-                                        type="submit"
+                                            variant="contained"
+                                            size="large"
+                                            onClick={submitForm}
+                                            startIcon={<SaveIcon />}  
                                     >
                                         Save
                                     </Button>
@@ -307,6 +314,7 @@ export default function SystemUser(props) {
                                         <Button
                                             variant="contained"
                                             size="large"
+                                            startIcon={<EditIcon/>}
                                             onClick={() => navi(`/user/edit/${id}`)}
                                         >
                                             Edit
