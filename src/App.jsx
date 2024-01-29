@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout';
 import { AppRoutes } from './Data/AppRoutes';
-
+import Missing from './Pages/Missing/Missing';
 
 
 export default function App() {
@@ -18,7 +18,7 @@ export default function App() {
                     <Route key={route} path={route.path} element={route.component} />
                 ))}
 
-                {/* <Route path='*' element={<Missing />} /> */}
+                <Route path='*' element={<Missing />} />
             </Route>
         </Routes>
     );
