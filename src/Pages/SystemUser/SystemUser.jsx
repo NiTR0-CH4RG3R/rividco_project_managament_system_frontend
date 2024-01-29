@@ -75,6 +75,7 @@ export default function SystemUser(props) {
                         alignItems="center"
                         height="130vh"
                         flexDirection="column"
+                        marginTop="200px"
                     >
                         <Grid container spacing={2} sx={{ width: "70%" }}>
                             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
