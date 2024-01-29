@@ -94,6 +94,7 @@ const AddTaskResources = (props) => {
       console.error('Error uploading file:', error.message);
     }
   };
+  
 
   const handleClear = () => {
     formik.resetForm();
