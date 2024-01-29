@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, TextField, Grid, MenuItem, Button } from '@mui/material';
+import React,{useState,useRef} from 'react'
+import { Box, TextField, Grid, MenuItem, Button,Avatar} from '@mui/material';
 //import Modal from '@mui/material/Modal';
 import { useFormik } from 'formik';
 import SystemUserValidation from '../../Validation/SystemUserValidation';
@@ -26,38 +26,76 @@ const role = [
 
 
 export default function SystemUser(props) {
-    
-    const {
-        values,
-        errors,
-        touched,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        handleReset,
-        submitForm,
-    } = useFormik({
-        initialValues: {
-            FirstName: '',
-            LastName: '',
-            Address: '',
-            OfficeNo: '',
-            Email: '',
-            MobileNo: '',
-            UserName: '',
-            Password: '',
-            Comment: '',
-            Role: '',
-        },
-        validationSchema: SystemUserValidation,
-        onSubmit: (values) => {
-            alert('Form submitted successfully:', values);
-            // You can handle the form submission logic here
-        },
-    });
 
-    const { id } = useParams()
-    const navi = useNavigate()
+    //const ProfilePictureUploader = () => {
+        const [file, setFile] = useState(null);
+        const [imagePreview, setImagePreview] = useState(null);
+        const inputRef = useRef();
+
+        const handleFileChange = (e) => {
+            const selectedFile = e.target.files[0];
+
+            if (selectedFile) {
+                setFile(selectedFile);
+
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setImagePreview(reader.result);
+                };
+                reader.readAsDataURL(selectedFile);
+            }
+        };
+
+
+        const handleButtonClick = () => {
+            // Trigger the input field when the button is clicked to change the photo
+            inputRef.current.click();
+        };
+
+        const handleSaveClick = () => {
+            // Display the uploaded image
+            if (file) {
+                console.log('File uploaded:', file);
+                setImagePreview(URL.createObjectURL(file));
+
+                // Reset file state after saving
+                setFile(null);
+            } else {
+                console.log('No new photo selected.');
+            }
+        };
+    
+        const {
+            values,
+            errors,
+            touched,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            handleReset,
+            submitForm,
+        } = useFormik({
+            initialValues: {
+                FirstName: '',
+                LastName: '',
+                Address: '',
+                OfficeNo: '',
+                Email: '',
+                MobileNo: '',
+                UserName: '',
+                Password: '',
+                Comment: '',
+                Role: '',
+            },
+            validationSchema: SystemUserValidation,
+            onSubmit: (values) => {
+                alert('Form submitted successfully:', values);
+                // You can handle the form submission logic here
+            },
+        });
+
+        const { id } = useParams()
+        const navi = useNavigate()
 
 
         return (
@@ -66,18 +104,46 @@ export default function SystemUser(props) {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': { m: 2},
+                            '& .MuiTextField-root': { m: 2 },
                         }}
                         noValidate
                         autoComplete="off"
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
-                        height="130vh"
-                        flexDirection="column"
-                        marginTop="200px"
+                        height="150vh"
+                        flexDirection="row"
+                        marginTop= "35%"
                     >
+                        
                         <Grid container spacing={2} sx={{ width: "70%" }}>
+                            <Grid item xs={12} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '1em 1em 0em 1em !important'}}>
+                                <div>
+                                    <Avatar alt="Profile Picture" src={imagePreview} sx={{ width: 200, height: 200 }} />
+                                        <input
+                                            accept="image/*"
+                                            ref={inputRef}
+                                            style={{ display: 'none' }}
+                                            type="file"
+                                            onChange={handleFileChange}
+                                            
+                                        />
+                                        <Button
+                                            variant="contained"
+                                            size='large'
+                                            sx={{ marginTop: 2, backgroundColor: '#1976D2', color: '#fff',padding: '0.5em 1em 0.5em 1em !important'}}
+                                            onClick={() => {
+                                                handleButtonClick();
+                                                handleSaveClick();
+                                            }}
+                                        >
+                                            {file ? 'Update Profile' : 'Change Photo'}
+                                        </Button>
+                                        
+                                </div>
+                            </Grid>
+
+
                             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                                 <TextField
                                     required
@@ -86,7 +152,7 @@ export default function SystemUser(props) {
                                     placeholder="First Name"
                                     //multiline
                                     variant="outlined"
-                                    sx={{width: '100%'}}
+                                    sx={{ width: '100%' }}
                                     value={values.FirstName} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
@@ -96,6 +162,8 @@ export default function SystemUser(props) {
                                 />
                                 
                             </Grid>
+
+                            
                       
                             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
                                 <TextField
@@ -115,7 +183,9 @@ export default function SystemUser(props) {
                                 />
                                 
                             </Grid>
+
                             
+
                             <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
                                 <TextField
                                     required
@@ -143,7 +213,7 @@ export default function SystemUser(props) {
                                     placeholder="E-mail"
                                     //multiline
                                     variant="outlined"
-                                    sx={{ width: '100%'}}
+                                    sx={{ width: '100%' }}
                                     value={values.Email} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
@@ -162,7 +232,7 @@ export default function SystemUser(props) {
                                     label="Role"
                                     helperText="Please select the Role"
                                     variant="outlined"
-                                    sx={{ width: '100%'}}
+                                    sx={{ width: '100%' }}
                                     //value={values.Role} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
@@ -190,7 +260,7 @@ export default function SystemUser(props) {
                                     placeholder="Mobile No:"
                                     //multiline
                                     variant="outlined"
-                                    sx={{width: '100%'}}
+                                    sx={{ width: '100%' }}
                                     value={values.MobileNo} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
@@ -208,7 +278,7 @@ export default function SystemUser(props) {
                                     placeholder="Office No:"
                                     //multiline
                                     variant="outlined"
-                                    sx={{width: '100%'}}
+                                    sx={{ width: '100%' }}
                                     value={values.OfficeNo} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
@@ -226,7 +296,7 @@ export default function SystemUser(props) {
                                     label="Username"
                                     placeholder="Username"
                                     variant="outlined"
-                                    sx={{width: '100%'}}
+                                    sx={{ width: '100%' }}
                                     value={values.UserName} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
@@ -243,13 +313,13 @@ export default function SystemUser(props) {
                                     label="password"
                                     placeholder="password"
                                     variant="outlined"
-                                    sx={{width: '100%'}}
+                                    sx={{ width: '100%' }}
                                     value={values.Password} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
                                     disabled={props.type === 'view'}
                                     error={touched.Password && errors.Password}
-                                    helperText={touched.Password ? errors.Password: ""}
+                                    helperText={touched.Password ? errors.Password : ""}
                                 />
                                 
                             </Grid>
@@ -261,75 +331,78 @@ export default function SystemUser(props) {
                                     placeholder="Please Enter Your Comment"
                                     multiline
                                     variant="outlined"
-                                    sx={{width: '100%'}}
+                                    sx={{ width: '100%' }}
                                     rows={4}
                                     value={values.Comment} //set value using formik
                                     onChange={handleChange} //get onchange value using formik
                                     onBlur={handleBlur}
                                     disabled={props.type === 'view'}
                                     error={touched.Comment && errors.Comment}
-                                    helperText={touched.Comment ? errors.Comment: ""}
+                                    helperText={touched.Comment ? errors.Comment : ""}
                                 />
                                 
                             </Grid>
                             
-                            {(props.type === 'add'||  props.type==='edit') && (
+                            {(props.type === 'add' || props.type === 'edit') && (
                                 <Grid
-                                container
-                                spacing={2}
-                                sx={{ mt: 3, justifyContent: "flex-end"}}
-                            >
-                                <Grid item>
-                                    <Button
-                                        variant="contained"
-                                        size="large"
-                                        onClick={handleReset}
-                                        startIcon={<ClearIcon />}                                       
-                                    >
-                                        Clear
-                                    </Button>
-                                </Grid> 
-                                
-                                <Grid item>
-                                    <Button
-                                            variant="contained"
-                                            size="large"
-                                            onClick={submitForm}
-                                            startIcon={<SaveIcon />}  
-                                    >
-                                        Save
-                                    </Button>
-                                </Grid>
-
-                            </Grid>
-
-                            )}
-
-                            {(props.type === 'view') && (
-                                <Grid
-                                container
-                                spacing={2}
+                                    container
+                                    spacing={2}
                                     sx={{ mt: 3, justifyContent: "flex-end" }}
                                 >
                                     <Grid item>
                                         <Button
                                             variant="contained"
                                             size="large"
-                                            startIcon={<EditIcon/>}
+                                            onClick={handleReset}
+                                            startIcon={<ClearIcon />}
+                                        >
+                                            Clear
+                                        </Button>
+                                    </Grid>
+                                
+                                    <Grid item>
+                                        <Button
+                                            variant="contained"
+                                            size="large"
+                                            onClick={submitForm}
+                                            startIcon={<SaveIcon />}
+                                        >
+                                            Save
+                                        </Button>
+                                    </Grid>
+
+                                </Grid>
+
+                            )}
+
+                            {(props.type === 'view') && (
+                                <Grid
+                                    container
+                                    spacing={2}
+                                    sx={{ mt: 3, justifyContent: "flex-end" }}
+                                >
+                                    <Grid item>
+                                        <Button
+                                            variant="contained"
+                                            size="large"
+                                            startIcon={<EditIcon />}
                                             onClick={() => navi(`/user/edit/${id}`)}
                                         >
                                             Edit
-                                            </Button>
+                                        </Button>
                                     </Grid>
                                 </Grid>
                             )}
                             
                         </Grid>
-        
+
+                        
+                                
                     </Box>
-            
-                    
+                                    
+                                            
                 </form>
             </div>
         )
+    
 };
