@@ -43,11 +43,11 @@ export const AppRoutes = {
     component: <Vendoritem type="add" />,
   },
   vendor_item_view: {
-    path: "/vendor/item/view:id",
+    path: "/vendor/item/view/id",
     component: <Vendoritem type="view" />,
   },
   vendor_item_edit: {
-    path: "/vendor/item/edit:id",
+    path: "/vendor/item/edit/id",
     component: <Vendoritem type="edit" />,
   },
 

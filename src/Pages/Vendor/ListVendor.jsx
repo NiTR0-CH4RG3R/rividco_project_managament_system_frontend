@@ -242,6 +242,7 @@ const ListVendor = () => {
         page={page}
         pagination
         autoHeight
+        //
         onPageChange={(params) => setPage(params.page)}
         onPageSizeChange={(params) => setPageSize(params.pageSize)}
       />

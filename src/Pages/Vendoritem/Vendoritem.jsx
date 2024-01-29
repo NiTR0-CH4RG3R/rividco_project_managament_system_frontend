@@ -10,7 +10,7 @@ import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
-//add formik
+//add formik for form management
 import { useFormik } from "formik";
 import { VendoritemValidation } from "../../Validation/VendoritemValidation";
 
@@ -20,7 +20,7 @@ const vendorcategoryType = [
     label: "Vendor1",
   },
   {
-    value: "Vendor1",
+    value: "Vendor2",
     label: "Vendor2",
   },
 ];
@@ -199,7 +199,7 @@ export default function Vendoritem(props) {
                 helperText={touched.capacity ? errors.capacity : ""}
               />
             </Grid>
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 placeholder="Enter brand name (e.g., SolarTech, HydroPower Solutions)"
                 id="brand"
@@ -283,7 +283,7 @@ export default function Vendoritem(props) {
                   sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
                   color="primary"
                   startIcon={<EditIcon />}
-                  onClick={() => navi(`/vendor/update/${id}`)}
+                  // onClick={() => navi(`/vendor/update/${id}`)}
                 >
                   Edit
                 </Button>
