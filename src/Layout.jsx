@@ -19,7 +19,9 @@ export default function Layout() {
                     <main className='content' style={{ display: 'flex' }}>
                         <TopBar drawerWidth={SideNavigationPanelData.width} />
                         <SideNavigationPanel SideNavigationPanelMenuItems={SideNavigationPanelData.items} drawerWidth={SideNavigationPanelData.width} />
-                        <Outlet />
+                        <Box display='flex' justifyContent='center' alignItems='center' width={`calc( 100% - ${SideNavigationPanelData.width}px )`} >
+                            <Outlet />
+                        </Box>
                     </main>
                 </Box>
             </ThemeProvider>
