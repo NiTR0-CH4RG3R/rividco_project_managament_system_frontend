@@ -6,7 +6,7 @@ import SystemUserValidation from '../../Validation/SystemUserValidation';
 import { useParams, useNavigate } from 'react-router-dom';
 import SaveIcon from '@mui/icons-material/Save';
 import EditIcon from '@mui/icons-material/Edit';
-import ClearIcon from '@mui/icons-material/Clear';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
 
 
  
@@ -131,13 +131,14 @@ export default function SystemUser(props) {
                                         <Button
                                             variant="contained"
                                             size='large'
+                                            fullWidth
                                             sx={{ marginTop: 2, backgroundColor: '#1976D2', color: '#fff',padding: '0.5em 1em 0.5em 1em !important'}}
                                             onClick={() => {
                                                 handleButtonClick();
                                                 handleSaveClick();
                                             }}
                                         >
-                                            {file ? 'Update Profile' : 'Change Photo'}
+                                            {file ? 'Edit Profile' : 'Upload Photo'}
                                         </Button>
                                         
                                 </div>
@@ -354,7 +355,7 @@ export default function SystemUser(props) {
                                             variant="contained"
                                             size="large"
                                             onClick={handleReset}
-                                            startIcon={<ClearIcon />}
+                                            startIcon={<ClearAllIcon />}
                                         >
                                             Clear
                                         </Button>
