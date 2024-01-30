@@ -31,7 +31,7 @@ export default function SideNavigationPanelMenu({ name, icon, subMenu }) {
                 <List component="div" disablePadding>
                     {
                         subMenu.map((subItem) => (
-                            <ListItemButton onClick={() => (navigate(subItem.path))} selected={location.pathname === subItem.path}>
+                            <ListItemButton key={subItem.name} onClick={() => (navigate(subItem.path))} selected={location.pathname === subItem.path}>
                                 <ListItemText
                                     primaryTypographyProps={{
                                         variant: 'body2',

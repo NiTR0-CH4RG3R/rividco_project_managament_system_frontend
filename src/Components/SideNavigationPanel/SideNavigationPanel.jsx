@@ -29,7 +29,7 @@ export default function SideNavigationPanel({ SideNavigationPanelMenuItems = [],
             <Toolbar />
             <Box sx={{ overflow: 'auto' }}>
                 <List>
-                    {SideNavigationPanelMenuItems.map((item) => (<SideNavigationPanelMenu name={item.name} icon={item.icon} subMenu={item.subMenu} />))}
+                    {SideNavigationPanelMenuItems.map((item) => (<SideNavigationPanelMenu key={item.name} name={item.name} icon={item.icon} subMenu={item.subMenu} />))}
                 </List>
             </Box>
         </Drawer>
