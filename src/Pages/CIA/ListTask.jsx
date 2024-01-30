@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { AddBoxOutlined } from '@mui/icons-material';
-import { Box, IconButton, Link, Stack } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import * as React from "react";
+import { AddBoxOutlined } from "@mui/icons-material";
+import { Box, IconButton, Link, Stack } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 //Initialize columns of the data grid
 const columns = [
@@ -59,7 +59,7 @@ const columns = [
         //Urgency levels should be changed later
         renderCell: (params) => {
             let color;
-            switch (params.value) {
+            switch(params.value){
                 case "High":
                     color = "rgba(255, 0, 0, 1.0)";
                     break;
@@ -70,13 +70,13 @@ const columns = [
                     color = "rgba(0, 128, 0, 1.0)";
                     break;
                 default:
-                    color = "inherit";
+                    color = "inherit";   
             }
             return (
                 <div style={{ color: color, padding: '5px' }}>
-                    {params.value}
+                  {params.value}
                 </div>
-            );
+              );
         }
     },
     {
@@ -129,31 +129,31 @@ const columns = [
 
 //Asynchronous method to fetch data from API
 const fetchData = async () => {
-    try {
+    try{
         const response = await axios.get('https://localhost:44328/api/Tasks');
         const data = await response.data;
         return data;
     }
-    catch (error) {
-        console.error('Error in API link: ', error);
+    catch(error){
+        console.error('Error in API link: ' , error);
         throw error;
     }
-
+    
 }
 
-function ListTask() {
+function ListTask(){
 
     const [task, setTask] = React.useState([]);
     const navigate = useNavigate();
 
     //Fetching data from API
-    React.useEffect(() => {
-        const fetchRow = async () => {
-            try {
+    React.useEffect(() =>{
+        const fetchRow = async () =>{
+            try{
                 const data = await fetchData();
                 setTask(data);
             }
-            catch (error) {
+            catch(error){
                 console.error(error);
                 throw error;
             }
@@ -161,48 +161,48 @@ function ListTask() {
         fetchRow();
     }, [])
 
-    //Navigate to add task page when click on Add Icon
-    const handleClick = () => {
-        navigate('/cia/add');
-    }
+  //Navigate to add task page when click on Add Icon
+  const handleClick = () => {
+    navigate("/cia/add");
+  };
 
-    //Map taskId as unique identifier in the data grid
-    const getRowId = (row) => row.taskId;
+  //Map taskId as unique identifier in the data grid
+  const getRowId = (row) => row.taskId;
 
-    return (
-        <Box sx={{ mt: 10, width: '100%', marginLeft: -30, paddingInlineStart: 30 }}>
+    return(
+        <Box sx={{ mt: 10, width: '100%', marginLeft: -30, paddingInlineStart: 30}}>
 
-            <Box sx={{ height: '55vh', ml: 2, mr: 2 }}>
-                <DataGrid
+            <Box sx={{ height: '55vh', ml: 2, mr: 2}}>
+                <DataGrid 
                     columns={columns}
                     rows={task}
                     getRowId={getRowId}
                     initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 5,
+                            pagination: {
+                                paginationModel:{
+                                    pageSize: 5,
+                                },
                             },
-                        },
-                    }}
+                        }}
                     pageSizeOptions={[5]}
                     disableSelectionOnClick={true}
                     disableColumnFilter={true}
-                    autoWidth={true}
+                    autoWidth = {true}
                     //onRowSelectionModelChange={(newSelection) => setselecctedRow(newSelection)}    
                     style={{ border: '1px solid #1976d2' }}
                 />
             </Box>
-
-            <Box sx={{ mt: 10, ml: 2, display: 'flex', justifyContent: 'flex-start' }}>
+            
+            <Box sx={{mt: 10, ml:2, display: 'flex', justifyContent: 'flex-start'}}>
                 <Stack direction="row" spacing={1}>
                     <IconButton arisl-aria-label='add-button' onClick={handleClick}>
-                        <AddBoxOutlined color='primary' style={{ fontSize: 20 }} />
+                        <AddBoxOutlined color='primary' style={{fontSize: 50}} />
                     </IconButton>
                 </Stack>
             </Box>
-
+    
         </Box>
     )
 }
 
-export default ListTask
+export default ListTask;
