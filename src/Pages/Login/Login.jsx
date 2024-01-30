@@ -1,7 +1,10 @@
-import { Box, Button, Grid, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardMedia, Grid, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import { ClearAllOutlined } from '@mui/icons-material';
+import imagePath from './blueLogoAsset 1.png';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
 
@@ -12,6 +15,12 @@ const Login = () => {
 
   const handleLogin = () => {
     // Perform login logic here
+    if (username.trim() === 'rividco' && password.trim() === 'rividco123') {
+      navi('/cia/resource/add/id')
+    } else {
+      alert("Username or Password Incorrect...")
+    }
+
     if (username.trim() === '') {
       setUsernameError(true);
     } else {
@@ -25,6 +34,8 @@ const Login = () => {
     }
   };
 
+  const navi = useNavigate();
+
   return (
     <div>
         <Grid
@@ -34,15 +45,26 @@ const Login = () => {
             style={{ minHeight: '100vh' }}
         >
         <Box
+            paddingTop={5}
             sx={{
                 width: 600,
-                height: 500,
+                boxShadow: 8
             }}
         >
-            <Typography variant='h2' style={{ margin: '2%', fontFamily: 'Times New Roman', textAlign:'center'}}>
+            
+            <Typography variant='h3' style={{ margin: '2%', textAlign:'center', fontWeight:'bold'}}>
                 LogIn
             </Typography>
-            <Grid sx={{ padding: "1em 0em 1em 0em !important" }}>
+
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '5%' }}>
+            <img 
+              src={imagePath} 
+              alt="companyLogo"
+              style={{ width: '300px', height: '80px' }}
+            />
+            </div>
+
+            <Grid sx={{ padding: "1em 3em 1em 3em !important" }}>
             <TextField
                 id="username"
                 variant='outlined'
@@ -50,6 +72,7 @@ const Login = () => {
                 placeholder='Enter Username'
                 sx={{ width: "100%" }}
                 value={username}
+                required
                 onChange={(e) => {
                 setUsername(e.target.value);
                 setUsernameError(false); 
@@ -59,13 +82,14 @@ const Login = () => {
             />
             </Grid>
 
-            <Grid sx={{ padding: "1em 0em 1em 0em !important" }}>
+            <Grid sx={{ padding: "1em 3em 1em 3em !important" }}>
             <TextField
                 type='password'
                 id="password"
                 variant='outlined'
                 label='Password'
                 placeholder='Enter Password'
+                required
                 sx={{ width: "100%" }}
                 value={password}
                 onChange={(e) => {
@@ -84,19 +108,10 @@ const Login = () => {
                 padding: "1em 2em 0em 2em !important",
                 }}
             >
+              
                 <Button
-                    variant="contained"
-                    sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
-                    color="primary"
-                    startIcon={<LoginOutlinedIcon/>}
-                    onClick={handleLogin}
-                >
-                    LogIn
-                </Button>
-
-                <Button
-                    variant="contained"
-                    sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+                    variant="outlined"
+                    sx={{ width: "8.5rem", margin: "1em 0em !important" }}
                     color="primary"
                     startIcon={<ClearAllOutlined/>}
                     onClick={() => {
@@ -105,11 +120,37 @@ const Login = () => {
                       }}
                 >
                     Clear
-                </Button>                 
+                </Button> 
+
+                <Button
+                    variant="contained"
+                    sx={{ width: "8.5rem", margin: "1em 3em 1em 1em !important" }}
+                    color="primary"
+                    startIcon={<LoginOutlinedIcon/>}
+                    onClick={handleLogin} 
+                >
+                    LogIn
+                </Button>
+                
             </div>
+
+            <Grid
+              sx={{ width: '100%', 
+                    backgroundColor: '#1e4072', 
+                    bottom: 0, 
+                    height: '53px', 
+                    marginTop: '5%', 
+                    padding: '3px',
+                  }}
+            >
+              <Typography variant='h6' style={{ margin: '2%', textAlign:'center', color: 'white' }}>
+                RIVIDCO PVT LTD
+              </Typography>
+
+            </Grid>
+
         </Box>
         </Grid>
-
     </div>
   )
 }
