@@ -132,7 +132,7 @@ export default function SystemUser(props) {
                                             variant="contained"
                                             size='large'
                                             fullWidth
-                                            sx={{ marginTop: 2, backgroundColor: '#1976D2', color: '#fff',padding: '0.5em 1em 0.5em 1em !important'}}
+                                            sx={{ marginTop: 2, backgroundColor: 'primary',padding: '0.5em 1em 0.5em 1em !important'}}
                                             onClick={() => {
                                                 handleButtonClick();
                                                 handleSaveClick();
