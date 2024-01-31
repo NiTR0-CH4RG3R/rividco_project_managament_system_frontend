@@ -12,8 +12,11 @@ import Project from "../Pages/Project/Project";
 import VendorList from "../Pages/Vendor/VendorList";
 import ProjectList from "../Pages/Project/ProjectList";
 import TaskList from "../Pages/CIA/TaskList";
+import Home from "../Pages/Home/Home";
 
 export const AppRoutes = {
+    home: { path: "/home", component: <Home />, },
+
     /* Customer related routes */
     customer_list: { path: "/customer/list", component: <CustomerList />, },
     customer_add: { path: "/customer/add", component: <Customer type="add" /> },
