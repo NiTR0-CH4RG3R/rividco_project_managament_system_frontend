@@ -29,13 +29,19 @@ const categoryType = [
 export default function Customer(props) {
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
-    props.type === "add" ? "Add a new Customer" :
-    props.type === "edit" ? "Edit Customer Details" :
-    `View Customer Details`
+    props.type === "add"
+      ? "Add a new Customer"
+      : props.type === "edit"
+      ? "Edit Customer Details"
+      : `View Customer Details`
   );
-  setSubtitle(props.type === "add" ? "You can add a new customers here." :
-  props.type === "edit" ? "You can edit customer details here." :
-  `You can view customer details here.`);
+  setSubtitle(
+    props.type === "add"
+      ? "You can add a new customers here."
+      : props.type === "edit"
+      ? "You can edit customer details here."
+      : `You can view customer details here.`
+  );
 
   const [loading, setLoading] = React.useState(false);
 
