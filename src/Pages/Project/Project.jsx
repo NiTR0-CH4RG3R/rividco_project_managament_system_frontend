@@ -18,6 +18,7 @@ import { IconButton } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
 import { addProjectValidation } from "../../Validation/AddProjectValidation";
 import ReferenceByModal from "../../Components/ModalWindow/ReferenceByModal";
+import { useTopbarContext } from "../../Contexts/TopbarContext";
 
 const statusType = [
   {
@@ -31,12 +32,27 @@ const statusType = [
 ];
 
 export default function Project(props) {
+  const { setTitle, setSubtitle } = useTopbarContext();
+  setTitle(
+    props.type === "add"
+      ? "Add a new Project"
+      : props.type === "edit"
+      ? "Edit Project"
+      : `View Project`
+  );
+  setSubtitle(
+    props.type === "add"
+      ? "You can add a new project here."
+      : props.type === "edit"
+      ? "You can edit project details here."
+      : `You can view project details here.`
+  );
+
   const [loading, setLoading] = React.useState(false);
   //for modal
   const [openCustomer, setOpenCustomer] = React.useState(false);
   const [openEmployee, setOpenEmployee] = React.useState(false);
   const [openReferenceBy, setOpenReferenceBy] = React.useState(false);
-  
 
   //set initial values in formik
   const {
@@ -49,7 +65,6 @@ export default function Project(props) {
     handleReset,
     setFieldValue,
     submitForm,
-    
   } = useFormik({
     initialValues: {
       //customer: "",
@@ -62,29 +77,29 @@ export default function Project(props) {
       //referencedBy: "",
       //coordinator: "",
       comment: "",
-    
-    selectedCustomer: {
-      userId: null,
-      id: null,
-      title: null,
-      completed: true,
+
+      selectedCustomer: {
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
+      },
+
+      selectedEmployee: {
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
+      },
+
+      selectedReferenceBy: {
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
+      },
     },
 
-    selectedEmployee: {
-      userId: null,
-      id: null,
-      title: null,
-      completed: true,
-    },
-
-    selectedReferenceBy: {
-      userId: null,
-      id: null,
-      title: null,
-      completed: true,
-    },
-  },
-  
     validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
