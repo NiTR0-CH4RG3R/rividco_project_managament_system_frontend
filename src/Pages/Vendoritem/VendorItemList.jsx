@@ -5,20 +5,21 @@ import ListPage from '../../Components/ListPage/ListPage';
 import { AppRoutes } from '../../Data/AppRoutes';
 
 const columns = [
-    { id: 'firstName', label: 'First Name', align: 'left' },
-    { id: 'lastName', label: 'Last Name', align: 'left' },
-    { id: 'category', label: 'Category', align: 'left' },
-    { id: 'address', label: 'Address', align: 'left' },
-    { id: 'contact', label: 'Contact Number' },
+    { id: 'itemName', label: 'Item Name', align: 'left' },
+    { id: 'vendor', label: 'Vendor', align: 'left' },
+    { id: 'address', label: 'Vendor Address', align: 'left' },
+    { id: 'price', label: 'Price', align: 'right' },
+    { id: 'capacity', label: 'Capacity', align: 'right' },
+    { id: 'warrenty', label: 'Warrenty Duration', align: 'right' },
 ];
 
-export default function CustomerList() {
+export default function VendorList() {
     const { setTitle, setSubtitle } = useTopbarContext();
-    setTitle("List Customers");
-    setSubtitle("You can view and manage all the customers here.");
+    setTitle("List Vendor Items");
+    setSubtitle("You can view and manage all the vendor items here.");
 
     const [rows, setRows] = useState([
-        { id: 0, firstName: 'John', lastName: 'Doe', category: 'CUSTOMER', address: 'No. 380, Walawwaththa, Dadalla, Galle', contact: '1234567890', }
+        { id: 0, itemName: 'Converter', vendor: 'NC Enterprices', address: 'No. 380, Walawwaththa, Dadalla, Galle', price: 800.0, capacity: 180.0, warrenty: 360, }
     ]);
 
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function CustomerList() {
                 console.log(id);
             }}
             onAddButtonClick={(e) => {
-                navigate(AppRoutes.customer_add.path)
+                navigate(AppRoutes.vendor_item_add.path)
             }}
             tablePaginationProps={{
                 rowsPerPageOptions: [5, 10, 25, 100],

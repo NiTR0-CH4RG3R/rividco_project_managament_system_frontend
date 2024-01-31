@@ -1,98 +1,53 @@
 import React, { useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { TextField, InputAdornment, IconButton } from '@mui/material';
-import SearchRoundedIcon from '@mui/icons-material/Search';
-import { Box, Stack } from "@mui/material";
-import { AddBoxOutlined } from "@mui/icons-material";
+import { useNavigate } from 'react-router-dom';
+import { useTopbarContext } from '../../Contexts/TopbarContext';
+import ListPage from '../../Components/ListPage/ListPage';
+import { AppRoutes } from '../../Data/AppRoutes';
 
 const columns = [
-  { field: 'id', headerName: 'Registration No', width: 150 },
-  { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'profession', headerName: 'Profession', width: 100 },
-  { field: 'address', headerName: 'Address', width: 450 },
-  { field: 'email', headerName: 'E-mail Adress', width: 250 },
-  { field: 'contact1', headerName: 'Contact No1', type: Number, width: 150 },
+    { id: 'firstName', label: 'First Name', align: 'left' },
+    { id: 'lastName', label: 'Last Name', align: 'left' },
+    { id: 'role', label: 'Role', align: 'center' },
+    { id: 'status', label: 'Address', align: 'center' },
+    { id: 'contact', label: 'Contact Number' },
 ];
 
-const rows = [
-  { id:"SC1201", name:"Nethmi Nuwanthara", profession:"Clerk", address:"No 262/E,Ihala biyanwila,Mankada road,Kadawatha", email:"indika456@gmail.com", contact1:760809481},
-  { id:"SC1202", name:"Udeshi Gamage", profession:"Clerk", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"sonali890@gmail.com", contact1:760900481 },
-  { id:"SC1203", name:"Sachindu Umayangana", profession:"Teacher", address:"No 262/E,Pahala biyanwila,Mankada road,Kadawatha", email:"amali92@gmail.com", contact1:760809481 },
-  { id:"SC1204", name:"Buddhima De Soyza", profession:"Teacher", address:"No 300/a,Weliwatta,Palpathwala,Matale", email:"kamal273@gmail.com", contact1:760809481 },
-  { id:"SC1205", name:"Saymi De Alwis", profession:"Lecturer", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"indika456@gmail.com", contact1:760809481},
-  { id:"SC1206", name:"Tharushi Kavindya", profession:"Lecturer", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"kamal273@gmail.com", contact1:760900481},
-  { id:"SC1207", name:"Udesh Kumara", profession:"Clerk", address:"No 300/a,Weliwatta,Palpathwala,Matale", email:"sonali890@gmail.com", contact1:714686363},
-  { id:"SC1208", name:"Yashod Gunathilaka", profession:"Lawyer", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"indika456@gmail.com", contact1:766785481},
-  { id:"SC1209", name:"Yashini Perera", profession:"Nurse", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"indika456@gmail.com", contact1:760809481},
-  { id:"SC1210", name:"Nirmal Gunathilaka", profession:"Doctor", address:"No 300/a,Weliwatta,Palpathwala,Matale", email:"sonali890@gmail.com", contact1:760809481},
-  { id:"SC1211", name:"Aparna Wijerathne", profession:"Lawyer", address:"No 262/E,Ihala biyanwila,Mankada road,Kadawatha", email:"indika456@gmail.com", contact1:760900481},
-  { id:"SC1212", name:"Malithi Perera", profession:"Engineer", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"indika456@gmail.com", contact1:763463784},
-  { id:"SC1213", name:"Kasuni Gunasena", profession:"Nurse", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"amali92@gmail.com", contact1:763463784},
-  { id:"SC1214", name:"Wiharika Niwarthana", profession:"Nurse", address:"No 262/E,Ihala biyanwila,Mankada road,Kadawatha", email:"kamal273@gmail.com", contact1:718182863},
-  { id:"SC1201", name:"Nethmi Nuwanthara", profession:"Clerk", address:"No 262/E,Ihala biyanwila,Mankada road,Kadawatha", email:"indika456@gmail.com", contact1:760809481},
-  { id:"SC1202", name:"Udeshi Gamage", profession:"Clerk", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"sonali890@gmail.com", contact1:760900481 },
-  { id:"gSC1203", name:"Sachindu Umayangana", profession:"Teacher", address:"No 262/E,Pahala biyanwila,Mankada road,Kadawatha", email:"amali92@gmail.com", contact1:760809481},
-  { id:"SC1204", name:"Buddhima De Soyza", profession:"Teacher", address:"No 300/a,Weliwatta,Palpathwala,Matale", email:"kamal273@gmail.com", contact1:760809481},
-  { id:"SC1205", name:"Saymi De Alwis", profession:"Lecturer", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"indika456@gmail.com", contact1:760809481},
-  { id:"SC1206", name:"Tharushi Kavindya", profession:"Lecturer", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"kamal273@gmail.com", contact1:760900481},
-  { id:"SC1207", name:"Udesh Kumara", profession:"Clerk", address:"No 300/a,Weliwatta,Palpathwala,Matale", email:"sonali890@gmail.com", contact1:714686363},
-  { id:"SC1208", name:"Yashod Gunathilaka", profession:"Lawyer", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"indika456@gmail.com", contact1:766785481},
-  { id:"SC1209", name:"Yashini Perera", profession:"Nurse", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"indika456@gmail.com", contact1:760809481},
-  { id:"SC1210", name:"Nirmal Gunathilaka", profession:"Doctor", address:"No 300/a,Weliwatta,Palpathwala,Matale", email:"sonali890@gmail.com", contact1:760809481},
-  { id:"SC1211", name:"Aparna Wijerathne", profession:"Lawyer", address:"No 262/E,Ihala biyanwila,Mankada road,Kadawatha", email:"indika456@gmail.com", contact1:760900481},
-  { id:"SC1212", name:"Malithi Perera", profession:"Engineer", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"indika456@gmail.com", contact1:763463784},
-  { id:"SC1213", name:"Kasuni Gunasena", profession:"Nurse", address:"No 44/18A, 1st cross street,Pagoda road,Nugegoda", email:"amali92@gmail.com", contact1:763463784},
-  { id:"SC1214", name:"Wiharika Niwarthana", profession:"Nurse", address:"No 262/E,Ihala biyanwila,Mankada road,Kadawatha", email:"kamal273@gmail.com", contact1:718182863},
-  
 
-];
+export default function SystemUserList() {
+    const { setTitle, setSubtitle } = useTopbarContext();
+    setTitle("List System Users");
+    setSubtitle("You can view and manage all the system users here.");
 
-const SytemUserList = () => {
-  const[pageSize,setPageSize]=useState(5);
-  const[page,setPage]=useState(1);
+    const [rows, setRows] = useState([
+        { id: 0, firstName: 'John', lastName: 'Doe', role: 'ADMIN', status: 'ACTIVE', contact: '1234567890', }
+    ]);
 
-  return (
-    <div style={{ height: 400, width: '100%' }}>
-    <h1><center>System User Datatable</center></h1>
-    
-      <TextField
-        variant="standard"
-        reg="search-input"
-        label="Search"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <IconButton>
-               <SearchRoundedIcon />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-  
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={pageSize}
-          page={page}
-          pagination
-          autoHeight
-          onPageChange={(params) => setPage(params.page)}
-          onPageSizeChange={(params) => setPageSize(params.pageSize)}
+    const navigate = useNavigate();
+
+    return (
+        <ListPage
+            columns={columns}
+            rows={rows}
+            searchBarProps={{
+                searchBy: 'name',
+                onSearchChange: (e) => { console.log(e.target.value); },
+                onSearchClick: (e) => { },
+            }}
+            onRowClick={(e, id) => {
+                console.log(id);
+            }}
+            onAddButtonClick={(e) => {
+                navigate(AppRoutes.system_user_add.path)
+            }}
+            tablePaginationProps={{
+                rowsPerPageOptions: [5, 10, 25, 100],
+                component: "div",
+                rowsPerPage: 5,
+                page: 0,
+                count: 100,
+                onPageChange: (e, page) => { console.log(page); },
+                onRowsPerPageChange: (e) => { console.log(e.target.value); }
+            }}
         />
-
-      <Box
-        sx={{ mt: 10, ml: 2, display: "flex", justifyContent: "flex-start" }}
-      >
-        <Stack direction="row" spacing={1}>
-          <IconButton arisl-aria-label="add-button">
-            <AddBoxOutlined color="primary" style={{ fontSize: 50 }} />
-          </IconButton>
-        </Stack>
-      </Box>
-     
-    </div>
-  );
-};
-
-export default SytemUserList;
+    );
+}

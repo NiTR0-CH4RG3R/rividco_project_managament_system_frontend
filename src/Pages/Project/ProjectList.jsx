@@ -5,20 +5,20 @@ import ListPage from '../../Components/ListPage/ListPage';
 import { AppRoutes } from '../../Data/AppRoutes';
 
 const columns = [
-    { id: 'firstName', label: 'First Name', align: 'left' },
-    { id: 'lastName', label: 'Last Name', align: 'left' },
-    { id: 'category', label: 'Category', align: 'left' },
-    { id: 'address', label: 'Address', align: 'left' },
-    { id: 'contact', label: 'Contact Number' },
+    { id: 'identificationNo', label: 'First Name', align: 'left' },
+    { id: 'customer', label: 'Customer', align: 'left' },
+    { id: 'location', label: 'Location', align: 'left' },
+    { id: 'salesPerson', label: 'Sales Person', align: 'left' },
+    { id: 'status', label: 'Status', align: 'center' },
 ];
 
-export default function CustomerList() {
+export default function ProjectList() {
     const { setTitle, setSubtitle } = useTopbarContext();
-    setTitle("List Customers");
-    setSubtitle("You can view and manage all the customers here.");
+    setTitle("List Projects");
+    setSubtitle("You can view and manage all the projects here.");
 
     const [rows, setRows] = useState([
-        { id: 0, firstName: 'John', lastName: 'Doe', category: 'CUSTOMER', address: 'No. 380, Walawwaththa, Dadalla, Galle', contact: '1234567890', }
+        { id: 0, identificationNo: 'P001', customer: 'Jane Doe', location: 'No. 380, Walawwaththa, Dadalla, Galle', salesPerson: 'Jone Doe', status: 'ACTIVE', },
     ]);
 
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function CustomerList() {
             columns={columns}
             rows={rows}
             searchBarProps={{
-                searchBy: 'name',
+                searchBy: 'location',
                 onSearchChange: (e) => { console.log(e.target.value); },
                 onSearchClick: (e) => { },
             }}
@@ -36,7 +36,7 @@ export default function CustomerList() {
                 console.log(id);
             }}
             onAddButtonClick={(e) => {
-                navigate(AppRoutes.customer_add.path)
+                navigate(AppRoutes.project_add.path)
             }}
             tablePaginationProps={{
                 rowsPerPageOptions: [5, 10, 25, 100],
