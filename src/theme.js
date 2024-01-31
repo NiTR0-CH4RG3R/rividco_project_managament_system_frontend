@@ -12,7 +12,10 @@ export const themeSettings = (mode) => {
                     paper: '#272727'
                 },
             } : {
-
+                background: {
+                    default: '#f7f7f7f7',
+                    paper: '#fff'
+                },
             })
             // ...(mode === "dark"
             //   ? {
