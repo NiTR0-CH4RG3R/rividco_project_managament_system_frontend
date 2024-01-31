@@ -6,6 +6,7 @@ import { AppRoutes as Routes } from "./AppRoutes";
 export const SideNavigationPanelData =
 {
     width: 240,
+    toolbarHeight: 80,
     items: [
         {
             name: "Customer",
@@ -31,7 +32,7 @@ export const SideNavigationPanelData =
             subMenu: [
                 { name: "List Projects", path: Routes.project_list.path, component: Routes.project_list.component },
                 { name: "Add Project", path: Routes.project_add.path, component: Routes.project_add.component },
-                { name: "List Pendnig Services", path: Routes.project_services_list.path, component: Routes.project_services_list.component }
+                { name: "List Services", path: Routes.project_services_list.path, component: Routes.project_services_list.component }
             ]
         },
 
