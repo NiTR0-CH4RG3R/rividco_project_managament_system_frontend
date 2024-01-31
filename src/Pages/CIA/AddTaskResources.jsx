@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import TaskResourcesValidation from '../../Validation/TaskResourcesValidation';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AddBox, FileUpload, Visibility, WhatsApp } from '@mui/icons-material';
+import { useTopbarContext } from "../../Contexts/TopbarContext";
 
 
 const uploadFile = async (file, category) => {
@@ -21,6 +22,20 @@ const uploadFile = async (file, category) => {
   };
 
 const AddTaskResources = (props) => {
+
+  const { setTitle, setSubtitle } = useTopbarContext();
+  setTitle(
+    props.type === "add"
+      ? "Add a new CIA Task Resource"
+      
+      : `View CIA Task Resource`
+  );
+  setSubtitle(
+    props.type === "add"
+      ? "You can add CIA Task Resource here."
+      
+      : `You can CIA Task Resource details here.`
+  );
   const formik = useFormik({
     initialValues: {
       taskId: '',
