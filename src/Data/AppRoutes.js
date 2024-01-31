@@ -44,8 +44,8 @@ export const AppRoutes = {
     project_view: { path: "/project/view/id", component: <Project type="view" />, },
     project_edit: { path: "/project/edit/id", component: <Project type="edit" />, },
     project_services_list: { path: "/project/services/list", component: <> </>, },
-    project_services_list: { path: "/project/test", component: <ProjectTest />, },
-    project_services_list: { path: "/project/items", component: <ProjectItems />, },
+    project_test_list: { path: "/project/test", component: <ProjectTest />, },
+    project_items_list: { path: "/project/items", component: <ProjectItems />, },
 
     /* CIA related routes */
     cia_list: { path: "/cia/list", component: <TaskList /> },
