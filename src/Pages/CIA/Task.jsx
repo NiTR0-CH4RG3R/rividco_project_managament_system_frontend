@@ -12,6 +12,7 @@ import { categories, statuses, urgencies } from './TaskData'
 import { taskValidation } from '../../Validation/TaskValidation'
 import { GridClearIcon } from '@mui/x-data-grid'
 import { useNavigate, useParams } from 'react-router'
+import { useTopbarContext } from "../../Contexts/TopbarContext";
 import {
   AddBox,
   ClearAll,
@@ -22,6 +23,26 @@ import {
 } from '@mui/icons-material'
 
 export default function Task(props) {
+
+
+  const { setTitle, setSubtitle } = useTopbarContext();
+  setTitle(
+    props.type === "add"
+      ? "Add a new CIA Task"
+      : props.type === "edit"
+      ? "Edit CIA Task"
+      : `View CIA Task`
+  );
+  setSubtitle(
+    props.type === "add"
+      ? "You can add new CIA task here."
+      : props.type === "edit"
+      ? "You can edit CIA task details here."
+      : `You can view CIA task details here.`
+  );
+
+
+
   const {
     values,
     errors,
