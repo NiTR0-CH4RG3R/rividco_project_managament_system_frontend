@@ -11,7 +11,7 @@ export default function SideNavigationPanel({ SideNavigationPanelMenuItems = [],
 
             sx={{
                 flexShrink: 0,
-                width: drawerWidth,
+                width: `${drawerWidth}px`,
                 height: '100vh',
             }}
             PaperProps={{
@@ -19,7 +19,7 @@ export default function SideNavigationPanel({ SideNavigationPanelMenuItems = [],
                 /*        This effect is present in the AppBar component as well. It also cause the shadow effect to apear.*/
                 elevation: 4,
                 sx: {
-                    width: drawerWidth,
+                    width: `${drawerWidth}px`,
                     boxSizing: 'border-box',
                 }
 
