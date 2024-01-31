@@ -9,7 +9,10 @@ export default function App() {
 
     let routes = [];
     Object.keys(AppRoutes).forEach((name) => {
-        routes.push(AppRoutes[name]);
+        // NOTE : This is a small hack to mimik the functionality of the login page for the interim presentation.
+        // TODO : Change this appropiately once you implemented the authentation properly. Never write this kind of bad code. Unless you want to get fired from your job. LOL!
+        const route = { path: AppRoutes[name].path.substr(1), component: AppRoutes[name].component }
+        routes.push(route);
     });
 
     return (
