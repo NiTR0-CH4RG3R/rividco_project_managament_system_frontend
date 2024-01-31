@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import imagePath from '../Login/blueLogoAsset 1.png';
+import { useTopbarContext } from "../../Contexts/TopbarContext";
 
 const Home = () => {
+
+    const { setTitle, setSubtitle } = useTopbarContext();
+    setTitle("Home");
+    setSubtitle("Welcome to RIVIDCO PROJECTS!");
 
     const [currentTime, setDateTime] = useState(new Date());
 
