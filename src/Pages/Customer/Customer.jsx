@@ -54,6 +54,7 @@ export default function Customer(props) {
     handleChange,
     handleSubmit,
     handleReset,
+    submitForm
   } = useFormik({
     initialValues: {
       firstName: "",
@@ -279,8 +280,8 @@ export default function Customer(props) {
 
                 <LoadingButton
                   color="secondary"
-                  type="submit"
-                  //onClick={handleSubmit}
+                  //type="submit"
+                  onClick={submitForm}
                   loading={loading}
                   loadingPosition="start"
                   startIcon={<SaveIcon />}
