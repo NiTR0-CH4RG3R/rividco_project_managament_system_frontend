@@ -1,18 +1,24 @@
-import { createContext, useContext } from "react";
+import { createContext, useState } from "react";
+import { useXContext } from "./Contexts";
 
-export const UserContext = createContext({
-    userId: null,
-    username: null,
-    password: null,
-    roles: [],
-} | undefined);
+export const UserContext = createContext({});
 
-export function useUserContext() {
-    const context = useContext(UserContext);
+export function UserContextProvider({ children }) {
+    const [userId, setUserId] = useState(0);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [roles, setRoles] = useState([]);
 
-    if (context === undefined) {
-        throw new Error("useUserContext must be used within a UserContextProvider");
-    }
-
-    return context;
+    return (
+        <UserContext.Provider value={{
+            userId, setUserId,
+            username, setUsername,
+            password, setPassword,
+            roles, setRoles
+        }}>
+            {children}
+        </UserContext.Provider>
+    );
 }
+
+export function useUserContext() { return useXContext(UserContext); }

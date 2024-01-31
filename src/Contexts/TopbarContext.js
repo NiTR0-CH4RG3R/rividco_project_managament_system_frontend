@@ -1,22 +1,17 @@
-import { createContext, useContext } from "react";
+import { useState, createContext } from "react";
+import { useXContext } from "./Contexts";
 
-export const TopbarContext = createContext({
-    title: null,
-    setTitle: () => { },
+export const TopbarContext = createContext({});
 
-    subtitle: null,
-    setSubtitle: () => { },
+export function TopbarContextProvider({ children }) {
+    const [title, setTitle] = useState("");
+    const [subtitle, setSubtitle] = useState("");
 
-    previousPage: null,
-    setPreviousPage: () => { },
-} | undefined);
-
-export function useTopbarContext() {
-    const context = useContext(TopbarContext);
-
-    if (context === undefined) {
-        throw new Error("useTopbarContext must be used within a TopbarContextProvider");
-    }
-
-    return context;
+    return (
+        <TopbarContext.Provider value={{ title, subtitle, setTitle, setSubtitle }}>
+            {children}
+        </TopbarContext.Provider>
+    );
 }
+
+export function useTopbarContext() { return useXContext(TopbarContext); }
