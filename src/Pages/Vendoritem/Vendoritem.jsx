@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 //add formik for form management
 import { useFormik } from "formik";
 import { VendoritemValidation } from "../../Validation/VendoritemValidation";
+import { useTopbarContext } from "../../Contexts/TopbarContext";
 
 const vendorcategoryType = [
   {
@@ -26,7 +27,26 @@ const vendorcategoryType = [
 ];
 
 export default function Vendoritem(props) {
+
+  const { setTitle, setSubtitle } = useTopbarContext();
+  setTitle(
+    props.type === "add"
+      ? "Add a new Vendor Item"
+      : props.type === "edit"
+      ? "Edit Vendor Item"
+      : `View Vendor Item`
+  );
+  setSubtitle(
+    props.type === "add"
+      ? "You can add a new vendor item here."
+      : props.type === "edit"
+      ? "You can edit vendor item details here."
+      : `You can view vendor item details here.`
+  );
+
   const [loading, setLoading] = React.useState(false);
+
+
 
   //set initial values in formik
   const {
