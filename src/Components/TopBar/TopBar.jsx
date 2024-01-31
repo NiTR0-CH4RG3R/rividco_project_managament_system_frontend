@@ -4,9 +4,12 @@ import { ColorModeContext } from '../../theme';
 import { useContext } from 'react';
 
 import { ArrowBack, Brightness4, AccountCircle } from '@mui/icons-material';
+import { useTopbarContext } from '../../Contexts/TopbarContext';
 
-export default function TopBar({ drawerWidth = 254 }) {
+export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
     const colorMode = useContext(ColorModeContext);
+
+    const { title, subtitle } = useTopbarContext();
 
     // [TODO] : Implement back button
     const [backButtonVisible, setBackButtonVisible] = useState(false);
@@ -16,6 +19,7 @@ export default function TopBar({ drawerWidth = 254 }) {
             position='fixed'
             sx={{
                 width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`,
+                height: `${topbarHeight}px`,
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
@@ -29,12 +33,12 @@ export default function TopBar({ drawerWidth = 254 }) {
                 flexDirection='column'
                 justifyContent='flex-start'
             >
-                <Typography variant='h3'>
-                    Primary Heading
+                <Typography variant='h3' sx={{ fontWeight: 'bold' }}>
+                    {title}
                 </Typography>
 
                 <Typography variant='subtitle2'>
-                    Second Heading
+                    {subtitle}
                 </Typography>
             </Box>
 
