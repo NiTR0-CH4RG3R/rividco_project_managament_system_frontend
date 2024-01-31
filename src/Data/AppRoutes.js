@@ -12,7 +12,10 @@ import Project from "../Pages/Project/Project";
 import VendorList from "../Pages/Vendor/VendorList";
 import ProjectList from "../Pages/Project/ProjectList";
 import TaskList from "../Pages/CIA/TaskList";
+import ProjectTest from "../Pages/Project/ProjectTest/ProjectTest"
+import ProjectItems from "../Pages/Project/ProjectItems/ProjectItems"
 import Home from "../Pages/Home/Home";
+
 
 export const AppRoutes = {
     home: { path: "/home", component: <Home />, },
@@ -40,7 +43,9 @@ export const AppRoutes = {
     project_add: { path: "/project/add", component: <Project type="add" /> },
     project_view: { path: "/project/view/id", component: <Project type="view" />, },
     project_edit: { path: "/project/edit/id", component: <Project type="edit" />, },
-    project_services_list: { title: "Test Title", subtitle: "", path: "/project/services/list", component: <> </>, },
+    project_services_list: { path: "/project/services/list", component: <> </>, },
+    project_services_list: { path: "/project/test", component: <ProjectTest />, },
+    project_services_list: { path: "/project/items", component: <ProjectItems />, },
 
     /* CIA related routes */
     cia_list: { path: "/cia/list", component: <TaskList /> },
@@ -52,8 +57,8 @@ export const AppRoutes = {
     cia_status: { path: "/cia/status", component: <TaskStatus /> },
 
     /* System User related routes */
-    system_user_list: { title: "Test Title", subtitle: "", path: "/user/list", component: <SystemUserList /> },
-    system_user_add: { title: "Test Title", subtitle: "", path: "/user/add", component: <SystemUser type="add" /> },
-    system_user_view: { title: "Test Title", subtitle: "", path: "/user/view/id", component: <SystemUser type="view" />, },
-    system_user_edit: { title: "Test Title", subtitle: "", path: "/user/edit/id", component: <SystemUser type="edit" />, },
+    system_user_list: { path: "/user/list", component: <SystemUserList /> },
+    system_user_add: { path: "/user/add", component: <SystemUser type="add" /> },
+    system_user_view: { path: "/user/view/id", component: <SystemUser type="view" />, },
+    system_user_edit: { path: "/user/edit/id", component: <SystemUser type="edit" />, },
 };
