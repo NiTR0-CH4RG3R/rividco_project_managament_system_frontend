@@ -13,8 +13,21 @@ import { useNavigate } from "react-router-dom";
 //add formik
 import { useFormik } from "formik";
 import { vendorValidation } from "../../Validation/VendorValidation";
+import { useTopbarContext } from "../../Contexts/TopbarContext";
 
 export default function Vendor(props) {
+
+
+    const { setTitle, setSubtitle } = useTopbarContext();
+  setTitle(
+    props.type === "add" ? "Add a new Vendor" :
+    props.type === "edit" ? "Edit Vendor Details" :
+    `View Vendor Details`
+  );
+  setSubtitle(props.type === "add" ? "You can add a new vendor here." :
+  props.type === "edit" ? "You can edit vendor details here." :
+  `You can view vendor details here.`);
+
     const [loading, setLoading] = React.useState(false);
 
     //set initial values in formik
