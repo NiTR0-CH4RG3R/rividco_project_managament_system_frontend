@@ -27,7 +27,6 @@ const vendorcategoryType = [
 ];
 
 export default function Vendoritem(props) {
-
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
     props.type === "add"
@@ -45,8 +44,6 @@ export default function Vendoritem(props) {
   );
 
   const [loading, setLoading] = React.useState(false);
-
-
 
   //set initial values in formik
   const {
@@ -263,9 +260,8 @@ export default function Vendoritem(props) {
                   sx={{
                     width: "8.5rem",
                     margin: "1em 0.5em !important",
-                    backgroundColor: "#d32f2f",
                   }}
-                  color="secondary"
+                  color="primary"
                   startIcon={<ClearAllIcon />}
                   onClick={() => clearData()}
                 >
@@ -273,7 +269,7 @@ export default function Vendoritem(props) {
                 </Button>
 
                 <LoadingButton
-                  color="secondary"
+                  color="primary"
                   type="submit"
                   //onClick={handleSubmit}
                   loading={loading}
@@ -283,7 +279,6 @@ export default function Vendoritem(props) {
                   sx={{
                     width: "8.5rem",
                     margin: "1em 0.5em !important",
-                    backgroundColor: "#4caf50",
                   }}
                 >
                   <span>Save</span>
