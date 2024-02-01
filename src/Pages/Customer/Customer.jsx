@@ -15,7 +15,6 @@ import { useFormik } from "formik";
 import { customerValidation } from "../../Validation/CustomerValidation";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
 
-
 const categoryType = [
   {
     value: "Customer",
@@ -27,9 +26,9 @@ const categoryType = [
   },
 
   {
-    value:"Business",
-    label:"Business",
-  }
+    value: "Business",
+    label: "Business",
+  },
 ];
 
 export default function Customer(props) {
@@ -68,7 +67,7 @@ export default function Customer(props) {
       address: "",
       email: "",
       category: "",
-      profession:"",
+      profession: "",
       mobileNumber: "",
       officeNumber: "",
       comment: "",
@@ -216,10 +215,16 @@ export default function Customer(props) {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
-              
-              
+                id="c_profession"
+                name="profession"
+                label="Profession"
+                sx={{ width: "100%" }}
+                value={values.profession} //set value using formik
+                onChange={handleChange} //get onchange value using formik
+                disabled={props.type === "view"}
+                onBlur={handleBlur}
               />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
