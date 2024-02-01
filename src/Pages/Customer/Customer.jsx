@@ -25,6 +25,11 @@ const categoryType = [
     value: "Guest",
     label: "Guest",
   },
+
+  {
+    value:"Business",
+    label:"Business",
+  }
 ];
 
 export default function Customer(props) {
