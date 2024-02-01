@@ -15,6 +15,7 @@ import { useFormik } from "formik";
 import { customerValidation } from "../../Validation/CustomerValidation";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
 
+
 const categoryType = [
   {
     value: "Customer",
@@ -54,7 +55,7 @@ export default function Customer(props) {
     handleChange,
     handleSubmit,
     handleReset,
-    submitForm
+    submitForm,
   } = useFormik({
     initialValues: {
       firstName: "",
