@@ -215,7 +215,14 @@ export default function Customer(props) {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                padding: "1em 1em 0em 1em !important",
+                display: values.category === "Business" ? "block" : "none",
+              }}
+            >
               <TextField
                 id="c_profession"
                 name="profession"
