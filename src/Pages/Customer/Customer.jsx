@@ -68,6 +68,7 @@ export default function Customer(props) {
       address: "",
       email: "",
       category: "",
+      profession:"",
       mobileNumber: "",
       officeNumber: "",
       comment: "",
@@ -214,6 +215,12 @@ export default function Customer(props) {
                   </MenuItem>
                 ))}
               </TextField>
+            </Grid>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+              
+              
+              />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
