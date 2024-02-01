@@ -270,9 +270,9 @@ export default function Customer(props) {
                   sx={{
                     width: "8.5rem",
                     margin: "1em 0.5em !important",
-                    backgroundColor: "#d32f2f",
+                    //backgroundColor: "#d32f2f",
                   }}
-                  color="secondary"
+                  color="primary"
                   startIcon={<ClearAllIcon />}
                   onClick={() => clearData()}
                 >
@@ -280,7 +280,7 @@ export default function Customer(props) {
                 </Button>
 
                 <LoadingButton
-                  color="secondary"
+                  color="primary"
                   //type="submit"
                   onClick={submitForm}
                   loading={loading}
@@ -290,7 +290,7 @@ export default function Customer(props) {
                   sx={{
                     width: "8.5rem",
                     margin: "1em 0.5em !important",
-                    backgroundColor: "#4caf50",
+                    //backgroundColor: "#4caf50",
                   }}
                 >
                   <span>Save</span>
