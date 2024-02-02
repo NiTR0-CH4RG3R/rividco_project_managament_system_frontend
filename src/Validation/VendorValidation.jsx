@@ -2,6 +2,7 @@ import * as yup from "yup";
 
 export const vendorValidation = yup.object().shape({
   name: yup.string().required("Required"),
+  registrationNumber: yup.string().required("Required"),
   
   address: yup.string().required("Required"),
   email: yup.string().email("Please enter a valid email").required("Required"),
@@ -21,4 +22,5 @@ export const vendorValidation = yup.object().shape({
       "Please enter a valid office number"
     )
     .min(10),
+
 });

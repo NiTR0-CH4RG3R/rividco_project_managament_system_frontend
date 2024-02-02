@@ -49,6 +49,7 @@ export default function Vendor(props) {
       name: "",
       address: "",
       email: "",
+      registrationNumber: "",
       mobileNumber: "",
       officeNumber: "",
       comment: "",
@@ -141,7 +142,7 @@ export default function Vendor(props) {
                 helperText={touched.address ? errors.address : ""}
               />
             </Grid>
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 required
                 placeholder="example@.com"
@@ -156,6 +157,24 @@ export default function Vendor(props) {
                 onBlur={handleBlur}
                 error={touched.email && errors.email}
                 helperText={touched.email ? errors.email : ""}
+              />
+            </Grid>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                required
+                placeholder="Please enter registration number"
+                id="v_registrationNumber"
+                name="email"
+                label="Registration Number"
+                sx={{ width: "100%" }}
+                value={values.registrationNumber}
+                onChange={handleChange}
+                disabled={props.type === "view"}
+                onBlur={handleBlur}
+                error={touched.registrationNumber && errors.registrationNumber}
+                helperText={
+                  touched.registrationNumber ? errors.registrationNumber : ""
+                }
               />
             </Grid>
 
