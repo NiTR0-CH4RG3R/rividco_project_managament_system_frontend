@@ -175,8 +175,15 @@ export default function Vendoritem(props) {
                 }}
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
-                error={touched.vendor && errors.vendor}
-                helperText={touched.vendor ? errors.vendor : ""}
+                error={
+                  touched.selectedVendor?.title &&
+                  errors.selectedVendor?.title
+                }
+                helperText={
+                  touched.selectedVendor?.title
+                    ? errors.selectedVendor?.title
+                    : ""
+                }
               />
             </Grid>
 
