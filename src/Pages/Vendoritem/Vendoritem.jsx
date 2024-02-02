@@ -59,7 +59,7 @@ export default function Vendoritem(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
-    submitForm
+    submitForm,
   } = useFormik({
     initialValues: {
       product_name: "",
@@ -68,6 +68,7 @@ export default function Vendoritem(props) {
       warranty_duration: "",
       capacity: "",
       brand: "",
+      productCode: "",
       comments: "",
       selectedVendor: {
         userId: null,
@@ -247,16 +248,35 @@ export default function Vendoritem(props) {
                 helperText={touched.capacity ? errors.capacity : ""}
               />
             </Grid>
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 placeholder="Enter brand name (e.g., SolarTech, HydroPower Solutions)"
                 id="brand"
                 name="brand"
                 label="Brand"
                 sx={{ width: "100%" }}
-                value={values.comments} //set value using formikß
+                value={values.brand} //set value using formikß
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
+                onBlur={handleBlur}
+                error={touched.brand && errors.brand}
+                helperText={touched.brand ? errors.brand : ""}
+              />
+            </Grid>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                required
+                placeholder="Please enter the product code"
+                id="productCode"
+                name="ProductCode"
+                label="Product Code"
+                sx={{ width: "100%" }}
+                value={values.productCode} //set value using formikß
+                onChange={handleChange} //get onchange value using formik
+                disabled={props.type === "view"}
+                onBlur={handleBlur}
+                error={touched.productCode && errors.productCode}
+                helperText={touched.productCode ? errors.productCode : ""}
               />
             </Grid>
 
