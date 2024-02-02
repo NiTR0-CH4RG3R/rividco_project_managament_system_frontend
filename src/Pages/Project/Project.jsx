@@ -76,7 +76,13 @@ export default function Project(props) {
       location: "",
       //referencedBy: "",
       //coordinator: "",
+      electricityTariffStructure: "",
+      electricityAccountNumber : "",
+      electricityBoardArea : "",
+      commisionDate : "",
       comment: "",
+      
+
 
       selectedCustomer: {
         userId: null,
@@ -394,6 +400,77 @@ export default function Project(props) {
                 }
               />
             </Grid>
+
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                required
+                placeholder="Please Electricity Tariff Amount"
+                id="p_electricityTariffStructure"
+                name="electricityTariffStructure"
+                label="Tariff"
+                sx={{ width: "100%" }}
+                value={values.electricityTariffStructure} //set value using formik
+                onChange={handleChange} //get onchange value using formik
+                disabled={props.type === "view"}
+                onBlur={handleBlur}
+                error={touched.electricityTariffStructure && errors.electricityTariffStructure}
+                helperText={touched.electricityTariffStructure ? errors.electricityTariffStructure : ""}
+              />
+            </Grid>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                required
+                placeholder="Please enter the Electricity Account Number"
+                id="p_electricityAccountnumber"
+                name="electricityAccountnumber"
+                label="Electricity Account Number"
+                sx={{ width: "100%" }}
+                value={values.electricityAccountNumber} //set value using formik
+                onChange={handleChange} //get onchange value using formik
+                disabled={props.type === "view"}
+                onBlur={handleBlur}
+                error={touched.electricityAccountNumber && errors.electricityAccountNumber}
+                helperText={touched.electricityAccountNumber ? errors.electricityAccountNumber : ""}
+              />
+            </Grid>
+
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                required
+                placeholder="Please enter Electricity Board Area"
+                id="p_electricityBoardArea"
+                name="electricityBoardArea"
+                label="Electricity Board Area"
+                sx={{ width: "100%" }}
+                value={values.electricityBoardArea} //set value using formik
+                onChange={handleChange} //get onchange value using formik
+                disabled={props.type === "view"}
+                onBlur={handleBlur}
+                error={touched.electricityBoardArea && errors.electricityBoardArea}
+                helperText={touched.electricityBoardArea ? errors.electricityBoardArea : ""}
+              />
+            </Grid>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                required
+                type="date"
+                placeholder="Select the Commision Date"
+                id="commisionDate"
+                name="commisionDate"
+                label="Commision Date"
+                sx={{ width: "100%" }}
+                value={values.startDate} //set value using formik
+                onChange={handleChange} //get onchange value using formik
+                disabled={props.type === "view"}
+                onBlur={handleBlur}
+                //focused
+                InputLabelProps={{ shrink: true }}
+                error={touched.commisionDate && errors.commisionDate}
+                helperText={touched.commisionDate ? errors.commisionDate : ""}
+              />
+            </Grid>
+
+
             <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 placeholder="Please Enter Your Comment"
@@ -423,9 +500,9 @@ export default function Project(props) {
                   sx={{
                     width: "8.5rem",
                     margin: "1em 0.5em !important",
-                    backgroundColor: "#d32f2f",
+                    
                   }}
-                  color="secondary"
+                  color="primary"
                   startIcon={<ClearAllIcon />}
                   onClick={() => clearData()}
                 >
@@ -433,7 +510,7 @@ export default function Project(props) {
                 </Button>
 
                 <LoadingButton
-                  color="secondary"
+                  color="primary"
                   //type="submit"
                   onClick={submitForm}
                   loading={loading}
@@ -443,7 +520,7 @@ export default function Project(props) {
                   sx={{
                     width: "8.5rem",
                     margin: "1em 0.5em !important",
-                    backgroundColor: "#4caf50",
+                    
                   }}
                 >
                   <span>Save</span>
