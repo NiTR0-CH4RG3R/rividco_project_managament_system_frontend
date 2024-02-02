@@ -6,4 +6,7 @@ export const VendoritemValidation = yup.object().shape({
   warranty_duration: yup.string().required("Required"),
   capacity: yup.string().required("Required"),
   vendor: yup.string().required("Required"),
+  selectedVendor: yup.object({
+    title: yup.string().required("Required"),
+  }),
 });
