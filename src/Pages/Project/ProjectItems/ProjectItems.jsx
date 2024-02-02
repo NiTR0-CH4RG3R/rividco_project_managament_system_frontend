@@ -2,9 +2,14 @@ import { Box , Grid} from '@mui/material'
 import React from 'react'
 import ProjectTable from '../ProjectItems/ProjectItemsTable'
 import ProjectForm from '../ProjectItems/ProjectItemsForm'
+import { useTopbarContext } from '../../../Contexts/TopbarContext'
 
 
-function ProjectItems() {
+export default function ProjectItems() {
+    const { setTitle, setSubtitle } = useTopbarContext();
+    setTitle("List Project items");
+    setSubtitle("You can view and manage all the project items here.");
+    
   return (
      <div>
         <Box>
@@ -27,4 +32,4 @@ function ProjectItems() {
   );
 }
 
-export default ProjectItems;
+
