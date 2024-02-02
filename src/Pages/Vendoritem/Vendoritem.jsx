@@ -176,8 +176,7 @@ export default function Vendoritem(props) {
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
                 error={
-                  touched.selectedVendor?.title &&
-                  errors.selectedVendor?.title
+                  touched.selectedVendor?.title && errors.selectedVendor?.title
                 }
                 helperText={
                   touched.selectedVendor?.title
@@ -253,8 +252,6 @@ export default function Vendoritem(props) {
                 id="brand"
                 name="brand"
                 label="Brand"
-                multiline
-                rows={4}
                 sx={{ width: "100%" }}
                 value={values.comments} //set value using formikß
                 onChange={handleChange} //get onchange value using formik
