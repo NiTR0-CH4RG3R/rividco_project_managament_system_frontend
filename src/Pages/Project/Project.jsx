@@ -80,6 +80,7 @@ export default function Project(props) {
       electricityAccountNumber : "",
       electricityBoardArea : "",
       commisionDate : "",
+      identificationNumber:"",
       comment: "",
       
 
@@ -467,6 +468,32 @@ export default function Project(props) {
                 InputLabelProps={{ shrink: true }}
                 error={touched.commisionDate && errors.commisionDate}
                 helperText={touched.commisionDate ? errors.commisionDate : ""}
+              />
+            </Grid>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                placeholder="Please Project identification number"
+                id="p_identificationNumber"
+                name="identificationNumber"
+                label="Identification Number"
+                sx={{ width: "100%" }}
+                value={values.identificationNumber} //set value using formik
+                onChange={handleChange} //get onchange value using formik
+                disabled={props.type === "view"}
+                onBlur={handleBlur}
+              />
+            </Grid>
+            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+              <TextField
+                placeholder="Please select sales Person"
+                id="p_salesPerson"
+                name="salesPerson"
+                label="Sales Person"
+                sx={{ width: "100%" }}
+                value={values.warantyPeriod} //set value using formik
+                onChange={handleChange} //get onchange value using formik
+                disabled={props.type === "view"}
+                onBlur={handleBlur}
               />
             </Grid>
 
