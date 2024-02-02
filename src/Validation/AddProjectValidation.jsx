@@ -12,6 +12,9 @@ export const addProjectValidation = yup.object().shape({
   selectedEmployee: yup.object({
     title: yup.string().required("Required"),
   }),
+  selectedSalesPerson: yup.object({
+    title: yup.string().required("Required"),
+  }),
   description: yup.string().required("Required"),
   status: yup.string().required("Required"),
   location: yup.string().required("Required"),

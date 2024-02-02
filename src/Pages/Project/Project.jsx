@@ -19,6 +19,7 @@ import { GridClearIcon } from "@mui/x-data-grid";
 import { addProjectValidation } from "../../Validation/AddProjectValidation";
 import ReferenceByModal from "../../Components/ModalWindow/ReferenceByModal";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
+import SalesPersonModal from "../../Components/ModalWindow/SalesPersonModal";
 
 const statusType = [
   {
@@ -53,6 +54,7 @@ export default function Project(props) {
   const [openCustomer, setOpenCustomer] = React.useState(false);
   const [openEmployee, setOpenEmployee] = React.useState(false);
   const [openReferenceBy, setOpenReferenceBy] = React.useState(false);
+  const [openSalesPerson, setOpenSalesPerson] = React.useState(false);
 
   //set initial values in formik
   const {
@@ -77,13 +79,11 @@ export default function Project(props) {
       //referencedBy: "",
       //coordinator: "",
       electricityTariffStructure: "",
-      electricityAccountNumber : "",
-      electricityBoardArea : "",
-      commisionDate : "",
-      identificationNumber:"",
+      electricityAccountNumber: "",
+      electricityBoardArea: "",
+      commisionDate: "",
+      identificationNumber: "",
       comment: "",
-      
-
 
       selectedCustomer: {
         userId: null,
@@ -100,6 +100,12 @@ export default function Project(props) {
       },
 
       selectedReferenceBy: {
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
+      },
+      selectedSalesPerson: {
         userId: null,
         id: null,
         title: null,
@@ -414,8 +420,15 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
-                error={touched.electricityTariffStructure && errors.electricityTariffStructure}
-                helperText={touched.electricityTariffStructure ? errors.electricityTariffStructure : ""}
+                error={
+                  touched.electricityTariffStructure &&
+                  errors.electricityTariffStructure
+                }
+                helperText={
+                  touched.electricityTariffStructure
+                    ? errors.electricityTariffStructure
+                    : ""
+                }
               />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -430,8 +443,15 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
-                error={touched.electricityAccountNumber && errors.electricityAccountNumber}
-                helperText={touched.electricityAccountNumber ? errors.electricityAccountNumber : ""}
+                error={
+                  touched.electricityAccountNumber &&
+                  errors.electricityAccountNumber
+                }
+                helperText={
+                  touched.electricityAccountNumber
+                    ? errors.electricityAccountNumber
+                    : ""
+                }
               />
             </Grid>
 
@@ -447,8 +467,14 @@ export default function Project(props) {
                 onChange={handleChange} //get onchange value using formik
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
-                error={touched.electricityBoardArea && errors.electricityBoardArea}
-                helperText={touched.electricityBoardArea ? errors.electricityBoardArea : ""}
+                error={
+                  touched.electricityBoardArea && errors.electricityBoardArea
+                }
+                helperText={
+                  touched.electricityBoardArea
+                    ? errors.electricityBoardArea
+                    : ""
+                }
               />
             </Grid>
             <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
@@ -490,13 +516,44 @@ export default function Project(props) {
                 name="salesPerson"
                 label="Sales Person"
                 sx={{ width: "100%" }}
-                value={values.warantyPeriod} //set value using formik
-                onChange={handleChange} //get onchange value using formik
+                //value={values.warantyPeriod} //set value using formik
+                //onChange={handleChange} //get onchange value using formik
+                onClick={() => {
+                  if (
+                    !values.selectedSalesPerson?.title &&
+                    props.type !== "view"
+                  ) {
+                    setOpenSalesPerson(true);
+                  }
+                }}
+                value={values.selectedSalesPerson?.title ?? ""}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() => setFieldValue("selectedSalesPerson", "")}
+                      sx={{
+                        visibility: values.selectedSalesPerson?.title
+                          ? "visible"
+                          : "hidden",
+                      }}
+                    >
+                      <GridClearIcon />
+                    </IconButton>
+                  ),
+                }}
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
+                error={
+                  touched.selectedSalesPerson?.title &&
+                  errors.selectedSalesPerson?.title
+                }
+                helperText={
+                  touched.selectedSalesPerson?.title
+                    ? errors.selectedSalesPerson?.title
+                    : ""
+                }
               />
             </Grid>
-
 
             <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
@@ -527,7 +584,6 @@ export default function Project(props) {
                   sx={{
                     width: "8.5rem",
                     margin: "1em 0.5em !important",
-                    
                   }}
                   color="primary"
                   startIcon={<ClearAllIcon />}
@@ -547,7 +603,6 @@ export default function Project(props) {
                   sx={{
                     width: "8.5rem",
                     margin: "1em 0.5em !important",
-                    
                   }}
                 >
                   <span>Save</span>
@@ -592,6 +647,11 @@ export default function Project(props) {
       <ReferenceByModal
         openReferenceBy={openReferenceBy}
         setOpenReferenceBy={setOpenReferenceBy}
+        sendData={setFieldValue}
+      />
+      <SalesPersonModal
+        openSalesPerson={openSalesPerson}
+        setOpenSalesPerson={setOpenSalesPerson}
         sendData={setFieldValue}
       />
     </div>
