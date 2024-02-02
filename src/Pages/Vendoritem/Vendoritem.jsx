@@ -63,6 +63,12 @@ export default function Vendoritem(props) {
       capacity: "",
       brand: "",
       comments: "",
+      selectedVendor: {
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
+      },
     },
     validationSchema: VendoritemValidation,
     onSubmit: (values) => {
