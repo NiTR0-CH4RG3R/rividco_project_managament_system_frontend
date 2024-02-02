@@ -15,6 +15,8 @@ import { useFormik } from "formik";
 import { VendoritemValidation } from "../../Validation/VendoritemValidation";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
 import VendorModal from "../../Components/ModalWindow/VendorModal";
+import { IconButton } from "@mui/material";
+import { GridClearIcon } from "@mui/x-data-grid";
 
 const vendorcategoryType = [
   {
@@ -147,22 +149,35 @@ export default function Vendoritem(props) {
                 required
                 id="vendor"
                 name="vendor"
-                select
                 label="Vendor "
                 sx={{ width: "100%" }}
-                value={values.vendor} //set value using formik
-                onChange={handleChange} //get onchange value using formik
+                //value={values.vendor} //set value using formik
+                //onChange={handleChange} //get onchange value using formik
+                onClick={() => {
+                  if (!values.selectedVendor?.title && props.type !== "view") {
+                    setOpenVendor(true);
+                  }
+                }}
+                value={values.selectedVendor?.title ?? ""}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() => setFieldValue("selectedVendor", "")}
+                      sx={{
+                        visibility: values.selectedVendor?.title
+                          ? "visible"
+                          : "hidden",
+                      }}
+                    >
+                      <GridClearIcon />
+                    </IconButton>
+                  ),
+                }}
                 disabled={props.type === "view"}
                 onBlur={handleBlur}
                 error={touched.vendor && errors.vendor}
                 helperText={touched.vendor ? errors.vendor : ""}
-              >
-                {vendorcategoryType.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
+              />
             </Grid>
 
             <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
