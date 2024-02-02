@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { VendoritemValidation } from "../../Validation/VendoritemValidation";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
+import VendorModal from "../../Components/ModalWindow/VendorModal";
 
 const vendorcategoryType = [
   {
@@ -43,6 +44,7 @@ export default function Vendoritem(props) {
       : `You can view vendor item details here.`
   );
 
+  const [openVendor, setOpenVendor] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
   //set initial values in formik
@@ -54,6 +56,7 @@ export default function Vendoritem(props) {
     handleChange,
     handleSubmit,
     handleReset,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       product_name: "",
@@ -313,6 +316,11 @@ export default function Vendoritem(props) {
           </Box>
         </Box>
       </form>
+      <VendorModal
+        openVendor={openVendor}
+        setOpenVendor={setOpenVendor}
+        sendData={setFieldValue}
+      />
     </div>
   );
 }
