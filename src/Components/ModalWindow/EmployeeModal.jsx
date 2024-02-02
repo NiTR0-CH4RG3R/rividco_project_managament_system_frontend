@@ -99,7 +99,7 @@ export default function EmployeeModal(props) {
               >
                 <Button
                   variant="contained"
-                  sx={{ width: "8.5rem", margin: "1em 0.5em !important" ,backgroundColor: "#d32f2f"}}
+                  sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
                   color="primary"
                   startIcon={<CloseIcon/>}
                   onClick={handleClose}

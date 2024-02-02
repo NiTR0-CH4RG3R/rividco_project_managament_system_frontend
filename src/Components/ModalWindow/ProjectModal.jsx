@@ -1,39 +1,39 @@
-import { Modal,Button } from "@mui/material";
+import { Modal, Button } from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function ProjectModal(props) {
-  const { openProject, setOpenProject, sendData } = props
+  const { openProject, setOpenProject, sendData } = props;
 
   const projectcols = [
     {
-      field: 'userId',
-      headerName: 'User ID',
-      align: 'center',
-      headerAlign: 'center',
+      field: "userId",
+      headerName: "User ID",
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'id',
-      headerName: 'ID',
-      align: 'center',
-      headerAlign: 'center',
+      field: "id",
+      headerName: "ID",
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'title',
-      headerName: 'Title',
-      align: 'center',
-      headerAlign: 'center',
+      field: "title",
+      headerName: "Title",
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'completed',
-      headerName: 'Completed',
-      align: 'center',
-      headerAlign: 'center',
+      field: "completed",
+      headerName: "Completed",
+      align: "center",
+      headerAlign: "center",
     },
-  ]
+  ];
 
   const handleClose = () => {
     setOpenProject(false);
@@ -44,7 +44,7 @@ export default function ProjectModal(props) {
   useEffect(() => {
     // Fetch data from REST endpoint using axios
     axios
-      .get('https://jsonplaceholder.typicode.com/todos')
+      .get("https://jsonplaceholder.typicode.com/todos")
       .then((response) => {
         setRows(response.data);
       })
@@ -69,7 +69,7 @@ export default function ProjectModal(props) {
         }}
       >
         <Typography variant="h6">Project Modal</Typography>
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 400, width: "100%" }}>
           <DataGrid
             rows={rows}
             columns={projectcols}
@@ -83,10 +83,27 @@ export default function ProjectModal(props) {
               },
             }}
             onRowClick={({ row }) => {
-              sendData('selectedProject', row)
-              setOpenProject(false)
+              sendData("selectedProject", row);
+              setOpenProject(false);
             }}
           />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "end",
+            padding: "1em 2em 0em 2em !important",
+          }}
+        >
+          <Button
+            variant="contained"
+            sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+            color="primary"
+            startIcon={<CloseIcon />}
+            onClick={handleClose}
+          >
+            Close
+          </Button>
         </div>
       </Box>
     </Modal>

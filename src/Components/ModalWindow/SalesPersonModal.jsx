@@ -10,30 +10,30 @@ export default function SalesPersonModal(props) {
 
   const customercols = [
     {
-      field: 'userId',
-      headerName: 'User ID',
-      align: 'center',
-      headerAlign: 'center',
+      field: "userId",
+      headerName: "User ID",
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'id',
-      headerName: 'ID',
-      align: 'center',
-      headerAlign: 'center',
+      field: "id",
+      headerName: "ID",
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'title',
-      headerName: 'Title',
-      align: 'center',
-      headerAlign: 'center',
+      field: "title",
+      headerName: "Title",
+      align: "center",
+      headerAlign: "center",
     },
     {
-      field: 'completed',
-      headerName: 'Completed',
-      align: 'center',
-      headerAlign: 'center',
+      field: "completed",
+      headerName: "Completed",
+      align: "center",
+      headerAlign: "center",
     },
-  ]
+  ];
 
   const handleClose = () => {
     setOpenSalesPerson(false);
@@ -44,7 +44,7 @@ export default function SalesPersonModal(props) {
   useEffect(() => {
     // Fetch data from REST endpoint using axios
     axios
-      .get('https://jsonplaceholder.typicode.com/todos')
+      .get("https://jsonplaceholder.typicode.com/todos")
       .then((response) => {
         setRows(response.data);
       })
@@ -69,24 +69,24 @@ export default function SalesPersonModal(props) {
         }}
       >
         <Typography variant="h6">Customer Modal</Typography>
-        <div style={{ height: 400, width: '100%' }}>
-        <DataGrid
-          rows={rows}
-          columns={customercols}
-          disableColumnFilter
-          disableColumnSelector
-          disableDensitySelector
-          slots={{ toolbar: GridToolbar }}
-          slotProps={{
-            toolbar: {
-              showQuickFilter: true,
-            },
-          }}
-          onRowClick={({ row }) => {
-            sendData("selectedSalesPerson", row);
-            setOpenSalesPerson(false);
-          }}
-        />
+        <div style={{ height: 400, width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={customercols}
+            disableColumnFilter
+            disableColumnSelector
+            disableDensitySelector
+            slots={{ toolbar: GridToolbar }}
+            slotProps={{
+              toolbar: {
+                showQuickFilter: true,
+              },
+            }}
+            onRowClick={({ row }) => {
+              sendData("selectedSalesPerson", row);
+              setOpenSalesPerson(false);
+            }}
+          />
         </div>
         <div
           style={{
@@ -100,7 +100,6 @@ export default function SalesPersonModal(props) {
             sx={{
               width: "8.5rem",
               margin: "1em 0.5em !important",
-              backgroundColor: "#d32f2f",
             }}
             color="primary"
             startIcon={<CloseIcon />}
