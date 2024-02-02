@@ -59,6 +59,7 @@ export default function Vendoritem(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
+    submitForm
   } = useFormik({
     initialValues: {
       product_name: "",
@@ -298,8 +299,8 @@ export default function Vendoritem(props) {
 
                 <LoadingButton
                   color="primary"
-                  type="submit"
-                  //onClick={handleSubmit}
+                  //type="submit"
+                  onClick={submitForm}
                   loading={loading}
                   loadingPosition="start"
                   startIcon={<SaveIcon />}
