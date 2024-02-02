@@ -247,7 +247,7 @@ export default function Vendoritem(props) {
                 helperText={touched.capacity ? errors.capacity : ""}
               />
             </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
               <TextField
                 placeholder="Enter brand name (e.g., SolarTech, HydroPower Solutions)"
                 id="brand"
