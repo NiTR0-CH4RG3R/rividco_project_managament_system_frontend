@@ -220,13 +220,21 @@ export default function Customer(props) {
               xs={12}
               sx={{
                 padding: "1em 1em 0em 1em !important",
-                display: values.category === "Business" ? "block" : "none",
               }}
             >
               <TextField
                 id="c_profession"
                 name="profession"
-                label="Profession"
+                label={
+                  values.category === "Business"
+                    ? "Nature of the business"
+                    : "Profession"
+                }
+                placeholder={
+                  values.category === "Business"
+                    ? "Please enter the nature of the business "
+                    : "Please enter the profession of the customer"
+                }
                 sx={{ width: "100%" }}
                 value={values.profession} //set value using formik
                 onChange={handleChange} //get onchange value using formik
