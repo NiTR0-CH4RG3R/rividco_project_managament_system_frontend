@@ -155,17 +155,14 @@ export default function Project(props) {
     <Box
       component="form"
       onSubmit={handleReset}
-      sx={{
-        "& .MuiTextField-root": { m: 1 },
-      }}
       noValidate
-      autoComplete="off"
       display="flex"
       justifyContent="center"
       alignItems="center"
       flexDirection="column"
+      width={"70%"}
     >
-      <Grid container spacing={1} sx={{ width: "70%" }}>
+      <Grid container spacing={1} >
         <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
           <TextField
             required
