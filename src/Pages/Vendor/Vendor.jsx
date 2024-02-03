@@ -107,10 +107,10 @@ export default function Vendor(props) {
           <TextField
             required
             placeholder="Please Enter Vendor Name"
-            id="v_name"
+            
             name="name"
             label="Name "
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.name} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -129,7 +129,7 @@ export default function Vendor(props) {
             label="Address "
             multiline
             maxRows={4}
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.address}
             onChange={handleChange}
             disabled={props.type === "view"}
@@ -146,7 +146,7 @@ export default function Vendor(props) {
             type="email"
             name="email"
             label="Email "
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.email}
             onChange={handleChange}
             disabled={props.type === "view"}
@@ -162,7 +162,7 @@ export default function Vendor(props) {
             id="v_registrationNumber"
             name="email"
             label="Registration Number"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.registrationNumber}
             onChange={handleChange}
             disabled={props.type === "view"}
@@ -181,7 +181,7 @@ export default function Vendor(props) {
             id="v_mobile_no"
             name="mobileNumber"
             label="Mobile No "
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.mobileNumber}
             onChange={handleChange}
             disabled={props.type === "view"}
@@ -196,7 +196,7 @@ export default function Vendor(props) {
             id="v_office_no"
             name="officeNumber"
             label="Office No"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.officeNumber}
             onChange={handleChange}
             disabled={props.type === "view"}
@@ -213,7 +213,7 @@ export default function Vendor(props) {
             label="Comment"
             multiline
             rows={4}
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.comment} //set value using formikß
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
