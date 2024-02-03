@@ -25,6 +25,7 @@ import FormTextField from "../../Components/StyledComponents/FormTextField";
 import FormClearButton from "../../Components/StyledComponents/FormClearButton";
 import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
 import FormButton from "../../Components/StyledComponents/FormButton";
+import WarrentyField from "../../Components/WarrentyField/WarrentyField";
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -236,17 +237,15 @@ export default function Project(props) {
             helperText={touched.description ? errors.description : ""}
           />
         </Grid>
+
         <Grid item xs={6}>
-          <FormTextField
-            placeholder="Please Enter Warranty Period"
-            id="p_warrantyPeriod"
+          <WarrentyField
+            //required={"required"}
             name="warrantyPeriod"
-            label="Warranty Period"
-            fullWidth
-            value={values.warantyPeriod} //set value using formik
-            onChange={handleChange} //get onchange value using formik
+            onChange={handleChange}
             disabled={props.type === "view"}
             onBlur={handleBlur}
+            fullWidth={"fullWidth"}
           />
         </Grid>
         <Grid item xs={6}>
