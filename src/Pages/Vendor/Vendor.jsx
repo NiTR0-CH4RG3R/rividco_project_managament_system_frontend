@@ -219,13 +219,13 @@ export default function Vendor(props) {
           <>
             <Button
               variant="contained"
+              size="large"
               sx={{
-                width: "8.5rem",
-                margin: "1em 0.5em !important",
+                mr:2
               }}
               color="primary"
               startIcon={<ClearAllIcon />}
-              onClick={() => clearData()}
+              type="reset"
             >
               Clear
             </Button>
