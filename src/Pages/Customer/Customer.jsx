@@ -208,7 +208,7 @@ export default function Customer(props) {
                 </Grid>
                 <Grid
                     item
-                    xs={12}
+                    xs={6}
 
                 >
                     <TextField
@@ -229,6 +229,21 @@ export default function Customer(props) {
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <TextField
+                        required
+                        placeholder="Please Enter Customer Id"
+                        name="customerId"
+                        label="Customer Id"
+                        fullWidth
+                        value={values.customerId} //set value using formik
+                        onChange={handleChange} //get onchange value using formik
+                        disabled={props.type === "view"}
+                        onBlur={handleBlur}
+                        error={touched.customerId && errors.customerId}
+                        helperText={touched.customerId ? errors.customerId : ""}
                     />
                 </Grid>
                 <Grid item xs={6}>
