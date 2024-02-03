@@ -43,6 +43,7 @@ export default function WarrentyField({ required, name, onChange, disabled, onBl
                 select
                 label="Unit"
                 value={unit}
+                disabled={disabled}
                 defaultValue={'months'}
                 sx={{ width: '100px' }}
                 onChange={(e) => {
