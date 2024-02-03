@@ -21,6 +21,7 @@ import FormTextField from "../../Components/StyledComponents/FormTextField";
 import FormClearButton from "../../Components/StyledComponents/FormClearButton";
 import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
 import FormButton from "../../Components/StyledComponents/FormButton";
+import WarrentyField from "../../Components/WarrentyField/WarrentyField";
 
 export default function Vendoritem(props) {
   function loadVendorData(id) {
@@ -178,23 +179,16 @@ export default function Vendoritem(props) {
             helperText={touched.price ? errors.price : ""}
           />
         </Grid>
+
         <Grid item xs={6}>
-          <FormTextField
-            required
-            placeholder="Enter warranty duration (e.g., 1 year, 24 months)"
-            id="warranty_duration"
+          <WarrentyField
+            required={true}
             name="warranty_duration"
-            label="Warranty duration "
-            fullWidth
-            value={values.warranty_duration} //set value using formik
-            onChange={handleChange} //get onchange value using formik
+            label="Warranty duration"
+            onChange={handleChange}
             disabled={props.type === "view"}
-            className={
-              errors.warranty_duration && touched.warranty_duration
-                ? "input-error"
-                : ""
-            }
             onBlur={handleBlur}
+            fullWidth={true}
             error={touched.warranty_duration && errors.warranty_duration}
             helperText={
               touched.warranty_duration ? errors.warranty_duration : ""

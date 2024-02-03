@@ -240,12 +240,12 @@ export default function Project(props) {
 
         <Grid item xs={6}>
           <WarrentyField
-            //required={"required"}
+            //required={true}
             name="warrantyPeriod"
             onChange={handleChange}
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            fullWidth={"fullWidth"}
+            fullWidth={true}
           />
         </Grid>
         <Grid item xs={6}>
