@@ -17,19 +17,31 @@ import { useTopbarContext } from "../../Contexts/TopbarContext";
 import VendorModal from "../../Components/ModalWindow/VendorModal";
 import { IconButton } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
+import { AppRoutes } from "../../Data/AppRoutes";
 
-const vendorcategoryType = [
-  {
-    value: "Vendor1",
-    label: "Vendor1",
-  },
-  {
-    value: "Vendor2",
-    label: "Vendor2",
-  },
-];
+
 
 export default function Vendoritem(props) {
+
+
+
+  function loadVendorData(id) {
+    //add here
+  }
+
+  const { id } = useParams();
+
+  React.useEffect(() => {
+    console.log(props);
+
+    if (props.type !== "add") {
+      console.log(id);
+      loadVendorData(id);
+    }
+  }, []);
+
+  
+
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
     props.type === "add"
@@ -79,288 +91,239 @@ export default function Vendoritem(props) {
     },
     validationSchema: VendoritemValidation,
     onSubmit: (values) => {
-      sendData(values);
+      setLoading(true);
+      //Send values to the backend
     },
   });
 
-  //
+ 
 
-  const { id } = useParams();
-  const navi = useNavigate();
+  
+  const navigation = useNavigate();
 
-  React.useEffect(() => {
-    console.log(props);
+  
 
-    if (props.type !== "add") {
-      console.log(id);
-      getDataFromApi(id);
-    }
-  }, []);
+  
 
-  function getDataFromApi(id) {
-    //add here
-  }
-
-  function sendData(data) {
-    //addhere
-    setLoading(true);
-    console.log(data);
-    clearData();
-    setLoading(false);
-  }
-
-  function clearData() {
-    handleReset();
-  }
+  
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1 },
-          }}
-          noValidate
-          autoComplete="off"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="100vh"
-          flexDirection="column"
-        >
-          <Grid container spacing={2} sx={{ width: "70%" }}>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Product name"
-                id="product_name"
-                name="product_name"
-                label="Product name "
-                sx={{ width: "100%" }}
-                value={values.product_name} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={touched.product_name && errors.product_name}
-                helperText={touched.product_name ? errors.product_name : ""}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                id="vendor"
-                name="vendor"
-                label="Vendor "
-                sx={{ width: "100%" }}
-                //value={values.vendor} //set value using formik
-                //onChange={handleChange} //get onchange value using formik
-                onClick={() => {
-                  if (!values.selectedVendor?.title && props.type !== "view") {
-                    setOpenVendor(true);
-                  }
-                }}
-                value={values.selectedVendor?.title ?? ""}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      onClick={() => setFieldValue("selectedVendor", "")}
-                      sx={{
-                        visibility: values.selectedVendor?.title
-                          ? "visible"
-                          : "hidden",
-                      }}
-                    >
-                      <GridClearIcon />
-                    </IconButton>
-                  ),
-                }}
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={
-                  touched.selectedVendor?.title && errors.selectedVendor?.title
-                }
-                helperText={
-                  touched.selectedVendor?.title
-                    ? errors.selectedVendor?.title
-                    : ""
-                }
-              />
-            </Grid>
-
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Enter price in LKR (e.g., 500,000 LKR)"
-                id="price"
-                name="price"
-                label="Price "
-                multiline
-                maxRows={4}
-                sx={{ width: "100%" }}
-                value={values.price} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={touched.price && errors.price}
-                helperText={touched.price ? errors.price : ""}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Enter warranty duration (e.g., 1 year, 24 months)"
-                id="warranty_duration"
-                name="warranty_duration"
-                label="Warranty duration "
-                sx={{ width: "100%" }}
-                value={values.warranty_duration} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                className={
-                  errors.warranty_duration && touched.warranty_duration
-                    ? "input-error"
-                    : ""
-                }
-                onBlur={handleBlur}
-                error={touched.warranty_duration && errors.warranty_duration}
-                helperText={
-                  touched.warranty_duration ? errors.warranty_duration : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Enter system capacity (e.g., 5 kW, 1000 liters/second)"
-                id="capacity"
-                name="capacity"
-                label="Capacity "
-                sx={{ width: "100%" }}
-                value={values.capacity} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                className={
-                  errors.capacity && touched.capacity ? "input-error" : ""
-                }
-                onBlur={handleBlur}
-                error={touched.capacity && errors.capacity}
-                helperText={touched.capacity ? errors.capacity : ""}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                placeholder="Enter brand name (e.g., SolarTech, HydroPower Solutions)"
-                id="brand"
-                name="brand"
-                label="Brand"
-                sx={{ width: "100%" }}
-                value={values.brand} //set value using formikß
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={touched.brand && errors.brand}
-                helperText={touched.brand ? errors.brand : ""}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Please enter the product code"
-                id="productCode"
-                name="ProductCode"
-                label="Product Code"
-                sx={{ width: "100%" }}
-                value={values.productCode} //set value using formikß
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={touched.productCode && errors.productCode}
-                helperText={touched.productCode ? errors.productCode : ""}
-              />
-            </Grid>
-
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                placeholder="Please Enter Your Comment"
-                id="comments"
-                name="comments"
-                label="Comment"
-                multiline
-                rows={4}
-                sx={{ width: "100%" }}
-                value={values.comments} //set value using formikß
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-              />
-            </Grid>
-          </Grid>
-          <Box display="flex" width="70%" justifyContent="flex-end">
-            {props.type !== "view" && (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "end",
-                  padding: "1em 2em 0em 2em !important",
-                }}
-              >
-                <Button
-                  variant="contained"
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      onReset={handleReset}
+      noValidate
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      width={"70%"}
+    >
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <TextField
+            required
+            placeholder="Product name"
+            name="product_name"
+            label="Product name "
+            fullWidth
+            value={values.product_name} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            onBlur={handleBlur}
+            error={touched.product_name && errors.product_name}
+            helperText={touched.product_name ? errors.product_name : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            id="vendor"
+            name="vendor"
+            label="Vendor "
+            fullWidth
+            onClick={() => {
+              if (!values.selectedVendor?.title && props.type !== "view") {
+                setOpenVendor(true);
+              }
+            }}
+            value={values.selectedVendor?.title ?? ""}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  onClick={() => setFieldValue("selectedVendor", "")}
                   sx={{
-                    width: "8.5rem",
-                    margin: "1em 0.5em !important",
-                  }}
-                  color="primary"
-                  startIcon={<ClearAllIcon />}
-                  onClick={() => clearData()}
-                >
-                  Clear
-                </Button>
-
-                <LoadingButton
-                  color="primary"
-                  //type="submit"
-                  onClick={submitForm}
-                  loading={loading}
-                  loadingPosition="start"
-                  startIcon={<SaveIcon />}
-                  variant="contained"
-                  sx={{
-                    width: "8.5rem",
-                    margin: "1em 0.5em !important",
+                    visibility: values.selectedVendor?.title
+                      ? "visible"
+                      : "hidden",
                   }}
                 >
-                  <span>Save</span>
-                </LoadingButton>
-              </div>
-            )}
-            {props.type === "view" && (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "end",
-                  padding: "1em 2em 0em 2em !important",
-                }}
-              >
-                <Button
-                  variant="contained"
-                  sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
-                  color="primary"
-                  startIcon={<EditIcon />}
-                  // onClick={() => navi(`/vendor/update/${id}`)}
-                >
-                  Edit
-                </Button>
-              </div>
-            )}
-          </Box>
-        </Box>
-      </form>
+                  <GridClearIcon />
+                </IconButton>
+              ),
+            }}
+            disabled={props.type === "view"}
+            onBlur={handleBlur}
+            error={
+              touched.selectedVendor?.title && errors.selectedVendor?.title
+            }
+            helperText={
+              touched.selectedVendor?.title ? errors.selectedVendor?.title : ""
+            }
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            required
+            placeholder="Enter price in LKR (e.g., 500,000 LKR)"
+            id="price"
+            name="price"
+            label="Price "
+            multiline
+            maxRows={4}
+            fullWidth
+            value={values.price} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            onBlur={handleBlur}
+            error={touched.price && errors.price}
+            helperText={touched.price ? errors.price : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            placeholder="Enter warranty duration (e.g., 1 year, 24 months)"
+            id="warranty_duration"
+            name="warranty_duration"
+            label="Warranty duration "
+            fullWidth
+            value={values.warranty_duration} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            className={
+              errors.warranty_duration && touched.warranty_duration
+                ? "input-error"
+                : ""
+            }
+            onBlur={handleBlur}
+            error={touched.warranty_duration && errors.warranty_duration}
+            helperText={
+              touched.warranty_duration ? errors.warranty_duration : ""
+            }
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            placeholder="Enter system capacity (e.g., 5 kW, 1000 liters/second)"
+            id="capacity"
+            name="capacity"
+            label="Capacity "
+            fullWidth
+            value={values.capacity} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            className={errors.capacity && touched.capacity ? "input-error" : ""}
+            onBlur={handleBlur}
+            error={touched.capacity && errors.capacity}
+            helperText={touched.capacity ? errors.capacity : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            placeholder="Enter brand name (e.g., SolarTech, HydroPower Solutions)"
+            id="brand"
+            name="brand"
+            label="Brand"
+            fullWidth
+            value={values.brand} //set value using formikß
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            onBlur={handleBlur}
+            error={touched.brand && errors.brand}
+            helperText={touched.brand ? errors.brand : ""}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            placeholder="Please enter the product code"
+            id="productCode"
+            name="ProductCode"
+            label="Product Code"
+            fullWidth
+            value={values.productCode} //set value using formikß
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            onBlur={handleBlur}
+            error={touched.productCode && errors.productCode}
+            helperText={touched.productCode ? errors.productCode : ""}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            placeholder="Please Enter Your Comment"
+            id="comments"
+            name="comments"
+            label="Comment"
+            multiline
+            rows={4}
+            fullWidth
+            value={values.comments} //set value using formikß
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+          />
+        </Grid>
+      </Grid>
+      <Box display="flex" width="100%" pt={3} justifyContent="flex-end">
+        {props.type !== "view" && (
+          <>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{
+                mr: 2,
+              }}
+              color="primary"
+              startIcon={<ClearAllIcon />}
+              type="reset"
+            >
+              Clear
+            </Button>
+
+            <LoadingButton
+              color="primary"
+              type="submit"
+              size="large"
+              loading={loading}
+              loadingPosition="start"
+              startIcon={<SaveIcon />}
+              variant="contained"
+            >
+              <span>Save</span>
+            </LoadingButton>
+          </>
+        )}
+        {props.type === "view" && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<EditIcon />}
+            onClick={() => navigation(`${AppRoutes.vendor_item_edit.path}/${id}`)}
+          >
+            Edit
+          </Button>
+        )}
+      </Box>
+
       <VendorModal
         openVendor={openVendor}
         setOpenVendor={setOpenVendor}
         sendData={setFieldValue}
       />
-    </div>
+    </Box>
   );
 }

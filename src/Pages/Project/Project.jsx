@@ -561,7 +561,6 @@ export default function Project(props) {
         {props.type === "view" && (
           <Button
             variant="contained"
-            sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
             color="primary"
             startIcon={<EditIcon />}
             onClick={() => navigate(`${AppRoutes.project_edit.path}/${id}`)}
