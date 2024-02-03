@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
-import LoadingButton from "@mui/lab/LoadingButton";
+
 import SaveIcon from "@mui/icons-material/Save";
-import Button from "@mui/material/Button";
+
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
@@ -21,6 +21,10 @@ import ReferenceByModal from "../../Components/ModalWindow/ReferenceByModal";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
 import SalesPersonModal from "../../Components/ModalWindow/SalesPersonModal";
 import { AppRoutes } from "../../Data/AppRoutes";
+import FormTextField from "../../Components/StyledComponents/FormTextField";
+import FormClearButton from "../../Components/StyledComponents/FormClearButton";
+import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
+import FormButton from "../../Components/StyledComponents/FormButton";
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -156,7 +160,7 @@ export default function Project(props) {
     >
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Select a Customer"
             id="p_customer"
@@ -196,7 +200,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             type="date"
             placeholder="Select a Date"
@@ -215,7 +219,7 @@ export default function Project(props) {
         </Grid>
 
         <Grid item xs={12}>
-          <TextField
+          <FormTextField
             required
             placeholder="Please Enter The Description"
             id="p_Description"
@@ -233,7 +237,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             placeholder="Please Enter Warranty Period"
             id="p_warrantyPeriod"
             name="warrantyPeriod"
@@ -246,7 +250,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             id="p_status"
             name="status"
@@ -265,10 +269,10 @@ export default function Project(props) {
                 {option.label}
               </MenuItem>
             ))}
-          </TextField>
+          </FormTextField>
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             placeholder="Please Enter Estimated Cost"
             id="p_estimatedCost"
             name="estimatedCost"
@@ -281,7 +285,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             placeholder="Select a Customer"
             id="p_referencedBy"
             name="referenceBy"
@@ -321,7 +325,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Please enter the location"
             id="p_location"
@@ -337,7 +341,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Select a Coordinator"
             id="p_coordinator"
@@ -378,7 +382,7 @@ export default function Project(props) {
         </Grid>
 
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Please Electricity Tariff Amount"
             id="p_electricityTariffStructure"
@@ -401,7 +405,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Please enter the Electricity Account Number"
             id="p_electricityAccountnumber"
@@ -425,7 +429,7 @@ export default function Project(props) {
         </Grid>
 
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Please enter Electricity Board Area"
             id="p_electricityBoardArea"
@@ -443,7 +447,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             type="date"
             placeholder="Select the Commision Date"
@@ -461,7 +465,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             placeholder="Please Project identification number"
             id="p_identificationNumber"
             name="identificationNumber"
@@ -474,7 +478,7 @@ export default function Project(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             placeholder="Please select sales Person"
             id="p_salesPerson"
             name="salesPerson"
@@ -515,7 +519,7 @@ export default function Project(props) {
         </Grid>
 
         <Grid item xs={12}>
-          <TextField
+          <FormTextField
             placeholder="Please Enter Your Comment"
             id="c_comment"
             name="comment"
@@ -532,7 +536,7 @@ export default function Project(props) {
       <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
         {props.type !== "view" && (
           <>
-            <Button
+            <FormClearButton
               variant="contained"
               size="large"
               sx={{
@@ -543,9 +547,9 @@ export default function Project(props) {
               type="reset"
             >
               Clear
-            </Button>
+            </FormClearButton>
 
-            <LoadingButton
+            <FormSaveLoadingButton
               color="primary"
               type="submit"
               size="large"
@@ -555,18 +559,18 @@ export default function Project(props) {
               variant="contained"
             >
               <span>Save</span>
-            </LoadingButton>
+            </FormSaveLoadingButton>
           </>
         )}
         {props.type === "view" && (
-          <Button
+          <FormButton
             variant="contained"
             color="primary"
             startIcon={<EditIcon />}
             onClick={() => navigate(`${AppRoutes.project_edit.path}/${id}`)}
           >
             Edit
-          </Button>
+          </FormButton>
         )}
       </Box>
 
