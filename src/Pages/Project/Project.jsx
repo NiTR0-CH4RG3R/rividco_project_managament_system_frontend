@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -22,18 +22,36 @@ import { useTopbarContext } from "../../Contexts/TopbarContext";
 import SalesPersonModal from "../../Components/ModalWindow/SalesPersonModal";
 import { AppRoutes } from "../../Data/AppRoutes";
 
-const statusType = [
-  {
-    value: "On going",
-    label: "On going",
-  },
-  {
-    value: "Done",
-    label: "Done",
-  },
-];
-
 export default function Project(props) {
+  const [statusType, setStatusType] = useState([]);
+  function loadProjectData(id) {
+    //add here
+  }
+
+  function loadStatusType() {
+    //load status type from the backend
+    setStatusType([
+      {
+        value: "On going",
+        label: "On going",
+      },
+      {
+        value: "Done",
+        label: "Done",
+      },
+    ]);
+  }
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    loadStatusType();
+
+    if (props.type !== "add") {
+      loadProjectData(id);
+    }
+  }, []);
+
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
     props.type === "add"
@@ -50,12 +68,12 @@ export default function Project(props) {
       : `You can view project details here.`
   );
 
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   //for modal
-  const [openCustomer, setOpenCustomer] = React.useState(false);
-  const [openEmployee, setOpenEmployee] = React.useState(false);
-  const [openReferenceBy, setOpenReferenceBy] = React.useState(false);
-  const [openSalesPerson, setOpenSalesPerson] = React.useState(false);
+  const [openCustomer, setOpenCustomer] = useState(false);
+  const [openEmployee, setOpenEmployee] = useState(false);
+  const [openReferenceBy, setOpenReferenceBy] = useState(false);
+  const [openSalesPerson, setOpenSalesPerson] = useState(false);
 
   //set initial values in formik
   const {
@@ -117,40 +135,12 @@ export default function Project(props) {
     validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
-      sendData(values);
+      setLoading(true);
+      //Send values to the backend
     },
   });
 
-  //
-  //console.log(values);
-
-  const { id } = useParams();
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    console.log(props);
-
-    if (props.type !== "add") {
-      console.log(id);
-      getDataFromApi(id);
-    }
-  }, []);
-
-  function getDataFromApi(id) {
-    //add here
-  }
-
-  function sendData(data) {
-    //addhere
-    setLoading(true);
-    console.log(data);
-    clearData();
-    setLoading(false);
-  }
-
-  function clearData() {
-    handleReset();
-  }
 
   return (
     <Box
@@ -569,17 +559,15 @@ export default function Project(props) {
           </>
         )}
         {props.type === "view" && (
-          
-            <Button
-              variant="contained"
-              sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
-              color="primary"
-              startIcon={<EditIcon />}
-              onClick={() => navigate(`${AppRoutes.project_edit.path}/${id}`)}
-            >
-              Edit
-            </Button>
-          
+          <Button
+            variant="contained"
+            sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+            color="primary"
+            startIcon={<EditIcon />}
+            onClick={() => navigate(`${AppRoutes.project_edit.path}/${id}`)}
+          >
+            Edit
+          </Button>
         )}
       </Box>
 
