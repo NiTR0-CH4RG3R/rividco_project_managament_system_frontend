@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -16,6 +16,8 @@ import { customerValidation } from "./CustomerValidation";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
 import { AppRoutes } from "../../Data/AppRoutes";
 import FormTextField from "../../Components/StyledComponents/FormTextField";
+//add styled comp
+
 
 
 export default function Customer(props) {
@@ -134,7 +136,7 @@ export default function Customer(props) {
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField
+                    <FormTextField
                         required
                         placeholder="Please Enter Your Last Name"
                         name="lastName"
@@ -150,7 +152,7 @@ export default function Customer(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <TextField
+                    <FormTextField
                         required
                         placeholder="No: 00 , road ,city"
                         id="c_address"
@@ -168,7 +170,7 @@ export default function Customer(props) {
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField
+                    <FormTextField
                         required
                         placeholder="example@.com"
                         id="c_email"
@@ -185,7 +187,7 @@ export default function Customer(props) {
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField
+                    <FormTextField
                         required
                         id="c_category"
                         name="category"
@@ -204,14 +206,14 @@ export default function Customer(props) {
                                 {option.label}
                             </MenuItem>
                         ))}
-                    </TextField>
+                    </FormTextField>
                 </Grid>
                 <Grid
                     item
                     xs={6}
 
                 >
-                    <TextField
+                    <FormTextField
                         id="c_profession"
                         name="profession"
                         label={
@@ -232,7 +234,7 @@ export default function Customer(props) {
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField
+                    <FormTextField
                         required
                         placeholder="Please Enter Customer Id"
                         name="customerId"
@@ -247,7 +249,7 @@ export default function Customer(props) {
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField
+                    <FormTextField
                         required
                         placeholder="07xxxxxxxx"
                         id="c_mobile_no"
@@ -263,7 +265,7 @@ export default function Customer(props) {
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField
+                    <FormTextField
                         placeholder="0xxxxxxxxx"
                         id="c_office_no"
                         name="officeNumber"
@@ -278,7 +280,7 @@ export default function Customer(props) {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField
+                    <FormTextField
                         placeholder="Please Enter Your Comment"
                         id="c_comment"
                         name="comment"
