@@ -90,6 +90,7 @@ export default function Customer(props) {
             email: "",
             category: "",
             profession: "",
+            customerId:"",
             mobileNumber: "",
             officeNumber: "",
             comment: "",
