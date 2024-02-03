@@ -163,7 +163,7 @@ export default function Project(props) {
       width={"70%"}
     >
       <Grid container spacing={1} >
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             placeholder="Select a Customer"
@@ -208,7 +208,7 @@ export default function Project(props) {
             }
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             type="date"
@@ -228,7 +228,7 @@ export default function Project(props) {
           />
         </Grid>
 
-        <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={12} >
           <TextField
             required
             placeholder="Please Enter The Description"
@@ -246,7 +246,7 @@ export default function Project(props) {
             helperText={touched.description ? errors.description : ""}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             placeholder="Please Enter Warranty Period"
             id="p_warrantyPeriod"
@@ -259,7 +259,7 @@ export default function Project(props) {
             onBlur={handleBlur}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             id="p_status"
@@ -281,7 +281,7 @@ export default function Project(props) {
             ))}
           </TextField>
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             placeholder="Please Enter Estimated Cost"
             id="p_estimatedCost"
@@ -294,7 +294,7 @@ export default function Project(props) {
             onBlur={handleBlur}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             placeholder="Select a Customer"
             id="p_referencedBy"
@@ -335,7 +335,7 @@ export default function Project(props) {
             }
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             placeholder="Please enter the location"
@@ -351,7 +351,7 @@ export default function Project(props) {
             helperText={touched.location ? errors.location : ""}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             placeholder="Select a Coordinator"
@@ -393,7 +393,7 @@ export default function Project(props) {
           />
         </Grid>
 
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             placeholder="Please Electricity Tariff Amount"
@@ -416,7 +416,7 @@ export default function Project(props) {
             }
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             placeholder="Please enter the Electricity Account Number"
@@ -440,7 +440,7 @@ export default function Project(props) {
           />
         </Grid>
 
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             placeholder="Please enter Electricity Board Area"
@@ -458,7 +458,7 @@ export default function Project(props) {
             }
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             type="date"
@@ -477,7 +477,7 @@ export default function Project(props) {
             helperText={touched.commisionDate ? errors.commisionDate : ""}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             placeholder="Please Project identification number"
             id="p_identificationNumber"
@@ -490,7 +490,7 @@ export default function Project(props) {
             onBlur={handleBlur}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             placeholder="Please select sales Person"
             id="p_salesPerson"
@@ -533,7 +533,7 @@ export default function Project(props) {
           />
         </Grid>
 
-        <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={12} >
           <TextField
             placeholder="Please Enter Your Comment"
             id="c_comment"
