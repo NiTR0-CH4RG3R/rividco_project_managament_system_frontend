@@ -405,7 +405,7 @@ export default function Project(props) {
             required
             placeholder="Please enter the Electricity Account Number"
             id="p_electricityAccountnumber"
-            name="electricityAccountnumber"
+            name="electricityAccountNumber"
             label="Electricity Account Number"
             fullWidth
             value={values.electricityAccountNumber} //set value using formik
