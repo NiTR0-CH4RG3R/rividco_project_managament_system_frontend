@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { IconButton, MenuItem } from '@mui/material'
 import { useFormik } from 'formik'
@@ -12,7 +11,7 @@ import { categories, statuses, urgencies } from './TaskData'
 import { taskValidation } from '../../Validation/TaskValidation'
 import { GridClearIcon } from '@mui/x-data-grid'
 import { useNavigate, useParams } from 'react-router'
-import { useTopbarContext } from "../../Contexts/TopbarContext";
+import { useTopbarContext } from '../../Contexts/TopbarContext'
 import {
   AddBox,
   ClearAll,
@@ -21,27 +20,29 @@ import {
   Save,
   Visibility,
 } from '@mui/icons-material'
+import FormTextField from '../../Components/StyledComponents/FormTextField'
+import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
+import FormClearButton from '../../Components/StyledComponents/FormClearButton'
+import FormButton from '../../Components/StyledComponents/FormButton'
+import FormEditButton from '../../Components/StyledComponents/FormEditButton'
+import { AppRoutes } from '../../Data/AppRoutes'
 
 export default function Task(props) {
-
-
-  const { setTitle, setSubtitle } = useTopbarContext();
+  const { setTitle, setSubtitle } = useTopbarContext()
   setTitle(
-    props.type === "add"
-      ? "Add a new CIA Task"
-      : props.type === "edit"
-      ? "Edit CIA Task"
+    props.type === 'add'
+      ? 'Add a new CIA Task'
+      : props.type === 'edit'
+      ? 'Edit CIA Task'
       : `View CIA Task`
-  );
+  )
   setSubtitle(
-    props.type === "add"
-      ? "You can add new CIA task here."
-      : props.type === "edit"
-      ? "You can edit CIA task details here."
+    props.type === 'add'
+      ? 'You can add new CIA task here.'
+      : props.type === 'edit'
+      ? 'You can edit CIA task details here.'
       : `You can view CIA task details here.`
-  );
-
-
+  )
 
   const {
     values,
@@ -112,7 +113,7 @@ export default function Task(props) {
         >
           <Grid container spacing={2} sx={{ width: '70%' }}>
             <Grid item xs={12}>
-              <TextField
+              <FormTextField
                 id="description"
                 name="description"
                 label="Description"
@@ -130,7 +131,7 @@ export default function Task(props) {
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField
+              <FormTextField
                 id="category"
                 name="category"
                 label="Category"
@@ -147,10 +148,10 @@ export default function Task(props) {
                     {option.label}
                   </MenuItem>
                 ))}
-              </TextField>
+              </FormTextField>
             </Grid>
             <Grid item xs={6}>
-              <TextField
+              <FormTextField
                 id="callbacknumber"
                 name="callbacknumber"
                 label="Callback Number"
@@ -167,7 +168,7 @@ export default function Task(props) {
               />
             </Grid>
             <Grid item xs={10}>
-              <TextField
+              <FormTextField
                 id="requested_by"
                 name="requested_by"
                 label="Requested Customer"
@@ -226,7 +227,7 @@ export default function Task(props) {
             )}
 
             <Grid item xs={6}>
-              <TextField
+              <FormTextField
                 id="project_regarding"
                 name="project_regarding"
                 label="Project Regarding"
@@ -257,7 +258,7 @@ export default function Task(props) {
             </Grid>
 
             <Grid item xs={6}>
-              <TextField
+              <FormTextField
                 id="assigned_to"
                 name="assigned_to"
                 label="Assigned Employee"
@@ -290,7 +291,7 @@ export default function Task(props) {
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField
+              <FormTextField
                 id="status"
                 name="status"
                 label="Status"
@@ -307,10 +308,10 @@ export default function Task(props) {
                     {option.label}
                   </MenuItem>
                 ))}
-              </TextField>
+              </FormTextField>
             </Grid>
             <Grid item xs={6}>
-              <TextField
+              <FormTextField
                 id="urgency"
                 name="urgency"
                 label="Urgency Level"
@@ -328,10 +329,10 @@ export default function Task(props) {
                     {option.label}
                   </MenuItem>
                 ))}
-              </TextField>
+              </FormTextField>
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <FormTextField
                 id="comment"
                 name="comment"
                 label="Comment"
@@ -354,36 +355,36 @@ export default function Task(props) {
                 sx={{ mt: 3, display: 'flex', justifyContent: 'end' }}
               >
                 <Grid>
-                  <Button
+                  <FormButton
                     variant="contained"
                     size="large"
                     color="success"
-                    onClick={() => navi(`/cia/status`)} //navigate to the taskstatus page
+                    onClick={() => navi(`${AppRoutes.cia_status.path}`)} //navigate to the taskstatus page
                     startIcon={<History />}
                   >
                     View Status History
-                  </Button>
+                  </FormButton>
                 </Grid>
                 <Grid>
-                  <Button
+                  <FormButton
                     variant="contained"
                     size="large"
                     color="success"
-                    onClick={() => navi(`/cia/resource/view/id`)} //navigate to the view task resouce page
+                    onClick={() => navi(`${AppRoutes.cia_resources_view.path}`)} //navigate to the view task resouce page
                     startIcon={<Visibility />}
                   >
                     View Task Resources
-                  </Button>
+                  </FormButton>
                 </Grid>
                 <Grid>
-                  <Button
+                  <FormEditButton
                     variant="contained"
                     size="large"
-                    onClick={() => navi(`/cia/edit/id`)} //navigate to edit task page
+                    onClick={() => navi(`${AppRoutes.cia_edit.path}/${id}`)} //navigate to edit task page
                     startIcon={<Edit />}
                   >
                     Edit
-                  </Button>
+                  </FormEditButton>
                 </Grid>
               </Grid>
             )}
@@ -395,35 +396,35 @@ export default function Task(props) {
                 sx={{ mt: 3, display: 'flex', justifyContent: 'end' }}
               >
                 <Grid>
-                  <Button
+                  <FormButton
                     variant="contained"
                     size="large"
                     color="success"
-                    onClick={() => navi(`/cia/resource/add/id`)} //navigate to add task resources
+                    onClick={() => navi(`${AppRoutes.cia_resources_add.path}`)} //navigate to add task resources
                     startIcon={<AddBox />}
                   >
                     Add Task Resources
-                  </Button>
+                  </FormButton>
                 </Grid>
                 <Grid>
-                  <Button
+                  <FormClearButton
                     variant="contained"
                     size="large"
                     onClick={handleReset}
                     startIcon={<ClearAll />}
                   >
                     Clear
-                  </Button>
+                  </FormClearButton>
                 </Grid>
                 <Grid>
-                  <Button
+                  <FormSaveLoadingButton
                     variant="contained"
                     size="large"
                     startIcon={<Save />}
                     onClick={submitForm}
                   >
                     Save
-                  </Button>
+                  </FormSaveLoadingButton>
                 </Grid>
               </Grid>
             )}
