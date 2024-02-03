@@ -154,7 +154,8 @@ export default function Project(props) {
   return (
     <Box
       component="form"
-      onSubmit={handleReset}
+      onSubmit={handleSubmit}
+      
       noValidate
       display="flex"
       justifyContent="center"
