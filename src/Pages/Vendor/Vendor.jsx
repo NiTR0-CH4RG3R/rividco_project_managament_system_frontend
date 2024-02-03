@@ -63,7 +63,7 @@ export default function Vendor(props) {
   //
 
   const { id } = useParams();
-  const navi = useNavigate();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     console.log(props);
@@ -221,7 +221,7 @@ export default function Vendor(props) {
               variant="contained"
               size="large"
               sx={{
-                mr:2
+                mr: 2,
               }}
               color="primary"
               startIcon={<ClearAllIcon />}
@@ -238,24 +238,21 @@ export default function Vendor(props) {
               loadingPosition="start"
               startIcon={<SaveIcon />}
               variant="contained"
-              
             >
               <span>Save</span>
             </LoadingButton>
           </>
         )}
         {props.type === "view" && (
-          
-            <Button
-              variant="contained"
-              sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
-              color="primary"
-              startIcon={<EditIcon />}
-              onClick={() => navi(`/customer/update/${id}`)}
-            >
-              Edit
-            </Button>
-          
+          <Button
+            variant="contained"
+            
+            color="primary"
+            startIcon={<EditIcon />}
+            onClick={() => navigate(`/customer/update/${id}`)}
+          >
+            Edit
+          </Button>
         )}
       </Box>
     </Box>
