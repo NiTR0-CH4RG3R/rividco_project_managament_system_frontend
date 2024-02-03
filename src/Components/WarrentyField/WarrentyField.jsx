@@ -31,7 +31,11 @@ export default function WarrentyField({ required, name, onChange, disabled, onBl
                     }
 
                 }}
-                sx={{ width: fullWidth === true ? `calc(100% - 100px)` : 'default' }}
+                sx={{ width: fullWidth === true ? `calc(100% - 100px)` : 'default',
+                    '& .MuiInputBase-root': {
+                        borderTopRightRadius: 0,borderBottomRightRadius:0
+                    },
+                }}
                 onAbort={onChange}
                 disabled={disabled}
                 onBlur={onBlur}
@@ -45,7 +49,9 @@ export default function WarrentyField({ required, name, onChange, disabled, onBl
                 value={unit}
                 disabled={disabled}
                 defaultValue={'months'}
-                sx={{ width: '100px' }}
+                sx={{ width: '100px' ,'& .MuiInputBase-root': {
+                    borderTopLeftRadius: 0,borderBottomLeftRadius:0
+                },}}
                 onChange={(e) => {
                     setUnit(e.target.value);
                     if (e.target.value === 'months') {
