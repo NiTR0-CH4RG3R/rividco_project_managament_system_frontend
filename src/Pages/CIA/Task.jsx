@@ -214,14 +214,14 @@ export default function Task(props) {
             {(props.type === 'add' || props.type === 'edit') && (
               <Grid item xs={2}>
                 <Grid container xs={12} sx={{ justifyContent: 'center' }}>
-                  <Button
+                  <FormButton
                     variant="contained"
                     color="success"
-                    onClick={() => navi(`/customer/add/`)}
+                    onClick={() => navi(`${AppRoutes.customer_add.path}`)}
                     startIcon={<AddBox />}
                   >
                     Add Guest
-                  </Button>
+                  </FormButton>
                 </Grid>
               </Grid>
             )}
