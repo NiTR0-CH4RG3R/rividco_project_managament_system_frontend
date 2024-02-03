@@ -214,7 +214,7 @@ export default function Vendor(props) {
         </Grid>
       </Grid>
 
-      <Box display="flex" width="100%" justifyContent="flex-end">
+      <Box display="flex" width="100%" pt={3} justifyContent="flex-end">
         {props.type !== "view" && (
           <>
             <Button
