@@ -103,7 +103,7 @@ export default function Vendor(props) {
       width={"70%"}
     >
       <Grid container spacing={2} >
-        <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={12} >
           <TextField
             required
             placeholder="Please Enter Vendor Name"
@@ -120,7 +120,7 @@ export default function Vendor(props) {
           />
         </Grid>
 
-        <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={12} >
           <TextField
             required
             placeholder="No: 00 , road ,city"
@@ -138,7 +138,7 @@ export default function Vendor(props) {
             helperText={touched.address ? errors.address : ""}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             placeholder="example@.com"
@@ -155,7 +155,7 @@ export default function Vendor(props) {
             helperText={touched.email ? errors.email : ""}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             placeholder="Please enter registration number"
@@ -174,7 +174,7 @@ export default function Vendor(props) {
           />
         </Grid>
 
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             required
             placeholder="07xxxxxxxx"
@@ -190,7 +190,7 @@ export default function Vendor(props) {
             helperText={touched.mobileNumber ? errors.mobileNumber : ""}
           />
         </Grid>
-        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={6} >
           <TextField
             placeholder="0xxxxxxxxx"
             id="v_office_no"
@@ -205,7 +205,7 @@ export default function Vendor(props) {
             helperText={touched.officeNumber ? errors.officeNumber : ""}
           />
         </Grid>
-        <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+        <Grid item xs={12} >
           <TextField
             placeholder="Please Enter Your Comment"
             id="v_comment"
