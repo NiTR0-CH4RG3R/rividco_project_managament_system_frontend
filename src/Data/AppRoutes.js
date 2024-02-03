@@ -45,7 +45,7 @@ export const AppRoutes = {
     project_list: { path: "/project/list", component: <ProjectList />, },
     project_add: { path: "/project/add", component: <Project type="add" /> },
     project_view: { path: "/project/view/id", component: <Project type="view" />, },
-    project_edit: { path: "/project/edit/id", component: <Project type="edit" />, },
+    project_edit: { path: "/project/edit", component: <Project type="edit" />, },
     project_services_list: { path: "/project/services/list", component: <> </>, },
     project_test_list: { path: "/project/test", component: <ProjectTest />, },
     project_items_list: { path: "/project/items", component: <ProjectItems />, },
