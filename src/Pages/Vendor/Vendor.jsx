@@ -91,8 +91,8 @@ export default function Vendor(props) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    
+      
         <Box
           component="form"
           sx={{
@@ -285,7 +285,7 @@ export default function Vendor(props) {
             )}
           </Box>
         </Box>
-      </form>
-    </div>
+      
+    
   );
 }
