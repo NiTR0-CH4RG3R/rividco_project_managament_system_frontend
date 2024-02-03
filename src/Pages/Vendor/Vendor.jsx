@@ -102,12 +102,11 @@ export default function Vendor(props) {
       flexDirection="column"
       width={"70%"}
     >
-      <Grid container spacing={2} >
-        <Grid item xs={12} >
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
           <TextField
             required
             placeholder="Please Enter Vendor Name"
-            
             name="name"
             label="Name "
             fullWidth
@@ -120,11 +119,10 @@ export default function Vendor(props) {
           />
         </Grid>
 
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <TextField
             required
             placeholder="No: 00 , road ,city"
-            id="v_address"
             name="address"
             label="Address "
             multiline
@@ -138,11 +136,10 @@ export default function Vendor(props) {
             helperText={touched.address ? errors.address : ""}
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             placeholder="example@.com"
-            id="v_email"
             type="email"
             name="email"
             label="Email "
@@ -155,11 +152,10 @@ export default function Vendor(props) {
             helperText={touched.email ? errors.email : ""}
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             placeholder="Please enter registration number"
-            id="v_registrationNumber"
             name="email"
             label="Registration Number"
             fullWidth
@@ -174,11 +170,10 @@ export default function Vendor(props) {
           />
         </Grid>
 
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             placeholder="07xxxxxxxx"
-            id="v_mobile_no"
             name="mobileNumber"
             label="Mobile No "
             fullWidth
@@ -190,10 +185,9 @@ export default function Vendor(props) {
             helperText={touched.mobileNumber ? errors.mobileNumber : ""}
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             placeholder="0xxxxxxxxx"
-            id="v_office_no"
             name="officeNumber"
             label="Office No"
             fullWidth
@@ -205,10 +199,9 @@ export default function Vendor(props) {
             helperText={touched.officeNumber ? errors.officeNumber : ""}
           />
         </Grid>
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <TextField
             placeholder="Please Enter Your Comment"
-            id="v_comment"
             name="comment"
             label="Comment"
             multiline
