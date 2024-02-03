@@ -314,14 +314,14 @@ export default function Customer(props) {
           </>
         )}
         {props.type === "view" && (
-          <Button
+          <FormButton
             variant="contained"
             color="primary"
             startIcon={<EditIcon />}
             onClick={() => navigate(`${AppRoutes.customer_edit.path}/${id}`)}
           >
             Edit
-          </Button>
+          </FormButton>
         )}
       </Box>
     </Box>
