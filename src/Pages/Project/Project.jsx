@@ -153,9 +153,10 @@ export default function Project(props) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            
                 <Box
                     component="form"
+                    onSubmit={handleReset}
                     sx={{
                         "& .MuiTextField-root": { m: 1 },
                     }}
@@ -629,7 +630,7 @@ export default function Project(props) {
                         )}
                     </Box>
                 </Box>
-            </form>
+            
 
             <CustomerModal
                 //call customer modal
