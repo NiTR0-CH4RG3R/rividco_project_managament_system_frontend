@@ -538,15 +538,9 @@ export default function Project(props) {
           />
         </Grid>
       </Grid>
-      <Box display="flex" width="70%" justifyContent="flex-end">
+      <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
         {props.type !== "view" && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "end",
-              padding: "1em 2em 0em 2em !important",
-            }}
-          >
+          <>
             <Button
               variant="contained"
               size="large"
@@ -571,7 +565,7 @@ export default function Project(props) {
             >
               <span>Save</span>
             </LoadingButton>
-          </div>
+          </>
         )}
         {props.type === "view" && (
           <div
