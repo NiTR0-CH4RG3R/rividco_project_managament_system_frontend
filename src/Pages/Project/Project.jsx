@@ -155,7 +155,7 @@ export default function Project(props) {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      
+
       noValidate
       display="flex"
       justifyContent="center"
@@ -557,13 +557,13 @@ export default function Project(props) {
           >
             <Button
               variant="contained"
+              size="large"
               sx={{
-                width: "8.5rem",
-                margin: "1em 0.5em !important",
+                mr:2
               }}
               color="primary"
               startIcon={<ClearAllIcon />}
-              onClick={() => clearData()}
+              type="reset"
             >
               Clear
             </Button>
