@@ -170,7 +170,8 @@ export default function Project(props) {
             id="p_customer"
             name="customer"
             label="customer"
-            sx={{ width: "100%" }}
+            fullWidth
+            
             onClick={() => {
               if (!values.selectedCustomer?.title && props.type !== "view") {
                 setOpenCustomer(true);
@@ -215,7 +216,7 @@ export default function Project(props) {
             id="p_startDate"
             name="startDate"
             label="Start Date"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.startDate} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -236,7 +237,7 @@ export default function Project(props) {
             label="Description"
             multiline
             maxRows={4}
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.description} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -251,7 +252,7 @@ export default function Project(props) {
             id="p_warrantyPeriod"
             name="warrantyPeriod"
             label="Warranty Period"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.warantyPeriod} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -265,7 +266,7 @@ export default function Project(props) {
             name="status"
             select
             label="Status"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.status} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -286,7 +287,7 @@ export default function Project(props) {
             id="p_estimatedCost"
             name="estimatedCost"
             label="Estimated Cost"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.estimatedCost} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -299,7 +300,7 @@ export default function Project(props) {
             id="p_referencedBy"
             name="referenceBy"
             label="Reference By"
-            sx={{ width: "100%" }}
+            fullWidth
             onClick={() => {
               if (!values.selectedReferenceBy?.title && props.type !== "view") {
                 setOpenReferenceBy(true);
@@ -341,7 +342,7 @@ export default function Project(props) {
             id="p_location"
             name="location"
             label="Location"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.location} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -357,7 +358,7 @@ export default function Project(props) {
             id="p_coordinator"
             name="coordinator"
             label="Coordinator"
-            sx={{ width: "100%" }}
+            fullWidth
             onClick={() => {
               if (!values.selectedEmployee?.title && props.type !== "view") {
                 setOpenEmployee(true);
@@ -399,7 +400,7 @@ export default function Project(props) {
             id="p_electricityTariffStructure"
             name="electricityTariffStructure"
             label="Tariff"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.electricityTariffStructure} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -422,7 +423,7 @@ export default function Project(props) {
             id="p_electricityAccountnumber"
             name="electricityAccountnumber"
             label="Electricity Account Number"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.electricityAccountNumber} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -446,7 +447,7 @@ export default function Project(props) {
             id="p_electricityBoardArea"
             name="electricityBoardArea"
             label="Electricity Board Area"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.electricityBoardArea} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -465,7 +466,7 @@ export default function Project(props) {
             id="commisionDate"
             name="commisionDate"
             label="Commision Date"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.startDate} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -482,7 +483,7 @@ export default function Project(props) {
             id="p_identificationNumber"
             name="identificationNumber"
             label="Identification Number"
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.identificationNumber} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -495,7 +496,7 @@ export default function Project(props) {
             id="p_salesPerson"
             name="salesPerson"
             label="Sales Person"
-            sx={{ width: "100%" }}
+            fullWidth
             //value={values.warantyPeriod} //set value using formik
             //onChange={handleChange} //get onchange value using formik
             onClick={() => {
@@ -540,7 +541,7 @@ export default function Project(props) {
             label="Comment"
             multiline
             rows={4}
-            sx={{ width: "100%" }}
+            fullWidth
             value={values.comment} //set value using formikß
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
