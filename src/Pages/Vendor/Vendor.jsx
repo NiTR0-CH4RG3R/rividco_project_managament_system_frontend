@@ -248,13 +248,7 @@ export default function Vendor(props) {
           </>
         )}
         {props.type === "view" && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "end",
-              padding: "1em 2em 0em 2em !important",
-            }}
-          >
+          
             <Button
               variant="contained"
               sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
@@ -264,7 +258,7 @@ export default function Vendor(props) {
             >
               Edit
             </Button>
-          </div>
+          
         )}
       </Box>
     </Box>
