@@ -124,7 +124,7 @@ export default function Project(props) {
   //console.log(values);
 
   const { id } = useParams();
-  const navi = useNavigate();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     console.log(props);
@@ -568,23 +568,17 @@ export default function Project(props) {
           </>
         )}
         {props.type === "view" && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "end",
-              padding: "1em 2em 0em 2em !important",
-            }}
-          >
+          
             <Button
               variant="contained"
               sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
               color="primary"
               startIcon={<EditIcon />}
-              onClick={() => navi(`/customer/update/${id}`)}
+              onClick={() => navigate(`/customer/update/${id}`)}
             >
               Edit
             </Button>
-          </div>
+          
         )}
       </Box>
 
