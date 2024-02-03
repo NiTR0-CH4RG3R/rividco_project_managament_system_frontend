@@ -93,6 +93,8 @@ export default function Vendor(props) {
   return (
     <Box
       component="form"
+      onSubmit={handleSubmit}
+      onReset={handleReset}
       noValidate
       display="flex"
       justifyContent="center"
