@@ -1,11 +1,10 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
+
 import Grid from "@mui/material/Grid";
-import LoadingButton from "@mui/lab/LoadingButton";
+
 import SaveIcon from "@mui/icons-material/Save";
-import Button from "@mui/material/Button";
+
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
@@ -18,20 +17,19 @@ import VendorModal from "../../Components/ModalWindow/VendorModal";
 import { IconButton } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
 import { AppRoutes } from "../../Data/AppRoutes";
-
-
+import FormTextField from "../../Components/StyledComponents/FormTextField";
+import FormClearButton from "../../Components/StyledComponents/FormClearButton";
+import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
+import FormButton from "../../Components/StyledComponents/FormButton";
 
 export default function Vendoritem(props) {
-
-
-
   function loadVendorData(id) {
     //add here
   }
 
   const { id } = useParams();
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.log(props);
 
     if (props.type !== "add") {
@@ -39,8 +37,6 @@ export default function Vendoritem(props) {
       loadVendorData(id);
     }
   }, []);
-
-  
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
@@ -58,8 +54,8 @@ export default function Vendoritem(props) {
       : `You can view vendor item details here.`
   );
 
-  const [openVendor, setOpenVendor] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [openVendor, setOpenVendor] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   //set initial values in formik
   const {
@@ -96,16 +92,7 @@ export default function Vendoritem(props) {
     },
   });
 
- 
-
-  
   const navigation = useNavigate();
-
-  
-
-  
-
-  
 
   return (
     <Box
@@ -121,7 +108,7 @@ export default function Vendoritem(props) {
     >
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Product name"
             name="product_name"
@@ -136,7 +123,7 @@ export default function Vendoritem(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             id="vendor"
             name="vendor"
@@ -174,7 +161,7 @@ export default function Vendoritem(props) {
         </Grid>
 
         <Grid item xs={12}>
-          <TextField
+          <FormTextField
             required
             placeholder="Enter price in LKR (e.g., 500,000 LKR)"
             id="price"
@@ -192,7 +179,7 @@ export default function Vendoritem(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Enter warranty duration (e.g., 1 year, 24 months)"
             id="warranty_duration"
@@ -215,7 +202,7 @@ export default function Vendoritem(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Enter system capacity (e.g., 5 kW, 1000 liters/second)"
             id="capacity"
@@ -232,7 +219,7 @@ export default function Vendoritem(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             placeholder="Enter brand name (e.g., SolarTech, HydroPower Solutions)"
             id="brand"
             name="brand"
@@ -247,7 +234,7 @@ export default function Vendoritem(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Please enter the product code"
             id="productCode"
@@ -264,7 +251,7 @@ export default function Vendoritem(props) {
         </Grid>
 
         <Grid item xs={12}>
-          <TextField
+          <FormTextField
             placeholder="Please Enter Your Comment"
             id="comments"
             name="comments"
@@ -281,7 +268,7 @@ export default function Vendoritem(props) {
       <Box display="flex" width="100%" pt={3} justifyContent="flex-end">
         {props.type !== "view" && (
           <>
-            <Button
+            <FormClearButton
               variant="contained"
               size="large"
               sx={{
@@ -292,9 +279,9 @@ export default function Vendoritem(props) {
               type="reset"
             >
               Clear
-            </Button>
+            </FormClearButton>
 
-            <LoadingButton
+            <FormSaveLoadingButton
               color="primary"
               type="submit"
               size="large"
@@ -304,18 +291,20 @@ export default function Vendoritem(props) {
               variant="contained"
             >
               <span>Save</span>
-            </LoadingButton>
+            </FormSaveLoadingButton>
           </>
         )}
         {props.type === "view" && (
-          <Button
+          <FormButton
             variant="contained"
             color="primary"
             startIcon={<EditIcon />}
-            onClick={() => navigation(`${AppRoutes.vendor_item_edit.path}/${id}`)}
+            onClick={() =>
+              navigation(`${AppRoutes.vendor_item_edit.path}/${id}`)
+            }
           >
             Edit
-          </Button>
+          </FormButton>
         )}
       </Box>
 
