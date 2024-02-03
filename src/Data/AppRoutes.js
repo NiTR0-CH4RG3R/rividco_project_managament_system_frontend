@@ -15,10 +15,13 @@ import TaskList from "../Pages/CIA/TaskList";
 import ProjectTest from "../Pages/Project/ProjectTest/ProjectTest"
 import ProjectItems from "../Pages/Project/ProjectItems/ProjectItems"
 import Home from "../Pages/Home/Home";
+import Test from "../Pages/Test/Test";
 
 
 export const AppRoutes = {
     home: { path: "/home", component: <Home />, },
+
+    test: { path: "/test", component: <Test />, },
 
     /* Customer related routes */
     customer_list: { path: "/customer/list", component: <CustomerList />, },
