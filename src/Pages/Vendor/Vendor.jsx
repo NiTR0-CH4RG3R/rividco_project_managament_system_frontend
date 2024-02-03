@@ -102,7 +102,7 @@ export default function Vendor(props) {
       flexDirection="column"
       width={"70%"}
     >
-      <Grid container spacing={2} sx={{ width: "70%" }}>
+      <Grid container spacing={2} >
         <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
           <TextField
             required
