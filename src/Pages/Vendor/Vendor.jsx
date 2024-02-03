@@ -250,7 +250,7 @@ export default function Vendor(props) {
             
             color="primary"
             startIcon={<EditIcon />}
-            onClick={() => navigate(`/customer/update/${id}`)}
+            onClick={() => navigate(`${AppRoutes.vendor_edit.path}/${id}`)}
           >
             Edit
           </Button>
