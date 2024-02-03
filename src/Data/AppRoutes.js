@@ -33,7 +33,7 @@ export const AppRoutes = {
     vendor_list: { path: "/vendor/list", component: <VendorList /> },
     vendor_add: { path: "/vendor/add", component: <Vendor type="add" /> },
     vendor_view: { path: "/vendor/view/id", component: <Vendor type="view" /> },
-    vendor_edit: { path: "/vendor/edit/id", component: <Vendor type="edit" /> },
+    vendor_edit: { path: "/vendor/edit", component: <Vendor type="edit" /> },
 
     /* Vendor Items related routes */
     vendor_item_list: { path: "/vendor/item/list", component: <VendorItemList />, },
