@@ -232,16 +232,13 @@ export default function Vendor(props) {
 
             <LoadingButton
               color="primary"
-              //type="submit"
-              onClick={submitForm}
+              type="submit"
+              size="large"
               loading={loading}
               loadingPosition="start"
               startIcon={<SaveIcon />}
               variant="contained"
-              sx={{
-                width: "8.5rem",
-                margin: "1em 0.5em !important",
-              }}
+              
             >
               <span>Save</span>
             </LoadingButton>
