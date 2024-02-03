@@ -575,7 +575,7 @@ export default function Project(props) {
               sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
               color="primary"
               startIcon={<EditIcon />}
-              onClick={() => navigate(`/customer/update/${id}`)}
+              onClick={() => navigate(`${AppRoutes.project_edit.path}/${id}`)}
             >
               Edit
             </Button>
