@@ -145,7 +145,7 @@ const AddTaskResources = (props) => {
           <Grid container spacing={2} sx={{ width: '70%' }}>
             {/* ---------------TaskID Field---------------- */}
 
-            <Grid item xs={10} sx={{ padding: '1em 1em 0em 1em !important' }}>
+            <Grid item xs={10}>
               <FormTextField
                 id="taskId"
                 variant="outlined"
@@ -158,7 +158,7 @@ const AddTaskResources = (props) => {
 
             {/* ---------------Whatsapp link Button---------------- */}
 
-            <Grid item xs={2} sx={{ padding: '1em 1em 0em 1em !important' }}>
+            <Grid item xs={2}>
               <FormButton
                 variant="contained"
                 sx={{ width: '8.5rem', margin: '1em 0.5em !important' }}
@@ -173,7 +173,7 @@ const AddTaskResources = (props) => {
 
             {/* ---------------Category Field---------------- */}
 
-            <Grid item xs={6} sx={{ padding: '1em 1em 0em 1em !important' }}>
+            <Grid item xs={6}>
               <FormTextField
                 select
                 variant="outlined"
@@ -191,7 +191,7 @@ const AddTaskResources = (props) => {
 
             {/* ---------------AddedBy Field---------------- */}
 
-            <Grid item xs={6} sx={{ padding: '1em 1em 0em 1em !important' }}>
+            <Grid item xs={6}>
               <FormTextField
                 variant="outlined"
                 label="AddedBy"
@@ -207,7 +207,7 @@ const AddTaskResources = (props) => {
 
             {/* ---------------AddedDate Field---------------- */}
 
-            <Grid item xs={5} sx={{ padding: '1em 1em 0em 1em !important' }}>
+            <Grid item xs={5}>
               <FormTextField
                 variant="outlined"
                 type="date"
@@ -229,7 +229,7 @@ const AddTaskResources = (props) => {
 
             {/* ---------------FileUpload Field---------------- */}
 
-            <Grid item xs={5} sx={{ padding: '1em 1em 0em 1em !important' }}>
+            <Grid item xs={5}>
               <FormTextField
                 type="file"
                 sx={{ width: '100%' }}
@@ -242,7 +242,7 @@ const AddTaskResources = (props) => {
 
             {/* ---------------Upload link Button---------------- */}
 
-            <Grid item xs={2} sx={{ padding: '1em 1em 0em 1em !important' }}>
+            <Grid item xs={2}>
               <FormButton
                 variant="contained"
                 sx={{ width: '8.5rem', margin: '1em 0.5em !important' }}
@@ -257,7 +257,7 @@ const AddTaskResources = (props) => {
 
             {/* ---------------Comment Field---------------- */}
 
-            <Grid item xs={12} sx={{ padding: '1em 1em 0em 1em !important' }}>
+            <Grid item xs={12}>
               <FormTextField
                 variant="outlined"
                 label="Comment"
