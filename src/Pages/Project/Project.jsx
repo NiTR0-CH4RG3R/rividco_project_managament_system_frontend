@@ -155,7 +155,7 @@ export default function Project(props) {
     <Box
       component="form"
       onSubmit={handleSubmit}
-
+      onReset={handleReset}
       noValidate
       display="flex"
       justifyContent="center"
@@ -163,8 +163,8 @@ export default function Project(props) {
       flexDirection="column"
       width={"70%"}
     >
-      <Grid container spacing={2} >
-        <Grid item xs={6} >
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
           <TextField
             required
             placeholder="Select a Customer"
@@ -172,7 +172,6 @@ export default function Project(props) {
             name="customer"
             label="customer"
             fullWidth
-            
             onClick={() => {
               if (!values.selectedCustomer?.title && props.type !== "view") {
                 setOpenCustomer(true);
@@ -193,10 +192,8 @@ export default function Project(props) {
                 </IconButton>
               ),
             }}
-            
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            
             error={
               touched.selectedCustomer?.title && errors.selectedCustomer?.title
             }
@@ -207,7 +204,7 @@ export default function Project(props) {
             }
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             type="date"
@@ -220,14 +217,13 @@ export default function Project(props) {
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            
             InputLabelProps={{ shrink: true }}
             error={touched.startDate && errors.startDate}
             helperText={touched.startDate ? errors.startDate : ""}
           />
         </Grid>
 
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <TextField
             required
             placeholder="Please Enter The Description"
@@ -245,7 +241,7 @@ export default function Project(props) {
             helperText={touched.description ? errors.description : ""}
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             placeholder="Please Enter Warranty Period"
             id="p_warrantyPeriod"
@@ -258,7 +254,7 @@ export default function Project(props) {
             onBlur={handleBlur}
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             id="p_status"
@@ -280,7 +276,7 @@ export default function Project(props) {
             ))}
           </TextField>
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             placeholder="Please Enter Estimated Cost"
             id="p_estimatedCost"
@@ -293,7 +289,7 @@ export default function Project(props) {
             onBlur={handleBlur}
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             placeholder="Select a Customer"
             id="p_referencedBy"
@@ -320,7 +316,6 @@ export default function Project(props) {
                 </IconButton>
               ),
             }}
-            
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
@@ -334,7 +329,7 @@ export default function Project(props) {
             }
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             placeholder="Please enter the location"
@@ -350,7 +345,7 @@ export default function Project(props) {
             helperText={touched.location ? errors.location : ""}
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             placeholder="Select a Coordinator"
@@ -378,7 +373,6 @@ export default function Project(props) {
                 </IconButton>
               ),
             }}
-            
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
@@ -392,7 +386,7 @@ export default function Project(props) {
           />
         </Grid>
 
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             placeholder="Please Electricity Tariff Amount"
@@ -415,7 +409,7 @@ export default function Project(props) {
             }
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             placeholder="Please enter the Electricity Account Number"
@@ -439,7 +433,7 @@ export default function Project(props) {
           />
         </Grid>
 
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             placeholder="Please enter Electricity Board Area"
@@ -457,7 +451,7 @@ export default function Project(props) {
             }
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             required
             type="date"
@@ -470,13 +464,12 @@ export default function Project(props) {
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            
             InputLabelProps={{ shrink: true }}
             error={touched.commisionDate && errors.commisionDate}
             helperText={touched.commisionDate ? errors.commisionDate : ""}
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             placeholder="Please Project identification number"
             id="p_identificationNumber"
@@ -489,14 +482,13 @@ export default function Project(props) {
             onBlur={handleBlur}
           />
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6}>
           <TextField
             placeholder="Please select sales Person"
             id="p_salesPerson"
             name="salesPerson"
             label="Sales Person"
             fullWidth
-            
             onClick={() => {
               if (!values.selectedSalesPerson?.title && props.type !== "view") {
                 setOpenSalesPerson(true);
@@ -531,7 +523,7 @@ export default function Project(props) {
           />
         </Grid>
 
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <TextField
             placeholder="Please Enter Your Comment"
             id="c_comment"
@@ -559,7 +551,7 @@ export default function Project(props) {
               variant="contained"
               size="large"
               sx={{
-                mr:2
+                mr: 2,
               }}
               color="primary"
               startIcon={<ClearAllIcon />}
@@ -576,7 +568,6 @@ export default function Project(props) {
               loadingPosition="start"
               startIcon={<SaveIcon />}
               variant="contained"
-              
             >
               <span>Save</span>
             </LoadingButton>
