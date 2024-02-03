@@ -22,638 +22,637 @@ import { useTopbarContext } from "../../Contexts/TopbarContext";
 import SalesPersonModal from "../../Components/ModalWindow/SalesPersonModal";
 
 const statusType = [
-  {
-    value: "On going",
-    label: "On going",
-  },
-  {
-    value: "Done",
-    label: "Done",
-  },
+    {
+        value: "On going",
+        label: "On going",
+    },
+    {
+        value: "Done",
+        label: "Done",
+    },
 ];
 
 export default function Project(props) {
-  const { setTitle, setSubtitle } = useTopbarContext();
-  setTitle(
-    props.type === "add"
-      ? "Add a new Project"
-      : props.type === "edit"
-      ? "Edit Project"
-      : `View Project`
-  );
-  setSubtitle(
-    props.type === "add"
-      ? "You can add a new project here."
-      : props.type === "edit"
-      ? "You can edit project details here."
-      : `You can view project details here.`
-  );
+    const { setTitle, setSubtitle } = useTopbarContext();
+    setTitle(
+        props.type === "add"
+            ? "Add a new Project"
+            : props.type === "edit"
+                ? "Edit Project"
+                : `View Project`
+    );
+    setSubtitle(
+        props.type === "add"
+            ? "You can add a new project here."
+            : props.type === "edit"
+                ? "You can edit project details here."
+                : `You can view project details here.`
+    );
 
-  const [loading, setLoading] = React.useState(false);
-  //for modal
-  const [openCustomer, setOpenCustomer] = React.useState(false);
-  const [openEmployee, setOpenEmployee] = React.useState(false);
-  const [openReferenceBy, setOpenReferenceBy] = React.useState(false);
-  const [openSalesPerson, setOpenSalesPerson] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
+    //for modal
+    const [openCustomer, setOpenCustomer] = React.useState(false);
+    const [openEmployee, setOpenEmployee] = React.useState(false);
+    const [openReferenceBy, setOpenReferenceBy] = React.useState(false);
+    const [openSalesPerson, setOpenSalesPerson] = React.useState(false);
 
-  //set initial values in formik
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    handleReset,
-    setFieldValue,
-    submitForm,
-  } = useFormik({
-    initialValues: {
-      //customer: "",
-      startDate: "",
-      description: "",
-      warantyPeriod: "",
-      status: "",
-      estimatedCost: "",
-      location: "",
-      //referencedBy: "",
-      //coordinator: "",
-      electricityTariffStructure: "",
-      electricityAccountNumber: "",
-      electricityBoardArea: "",
-      commisionDate: "",
-      identificationNumber: "",
-      comment: "",
+    //set initial values in formik
+    const {
+        values,
+        errors,
+        touched,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        handleReset,
+        setFieldValue,
+        submitForm,
+    } = useFormik({
+        initialValues: {
+            //customer: "",
+            startDate: "",
+            description: "",
+            warantyPeriod: "",
+            status: "",
+            estimatedCost: "",
+            location: "",
+            //referencedBy: "",
+            //coordinator: "",
+            electricityTariffStructure: "",
+            electricityAccountNumber: "",
+            electricityBoardArea: "",
+            commisionDate: "",
+            identificationNumber: "",
+            comment: "",
 
-      selectedCustomer: {
-        userId: null,
-        id: null,
-        title: null,
-        completed: true,
-      },
+            selectedCustomer: {
+                userId: null,
+                id: null,
+                title: null,
+                completed: true,
+            },
 
-      selectedEmployee: {
-        userId: null,
-        id: null,
-        title: null,
-        completed: true,
-      },
+            selectedEmployee: {
+                userId: null,
+                id: null,
+                title: null,
+                completed: true,
+            },
 
-      selectedReferenceBy: {
-        userId: null,
-        id: null,
-        title: null,
-        completed: true,
-      },
-      selectedSalesPerson: {
-        userId: null,
-        id: null,
-        title: null,
-        completed: true,
-      },
-    },
+            selectedReferenceBy: {
+                userId: null,
+                id: null,
+                title: null,
+                completed: true,
+            },
+            selectedSalesPerson: {
+                userId: null,
+                id: null,
+                title: null,
+                completed: true,
+            },
+        },
 
-    validationSchema: addProjectValidation,
+        validationSchema: addProjectValidation,
 
-    onSubmit: (values) => {
-      sendData(values);
-    },
-  });
+        onSubmit: (values) => {
+            sendData(values);
+        },
+    });
 
-  //
-  //console.log(values);
+    //
+    //console.log(values);
 
-  const { id } = useParams();
-  const navi = useNavigate();
+    const { id } = useParams();
+    const navi = useNavigate();
 
-  React.useEffect(() => {
-    console.log(props);
+    React.useEffect(() => {
+        console.log(props);
 
-    if (props.type !== "add") {
-      console.log(id);
-      getDataFromApi(id);
+        if (props.type !== "add") {
+            console.log(id);
+            getDataFromApi(id);
+        }
+    }, []);
+
+    function getDataFromApi(id) {
+        //add here
     }
-  }, []);
 
-  function getDataFromApi(id) {
-    //add here
-  }
+    function sendData(data) {
+        //addhere
+        setLoading(true);
+        console.log(data);
+        clearData();
+        setLoading(false);
+    }
 
-  function sendData(data) {
-    //addhere
-    setLoading(true);
-    console.log(data);
-    clearData();
-    setLoading(false);
-  }
+    function clearData() {
+        handleReset();
+    }
 
-  function clearData() {
-    handleReset();
-  }
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1 },
-          }}
-          noValidate
-          autoComplete="off"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="100vh"
-          flexDirection="column"
-        >
-          <Grid container spacing={2} sx={{ width: "70%" }}>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Select a Customer"
-                id="p_customer"
-                name="customer"
-                label="customer"
-                sx={{ width: "100%" }}
-                onClick={() => {
-                  if (
-                    !values.selectedCustomer?.title &&
-                    props.type !== "view"
-                  ) {
-                    setOpenCustomer(true);
-                  }
-                }}
-                value={values.selectedCustomer?.title ?? ""}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      onClick={() => setFieldValue("selectedCustomer", "")}
-                      sx={{
-                        visibility: values.selectedCustomer?.title
-                          ? "visible"
-                          : "hidden",
-                      }}
-                    >
-                      <GridClearIcon />
-                    </IconButton>
-                  ),
-                }}
-                //onChange={handleChange} //get onchange value using formik
-                //onChange={(e) => setFieldValue("selectedCustomer.title",e.target.value)}
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                //error={touched.selectedCustomer && errors.selectedCustomer}
-                //helperText={touched.selectedCustomer ?errors.selectedCustomer : ""}
-                error={
-                  touched.selectedCustomer?.title &&
-                  errors.selectedCustomer?.title
-                }
-                helperText={
-                  touched.selectedCustomer?.title
-                    ? errors.selectedCustomer?.title
-                    : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                type="date"
-                placeholder="Select a Date"
-                id="p_startDate"
-                name="startDate"
-                label="Start Date"
-                sx={{ width: "100%" }}
-                value={values.startDate} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                //focused
-                InputLabelProps={{ shrink: true }}
-                error={touched.startDate && errors.startDate}
-                helperText={touched.startDate ? errors.startDate : ""}
-              />
-            </Grid>
-
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Please Enter The Description"
-                id="p_Description"
-                name="description"
-                label="Description"
-                multiline
-                maxRows={4}
-                sx={{ width: "100%" }}
-                value={values.description} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={touched.description && errors.description}
-                helperText={touched.description ? errors.description : ""}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                placeholder="Please Enter Warranty Period"
-                id="p_warrantyPeriod"
-                name="warrantyPeriod"
-                label="Warranty Period"
-                sx={{ width: "100%" }}
-                value={values.warantyPeriod} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                id="p_status"
-                name="status"
-                select
-                label="Status"
-                sx={{ width: "100%" }}
-                value={values.status} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={touched.status && errors.status}
-                helperText={touched.status ? errors.status : ""}
-              >
-                {statusType.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                placeholder="Please Enter Estimated Cost"
-                id="p_estimatedCost"
-                name="estimatedCost"
-                label="Estimated Cost"
-                sx={{ width: "100%" }}
-                value={values.estimatedCost} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                placeholder="Select a Customer"
-                id="p_referencedBy"
-                name="referenceBy"
-                label="Reference By"
-                sx={{ width: "100%" }}
-                onClick={() => {
-                  if (
-                    !values.selectedReferenceBy?.title &&
-                    props.type !== "view"
-                  ) {
-                    setOpenReferenceBy(true);
-                  }
-                }}
-                value={values.selectedReferenceBy?.title ?? ""}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      onClick={() => setFieldValue("selectedReferenceBy", "")}
-                      sx={{
-                        visibility: values.selectedReferenceBy?.title
-                          ? "visible"
-                          : "hidden",
-                      }}
-                    >
-                      <GridClearIcon />
-                    </IconButton>
-                  ),
-                }}
-                //onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={
-                  touched.selectedReferenceBy?.title &&
-                  errors.selectedReferenceBy?.title
-                }
-                helperText={
-                  touched.selectedReferenceBy?.title
-                    ? errors.selectedReferenceBy?.title
-                    : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Please enter the location"
-                id="p_location"
-                name="location"
-                label="Location"
-                sx={{ width: "100%" }}
-                value={values.location} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={touched.location && errors.location}
-                helperText={touched.location ? errors.location : ""}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Select a Coordinator"
-                id="p_coordinator"
-                name="coordinator"
-                label="Coordinator"
-                sx={{ width: "100%" }}
-                onClick={() => {
-                  if (
-                    !values.selectedEmployee?.title &&
-                    props.type !== "view"
-                  ) {
-                    setOpenEmployee(true);
-                  }
-                }}
-                value={values.selectedEmployee?.title ?? ""}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      onClick={() => setFieldValue("selectedEmployee", "")}
-                      sx={{
-                        visibility: values.selectedEmployee?.title
-                          ? "visible"
-                          : "hidden",
-                      }}
-                    >
-                      <GridClearIcon />
-                    </IconButton>
-                  ),
-                }}
-                //onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={
-                  touched.selectedEmployee?.title &&
-                  errors.selectedEmployee?.title
-                }
-                helperText={
-                  touched.selectedEmployee?.title
-                    ? errors.selectedEmployee?.title
-                    : ""
-                }
-              />
-            </Grid>
-
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Please Electricity Tariff Amount"
-                id="p_electricityTariffStructure"
-                name="electricityTariffStructure"
-                label="Tariff"
-                sx={{ width: "100%" }}
-                value={values.electricityTariffStructure} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={
-                  touched.electricityTariffStructure &&
-                  errors.electricityTariffStructure
-                }
-                helperText={
-                  touched.electricityTariffStructure
-                    ? errors.electricityTariffStructure
-                    : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Please enter the Electricity Account Number"
-                id="p_electricityAccountnumber"
-                name="electricityAccountnumber"
-                label="Electricity Account Number"
-                sx={{ width: "100%" }}
-                value={values.electricityAccountNumber} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={
-                  touched.electricityAccountNumber &&
-                  errors.electricityAccountNumber
-                }
-                helperText={
-                  touched.electricityAccountNumber
-                    ? errors.electricityAccountNumber
-                    : ""
-                }
-              />
-            </Grid>
-
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                placeholder="Please enter Electricity Board Area"
-                id="p_electricityBoardArea"
-                name="electricityBoardArea"
-                label="Electricity Board Area"
-                sx={{ width: "100%" }}
-                value={values.electricityBoardArea} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={
-                  touched.electricityBoardArea && errors.electricityBoardArea
-                }
-                helperText={
-                  touched.electricityBoardArea
-                    ? errors.electricityBoardArea
-                    : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                type="date"
-                placeholder="Select the Commision Date"
-                id="commisionDate"
-                name="commisionDate"
-                label="Commision Date"
-                sx={{ width: "100%" }}
-                value={values.startDate} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                //focused
-                InputLabelProps={{ shrink: true }}
-                error={touched.commisionDate && errors.commisionDate}
-                helperText={touched.commisionDate ? errors.commisionDate : ""}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                placeholder="Please Project identification number"
-                id="p_identificationNumber"
-                name="identificationNumber"
-                label="Identification Number"
-                sx={{ width: "100%" }}
-                value={values.identificationNumber} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                placeholder="Please select sales Person"
-                id="p_salesPerson"
-                name="salesPerson"
-                label="Sales Person"
-                sx={{ width: "100%" }}
-                //value={values.warantyPeriod} //set value using formik
-                //onChange={handleChange} //get onchange value using formik
-                onClick={() => {
-                  if (
-                    !values.selectedSalesPerson?.title &&
-                    props.type !== "view"
-                  ) {
-                    setOpenSalesPerson(true);
-                  }
-                }}
-                value={values.selectedSalesPerson?.title ?? ""}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      onClick={() => setFieldValue("selectedSalesPerson", "")}
-                      sx={{
-                        visibility: values.selectedSalesPerson?.title
-                          ? "visible"
-                          : "hidden",
-                      }}
-                    >
-                      <GridClearIcon />
-                    </IconButton>
-                  ),
-                }}
-                disabled={props.type === "view"}
-                onBlur={handleBlur}
-                error={
-                  touched.selectedSalesPerson?.title &&
-                  errors.selectedSalesPerson?.title
-                }
-                helperText={
-                  touched.selectedSalesPerson?.title
-                    ? errors.selectedSalesPerson?.title
-                    : ""
-                }
-              />
-            </Grid>
-
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                placeholder="Please Enter Your Comment"
-                id="c_comment"
-                name="comment"
-                label="Comment"
-                multiline
-                rows={4}
-                sx={{ width: "100%" }}
-                value={values.comment} //set value using formikß
-                onChange={handleChange} //get onchange value using formik
-                disabled={props.type === "view"}
-              />
-            </Grid>
-          </Grid>
-          <Box display="flex" width="70%" justifyContent="flex-end">
-            {props.type !== "view" && (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "end",
-                  padding: "1em 2em 0em 2em !important",
-                }}
-              >
-                <Button
-                  variant="contained"
-                  sx={{
-                    width: "8.5rem",
-                    margin: "1em 0.5em !important",
-                  }}
-                  color="primary"
-                  startIcon={<ClearAllIcon />}
-                  onClick={() => clearData()}
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <Box
+                    component="form"
+                    sx={{
+                        "& .MuiTextField-root": { m: 1 },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    flexDirection="column"
                 >
-                  Clear
-                </Button>
+                    <Grid container spacing={1} sx={{ width: "70%" }}>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                placeholder="Select a Customer"
+                                id="p_customer"
+                                name="customer"
+                                label="customer"
+                                sx={{ width: "100%" }}
+                                onClick={() => {
+                                    if (
+                                        !values.selectedCustomer?.title &&
+                                        props.type !== "view"
+                                    ) {
+                                        setOpenCustomer(true);
+                                    }
+                                }}
+                                value={values.selectedCustomer?.title ?? ""}
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton
+                                            onClick={() => setFieldValue("selectedCustomer", "")}
+                                            sx={{
+                                                visibility: values.selectedCustomer?.title
+                                                    ? "visible"
+                                                    : "hidden",
+                                            }}
+                                        >
+                                            <GridClearIcon />
+                                        </IconButton>
+                                    ),
+                                }}
+                                //onChange={handleChange} //get onchange value using formik
+                                //onChange={(e) => setFieldValue("selectedCustomer.title",e.target.value)}
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                //error={touched.selectedCustomer && errors.selectedCustomer}
+                                //helperText={touched.selectedCustomer ?errors.selectedCustomer : ""}
+                                error={
+                                    touched.selectedCustomer?.title &&
+                                    errors.selectedCustomer?.title
+                                }
+                                helperText={
+                                    touched.selectedCustomer?.title
+                                        ? errors.selectedCustomer?.title
+                                        : ""
+                                }
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                type="date"
+                                placeholder="Select a Date"
+                                id="p_startDate"
+                                name="startDate"
+                                label="Start Date"
+                                sx={{ width: "100%" }}
+                                value={values.startDate} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                //focused
+                                InputLabelProps={{ shrink: true }}
+                                error={touched.startDate && errors.startDate}
+                                helperText={touched.startDate ? errors.startDate : ""}
+                            />
+                        </Grid>
 
-                <LoadingButton
-                  color="primary"
-                  //type="submit"
-                  onClick={submitForm}
-                  loading={loading}
-                  loadingPosition="start"
-                  startIcon={<SaveIcon />}
-                  variant="contained"
-                  sx={{
-                    width: "8.5rem",
-                    margin: "1em 0.5em !important",
-                  }}
-                >
-                  <span>Save</span>
-                </LoadingButton>
-              </div>
-            )}
-            {props.type === "view" && (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "end",
-                  padding: "1em 2em 0em 2em !important",
-                }}
-              >
-                <Button
-                  variant="contained"
-                  sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
-                  color="primary"
-                  startIcon={<EditIcon />}
-                  onClick={() => navi(`/customer/update/${id}`)}
-                >
-                  Edit
-                </Button>
-              </div>
-            )}
-          </Box>
-        </Box>
-      </form>
+                        <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                placeholder="Please Enter The Description"
+                                id="p_Description"
+                                name="description"
+                                label="Description"
+                                multiline
+                                maxRows={4}
+                                sx={{ width: "100%" }}
+                                value={values.description} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                error={touched.description && errors.description}
+                                helperText={touched.description ? errors.description : ""}
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                placeholder="Please Enter Warranty Period"
+                                id="p_warrantyPeriod"
+                                name="warrantyPeriod"
+                                label="Warranty Period"
+                                sx={{ width: "100%" }}
+                                value={values.warantyPeriod} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                id="p_status"
+                                name="status"
+                                select
+                                label="Status"
+                                sx={{ width: "100%" }}
+                                value={values.status} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                error={touched.status && errors.status}
+                                helperText={touched.status ? errors.status : ""}
+                            >
+                                {statusType.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                placeholder="Please Enter Estimated Cost"
+                                id="p_estimatedCost"
+                                name="estimatedCost"
+                                label="Estimated Cost"
+                                sx={{ width: "100%" }}
+                                value={values.estimatedCost} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                placeholder="Select a Customer"
+                                id="p_referencedBy"
+                                name="referenceBy"
+                                label="Reference By"
+                                sx={{ width: "100%" }}
+                                onClick={() => {
+                                    if (
+                                        !values.selectedReferenceBy?.title &&
+                                        props.type !== "view"
+                                    ) {
+                                        setOpenReferenceBy(true);
+                                    }
+                                }}
+                                value={values.selectedReferenceBy?.title ?? ""}
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton
+                                            onClick={() => setFieldValue("selectedReferenceBy", "")}
+                                            sx={{
+                                                visibility: values.selectedReferenceBy?.title
+                                                    ? "visible"
+                                                    : "hidden",
+                                            }}
+                                        >
+                                            <GridClearIcon />
+                                        </IconButton>
+                                    ),
+                                }}
+                                //onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                error={
+                                    touched.selectedReferenceBy?.title &&
+                                    errors.selectedReferenceBy?.title
+                                }
+                                helperText={
+                                    touched.selectedReferenceBy?.title
+                                        ? errors.selectedReferenceBy?.title
+                                        : ""
+                                }
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                placeholder="Please enter the location"
+                                id="p_location"
+                                name="location"
+                                label="Location"
+                                sx={{ width: "100%" }}
+                                value={values.location} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                error={touched.location && errors.location}
+                                helperText={touched.location ? errors.location : ""}
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                placeholder="Select a Coordinator"
+                                id="p_coordinator"
+                                name="coordinator"
+                                label="Coordinator"
+                                sx={{ width: "100%" }}
+                                onClick={() => {
+                                    if (
+                                        !values.selectedEmployee?.title &&
+                                        props.type !== "view"
+                                    ) {
+                                        setOpenEmployee(true);
+                                    }
+                                }}
+                                value={values.selectedEmployee?.title ?? ""}
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton
+                                            onClick={() => setFieldValue("selectedEmployee", "")}
+                                            sx={{
+                                                visibility: values.selectedEmployee?.title
+                                                    ? "visible"
+                                                    : "hidden",
+                                            }}
+                                        >
+                                            <GridClearIcon />
+                                        </IconButton>
+                                    ),
+                                }}
+                                //onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                error={
+                                    touched.selectedEmployee?.title &&
+                                    errors.selectedEmployee?.title
+                                }
+                                helperText={
+                                    touched.selectedEmployee?.title
+                                        ? errors.selectedEmployee?.title
+                                        : ""
+                                }
+                            />
+                        </Grid>
 
-      <CustomerModal
-        //call customer modal
-        openCustomer={openCustomer}
-        setOpenCustomer={setOpenCustomer}
-        sendData={setFieldValue}
-      />
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                placeholder="Please Electricity Tariff Amount"
+                                id="p_electricityTariffStructure"
+                                name="electricityTariffStructure"
+                                label="Tariff"
+                                sx={{ width: "100%" }}
+                                value={values.electricityTariffStructure} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                error={
+                                    touched.electricityTariffStructure &&
+                                    errors.electricityTariffStructure
+                                }
+                                helperText={
+                                    touched.electricityTariffStructure
+                                        ? errors.electricityTariffStructure
+                                        : ""
+                                }
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                placeholder="Please enter the Electricity Account Number"
+                                id="p_electricityAccountnumber"
+                                name="electricityAccountnumber"
+                                label="Electricity Account Number"
+                                sx={{ width: "100%" }}
+                                value={values.electricityAccountNumber} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                error={
+                                    touched.electricityAccountNumber &&
+                                    errors.electricityAccountNumber
+                                }
+                                helperText={
+                                    touched.electricityAccountNumber
+                                        ? errors.electricityAccountNumber
+                                        : ""
+                                }
+                            />
+                        </Grid>
 
-      <EmployeeModal
-        openEmployee={openEmployee}
-        setOpenEmployee={setOpenEmployee}
-        sendData={setFieldValue}
-      />
-      <ReferenceByModal
-        openReferenceBy={openReferenceBy}
-        setOpenReferenceBy={setOpenReferenceBy}
-        sendData={setFieldValue}
-      />
-      <SalesPersonModal
-        openSalesPerson={openSalesPerson}
-        setOpenSalesPerson={setOpenSalesPerson}
-        sendData={setFieldValue}
-      />
-    </div>
-  );
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                placeholder="Please enter Electricity Board Area"
+                                id="p_electricityBoardArea"
+                                name="electricityBoardArea"
+                                label="Electricity Board Area"
+                                sx={{ width: "100%" }}
+                                value={values.electricityBoardArea} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                error={
+                                    touched.electricityBoardArea && errors.electricityBoardArea
+                                }
+                                helperText={
+                                    touched.electricityBoardArea
+                                        ? errors.electricityBoardArea
+                                        : ""
+                                }
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                required
+                                type="date"
+                                placeholder="Select the Commision Date"
+                                id="commisionDate"
+                                name="commisionDate"
+                                label="Commision Date"
+                                sx={{ width: "100%" }}
+                                value={values.startDate} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                //focused
+                                InputLabelProps={{ shrink: true }}
+                                error={touched.commisionDate && errors.commisionDate}
+                                helperText={touched.commisionDate ? errors.commisionDate : ""}
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                placeholder="Please Project identification number"
+                                id="p_identificationNumber"
+                                name="identificationNumber"
+                                label="Identification Number"
+                                sx={{ width: "100%" }}
+                                value={values.identificationNumber} //set value using formik
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                            />
+                        </Grid>
+                        <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                placeholder="Please select sales Person"
+                                id="p_salesPerson"
+                                name="salesPerson"
+                                label="Sales Person"
+                                sx={{ width: "100%" }}
+                                //value={values.warantyPeriod} //set value using formik
+                                //onChange={handleChange} //get onchange value using formik
+                                onClick={() => {
+                                    if (
+                                        !values.selectedSalesPerson?.title &&
+                                        props.type !== "view"
+                                    ) {
+                                        setOpenSalesPerson(true);
+                                    }
+                                }}
+                                value={values.selectedSalesPerson?.title ?? ""}
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton
+                                            onClick={() => setFieldValue("selectedSalesPerson", "")}
+                                            sx={{
+                                                visibility: values.selectedSalesPerson?.title
+                                                    ? "visible"
+                                                    : "hidden",
+                                            }}
+                                        >
+                                            <GridClearIcon />
+                                        </IconButton>
+                                    ),
+                                }}
+                                disabled={props.type === "view"}
+                                onBlur={handleBlur}
+                                error={
+                                    touched.selectedSalesPerson?.title &&
+                                    errors.selectedSalesPerson?.title
+                                }
+                                helperText={
+                                    touched.selectedSalesPerson?.title
+                                        ? errors.selectedSalesPerson?.title
+                                        : ""
+                                }
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
+                            <TextField
+                                placeholder="Please Enter Your Comment"
+                                id="c_comment"
+                                name="comment"
+                                label="Comment"
+                                multiline
+                                rows={4}
+                                sx={{ width: "100%" }}
+                                value={values.comment} //set value using formikß
+                                onChange={handleChange} //get onchange value using formik
+                                disabled={props.type === "view"}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Box display="flex" width="70%" justifyContent="flex-end">
+                        {props.type !== "view" && (
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "end",
+                                    padding: "1em 2em 0em 2em !important",
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        width: "8.5rem",
+                                        margin: "1em 0.5em !important",
+                                    }}
+                                    color="primary"
+                                    startIcon={<ClearAllIcon />}
+                                    onClick={() => clearData()}
+                                >
+                                    Clear
+                                </Button>
+
+                                <LoadingButton
+                                    color="primary"
+                                    //type="submit"
+                                    onClick={submitForm}
+                                    loading={loading}
+                                    loadingPosition="start"
+                                    startIcon={<SaveIcon />}
+                                    variant="contained"
+                                    sx={{
+                                        width: "8.5rem",
+                                        margin: "1em 0.5em !important",
+                                    }}
+                                >
+                                    <span>Save</span>
+                                </LoadingButton>
+                            </div>
+                        )}
+                        {props.type === "view" && (
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "end",
+                                    padding: "1em 2em 0em 2em !important",
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+                                    color="primary"
+                                    startIcon={<EditIcon />}
+                                    onClick={() => navi(`/customer/update/${id}`)}
+                                >
+                                    Edit
+                                </Button>
+                            </div>
+                        )}
+                    </Box>
+                </Box>
+            </form>
+
+            <CustomerModal
+                //call customer modal
+                openCustomer={openCustomer}
+                setOpenCustomer={setOpenCustomer}
+                sendData={setFieldValue}
+            />
+
+            <EmployeeModal
+                openEmployee={openEmployee}
+                setOpenEmployee={setOpenEmployee}
+                sendData={setFieldValue}
+            />
+            <ReferenceByModal
+                openReferenceBy={openReferenceBy}
+                setOpenReferenceBy={setOpenReferenceBy}
+                sendData={setFieldValue}
+            />
+            <SalesPersonModal
+                openSalesPerson={openSalesPerson}
+                setOpenSalesPerson={setOpenSalesPerson}
+                sendData={setFieldValue}
+            />
+        </div>
+    );
 }
