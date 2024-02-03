@@ -192,12 +192,10 @@ export default function Project(props) {
                 </IconButton>
               ),
             }}
-            //onChange={handleChange} //get onchange value using formik
-            //onChange={(e) => setFieldValue("selectedCustomer.title",e.target.value)}
+            
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            //error={touched.selectedCustomer && errors.selectedCustomer}
-            //helperText={touched.selectedCustomer ?errors.selectedCustomer : ""}
+            
             error={
               touched.selectedCustomer?.title && errors.selectedCustomer?.title
             }
@@ -221,7 +219,7 @@ export default function Project(props) {
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            //focused
+            
             InputLabelProps={{ shrink: true }}
             error={touched.startDate && errors.startDate}
             helperText={touched.startDate ? errors.startDate : ""}
@@ -321,7 +319,7 @@ export default function Project(props) {
                 </IconButton>
               ),
             }}
-            //onChange={handleChange} //get onchange value using formik
+            
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
@@ -379,7 +377,7 @@ export default function Project(props) {
                 </IconButton>
               ),
             }}
-            //onChange={handleChange} //get onchange value using formik
+            
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
@@ -471,7 +469,7 @@ export default function Project(props) {
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            //focused
+            
             InputLabelProps={{ shrink: true }}
             error={touched.commisionDate && errors.commisionDate}
             helperText={touched.commisionDate ? errors.commisionDate : ""}
@@ -497,8 +495,7 @@ export default function Project(props) {
             name="salesPerson"
             label="Sales Person"
             fullWidth
-            //value={values.warantyPeriod} //set value using formik
-            //onChange={handleChange} //get onchange value using formik
+            
             onClick={() => {
               if (!values.selectedSalesPerson?.title && props.type !== "view") {
                 setOpenSalesPerson(true);
@@ -572,16 +569,13 @@ export default function Project(props) {
 
             <LoadingButton
               color="primary"
-              //type="submit"
-              onClick={submitForm}
+              type="submit"
+              size="large"
               loading={loading}
               loadingPosition="start"
               startIcon={<SaveIcon />}
               variant="contained"
-              sx={{
-                width: "8.5rem",
-                margin: "1em 0.5em !important",
-              }}
+              
             >
               <span>Save</span>
             </LoadingButton>
