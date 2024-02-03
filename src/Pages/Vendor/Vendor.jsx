@@ -1,11 +1,10 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
+
 import Grid from "@mui/material/Grid";
-import LoadingButton from "@mui/lab/LoadingButton";
+
 import SaveIcon from "@mui/icons-material/Save";
-import Button from "@mui/material/Button";
+
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
@@ -15,6 +14,10 @@ import { useFormik } from "formik";
 import { vendorValidation } from "../../Validation/VendorValidation";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
 import { AppRoutes } from "../../Data/AppRoutes";
+import FormTextField from "../../Components/StyledComponents/FormTextField";
+import FormClearButton from "../../Components/StyledComponents/FormClearButton";
+import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
+import FormButton from "../../Components/StyledComponents/FormButton";
 
 export default function Vendor(props) {
   function loadVendorData(id) {
@@ -22,9 +25,9 @@ export default function Vendor(props) {
   }
 
   const { id } = useParams();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (props.type !== "add") {
       loadVendorData(id);
     }
@@ -91,7 +94,7 @@ export default function Vendor(props) {
     >
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <TextField
+          <FormTextField
             required
             placeholder="Please Enter Vendor Name"
             name="name"
@@ -107,7 +110,7 @@ export default function Vendor(props) {
         </Grid>
 
         <Grid item xs={12}>
-          <TextField
+          <FormTextField
             required
             placeholder="No: 00 , road ,city"
             name="address"
@@ -124,7 +127,7 @@ export default function Vendor(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="example@.com"
             type="email"
@@ -140,7 +143,7 @@ export default function Vendor(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="Please enter registration number"
             name="email"
@@ -158,7 +161,7 @@ export default function Vendor(props) {
         </Grid>
 
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             required
             placeholder="07xxxxxxxx"
             name="mobileNumber"
@@ -173,7 +176,7 @@ export default function Vendor(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <TextField
+          <FormTextField
             placeholder="0xxxxxxxxx"
             name="officeNumber"
             label="Office No"
@@ -187,7 +190,7 @@ export default function Vendor(props) {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <FormTextField
             placeholder="Please Enter Your Comment"
             name="comment"
             label="Comment"
@@ -204,7 +207,7 @@ export default function Vendor(props) {
       <Box display="flex" width="100%" pt={3} justifyContent="flex-end">
         {props.type !== "view" && (
           <>
-            <Button
+            <FormClearButton
               variant="contained"
               size="large"
               sx={{
@@ -215,9 +218,9 @@ export default function Vendor(props) {
               type="reset"
             >
               Clear
-            </Button>
+            </FormClearButton>
 
-            <LoadingButton
+            <FormSaveLoadingButton
               color="primary"
               type="submit"
               size="large"
@@ -227,18 +230,18 @@ export default function Vendor(props) {
               variant="contained"
             >
               <span>Save</span>
-            </LoadingButton>
+            </FormSaveLoadingButton>
           </>
         )}
         {props.type === "view" && (
-          <Button
+          <FormButton
             variant="contained"
             color="primary"
             startIcon={<EditIcon />}
             onClick={() => navigate(`${AppRoutes.vendor_edit.path}/${id}`)}
           >
             Edit
-          </Button>
+          </FormButton>
         )}
       </Box>
     </Box>
