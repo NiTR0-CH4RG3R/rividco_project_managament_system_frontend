@@ -17,6 +17,19 @@ import { useTopbarContext } from "../../Contexts/TopbarContext";
 import { AppRoutes } from "../../Data/AppRoutes";
 
 export default function Vendor(props) {
+  function loadVendorData(id) {
+    //add here
+  }
+
+  const { id } = useParams();
+  const [loading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    if (props.type !== "add") {
+      loadVendorData(id);
+    }
+  }, []);
+
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
     props.type === "add"
@@ -32,8 +45,6 @@ export default function Vendor(props) {
       ? "You can edit vendor details here."
       : `You can view vendor details here.`
   );
-
-  const [loading, setLoading] = React.useState(false);
 
   //set initial values in formik
   const {
@@ -57,39 +68,14 @@ export default function Vendor(props) {
     },
     validationSchema: vendorValidation,
     onSubmit: (values) => {
-      sendData(values);
+      setLoading(true);
+      //send values to the backend
     },
   });
 
   //
 
-  const { id } = useParams();
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    console.log(props);
-
-    if (props.type !== "add") {
-      console.log(id);
-      getDataFromApi(id);
-    }
-  }, []);
-
-  function getDataFromApi(id) {
-    //add here
-  }
-
-  function sendData(data) {
-    //addhere
-    setLoading(true);
-    console.log(data);
-    clearData();
-    setLoading(false);
-  }
-
-  function clearData() {
-    handleReset();
-  }
 
   return (
     <Box
@@ -247,7 +233,6 @@ export default function Vendor(props) {
         {props.type === "view" && (
           <Button
             variant="contained"
-            
             color="primary"
             startIcon={<EditIcon />}
             onClick={() => navigate(`${AppRoutes.vendor_edit.path}/${id}`)}
