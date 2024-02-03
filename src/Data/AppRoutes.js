@@ -39,7 +39,7 @@ export const AppRoutes = {
     vendor_item_list: { path: "/vendor/item/list", component: <VendorItemList />, },
     vendor_item_add: { path: "/vendor/item/add", component: <Vendoritem type="add" />, },
     vendor_item_view: { path: "/vendor/item/view/id", component: <Vendoritem type="view" />, },
-    vendor_item_edit: { path: "/vendor/item/edit/id", component: <Vendoritem type="edit" />, },
+    vendor_item_edit: { path: "/vendor/item/edit", component: <Vendoritem type="edit" />, },
 
     /* Project related routes */
     project_list: { path: "/project/list", component: <ProjectList />, },
