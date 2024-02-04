@@ -1,78 +1,83 @@
-import React, { useState, useRef } from "react";
-import { Box, TextField, Grid, MenuItem, Button, Avatar } from "@mui/material";
+import React, { useState, useRef } from 'react'
+import { Box, Grid, MenuItem, Avatar } from '@mui/material'
 //import Modal from '@mui/material/Modal';
-import { useFormik } from "formik";
-import SystemUserValidation from "../../Validation/SystemUserValidation";
-import { useParams, useNavigate } from "react-router-dom";
-import SaveIcon from "@mui/icons-material/Save";
-import EditIcon from "@mui/icons-material/Edit";
-import ClearAllIcon from "@mui/icons-material/ClearAll";
-import { useTopbarContext } from "../../Contexts/TopbarContext";
+import { useFormik } from 'formik'
+import SystemUserValidation from '../../Validation/SystemUserValidation'
+import { useParams, useNavigate } from 'react-router-dom'
+import SaveIcon from '@mui/icons-material/Save'
+import EditIcon from '@mui/icons-material/Edit'
+import ClearAllIcon from '@mui/icons-material/ClearAll'
+import { useTopbarContext } from '../../Contexts/TopbarContext'
+import FormTextField from '../../Components/StyledComponents/FormTextField'
+import FormButton from '../../Components/StyledComponents/FormButton'
+import FormClearButton from '../../Components/StyledComponents/FormClearButton'
+import FormEditButton from '../../Components/StyledComponents/FormEditButton'
+import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
 
-const role = [
+const roles = [
   {
-    value: "Admin",
-    label: "Admin",
+    value: 'admin',
+    label: 'Admin',
   },
   {
-    value: "User",
-    label: "User",
+    value: 'user',
+    label: 'User',
   },
-];
+]
 
 export default function SystemUser(props) {
-  const { setTitle, setSubtitle } = useTopbarContext();
+  const { setTitle, setSubtitle } = useTopbarContext()
   setTitle(
-    props.type === "add"
-      ? "Add a new System User"
-      : props.type === "edit"
-      ? "Edit System User"
+    props.type === 'add'
+      ? 'Add a new System User'
+      : props.type === 'edit'
+      ? 'Edit System User'
       : `View System User`
-  );
+  )
   setSubtitle(
-    props.type === "add"
-      ? "You can add new system user here."
-      : props.type === "edit"
-      ? "You can edit system user details here."
+    props.type === 'add'
+      ? 'You can add new system user here.'
+      : props.type === 'edit'
+      ? 'You can edit system user details here.'
       : `You can view system user details here.`
-  );
+  )
 
   //const ProfilePictureUploader = () => {
-  const [file, setFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const inputRef = useRef();
+  const [file, setFile] = useState(null)
+  const [imagePreview, setImagePreview] = useState(null)
+  const inputRef = useRef()
 
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
+    const selectedFile = e.target.files[0]
 
     if (selectedFile) {
-      setFile(selectedFile);
+      setFile(selectedFile)
 
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onloadend = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(selectedFile);
+        setImagePreview(reader.result)
+      }
+      reader.readAsDataURL(selectedFile)
     }
-  };
+  }
 
   const handleButtonClick = () => {
     // Trigger the input field when the button is clicked to change the photo
-    inputRef.current.click();
-  };
+    inputRef.current.click()
+  }
 
   const handleSaveClick = () => {
     // Display the uploaded image
     if (file) {
-      console.log("File uploaded:", file);
-      setImagePreview(URL.createObjectURL(file));
+      console.log('File uploaded:', file)
+      setImagePreview(URL.createObjectURL(file))
 
       // Reset file state after saving
-      setFile(null);
+      setFile(null)
     } else {
-      console.log("No new photo selected.");
+      console.log('No new photo selected.')
     }
-  };
+  }
 
   const {
     values,
@@ -85,320 +90,295 @@ export default function SystemUser(props) {
     submitForm,
   } = useFormik({
     initialValues: {
-      FirstName: "",
-      LastName: "",
-      Address: "",
-      OfficeNo: "",
-      Email: "",
-      MobileNo: "",
-      UserName: "",
-      Password: "",
-      Comment: "",
-      Role: "",
+      firstName: '',
+      lastName: '',
+      address: '',
+      email: '',
+      role: '',
+      mobileNo: '',
+      officeNo: '',
+      userName: '',
+      password: '',
+      comment: '',
     },
-    validationSchema: SystemUserValidation,
     onSubmit: (values) => {
-      alert("Form submitted successfully:", values);
+      console.log('form values', values)
+      //alert('Form submitted successfully:', values)
       // You can handle the form submission logic here
     },
-  });
+    validationSchema: SystemUserValidation,
+  })
 
-  const { id } = useParams();
-  const navi = useNavigate();
+  const { id } = useParams()
+  const navi = useNavigate()
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      onReset={handleReset}
+      onSubmit={handleSubmit}
+      noValidate
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      width="70%"
+    >
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Avatar
+            alt="Profile Picture"
+            src={imagePreview}
+            sx={{ width: 100, height: 100 }}
+          />
+          <input
+            accept="image/*"
+            ref={inputRef}
+            style={{ display: 'none' }}
+            type="file"
+            onChange={handleFileChange}
+          />
+          <FormButton
+            variant="contained"
+            onClick={() => {
+              handleButtonClick()
+              handleSaveClick()
+            }}
+          >
+            {file ? 'Edit Profile' : 'Upload Photo'}
+          </FormButton>
+        </Grid>
+
+        <Grid item xs={6}>
+          <FormTextField
+            required
+            id="firstName"
+            name="firstName"
+            label="First Name"
+            placeholder="First Name"
+            variant="outlined"
+            fullWidth
+            value={values.firstName} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.firstName && errors.firstName}
+            helperText={touched.firstName ? errors.firstName : ''}
+          />
+        </Grid>
+
+        <Grid item xs={6}>
+          <FormTextField
+            required
+            id="lastName"
+            name="lastName"
+            label="Last Name"
+            placeholder="Last Name"
+            variant="outlined"
+            fullWidth
+            value={values.lastName} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.lastName && errors.lastName}
+            helperText={touched.lastName ? errors.lastName : ''}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            id="address"
+            name="address"
+            label="Address"
+            placeholder="Address"
+            multiline
+            variant="outlined"
+            fullWidth
+            value={values.address} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.address && errors.address}
+            helperText={touched.address ? errors.address : ''}
+          />
+        </Grid>
+
+        <Grid item xs={8}>
+          <FormTextField
+            required
+            id="email"
+            name="email"
+            label="E-mail"
+            placeholder="E-mail"
+            variant="outlined"
+            fullWidth
+            value={values.email} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.email && errors.email}
+            helperText={touched.email ? errors.email : ''}
+          />
+        </Grid>
+
+        <Grid item xs={4}>
+          <FormTextField
+            required
+            id="role"
+            name="role"
+            label="Role"
+            select
+            helperText="Please select the Role"
+            variant="outlined"
+            fullWidth
+            value={values.role} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.role && errors.role}
+          >
+            {roles.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </FormTextField>
+        </Grid>
+
+        <Grid item xs={6}>
+          <FormTextField
+            required
+            id="mobileNo"
+            name="mobileNo"
+            label="Mobile No:"
+            placeholder="Mobile No:"
+            variant="outlined"
+            fullWidth
+            value={values.mobileNo} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.mobileNo && errors.mobileNo}
+            helperText={touched.mobileNo ? errors.mobileNo : ''}
+          />
+        </Grid>
+
+        <Grid item xs={6}>
+          <FormTextField
+            id="officeNo"
+            name="officeNo"
+            label="Office No:"
+            placeholder="Office No:"
+            variant="outlined"
+            fullWidth
+            value={values.officeNo} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.officeNo && errors.officeNo}
+            helperText={touched.officeNo ? errors.officeNo : ''}
+          />
+        </Grid>
+
+        <Grid item xs={6}>
+          <FormTextField
+            required
+            id="userName"
+            name="userName"
+            label="Username"
+            placeholder="Username"
+            variant="outlined"
+            fullWidth
+            value={values.userName} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.userName && errors.userName}
+            helperText={touched.userName ? errors.userName : ''}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <FormTextField
+            required
+            id="password"
+            name="password"
+            label="Password"
+            placeholder="password"
+            variant="outlined"
+            fullWidth
+            value={values.password} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.password && errors.password}
+            helperText={touched.password ? errors.password : ''}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormTextField
+            id="comment"
+            name="comment"
+            label="Comment"
+            placeholder="Please Enter Your Comment"
+            multiline
+            variant="outlined"
+            fullWidth
+            rows={4}
+            value={values.comment} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            onBlur={handleBlur}
+            disabled={props.type === 'view'}
+            error={touched.comment && errors.comment}
+            helperText={touched.comment ? errors.comment : ''}
+          />
+        </Grid>
+
         <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 2 },
-          }}
-          noValidate
-          autoComplete="off"
           display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="150vh"
-          flexDirection="row"
-          marginTop="35%"
+          width="100%"
+          pt={3}
+          justifyContent="flex-end"
+          sx={{
+            '& .MuiButton-root': { m: 1 },
+          }}
         >
-          <Grid container spacing={2} sx={{ width: "70%" }}>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "1em 1em 0em 1em !important",
-              }}
-            >
-              <div>
-                <Avatar
-                  alt="Profile Picture"
-                  src={imagePreview}
-                  sx={{ width: 200, height: 200 }}
-                />
-                <input
-                  accept="image/*"
-                  ref={inputRef}
-                  style={{ display: "none" }}
-                  type="file"
-                  onChange={handleFileChange}
-                />
-                <Button
-                  variant="contained"
-                  size="large"
-                  fullWidth
-                  sx={{
-                    marginTop: 2,
-                    backgroundColor: "primary",
-                    padding: "0.5em 1em 0.5em 1em !important",
-                  }}
-                  onClick={() => {
-                    handleButtonClick();
-                    handleSaveClick();
-                  }}
-                >
-                  {file ? "Edit Profile" : "Upload Photo"}
-                </Button>
-              </div>
-            </Grid>
-
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                id="FirstName"
-                label="First Name"
-                placeholder="First Name"
-                //multiline
-                variant="outlined"
-                sx={{ width: "100%" }}
-                value={values.FirstName} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.FirstName && errors.FirstName}
-                helperText={touched.FirstName ? errors.FirstName : ""}
-              />
-            </Grid>
-
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                id="LastName"
-                label="Last Name"
-                placeholder="Last Name"
-                //multiline
-                variant="outlined"
-                sx={{ width: "100%" }}
-                value={values.LastName} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.LastName && errors.LastName}
-                helperText={touched.LastName ? errors.LastName : ""}
-              />
-            </Grid>
-
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                id="Address"
-                label="Address"
-                placeholder="Address"
-                multiline
-                variant="outlined"
-                sx={{ width: "100%" }}
-                value={values.Address} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.Address && errors.Address}
-                helperText={touched.Address ? errors.Address : ""}
-              />
-            </Grid>
-
-            <Grid item xs={8} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                id="Email"
-                label="E-mail"
-                placeholder="E-mail"
-                //multiline
-                variant="outlined"
-                sx={{ width: "100%" }}
-                value={values.Email} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.Email && errors.Email}
-                helperText={touched.Email ? errors.Email : ""}
-              />
-            </Grid>
-
-            <Grid item xs={4} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                select
-                id="Role"
-                label="Role"
-                helperText="Please select the Role"
-                variant="outlined"
-                sx={{ width: "100%" }}
-                //value={values.Role} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.Role && errors.Role}
+          {(props.type === 'add' || props.type === 'edit') && (
+            <>
+              {' '}
+              <FormClearButton
+                variant="contained"
+                size="large"
+                onClick={handleReset}
+                startIcon={<ClearAllIcon />}
               >
-                {role.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                id="MobileNo"
-                label="Mobile No:"
-                placeholder="Mobile No:"
-                //multiline
-                variant="outlined"
-                sx={{ width: "100%" }}
-                value={values.MobileNo} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.MobileNo && errors.MobileNo}
-                helperText={touched.MobileNo ? errors.MobileNo : ""}
-              />
-            </Grid>
-
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                id="OfficeNo"
-                label="Office No:"
-                placeholder="Office No:"
-                //multiline
-                variant="outlined"
-                sx={{ width: "100%" }}
-                value={values.OfficeNo} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.OfficeNo && errors.OfficeNo}
-                helperText={touched.OfficeNo ? errors.OfficeNo : ""}
-              />
-            </Grid>
-
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                id="UserName"
-                label="Username"
-                placeholder="Username"
-                variant="outlined"
-                sx={{ width: "100%" }}
-                value={values.UserName} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.UserName && errors.UserName}
-                helperText={touched.UserName ? errors.UserName : ""}
-              />
-            </Grid>
-            <Grid item xs={6} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                required
-                id="Password"
-                label="password"
-                placeholder="password"
-                variant="outlined"
-                sx={{ width: "100%" }}
-                value={values.Password} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.Password && errors.Password}
-                helperText={touched.Password ? errors.Password : ""}
-              />
-            </Grid>
-
-            <Grid item xs={12} sx={{ padding: "1em 1em 0em 1em !important" }}>
-              <TextField
-                id="Comment"
-                label="Comment"
-                placeholder="Please Enter Your Comment"
-                multiline
-                variant="outlined"
-                sx={{ width: "100%" }}
-                rows={4}
-                value={values.Comment} //set value using formik
-                onChange={handleChange} //get onchange value using formik
-                onBlur={handleBlur}
-                disabled={props.type === "view"}
-                error={touched.Comment && errors.Comment}
-                helperText={touched.Comment ? errors.Comment : ""}
-              />
-            </Grid>
-
-            {(props.type === "add" || props.type === "edit") && (
-              <Grid
-                container
-                spacing={2}
-                sx={{ mt: 3, justifyContent: "flex-end" }}
+                Clear
+              </FormClearButton>
+              <FormSaveLoadingButton
+                variant="contained"
+                size="large"
+                onClick={submitForm}
+                startIcon={<SaveIcon />}
               >
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    onClick={handleReset}
-                    startIcon={<ClearAllIcon />}
-                  >
-                    Clear
-                  </Button>
-                </Grid>
-
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    onClick={submitForm}
-                    startIcon={<SaveIcon />}
-                  >
-                    Save
-                  </Button>
-                </Grid>
-              </Grid>
-            )}
-
-            {props.type === "view" && (
-              <Grid
-                container
-                spacing={2}
-                sx={{ mt: 3, justifyContent: "flex-end" }}
+                Save
+              </FormSaveLoadingButton>
+            </>
+          )}
+          {props.type === 'view' && (
+            <>
+              <FormEditButton
+                variant="contained"
+                size="large"
+                startIcon={<EditIcon />}
+                onClick={() => navi(`/user/edit/${id}`)}
               >
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    startIcon={<EditIcon />}
-                    onClick={() => navi(`/user/edit/${id}`)}
-                  >
-                    Edit
-                  </Button>
-                </Grid>
-              </Grid>
-            )}
-          </Grid>
+                Edit
+              </FormEditButton>
+            </>
+          )}
         </Box>
-      </form>
-    </div>
-  );
+      </Grid>
+    </Box>
+  )
 }
