@@ -13,6 +13,7 @@ import FormButton from '../../Components/StyledComponents/FormButton'
 import FormClearButton from '../../Components/StyledComponents/FormClearButton'
 import FormEditButton from '../../Components/StyledComponents/FormEditButton'
 import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
+import { AppRoutes } from '../../Data/AppRoutes'
 
 const roles = [
   {
@@ -371,7 +372,7 @@ export default function SystemUser(props) {
                 variant="contained"
                 size="large"
                 startIcon={<EditIcon />}
-                onClick={() => navi(`/user/edit/${id}`)}
+                onClick={() => navi(`${AppRoutes.system_user_edit.path}/${id}`)}
               >
                 Edit
               </FormEditButton>
