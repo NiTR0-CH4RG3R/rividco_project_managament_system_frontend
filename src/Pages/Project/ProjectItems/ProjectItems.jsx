@@ -7,11 +7,13 @@ import { useTopbarContext } from '../../../Contexts/TopbarContext'
 
 export default function ProjectItems() {
     const { setTitle, setSubtitle } = useTopbarContext();
-    setTitle("List Project items");
+    setTitle("Project items");
     setSubtitle("You can view and manage all the project items here.");
-    
+
+
   return (
      <div>
+        
         <Box>
             <Grid container spacing={1} sx={{ width: "100%" }}>
 
@@ -28,6 +30,7 @@ export default function ProjectItems() {
                 </Grid>
             </Grid>
         </Box>
+
     </div>
   );
 }

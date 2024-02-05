@@ -13,7 +13,7 @@ import { ClearAll, Save } from "@mui/icons-material";
 {
   /* ---------------- Validation part ------------------ */
 }
-const taskStatusValidation = yup.object().shape({
+const projectTestValidation = yup.object().shape({
   status: yup.string().required("Required"),
 });
 
@@ -36,7 +36,7 @@ function TaskForm() {
       console.log("form values", values);
     },
 
-    validationSchema: taskStatusValidation,
+    validationSchema: projectTestValidation,
   });
 
   return (

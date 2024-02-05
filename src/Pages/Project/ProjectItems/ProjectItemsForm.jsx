@@ -10,7 +10,7 @@ import * as yup from 'yup'
 import { ClearAll, Save } from '@mui/icons-material';
 
 {/* ---------------- Validation part ------------------ */}
-const taskStatusValidation = yup.object().shape({
+const projectItemsValidation = yup.object().shape({
   status: yup.string().required('Required')
   
 })
@@ -39,7 +39,7 @@ function TaskForm() {
       console.log('form values', values)
     },
 
-    validationSchema:taskStatusValidation
+    validationSchema:projectItemsValidation
   })
 
   return (
@@ -62,7 +62,7 @@ function TaskForm() {
           <TextField
               required
               id="vendor_item"
-              name='VendorItem'
+              name="vendor_item"
               select
               label="Vendor Item"
               value={values.vendor_item}
@@ -84,8 +84,8 @@ function TaskForm() {
            <div>
             <TextField
                 
-                id="serialNo"
-                name='Serial Number'
+                id="serial_number"
+                name='serial_number'
                 label="Serial Number"
                 value={values.serial_number}
             >
@@ -96,8 +96,8 @@ function TaskForm() {
             <div>
             <TextField
                 
-                id="warrantyPeriod"
-                name='Warranty Period'
+                id="warranty_period"
+                name="warranty_period"
                 label="Warranty Period"
                 value={values.warranty_period}
             >

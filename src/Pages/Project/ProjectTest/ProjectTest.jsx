@@ -2,8 +2,14 @@ import { Box , Grid} from '@mui/material'
 import React from 'react'
 import ProjectTable from '../ProjectTest/ProjectTestTable'
 import ProjectForm from '../ProjectTest/ProjectTestForm'
+import { useTopbarContext } from '../../../Contexts/TopbarContext'
 
-function ProjectTest() {
+
+export default function ProjectTest() {
+    const { setTitle, setSubtitle } = useTopbarContext();
+    setTitle("Project Tests");
+    setSubtitle("You can view and manage all the project tests here.");
+
   return (
     <div>
     <Box>
@@ -26,4 +32,3 @@ function ProjectTest() {
   )
 }
 
-export default ProjectTest
