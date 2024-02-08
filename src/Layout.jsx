@@ -14,9 +14,26 @@ export default function Layout() {
                 <main className='content' style={{ display: 'flex' }}>
                     <TopBar drawerWidth={SideNavigationPanelData.width} topbarHeight={SideNavigationPanelData.toolbarHeight} />
                     <SideNavigationPanel SideNavigationPanelMenuItems={SideNavigationPanelData.items} drawerWidth={SideNavigationPanelData.width} />
-                    <Box display='flex' justifyContent='center' alignItems='center' width={`calc( 100% - ${SideNavigationPanelData.width}px )`} >
-                        <Outlet />
+                    <Box
+                        mt={`${SideNavigationPanelData.toolbarHeight}px`}
+                        width={`calc( 100% - ${SideNavigationPanelData.width}px )`}
+                        height={`calc( 100% - ${SideNavigationPanelData.toolbarHeight}px )`}
+                        bottom={0}
+                        right={0}
+                        overflow={'auto'}
+                    >
+
+                        <Box
+                            width='100%'
+                            height='100%'
+                            display='flex'
+                            alignItems='center'
+                            justifyContent='center'
+                        >
+                            <Outlet />
+                        </Box>
                     </Box>
+
                 </main>
             </Box>
         </TopbarContextProvider>
