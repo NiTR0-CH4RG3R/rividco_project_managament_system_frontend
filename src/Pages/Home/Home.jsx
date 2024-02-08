@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import imagePath from '../Login/blueLogoAsset 1.png';
-import { useTopbarContext } from "../../contexts/topbarContext";
+import { useTopbarContext } from "../../Contexts/TopbarContext";
 
 const Home = () => {
 

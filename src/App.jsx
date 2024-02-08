@@ -1,14 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ColorModeContext, useMode } from "./theme";
 import Layout from './Layout';
 import { AppRoutes } from './Data/AppRoutes';
 import Missing from './Pages/Missing/Missing';
 import Login from './Pages/Login/Login';
+import AuthContextProvider from './auth/AuthContextProvider';
 
-console.log(process.env.REACT_APP_API_URL);
+
+
 
 
 export default function App() {
-
     let routes = [];
     Object.keys(AppRoutes).forEach((name) => {
         // NOTE : This is a small hack to mimik the functionality of the login page for the interim presentation.
@@ -17,17 +21,26 @@ export default function App() {
         routes.push(route);
     });
 
-    return (
-        <Routes>
-            <Route path='/' element={<Login />} />
-            <Route path='/*' element={<Layout />}>
-                {routes.map((route) => (
-                    <Route key={route} path={route.path} element={route.component} />
-                ))}
+    const [theme, colorMode] = useMode();
 
-                <Route path='*' element={<Missing />} />
-            </Route>
-        </Routes>
+    return (
+        <AuthContextProvider>
+            <ColorModeContext.Provider value={colorMode}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Routes>
+                        <Route path='/' element={<Login />} />
+                        <Route path='/*' element={<Layout />}>
+                            {routes.map((route) => (
+                                <Route key={route} path={route.path} element={route.component} />
+                            ))}
+
+                            <Route path='*' element={<Missing />} />
+                        </Route>
+                    </Routes>
+                </ThemeProvider>
+            </ColorModeContext.Provider>
+        </AuthContextProvider>
     );
 }
 
