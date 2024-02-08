@@ -5,6 +5,7 @@ import TaskForm from './TaskStatus/TaskForm'
 import { useTopbarContext } from '../../Contexts/TopbarContext'
 import FormButton from '../../Components/StyledComponents/FormButton'
 import TaskStatusPopup from './TaskStatus/TaskStatusPopup'
+import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
 
 function TaskStatus() {
   const { setTitle, setSubtitle } = useTopbarContext()
@@ -23,9 +24,9 @@ function TaskStatus() {
           </Grid>
           {/* ---------------- Add Status Button ------------------ */}
           <Grid item xs={2}>
-            <FormButton onClick={() => setOpenPopup(true)}>
+            <FormSaveLoadingButton onClick={() => setOpenPopup(true)}>
               Add New Status
-            </FormButton>
+            </FormSaveLoadingButton>
           </Grid>
         </Grid>
         <TaskStatusPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} />

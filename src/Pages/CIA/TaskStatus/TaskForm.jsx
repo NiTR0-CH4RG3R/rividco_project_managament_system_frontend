@@ -46,72 +46,73 @@ function TaskForm() {
       onSubmit={handleSubmit}
       display="flex"
       flexDirection="column"
+      sx={{
+        '& .MuiTextField-root': {
+          margin: 1,
+        },
+      }}
     >
       {/* ---------------- Task field ------------------ */}
-      <div>
-        <FormTextField
-          disabled
-          id="task"
-          name="task"
-          label="Task ID"
-          value={values.task}
-        ></FormTextField>
-      </div>
+
+      <FormTextField
+        disabled
+        id="task"
+        name="task"
+        label="Task ID"
+        value={values.task}
+      ></FormTextField>
 
       {/* ---------------- Status field ------------------ */}
-      <div>
-        <FormTextField
-          required
-          id="status"
-          name="status"
-          select
-          label="Status"
-          value={values.status}
-          onBlur={handleBlur}
-          error={touched.status && errors.status}
-          helperText={touched.status ? errors.status : ''}
-          onChange={handleChange}
-        >
-          {statuses.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </FormTextField>
-      </div>
+
+      <FormTextField
+        required
+        id="status"
+        name="status"
+        select
+        label="Status"
+        value={values.status}
+        onBlur={handleBlur}
+        error={touched.status && errors.status}
+        helperText={touched.status ? errors.status : ''}
+        onChange={handleChange}
+      >
+        {statuses.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </FormTextField>
 
       {/* ---------------- comment field ------------------ */}
-      <div>
-        <FormTextField
-          id="comment"
-          name="comment"
-          label="Comment"
-          multiline
-          rows={5}
-          value={values.comment}
-          onChange={handleChange}
-        />
-      </div>
+
+      <FormTextField
+        id="comment"
+        name="comment"
+        label="Comment"
+        multiline
+        rows={5}
+        value={values.comment}
+        onChange={handleChange}
+      />
 
       {/* ---------------- Button placement ------------------ */}
-      <div>
-        <Stack spacing={2} direction="row" justifyContent="flex-end">
-          <FormClearButton
-            variant="contained"
-            startIcon={<ClearAll />}
-            onClick={handleReset}
-          >
-            Clear
-          </FormClearButton>
-          <FormSaveLoadingButton
-            variant="contained"
-            startIcon={<Save />}
-            onClick={submitForm}
-          >
-            Save
-          </FormSaveLoadingButton>
-        </Stack>
-      </div>
+
+      <Stack spacing={2} direction="row" justifyContent="flex-end">
+        <FormClearButton
+          variant="contained"
+          startIcon={<ClearAll />}
+          onClick={handleReset}
+        >
+          Clear
+        </FormClearButton>
+        <FormSaveLoadingButton
+          variant="contained"
+          startIcon={<Save />}
+          onClick={submitForm}
+        >
+          Save
+        </FormSaveLoadingButton>
+      </Stack>
     </Box>
   )
 }
