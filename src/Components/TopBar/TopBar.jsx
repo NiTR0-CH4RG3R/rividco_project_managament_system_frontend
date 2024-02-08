@@ -4,7 +4,7 @@ import { ColorModeContext } from '../../theme';
 import { useContext } from 'react';
 
 import { ArrowBack, Brightness4, AccountCircle } from '@mui/icons-material';
-import { useTopbarContext } from '../../Contexts/TopbarContext';
+import { useTopbarContext } from '../../contexts/topbarContext';
 
 export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
     const colorMode = useContext(ColorModeContext);

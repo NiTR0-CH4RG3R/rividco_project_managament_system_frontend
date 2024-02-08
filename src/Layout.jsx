@@ -6,7 +6,7 @@ import { ColorModeContext, useMode } from "./theme";
 import TopBar from './Components/TopBar/TopBar';
 import SideNavigationPanel from './Components/SideNavigationPanel/SideNavigationPanel';
 import { SideNavigationPanelData } from './Data/SideNavigationPanelData';
-import { TopbarContextProvider } from './Contexts/TopbarContext';
+import { TopbarContextProvider } from './contexts/topbarContext';
 
 export default function Layout() {
 

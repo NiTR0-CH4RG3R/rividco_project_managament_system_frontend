@@ -4,6 +4,8 @@ import { AppRoutes } from './Data/AppRoutes';
 import Missing from './Pages/Missing/Missing';
 import Login from './Pages/Login/Login';
 
+console.log(process.env.REACT_APP_API_URL);
+
 
 export default function App() {
 
