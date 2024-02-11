@@ -28,3 +28,5 @@ export const del = async (url, params) => { return await axios.delete(url, { par
 
 export const secretGet = async (url, params) => { return await secretAxios.get(url, { params }) };
 export const secretPost = async (url, data, params) => { return await secretAxios.post(url, data, { params }) };
+
+export default axios;
