@@ -7,6 +7,7 @@ import { AppRoutes } from './Data/AppRoutes';
 import Missing from './Pages/Missing/Missing';
 import Login from './Pages/Login/Login';
 import AuthContextProvider from './auth/AuthContextProvider';
+import RequireAuth from './auth/RequireAuth';
 
 
 
@@ -29,18 +30,19 @@ export default function App() {
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
                     <Routes>
-                        <Route path='/' element={<Login />} />
-                        <Route path='/*' element={<Layout />}>
-                            {routes.map((route) => (
-                                <Route key={route} path={route.path} element={route.component} />
-                            ))}
-
+                        <Route path='/login' element={<Login />} />
+                        <Route element={<RequireAuth allowedRoles={['USER']} />} >
+                            <Route path='/' element={<Layout />}>
+                                {routes.map((route) => (
+                                    <Route key={route} path={route.path} element={route.component} />
+                                ))}
+                            </Route>
                             <Route path='*' element={<Missing />} />
                         </Route>
                     </Routes>
                 </ThemeProvider>
             </ColorModeContext.Provider>
-        </AuthContextProvider>
+        </AuthContextProvider >
     );
 }
 

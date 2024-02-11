@@ -1,11 +1,13 @@
-import { Box, Button, Grid, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-import { ClearAllOutlined } from '@mui/icons-material';
-import imagePath from './blueLogoAsset 1.png';
-import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../Data/AppRoutes';
-
+import { useState } from 'react'
+import { Paper, Box, Grid, Typography } from '@mui/material'
+import FormTextField from '../../Components/StyledComponents/FormTextField'
+import FormClearButton from '../../Components/StyledComponents/FormClearButton'
+import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
+import { ClearAllOutlined, LoginOutlined } from '@mui/icons-material';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useAuthContext from '../../auth/useAuthContext'
+import * as authService from '../../services/authService';
+import { AppRoutes } from '../../Data/AppRoutes'
 
 const Login = () => {
 
@@ -14,66 +16,91 @@ const Login = () => {
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
-
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const handleLogin = () => {
-        // Perform login logic here
-        if (username.trim() === 'rividco' && password.trim() === 'rividco123') {
-            navigate(AppRoutes.home.path)
-        } else {
-            alert("Username or Password Incorrect...")
-        }
+    const from = location?.state?.from || AppRoutes.home.path;
 
-        if (username.trim() === '') {
+
+    const { setAuth } = useAuthContext();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (username === '') {
             setUsernameError(true);
-        } else {
-            setUsernameError(false);
+            return false;
         }
 
-        if (password.trim() === '') {
+        if (password === '') {
             setPasswordError(true);
-        } else {
-            setPasswordError(false);
+            return false;
         }
+
+        // Call the login service here
+        authService.login(username, password)
+            .then(
+                user => {
+                    setAuth({ ...user, username });
+                    navigate(from, { replace: true });
+                }
+            )
+            .catch(
+                error => {
+                    console.error('Error logging in: ', error);
+                }
+            );
     };
 
 
     return (
-        <div>
-            <Grid
-                container
-                justifyContent="center"
-                alignItems="center"
-                style={{ minHeight: '100vh' }}
+        <Box
+            display='flex'
+            width='100%'
+            height='100%'
+            justifyContent='center'
+            alignItems='center'
+        >
+            <Paper
+                elevation={4}
+                sx={{
+                    p: 2,
+                    borderRadius: 2,
+                    width: '50%',
+                    maxWidth: '400px'
+                }}
             >
-                <Box
-                    paddingTop={5}
+                <Grid
+                    container
+
                     sx={{
-                        width: 600,
-                        boxShadow: 8
+                        '& .MuiGrid-item': {
+                            display: 'flex',
+                            justifyContent: 'center',
+                            p: 1,
+                        }
+                    }}
+
+                    component='form'
+                    onSubmit={handleSubmit}
+                    onReset={() => {
+                        setUsername('');
+                        setPassword('');
                     }}
                 >
+                    <Grid item xs={12} mb={2}>
+                        <Typography variant='h1' fontWeight='bold'>
+                            LOG IN
+                        </Typography>
+                    </Grid>
 
-                    <Typography variant='h3' style={{ margin: '2%', textAlign: 'center', fontWeight: 'bold' }}>
-                        LogIn
-                    </Typography>
-
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '5%' }}>
-                        <img
-                            src={imagePath}
-                            alt="companyLogo"
-                            style={{ width: '300px', height: '80px' }}
-                        />
-                    </div>
-
-                    <Grid sx={{ padding: "1em 3em 1em 3em !important" }}>
-                        <TextField
+                    <Grid item xs={12}>
+                        <FormTextField
+                            fullWidth
                             id="username"
                             variant='outlined'
                             label='Username'
                             placeholder='Enter Username'
-                            sx={{ width: "100%" }}
                             value={username}
                             required
                             onChange={(e) => {
@@ -85,15 +112,15 @@ const Login = () => {
                         />
                     </Grid>
 
-                    <Grid sx={{ padding: "1em 3em 1em 3em !important" }}>
-                        <TextField
+                    <Grid item xs={12}>
+                        <FormTextField
+                            fullWidth
                             type='password'
                             id="password"
                             variant='outlined'
                             label='Password'
                             placeholder='Enter Password'
                             required
-                            sx={{ width: "100%" }}
                             value={password}
                             onChange={(e) => {
                                 setPassword(e.target.value);
@@ -104,58 +131,51 @@ const Login = () => {
                         />
                     </Grid>
 
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "end",
-                            padding: "1em 2em 0em 2em !important",
-                        }}
-                    >
+                    <Grid
+                        item
+                        container
+                        direction='row'
+                        justifyContent='center'
+                        alignItems='center'
 
-                        <Button
-                            variant="outlined"
-                            sx={{ width: "8.5rem", margin: "1em 0em !important" }}
-                            color="primary"
+                        sx={{
+                            mt: 2,
+                            '& .MuiButton-root': {
+                                ml: 1,
+                                mr: 1,
+                                pl: 2,
+                                pr: 2
+                            }
+                        }}
+                        xs={12}>
+                        <FormClearButton
+                            type='reset'
+                            variant='outlined'
+                            size='large'
                             startIcon={<ClearAllOutlined />}
-                            onClick={() => {
-                                setUsername('');
-                                setPassword('');
-                            }}
                         >
                             Clear
-                        </Button>
+                        </FormClearButton>
 
-                        <Button
-                            variant="contained"
-                            sx={{ width: "8.5rem", margin: "1em 3em 1em 1em !important" }}
-                            color="primary"
-                            startIcon={<LoginOutlinedIcon />}
-                            onClick={handleLogin}
+                        <FormSaveLoadingButton
+                            type='submit'
+                            variant='contained'
+                            size='large'
+                            startIcon={<LoginOutlined />}
                         >
                             LogIn
-                        </Button>
+                        </FormSaveLoadingButton>
+                    </Grid>
 
-                    </div>
-
-                    <Grid
-                        sx={{
-                            width: '100%',
-                            backgroundColor: '#1e4072',
-                            bottom: 0,
-                            height: '53px',
-                            marginTop: '5%',
-                            padding: '3px',
-                        }}
-                    >
+                    <Grid item xs={12}>
                         <Typography variant='h6' style={{ margin: '2%', textAlign: 'center', color: 'white' }}>
                             RIVIDCO PVT LTD
                         </Typography>
-
                     </Grid>
+                </Grid>
+            </Paper>
+        </Box>
 
-                </Box>
-            </Grid>
-        </div>
     )
 }
 
