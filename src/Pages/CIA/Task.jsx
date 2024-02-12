@@ -114,6 +114,7 @@ export default function Task(props) {
                         placeholder="Enter any description"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         multiline
                         required
                         value={values.description}
@@ -132,6 +133,7 @@ export default function Task(props) {
                         select
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.category}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -152,6 +154,7 @@ export default function Task(props) {
                         placeholder="Enter telephone number"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         required
                         value={values.callbacknumber}
                         onChange={handleChange}
@@ -168,6 +171,7 @@ export default function Task(props) {
                         label="Requested Customer"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         required
                         onClick={() => {
                             if (!values.selectedCustomer?.title && props.type !== 'view') {
@@ -223,6 +227,7 @@ export default function Task(props) {
                         label="Project Regarding"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         onClick={() => {
                             if (!values.selectedProject?.title && props.type !== 'view') {
                                 setOpenProject(true)
@@ -254,6 +259,7 @@ export default function Task(props) {
                         label="Assigned Employee"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         onClick={() => {
                             if (!values.selectedEmployee?.title && props.type !== 'view') {
                                 setOpenEmployee(true)
@@ -285,6 +291,7 @@ export default function Task(props) {
                         select
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.status}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -306,6 +313,7 @@ export default function Task(props) {
                         variant="outlined"
                         defaultValue="None"
                         fullWidth
+                        size='small'
                         value={values.urgency}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -326,7 +334,9 @@ export default function Task(props) {
                         placeholder="Enter any comment"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         multiline
+                        rows={4}
                         value={values.comment}
                         onChange={handleChange}
                         onBlur={handleBlur}
