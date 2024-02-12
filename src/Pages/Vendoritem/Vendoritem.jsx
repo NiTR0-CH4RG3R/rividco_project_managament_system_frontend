@@ -115,6 +115,7 @@ export default function Vendoritem(props) {
                         name="product_name"
                         label="Product name "
                         fullWidth
+                        size="small"
                         value={values.product_name} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
@@ -130,6 +131,7 @@ export default function Vendoritem(props) {
                         name="vendor"
                         label="Vendor "
                         fullWidth
+                        size="small"
                         onClick={() => {
                             if (!values.selectedVendor?.title && props.type !== "view") {
                                 setOpenVendor(true);
@@ -171,6 +173,7 @@ export default function Vendoritem(props) {
                         multiline
                         maxRows={4}
                         fullWidth
+                        size="small"
                         value={values.price} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
@@ -189,6 +192,7 @@ export default function Vendoritem(props) {
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
                         fullWidth={true}
+                        size="small"
                         error={touched.warranty_duration && errors.warranty_duration}
                         helperText={
                             touched.warranty_duration ? errors.warranty_duration : ""
@@ -203,6 +207,7 @@ export default function Vendoritem(props) {
                         name="capacity"
                         label="Capacity "
                         fullWidth
+                        size="small"
                         value={values.capacity} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
@@ -219,6 +224,7 @@ export default function Vendoritem(props) {
                         name="brand"
                         label="Brand"
                         fullWidth
+                        size="small"
                         value={values.brand} //set value using formikß
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
@@ -235,6 +241,7 @@ export default function Vendoritem(props) {
                         name="ProductCode"
                         label="Product Code"
                         fullWidth
+                        size="small"
                         value={values.productCode} //set value using formikß
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
@@ -253,6 +260,7 @@ export default function Vendoritem(props) {
                         multiline
                         rows={4}
                         fullWidth
+                        size="small"
                         value={values.comments} //set value using formikß
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
