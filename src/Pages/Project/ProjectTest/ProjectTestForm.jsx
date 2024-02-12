@@ -31,6 +31,11 @@ function TaskForm() {
     initialValues: {
       status: "",
       comment: "",
+      testName: "",
+      result:"",
+      conductedBy:"",
+      conductedDate:"",
+
     },
     onSubmit: (values) => {
       console.log("form values", values);
@@ -56,7 +61,7 @@ function TaskForm() {
           <div>
             <TextField
               id="testName"
-              name="Test Name"
+              name="testName"
               label="Test Name"
               value={values.task}
             ></TextField>
@@ -70,10 +75,10 @@ function TaskForm() {
               name="result"
               select
               label="Result"
-              value={values.status}
+              value={values.result}
               onBlur={handleBlur}
-              error={touched.status && errors.status}
-              helperText={touched.status ? errors.status : ""}
+              error={touched.result && errors.result}
+              helperText={touched.result ? errors.result : ""}
               onChange={handleChange}
             >
               {result.map((option) => (
@@ -89,14 +94,14 @@ function TaskForm() {
             <TextField
               required
               id="conductedBy"
-              name="Conducted By"
+              name="conductedBy"
               select
               label="Conducted By"
-              value={values.status}
-              onBlur={handleBlur}
-              error={touched.status && errors.status}
-              helperText={touched.status ? errors.status : ""}
+              value={values.conductedBy}            
+              error={touched.conductedBy && errors.conductedBy}
+              helperText={touched.conductedBy ? errors.conductedBy : ""}
               onChange={handleChange}
+              onBlur={handleBlur}
             >
               {conductedby.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -108,12 +113,22 @@ function TaskForm() {
 
           {/* ---------------- Conducted Date field ------------------ */}
           <div>
+          
             <TextField
-              id="conductedDate"
-              name="Conducted Date"
-              label="Conducted Date"
-              value={values.task}
-            ></TextField>
+                        required
+                        type="date"
+                        placeholder="Select the Commision Date"
+                        id="conductedDate"
+                        name="conductedDate"
+                        label="Conducted Date"
+                        fullWidth
+                        value={values.startDate} //set value using formik
+                        onChange={handleChange} //get onchange value using formik
+                        onBlur={handleBlur}
+                        InputLabelProps={{ shrink: true }}
+                        error={touched.conductedDate && errors.conductedDate}
+                        helperText={touched.conductedDate ? errors.conductedDate : ""}
+                    />
           </div>
 
           {/* ---------------- comment field ------------------ */}

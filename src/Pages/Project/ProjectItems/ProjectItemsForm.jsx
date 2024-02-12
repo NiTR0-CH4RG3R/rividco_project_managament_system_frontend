@@ -29,9 +29,9 @@ function TaskForm() {
     } = useFormik({
     initialValues :{
       
-      vendor_item :'',
-      serial_number :'',
-      warranty_period :'',
+      vendorItem :'',
+      serialNumber :'',
+      warrantyPeriod :'',
       comment :''
 
     },
@@ -61,14 +61,14 @@ function TaskForm() {
           <div>
           <TextField
               required
-              id="vendor_item"
-              name="vendor_item"
+              id="vendorItem"
+              name="vendorItem"
               select
               label="Vendor Item"
-              value={values.vendor_item}
+              value={values.vendorItem}
               onBlur={handleBlur}
-              error={touched.status && errors.status}
-              helperText={touched.status ? errors.status : ''}
+              error={touched.vendorItem && errors.vendorItem}
+              helperText={touched.vendorItem ? errors.vendorItem : ''}
               onChange={handleChange}
                 
           >
@@ -84,8 +84,8 @@ function TaskForm() {
            <div>
             <TextField
                 
-                id="serial_number"
-                name='serial_number'
+                id="serialNumber"
+                name='serialNumber'
                 label="Serial Number"
                 value={values.serial_number}
                 onChange={handleChange}
@@ -97,10 +97,10 @@ function TaskForm() {
             <div>
             <TextField
                 
-                id="warranty_period"
-                name="warranty_period"
+                id="warrantyPeriod"
+                name="warrantyPeriod"
                 label="Warranty Period"
-                value={values.warranty_period}
+                value={values.warrantyPeriod}
                 onChange={handleChange}
             >
           </TextField>
