@@ -133,6 +133,7 @@ export default function SystemUser(props) {
                         sx={{ width: 100, height: 100 }}
                     />
                     <input
+                    
                         accept="image/*"
                         ref={inputRef}
                         style={{ display: 'none' }}
@@ -141,6 +142,7 @@ export default function SystemUser(props) {
                     />
                     <FormButton
                         variant="contained"
+                        
                         onClick={() => {
                             handleButtonClick()
                             handleSaveClick()
