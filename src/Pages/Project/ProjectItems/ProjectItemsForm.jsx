@@ -88,6 +88,7 @@ function TaskForm() {
                 name='serial_number'
                 label="Serial Number"
                 value={values.serial_number}
+                onChange={handleChange}
             >
           </TextField>
           </div>
@@ -100,6 +101,7 @@ function TaskForm() {
                 name="warranty_period"
                 label="Warranty Period"
                 value={values.warranty_period}
+                onChange={handleChange}
             >
           </TextField>
           </div>
