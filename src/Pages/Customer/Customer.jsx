@@ -124,6 +124,7 @@ export default function Customer(props) {
             placeholder="Please Enter Your First Name"
             name="firstName"
             label="First Name"
+            size="small"
             fullWidth
             value={values.firstName} //set value using formik
             onChange={handleChange} //get onchange value using formik
@@ -139,6 +140,7 @@ export default function Customer(props) {
             placeholder="Please Enter Your Last Name"
             name="lastName"
             label="Last Name "
+            size="small"
             fullWidth
             value={values.lastName} //set value using formik
             onChange={handleChange} //get onchange value using formik
@@ -158,7 +160,8 @@ export default function Customer(props) {
             label="Address "
             multiline
             maxRows={4}
-            sx={{ width: "100%" }}
+            fullWidth
+            size="small"
             value={values.address} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -174,7 +177,8 @@ export default function Customer(props) {
             id="c_email"
             name="email"
             label="Email "
-            sx={{ width: "100%" }}
+            fullWidth
+            size="small"
             value={values.email} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -191,7 +195,8 @@ export default function Customer(props) {
             name="category"
             select
             label="Category "
-            sx={{ width: "100%" }}
+            fullWidth
+            size="small"
             value={values.category} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -220,7 +225,8 @@ export default function Customer(props) {
                 ? "Please enter the nature of the business "
                 : "Please enter the profession of the customer"
             }
-            sx={{ width: "100%" }}
+            fullWidth
+            size="small"
             value={values.profession} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -234,6 +240,7 @@ export default function Customer(props) {
             name="customerId"
             label="Customer Id"
             fullWidth
+            size="small"
             value={values.customerId} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -249,7 +256,8 @@ export default function Customer(props) {
             id="c_mobile_no"
             name="mobileNumber"
             label="Mobile No "
-            sx={{ width: "100%" }}
+            fullWidth
+            size="small"
             value={values.mobileNumber} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -264,7 +272,8 @@ export default function Customer(props) {
             id="c_office_no"
             name="officeNumber"
             label="Office No"
-            sx={{ width: "100%" }}
+            fullWidth
+            size="small"
             value={values.officeNumber} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
@@ -281,7 +290,8 @@ export default function Customer(props) {
             label="Comment"
             multiline
             rows={4}
-            sx={{ width: "100%" }}
+            fullWidth
+            size="small"
             value={values.comment} //set value using formikß
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
