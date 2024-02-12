@@ -159,6 +159,7 @@ export default function SystemUser(props) {
                         placeholder="First Name"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.firstName} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         onBlur={handleBlur}
@@ -177,6 +178,7 @@ export default function SystemUser(props) {
                         placeholder="Last Name"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.lastName} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         onBlur={handleBlur}
@@ -196,6 +198,7 @@ export default function SystemUser(props) {
                         multiline
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.address} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         onBlur={handleBlur}
@@ -214,6 +217,7 @@ export default function SystemUser(props) {
                         placeholder="E-mail"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.email} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         onBlur={handleBlur}
@@ -233,6 +237,7 @@ export default function SystemUser(props) {
                         helperText="Please select the Role"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.role} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         onBlur={handleBlur}
@@ -256,6 +261,7 @@ export default function SystemUser(props) {
                         placeholder="Mobile No:"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.mobileNo} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         onBlur={handleBlur}
@@ -273,6 +279,7 @@ export default function SystemUser(props) {
                         placeholder="Office No:"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.officeNo} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         onBlur={handleBlur}
@@ -291,6 +298,7 @@ export default function SystemUser(props) {
                         placeholder="Username"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.userName} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         onBlur={handleBlur}
@@ -308,6 +316,7 @@ export default function SystemUser(props) {
                         placeholder="password"
                         variant="outlined"
                         fullWidth
+                        size='small'
                         value={values.password} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         onBlur={handleBlur}
@@ -326,6 +335,7 @@ export default function SystemUser(props) {
                         multiline
                         variant="outlined"
                         fullWidth
+                        size='small'
                         rows={4}
                         value={values.comment} //set value using formik
                         onChange={handleChange} //get onchange value using formik
