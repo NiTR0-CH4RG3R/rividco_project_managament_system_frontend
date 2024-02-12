@@ -100,6 +100,7 @@ export default function Vendor(props) {
                         name="name"
                         label="Name "
                         fullWidth
+                        size="small"
                         value={values.name} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
@@ -118,6 +119,7 @@ export default function Vendor(props) {
                         multiline
                         maxRows={4}
                         fullWidth
+                        size="small"
                         value={values.address}
                         onChange={handleChange}
                         disabled={props.type === "view"}
@@ -134,6 +136,7 @@ export default function Vendor(props) {
                         name="email"
                         label="Email "
                         fullWidth
+                        size="small"
                         value={values.email}
                         onChange={handleChange}
                         disabled={props.type === "view"}
@@ -149,6 +152,7 @@ export default function Vendor(props) {
                         name="email"
                         label="Registration Number"
                         fullWidth
+                        size="small"
                         value={values.registrationNumber}
                         onChange={handleChange}
                         disabled={props.type === "view"}
@@ -167,6 +171,7 @@ export default function Vendor(props) {
                         name="mobileNumber"
                         label="Mobile No "
                         fullWidth
+                        size="small"
                         value={values.mobileNumber}
                         onChange={handleChange}
                         disabled={props.type === "view"}
@@ -181,6 +186,7 @@ export default function Vendor(props) {
                         name="officeNumber"
                         label="Office No"
                         fullWidth
+                        size="small"
                         value={values.officeNumber}
                         onChange={handleChange}
                         disabled={props.type === "view"}
@@ -197,6 +203,7 @@ export default function Vendor(props) {
                         multiline
                         rows={4}
                         fullWidth
+                        size="small"
                         value={values.comment} //set value using formikß
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
