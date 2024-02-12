@@ -18,9 +18,11 @@ import FormTextField from "../../Components/StyledComponents/FormTextField";
 import FormClearButton from "../../Components/StyledComponents/FormClearButton";
 import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
 import FormButton from "../../Components/StyledComponents/FormButton";
+import ProjectFilterModal from "./ProjectFilterModal";
 
 export default function Customer(props) {
   const [loading, setLoading] = useState(false);
+  const [openProjectFilter,setOpenProjectFilter]=useState(false);
   const [categoryType, setCategoryType] = useState([]);
 
   function loadCustomerData(id) {
@@ -315,7 +317,9 @@ export default function Customer(props) {
         )}
         {props.type === "view" && (
           <>
-            <FormButton variant="contained" color="primary" sx={{ mr: 2 }}>
+            <FormButton variant="contained" color="primary" sx={{ mr: 2 }}
+            onClick={() => setOpenProjectFilter(true)}
+            >
               Projects
             </FormButton>
             <FormButton
@@ -329,6 +333,11 @@ export default function Customer(props) {
           </>
         )}
       </Box>
+      <ProjectFilterModal
+      openProjectFilter={openProjectFilter}
+      setOpenProjectFilter={setOpenProjectFilter}
+      id={id}
+      />
     </Box>
   );
 }
