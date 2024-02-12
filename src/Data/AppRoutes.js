@@ -26,7 +26,7 @@ export const AppRoutes = {
     /* Customer related routes */
     customer_list: { path: "/customer/list", component: <CustomerList />, },
     customer_add: { path: "/customer/add", component: <Customer type="add" /> },
-    customer_view: { subtitle: "", path: "/customer/view", component: <Customer type="view" />, },
+    customer_view: { subtitle: "", path: "/customer/view/:id", component: <Customer type="view" />, },
     customer_edit: { subtitle: "", path: "/customer/edit", component: <Customer type="edit" />, },
 
     /* Vendor related routes */
