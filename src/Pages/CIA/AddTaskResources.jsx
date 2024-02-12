@@ -151,7 +151,8 @@ const AddTaskResources = (props) => {
                                 variant="outlined"
                                 disabled
                                 label="TaskId"
-                                sx={{ width: '100%' }}
+                                fullWidth
+                                size='small'
                                 {...formik.getFieldProps('taskId')}
                             />
                         </Grid>
@@ -181,7 +182,8 @@ const AddTaskResources = (props) => {
                                 onChange={handlePathChange}
                                 label="Category"
                                 required
-                                sx={{ width: '100%' }}
+                                fullWidth
+                                size='small'
                             >
                                 <MenuItem value="images">Image</MenuItem>
                                 <MenuItem value="documents">Document</MenuItem>
@@ -195,7 +197,8 @@ const AddTaskResources = (props) => {
                             <FormTextField
                                 variant="outlined"
                                 label="AddedBy"
-                                sx={{ width: '100%' }}
+                                fullWidth
+                                size='small'
                                 placeholder="Add a consumer"
                                 required
                                 {...formik.getFieldProps('addedBy')}
@@ -207,7 +210,7 @@ const AddTaskResources = (props) => {
 
                         {/* ---------------AddedDate Field---------------- */}
 
-                        <Grid item xs={5}>
+                        <Grid item xs={6}>
                             <FormTextField
                                 variant="outlined"
                                 type="date"
@@ -217,7 +220,8 @@ const AddTaskResources = (props) => {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
-                                sx={{ width: '100%' }}
+                                fullWidth
+                                size='small'
                                 {...formik.getFieldProps('addedDate')}
                                 error={
                                     formik.touched.addedDate && Boolean(formik.errors.addedDate)
@@ -229,10 +233,11 @@ const AddTaskResources = (props) => {
 
                         {/* ---------------FileUpload Field---------------- */}
 
-                        <Grid item xs={5}>
+                        <Grid item xs={4}>
                             <FormTextField
                                 type="file"
-                                sx={{ width: '100%' }}
+                                fullWidth
+                                size='small'
                                 {...formik.getFieldProps('selectedFile')}
                                 onChange={handleFileChange}
                                 required
@@ -261,7 +266,8 @@ const AddTaskResources = (props) => {
                             <FormTextField
                                 variant="outlined"
                                 label="Comment"
-                                sx={{ width: '100%' }}
+                                fullWidth
+                                size='small'
                                 multiline
                                 required
                                 rows={4}
