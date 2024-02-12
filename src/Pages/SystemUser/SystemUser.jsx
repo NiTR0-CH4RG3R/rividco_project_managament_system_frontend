@@ -208,7 +208,7 @@ export default function SystemUser(props) {
                     />
                 </Grid>
 
-                <Grid item xs={8}>
+                <Grid item xs={6}>
                     <FormTextField
                         required
                         id="email"
@@ -227,14 +227,14 @@ export default function SystemUser(props) {
                     />
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={6}>
                     <FormTextField
                         required
                         id="role"
                         name="role"
                         label="Role"
                         select
-                        helperText="Please select the Role"
+                        
                         variant="outlined"
                         fullWidth
                         size='small'
@@ -243,6 +243,7 @@ export default function SystemUser(props) {
                         onBlur={handleBlur}
                         disabled={props.type === 'view'}
                         error={touched.role && errors.role}
+                        helperText={touched.role ? errors.role : ''}
                     >
                         {roles.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
