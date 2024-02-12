@@ -15,7 +15,7 @@ const projectItemsValidation = yup.object().shape({
   
 })
 
-function TaskForm() {
+function ProjectItemsForm() {
 
   const {
     values,
@@ -137,4 +137,4 @@ function TaskForm() {
   )
 }
 
-export default TaskForm
+export default ProjectItemsForm

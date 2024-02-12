@@ -17,7 +17,7 @@ const projectTestValidation = yup.object().shape({
   status: yup.string().required("Required"),
 });
 
-function TaskForm() {
+function ProjectTestForm() {
   const {
     values,
     errors,
@@ -63,7 +63,7 @@ function TaskForm() {
               id="testName"
               name="testName"
               label="Test Name"
-              value={values.task}
+              value={values.testName}
             ></TextField>
           </div>
 
@@ -171,4 +171,4 @@ function TaskForm() {
   );
 }
 
-export default TaskForm;
+export default ProjectTestForm;

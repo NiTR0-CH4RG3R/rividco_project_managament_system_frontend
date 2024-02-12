@@ -49,32 +49,7 @@ const rows = [
   
 ];
 
-// const columns = [
-//   {
-//     field: 'userId',
-//     headerName: 'User ID',
-//     align: 'center',
-//     headerAlign: 'center',
-//   },
-//   {
-//     field: 'id',
-//     headerName: 'ID',
-//     align: 'center',
-//     headerAlign: 'center',
-//   },
-//   {
-//     field: 'title',
-//     headerName: 'Title',
-//     align: 'center',
-//     headerAlign: 'center',
-//   },
-//   {
-//     field: 'completed',
-//     headerName: 'Completed',
-//     align: 'center',
-//     headerAlign: 'center',
-//   },
-// ]
+
 
 // {/* ---------------- add Custom toolbar  ------------------ */}
 function CustomToolbar() {
@@ -85,7 +60,7 @@ function CustomToolbar() {
   );
 }
 
-export default function TaskTable() {
+export default function ProjectItemsTable() {
 
   // const [rows, setRows] = useState([])
 
