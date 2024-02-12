@@ -24,29 +24,29 @@ const columns = [
   {
     field: 'conductedDate',
     headerName: 'Conducted Date',
-    width: 250,
+    width: 100,
     editable: true,
   },
   {
     field: 'comment',
     headerName: 'Comment',
-    width: 100,
+    width: 200,
     editable: true,
   }
 ];
 
 
 const rows = [
-  { id:'11' ,testName: 'Test 1', result: 'Pass', conductedBy: 'Admin 01' ,comment:'Comment 01' },
-  { id:'12' ,testName: 'Test 2', result: 'Fail', conductedBy: 'Admin 02' ,comment:'Comment 02' },
-  { id:'13' ,testName: 'Test 3', result: 'Pass', conductedBy: 'Admin 01' ,comment:'Comment 03' },
-  { id:'14' ,testName: 'Test 4', result: 'Pass', conductedBy: 'Admin 01' ,comment:'Comment 04' },
-  { id:'15' ,testName: 'Test 5', result: 'Fail', conductedBy: 'Admin 07' ,comment:'Comment 05' },
-  { id:'16' ,testName: 'Test 6', result: 'Fail', conductedBy: 'Admin 01' ,comment:'Comment 06' },
-  { id:'17' ,testName: 'Test 7', result: 'Pass', conductedBy: 'Admin 01' ,comment:'Comment 07' },
-  { id:'18' ,testName: 'Test 8', result: 'Fail', conductedBy: 'Admin 09' ,comment:'Comment 08' },
-  { id:'19' ,testName: 'Test 9', result: 'Fail', conductedBy: 'Admin 01' ,comment:'Comment 09' },
-  { id:'22' ,testName: 'Test 10', result: 'Pass', conductedBy: 'Admin 08' ,comment:'Comment 10' },
+  { id:'11' ,testName: 'Test 1', result: 'Pass', conductedBy: 'Admin 01' , comment:'Comment 02', conductedDate:'01/02/2023' },
+  { id:'12' ,testName: 'Test 2', result: 'Fail', conductedBy: 'Admin 02' , comment:'Comment 02', conductedDate:'01/02/2023' },
+  { id:'13' ,testName: 'Test 3', result: 'Pass', conductedBy: 'Admin 01' , comment:'Comment 02', conductedDate:'01/02/2023' },
+  { id:'14' ,testName: 'Test 4', result: 'Pass', conductedBy: 'Admin 01' , comment:'Comment 02', conductedDate:'01/02/2023' },
+  { id:'15' ,testName: 'Test 5', result: 'Fail', conductedBy: 'Admin 07' , comment:'Comment 02', conductedDate:'01/02/2023' },
+  { id:'16' ,testName: 'Test 6', result: 'Fail', conductedBy: 'Admin 01' , comment:'Comment 02', conductedDate:'01/02/2023' },
+  { id:'17' ,testName: 'Test 7', result: 'Pass', conductedBy: 'Admin 01' , comment:'Comment 02', conductedDate:'01/02/2023' },
+  { id:'18' ,testName: 'Test 8', result: 'Fail', conductedBy: 'Admin 09' , comment:'Comment 02', conductedDate:'01/02/2023' },
+  { id:'19' ,testName: 'Test 9', result: 'Fail', conductedBy: 'Admin 01' , comment:'Comment 02', conductedDate:'01/02/2023' },
+  { id:'22' ,testName: 'Test 10', result: 'Pass', conductedBy: 'Admin 08' ,comment:'Comment 02', conductedDate:'01/02/2023' },
   
 ];
 

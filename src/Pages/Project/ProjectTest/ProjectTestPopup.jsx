@@ -1,14 +1,14 @@
 import { Dialog, DialogContent, DialogTitle } from '@mui/material'
 import React from 'react'
-import ProjectItemsForm from './ProjectItemsForm'
+import ProjectTestForm from './ProjectTestForm'
 
-export default function ProjectItemsPopup(props) {
+export default function ProjectTestPopup(props) {
   const { openPopUp, setOpenPopup } = props
   return (
     <Dialog open={openPopUp} onClose={() => setOpenPopup(false)}>
-      <DialogTitle>Add New Item</DialogTitle>
+      <DialogTitle>Add New Test</DialogTitle>
       <DialogContent>
-        <ProjectItemsForm />
+        <ProjectTestForm />
       </DialogContent>
     </Dialog>
   )

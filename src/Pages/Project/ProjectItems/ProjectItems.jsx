@@ -1,7 +1,6 @@
 import { Box, Grid } from '@mui/material'
 import React, { useState } from 'react'
 import ProjectTable from '../ProjectItems/ProjectItemsTable'
-import ProjectForm from '../ProjectItems/ProjectItemsForm'
 import { useTopbarContext } from '../../../Contexts/TopbarContext'
 import FormSaveLoadingButton from '../../../Components/StyledComponents/FormSaveLoadingButton'
 import ProjectItemsPopup from '../ProjectItems/ProjectItemsPopup'

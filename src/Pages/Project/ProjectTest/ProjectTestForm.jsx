@@ -64,6 +64,8 @@ function ProjectTestForm() {
               name="testName"
               label="Test Name"
               value={values.testName}
+              onChange={handleChange}
+
             ></TextField>
           </div>
 
