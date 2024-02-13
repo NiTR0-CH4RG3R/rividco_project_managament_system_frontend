@@ -578,14 +578,26 @@ export default function Project(props) {
           </>
         )}
         {props.type === "view" && (
-          <FormButton
-            variant="contained"
-            color="primary"
-            startIcon={<EditIcon />}
-            onClick={() => navigate(`${AppRoutes.project_edit.path}/${id}`)}
-          >
-            Edit
-          </FormButton>
+          <>
+            <FormButton
+              variant="contained"
+              color="primary"
+              sx={{
+                mr: 2,
+              }}
+              onClick={() => navigate(`${AppRoutes.project_commsion_report.path.replace(':id',id)}`)}
+            >
+              Commision Reports
+            </FormButton>
+            <FormButton
+              variant="contained"
+              color="primary"
+              startIcon={<EditIcon />}
+              onClick={() => navigate(`${AppRoutes.project_edit.path.replace(':id',id)}}`)}
+            >
+              Edit
+            </FormButton>
+          </>
         )}
       </Box>
 
