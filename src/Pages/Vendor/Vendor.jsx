@@ -245,7 +245,7 @@ export default function Vendor(props) {
                         variant="contained"
                         color="primary"
                         startIcon={<EditIcon />}
-                        onClick={() => navigate(`${AppRoutes.vendor_edit.path}/${id}`)}
+                        onClick={() => navigate(`${AppRoutes.vendor_edit.path.replace(':id',id)}`)}
                     >
                         Edit
                     </FormButton>
