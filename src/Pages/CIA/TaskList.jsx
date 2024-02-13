@@ -61,7 +61,7 @@ export default function TaskList() {
                 onRowsPerPageChange: (e) => { console.log(e.target.value); }
             }}
             disableSearchBar
-            customUpperBar={<UpperBar />}
+            // customUpperBar={<UpperBar />}
         />
     );
 }

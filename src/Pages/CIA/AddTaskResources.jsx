@@ -11,6 +11,7 @@ import { useTopbarContext } from '../../Contexts/TopbarContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import ListPage from '../../Components/ListPage/ListPage'
 import { AppRoutes } from '../../Data/AppRoutes'
+import { Remove } from '@mui/icons-material'
 
 const AddTaskResources = (props) => {
 
@@ -167,6 +168,7 @@ const AddTaskResources = (props) => {
                             variant="outlined"
                             color="error"
                             onClick={() => handleRemoveField(index)}
+                            startIcon={<Remove />}
                         >
                             Remove
                         </FormButton>
