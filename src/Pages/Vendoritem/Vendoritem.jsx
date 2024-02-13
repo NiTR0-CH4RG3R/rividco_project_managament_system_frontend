@@ -302,7 +302,7 @@ export default function Vendoritem(props) {
                         color="primary"
                         startIcon={<EditIcon />}
                         onClick={() =>
-                            navigation(`${AppRoutes.vendor_item_edit.path}/${id}`)
+                            navigation(`${AppRoutes.vendor_item_edit.path.replace(':id',id)}`)
                         }
                     >
                         Edit
