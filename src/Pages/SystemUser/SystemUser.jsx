@@ -385,7 +385,7 @@ export default function SystemUser(props) {
                                 variant="contained"
                                 size="large"
                                 startIcon={<EditIcon />}
-                                onClick={() => navi(`${AppRoutes.system_user_edit.path}/${id}`)}
+                                onClick={() => navi(`${AppRoutes.system_user_edit.path.replace(':id',id)}}`)}
                             >
                                 Edit
                             </FormEditButton>
