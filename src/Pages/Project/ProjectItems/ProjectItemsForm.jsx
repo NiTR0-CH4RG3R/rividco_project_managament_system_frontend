@@ -8,6 +8,8 @@ import { vendoritems } from './ProjectItemsData';
 import { useFormik } from 'formik';
 import * as yup from 'yup'
 import { ClearAll, Save } from '@mui/icons-material';
+import WarrentyField from "../../../Components/WarrentyField/WarrentyField";
+
 
 {/* ---------------- Validation part ------------------ */}
 const projectItemsValidation = yup.object().shape({
@@ -87,7 +89,7 @@ function ProjectItemsForm() {
                 id="serialNumber"
                 name='serialNumber'
                 label="Serial Number"
-                value={values.serial_number}
+                value={values.serialNumber}
                 onChange={handleChange}
             >
           </TextField>
@@ -95,15 +97,15 @@ function ProjectItemsForm() {
 
             {/* ----------------Warranty Period------------------ */}
             <div>
-            <TextField
-                
-                id="warrantyPeriod"
-                name="warrantyPeriod"
-                label="Warranty Period"
-                value={values.warrantyPeriod}
-                onChange={handleChange}
-            >
-          </TextField>
+              
+            <WarrentyField 
+            required={true}
+            name="warrantyPeriod"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            fullWidth={true}
+            size="small"
+          />
           </div>
 
 
