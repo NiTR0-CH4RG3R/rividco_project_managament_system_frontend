@@ -9,7 +9,6 @@ import FormClearButton from '../../Components/StyledComponents/FormClearButton'
 import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
 import { useTopbarContext } from '../../Contexts/TopbarContext'
 import { useNavigate, useParams } from 'react-router-dom'
-import { WhatsApp } from '@mui/icons-material'
 import ListPage from '../../Components/ListPage/ListPage'
 import { AppRoutes } from '../../Data/AppRoutes'
 
@@ -49,10 +48,6 @@ const AddTaskResources = (props) => {
         console.log('Submitted fields:', fields);
     };
 
-    const openWhatsApp = () => {
-        window.open('https://web.whatsapp.com/', '_blank')
-    }
-
     const columns = [
         { id: 'category', label: 'Category', align: 'left' },
         { id: 'filelink', label: 'File Link', align: 'left' },
@@ -62,8 +57,7 @@ const AddTaskResources = (props) => {
     ];
 
     const [rows, setRows] = useState([
-        { id: 0, category: 'Image', filelink: 'file path or file link', comment: 'newly updated', addedby: 'john silva', addeddate: '2024-01-30', },
-        { id: 0, category: 'Document', filelink: 'file path or file link', comment: 'newly updated', addedby: 'john silva', addeddate: '2024-01-30', }
+        { id: 0, category: 'Image', filelink: 'file path or file link', comment: 'newly updated', addedby: 'john silva', addeddate: '2024-01-30', }
     ]);
 
     const { id } = useParams()
@@ -85,7 +79,7 @@ const AddTaskResources = (props) => {
         >
             {props.type === 'add' && (
             <Grid container spacing={2} sx={{ width: '70%', marginBottom: '1rem' }}>
-            <Grid item xs={8}>
+            <Grid item xs={12}>
                 <FormTextField
                     id="taskId"
                     variant="outlined"
@@ -95,29 +89,14 @@ const AddTaskResources = (props) => {
                     size='small'
                 />
             </Grid>
-
-            {/* ---------------Whatsapp link Button---------------- */}
-
-            <Grid item xs={2}>
-                <FormButton
-                    variant="contained"
-                    sx={{ width: '8.5rem', margin: '1em 0.5em !important' }}
-                    color="success"
-                    startIcon={<WhatsApp />}
-                    onClick={openWhatsApp}
-                    disabled={props.type === 'view'}
-                >
-                    WhatsApp
-                </FormButton>
-                </Grid>
-                </Grid>
+            </Grid>
             )}
                 
             {fields.map((field, index) => (
                 <Grid container spacing={2} key={index} sx={{ width: '70%', marginBottom: '1rem' }}>
                     {/* ---------------Category Field---------------- */}
                     {props.type === 'add' && (
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <FormTextField
                             select
                             variant="outlined"
@@ -137,7 +116,7 @@ const AddTaskResources = (props) => {
 
                     {/* ---------------FileUpload Field---------------- */}
                     {props.type === 'add' && (
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                         <FormTextField
                             type="file"
                             fullWidth
@@ -151,14 +130,13 @@ const AddTaskResources = (props) => {
                     {/* ---------------Comment Field---------------- */}
                     
                     {props.type === 'add' && (
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
                         <FormTextField
                             variant="outlined"
                             label="Comment"
                             fullWidth
                             required
                             size='small'
-                            multiline
                             rows={2}
                             value={field.comment}
                             onChange={(e) => handleChange(index, 'comment', e.target.value)}
@@ -166,24 +144,10 @@ const AddTaskResources = (props) => {
                     </Grid>
                     )}
 
-                    {/* Remove button */}
-
-                    {props.type === 'add' && (
-                    <Grid item xs={2}>
-                        <FormButton
-                            variant="outlined"
-                            color="error"
-                            onClick={() => handleRemoveField(index)}
-                        >
-                            Remove
-                        </FormButton>
-                    </Grid>
-                    )}
-
                     {/* Add button */}
 
                     {props.type === 'add' && (
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                     <FormButton
                         variant="outlined"
                         onClick={handleAddField}
@@ -191,6 +155,22 @@ const AddTaskResources = (props) => {
                     >
                         Add Field
                     </FormButton>
+                    </Grid>
+                    )}
+
+                    {/* Remove button */}
+
+                    {props.type === 'add' && (
+                    <Grid item xs={2}>
+                    {index !== 0 && ( // Conditionally render the Remove button
+                        <FormButton
+                            variant="outlined"
+                            color="error"
+                            onClick={() => handleRemoveField(index)}
+                        >
+                            Remove
+                        </FormButton>
+                    )}
                     </Grid>
                     )}
                 </Grid>
