@@ -10,7 +10,8 @@ import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoa
 import { useTopbarContext } from '../../Contexts/TopbarContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import { WhatsApp } from '@mui/icons-material'
-import ListPage from '../../Components/ListPage/ListPage';
+import ListPage from '../../Components/ListPage/ListPage'
+import { AppRoutes } from '../../Data/AppRoutes'
 
 const AddTaskResources = (props) => {
 
@@ -53,7 +54,7 @@ const AddTaskResources = (props) => {
     }
 
     const columns = [
-        { id: 'Category', label: 'Category', align: 'left' },
+        { id: 'category', label: 'Category', align: 'left' },
         { id: 'filelink', label: 'File Link', align: 'left' },
         { id: 'comment', label: 'Comment', align: 'left' },
         { id: 'addedby', label: 'Added By', align: 'left' },
@@ -61,7 +62,8 @@ const AddTaskResources = (props) => {
     ];
 
     const [rows, setRows] = useState([
-        { id: 0, category: 'image', filelink: '--', comment: 'newly updated', addedby: 'john silva', addeddate: '2024-01-30', }
+        { id: 0, category: 'Image', filelink: 'file path or file link', comment: 'newly updated', addedby: 'john silva', addeddate: '2024-01-30', },
+        { id: 0, category: 'Document', filelink: 'file path or file link', comment: 'newly updated', addedby: 'john silva', addeddate: '2024-01-30', }
     ]);
 
     const { id } = useParams()
@@ -79,6 +81,7 @@ const AddTaskResources = (props) => {
             alignItems="center"
             height="100vh"
             flexDirection="column"
+            width="90%"
         >
             {props.type === 'add' && (
             <Grid container spacing={2} sx={{ width: '70%', marginBottom: '1rem' }}>
@@ -220,6 +223,32 @@ const AddTaskResources = (props) => {
                     </FormSaveLoadingButton>
                 </div>
             </Box>
+            )}
+            {props.type === 'view' && (
+                <ListPage
+                    columns={columns}
+                    rows={rows}
+                    searchBarProps={{
+                        searchBy: 'category',
+                        onSearchChange: (e) => { console.log(e.target.value); },
+                        onSearchClick: (e) => { },
+                    }}
+                    onRowClick={(e, id) => {
+                        console.log(id);
+                    }}
+                    onAddButtonClick={(e) => {
+                        navi(AppRoutes.cia_resources_add.path)
+                    }}
+                    tablePaginationProps={{
+                        rowsPerPageOptions: [5, 10, 25, 100],
+                        component: "div",
+                        rowsPerPage: 5,
+                        page: 0,
+                        count: 100,
+                        onPageChange: (e, page) => { console.log(page); },
+                        onRowsPerPageChange: (e) => { console.log(e.target.value); }
+                    }}
+                /> 
             )}
         </Box>
         
