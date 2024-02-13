@@ -17,6 +17,7 @@ import ProjectItems from "../Pages/Project/ProjectItems/ProjectItems"
 import ProjectResources from "../Pages/Project/ProjectResources/ProjectResources"
 import Home from "../Pages/Home/Home";
 import Test from "../Pages/Test/Test";
+import CommisionReport from "../Pages/Project/CommisionReport";
 
 
 export const AppRoutes = {
@@ -51,6 +52,7 @@ export const AppRoutes = {
     project_test_list: { path: "/project/test", component: <ProjectTest />, },
     project_items_list: { path: "/project/items", component: <ProjectItems />, },
     project_resources_list: { path: "/project/resources", component: <ProjectResources />, },
+    project_commsion_report:{path:"/project/report",component:<CommisionReport/>},
     
 
     /* CIA related routes */
