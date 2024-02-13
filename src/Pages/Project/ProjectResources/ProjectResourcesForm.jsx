@@ -9,7 +9,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup'
 import { ClearAll, Save } from '@mui/icons-material';
 
-{/* ---------------- Validation part ------------------ */}
+ /* ---------------- Validation part ------------------ */
 const ProjectResourcesValidation = yup.object().shape({
   status: yup.string().required('Required')
   

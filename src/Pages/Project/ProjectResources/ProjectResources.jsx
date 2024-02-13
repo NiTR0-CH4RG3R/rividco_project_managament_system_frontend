@@ -1,9 +1,9 @@
 import { Box, Grid } from '@mui/material'
 import React, { useState } from 'react'
-import ProjectTable from '../ProjectIResources/ProjectResourcesTable'
+import ProjectTable from '../ProjectResources/ProjectResourcesTable'
 import { useTopbarContext } from '../../../Contexts/TopbarContext'
 import FormSaveLoadingButton from '../../../Components/StyledComponents/FormSaveLoadingButton'
-import ProjectResourcesPopup from '../ProjectIResources/ProjectResourcesPopup'
+import ProjectResourcesPopup from '../ProjectResources/ProjectResourcesPopup'
 
 
 export default function ProjectResources() {

@@ -14,6 +14,7 @@ import ProjectList from "../Pages/Project/ProjectList";
 import TaskList from "../Pages/CIA/TaskList";
 import ProjectTest from "../Pages/Project/ProjectTest/ProjectTest"
 import ProjectItems from "../Pages/Project/ProjectItems/ProjectItems"
+import ProjectResources from "../Pages/Project/ProjectResources/ProjectResources"
 import Home from "../Pages/Home/Home";
 import Test from "../Pages/Test/Test";
 
@@ -49,6 +50,8 @@ export const AppRoutes = {
     project_services_list: { path: "/project/services/list", component: <> </>, },
     project_test_list: { path: "/project/test", component: <ProjectTest />, },
     project_items_list: { path: "/project/items", component: <ProjectItems />, },
+    project_resources_list: { path: "/project/resources", component: <ProjectResources />, },
+    
 
     /* CIA related routes */
     cia_list: { path: "/cia/list", component: <TaskList /> },
