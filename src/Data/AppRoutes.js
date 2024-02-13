@@ -29,25 +29,25 @@ export const AppRoutes = {
     customer_list: { path: "/customer/list", component: <CustomerList />, },
     customer_add: { path: "/customer/add", component: <Customer type="add" /> },
     customer_view: { subtitle: "", path: "/customer/view/:id", component: <Customer type="view" />, },
-    customer_edit: { subtitle: "", path: "/customer/edit", component: <Customer type="edit" />, },
+    customer_edit: { subtitle: "", path: "/customer/edit/:id", component: <Customer type="edit" />, },
 
     /* Vendor related routes */
     vendor_list: { path: "/vendor/list", component: <VendorList /> },
     vendor_add: { path: "/vendor/add", component: <Vendor type="add" /> },
     vendor_view: { path: "/vendor/view/:id", component: <Vendor type="view" /> },
-    vendor_edit: { path: "/vendor/edit", component: <Vendor type="edit" /> },
+    vendor_edit: { path: "/vendor/edit/:id", component: <Vendor type="edit" /> },
 
     /* Vendor Items related routes */
     vendor_item_list: { path: "/vendor/item/list", component: <VendorItemList />, },
     vendor_item_add: { path: "/vendor/item/add", component: <Vendoritem type="add" />, },
     vendor_item_view: { path: "/vendor/item/view/:id", component: <Vendoritem type="view" />, },
-    vendor_item_edit: { path: "/vendor/item/edit", component: <Vendoritem type="edit" />, },
+    vendor_item_edit: { path: "/vendor/item/edit/:id", component: <Vendoritem type="edit" />, },
 
     /* Project related routes */
     project_list: { path: "/project/list", component: <ProjectList />, },
     project_add: { path: "/project/add", component: <Project type="add" /> },
     project_view: { path: "/project/view/:id", component: <Project type="view" />, },
-    project_edit: { path: "/project/edit", component: <Project type="edit" />, },
+    project_edit: { path: "/project/edit/:id", component: <Project type="edit" />, },
     project_services_list: { path: "/project/services/list", component: <> </>, },
     project_test_list: { path: "/project/test", component: <ProjectTest />, },
     project_items_list: { path: "/project/items", component: <ProjectItems />, },
