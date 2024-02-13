@@ -6,6 +6,7 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import { ArrowBack, Brightness4, AccountCircle } from '@mui/icons-material';
 import { useTopbarContext } from '../../Contexts/TopbarContext';
 import { useEffect } from 'react';
+import { AppRoutes } from '../../Data/AppRoutes';
 
 export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
     const colorMode = useContext(ColorModeContext);
@@ -22,6 +23,10 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
         const isHomePage = location.pathname === '/home';
         setBackButtonVisible(!isHomePage); 
     }, [location.pathname]);
+
+    const handleAccountButtonClick = () => {
+        navigate(AppRoutes.system_user_view.path)
+    }
 
     const handleBackButtonClick = () => {
         navigate(-1);
@@ -63,7 +68,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
                 <IconButton type='button' sx={{ color: 'grey.50', p: 1 }} onClick={colorMode.toggleColorMode}>
                     <Brightness4 />
                 </IconButton>
-                <IconButton type='button' sx={{ color: 'grey.50', p: 1 }}>
+                <IconButton type='button' sx={{ color: 'grey.50', p: 1 }} onClick={handleAccountButtonClick}>
                     <AccountCircle />
                 </IconButton>
             </Box>
