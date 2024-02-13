@@ -3,7 +3,7 @@ import { Box, IconButton, AppBar, Typography } from '@mui/material';
 import { ColorModeContext } from '../../theme';
 import { useContext } from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
-import { ArrowBack, Brightness4, AccountCircle } from '@mui/icons-material';
+import { ArrowBack, Brightness4, AccountCircle, Logout } from '@mui/icons-material';
 import { useTopbarContext } from '../../Contexts/TopbarContext';
 import { useEffect } from 'react';
 import { AppRoutes } from '../../Data/AppRoutes';
@@ -18,10 +18,12 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
     const location = useLocation();
 
     const [backButtonVisible, setBackButtonVisible] = useState(false);
+    const [logoutButtonVisible, setLogoutButtonVisible] = useState(false);
 
     useEffect(() => {
         const isHomePage = location.pathname === '/home';
-        setBackButtonVisible(!isHomePage); 
+        setBackButtonVisible(!isHomePage);
+        setLogoutButtonVisible(isHomePage); 
     }, [location.pathname]);
 
     const handleAccountButtonClick = () => {
@@ -30,7 +32,11 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
 
     const handleBackButtonClick = () => {
         navigate(-1);
-    };
+    }
+    //add the function
+    const handleLogoutButtonClick = () => {
+        
+    }
 
     return (
         <AppBar
@@ -70,6 +76,9 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
                 </IconButton>
                 <IconButton type='button' sx={{ color: 'grey.50', p: 1 }} onClick={handleAccountButtonClick}>
                     <AccountCircle />
+                </IconButton>
+                <IconButton type='button' sx={{ color: 'grey.50', p: 1, display: (logoutButtonVisible ? 'block' : 'none')}} onClick={handleLogoutButtonClick}>
+                    <Logout />
                 </IconButton>
             </Box>
         </AppBar>
