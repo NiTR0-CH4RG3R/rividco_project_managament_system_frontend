@@ -327,16 +327,17 @@ export default function Customer(props) {
         )}
         {props.type === "view" && (
           <>
-            <FormButton variant="contained" color="primary" sx={{ mr: 2 }}
+            <FormButton variant="contained" size="large" color="primary" sx={{ mr: 2 }}
             onClick={() => setOpenProjectFilter(true)}
             >
               Projects
             </FormButton>
             <FormButton
               variant="contained"
+              size="large"
               color="primary"
               startIcon={<EditIcon />}
-              onClick={() => navigate(`${AppRoutes.customer_edit.path}/${id}`)}
+              onClick={() => navigate(`${AppRoutes.customer_edit.path.replace(':id',id)}}`)}
             >
               Edit
             </FormButton>
