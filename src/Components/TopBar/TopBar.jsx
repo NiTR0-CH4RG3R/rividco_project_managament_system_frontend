@@ -2,17 +2,30 @@ import { useState } from 'react';
 import { Box, IconButton, AppBar, Typography } from '@mui/material';
 import { ColorModeContext } from '../../theme';
 import { useContext } from 'react';
-
+import { useNavigate,useLocation } from 'react-router-dom';
 import { ArrowBack, Brightness4, AccountCircle } from '@mui/icons-material';
 import { useTopbarContext } from '../../Contexts/TopbarContext';
+import { useEffect } from 'react';
 
 export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
     const colorMode = useContext(ColorModeContext);
 
     const { title, subtitle } = useTopbarContext();
 
-    // [TODO] : Implement back button
+    const navigate = useNavigate();
+
+    const location = useLocation();
+
     const [backButtonVisible, setBackButtonVisible] = useState(false);
+
+    useEffect(() => {
+        const isHomePage = location.pathname === '/home';
+        setBackButtonVisible(!isHomePage); 
+    }, [location.pathname]);
+
+    const handleBackButtonClick = () => {
+        navigate(-1);
+    };
 
     return (
         <AppBar
@@ -44,7 +57,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
 
             {/* Right side icons */}
             <Box display='flex' justifyContent='flex-end' alignItems='center'>
-                <IconButton type='button' sx={{ color: 'grey.50', p: 1, display: (!backButtonVisible && 'none') }}>
+                <IconButton type='button' sx={{ color: 'grey.50', p: 1, display: (backButtonVisible ? 'block' : 'none')}} onClick={handleBackButtonClick}>
                     <ArrowBack />
                 </IconButton>
                 <IconButton type='button' sx={{ color: 'grey.50', p: 1 }} onClick={colorMode.toggleColorMode}>
