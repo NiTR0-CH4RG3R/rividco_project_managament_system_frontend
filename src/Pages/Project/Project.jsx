@@ -579,33 +579,59 @@ export default function Project(props) {
         )}
         {props.type === "view" && (
           <>
-          <FormButton
+            <FormButton
               variant="contained"
               color="primary"
               sx={{
                 mr: 2,
               }}
-              onClick={() => navigate(`${AppRoutes.project_services_list.path.replace(':id',id)}`)}
+              onClick={() =>
+                navigate(
+                  `${AppRoutes.project_items_list.path.replace(":id", id)}`
+                )
+              }
+            >
+              Items
+            </FormButton>
+            <FormButton
+              variant="contained"
+              color="primary"
+              sx={{
+                mr: 2,
+              }}
+              onClick={() =>
+                navigate(
+                  `${AppRoutes.project_services_list.path.replace(":id", id)}`
+                )
+              }
             >
               Services
             </FormButton>
-          <FormButton
+            <FormButton
               variant="contained"
               color="primary"
               sx={{
                 mr: 2,
               }}
-              onClick={() => navigate(`${AppRoutes.project_test_list.path.replace(':id',id)}`)}
+              onClick={() =>
+                navigate(
+                  `${AppRoutes.project_test_list.path.replace(":id", id)}`
+                )
+              }
             >
               Tests
             </FormButton>
-          <FormButton
+            <FormButton
               variant="contained"
               color="primary"
               sx={{
                 mr: 2,
               }}
-              onClick={() => navigate(`${AppRoutes.project_resources_list.path.replace(':id',id)}`)}
+              onClick={() =>
+                navigate(
+                  `${AppRoutes.project_resources_list.path.replace(":id", id)}`
+                )
+              }
             >
               Resources
             </FormButton>
@@ -615,7 +641,11 @@ export default function Project(props) {
               sx={{
                 mr: 2,
               }}
-              onClick={() => navigate(`${AppRoutes.project_commsion_report.path.replace(':id',id)}`)}
+              onClick={() =>
+                navigate(
+                  `${AppRoutes.project_commsion_report.path.replace(":id", id)}`
+                )
+              }
             >
               Commision Reports
             </FormButton>
@@ -623,7 +653,9 @@ export default function Project(props) {
               variant="contained"
               color="primary"
               startIcon={<EditIcon />}
-              onClick={() => navigate(`${AppRoutes.project_edit.path.replace(':id',id)}}`)}
+              onClick={() =>
+                navigate(`${AppRoutes.project_edit.path.replace(":id", id)}}`)
+              }
             >
               Edit
             </FormButton>
