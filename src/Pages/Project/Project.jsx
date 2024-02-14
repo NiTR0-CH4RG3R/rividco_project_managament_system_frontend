@@ -585,6 +585,16 @@ export default function Project(props) {
               sx={{
                 mr: 2,
               }}
+              onClick={() => navigate(`${AppRoutes.project_test_list.path.replace(':id',id)}`)}
+            >
+              Tests
+            </FormButton>
+          <FormButton
+              variant="contained"
+              color="primary"
+              sx={{
+                mr: 2,
+              }}
               onClick={() => navigate(`${AppRoutes.project_resources_list.path.replace(':id',id)}`)}
             >
               Resources
