@@ -26,11 +26,12 @@ import FormClearButton from "../../Components/StyledComponents/FormClearButton";
 import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
 import FormButton from "../../Components/StyledComponents/FormButton";
 import WarrentyField from "../../Components/WarrentyField/WarrentyField";
-import CategoryIcon from '@mui/icons-material/Category';
-import ReportIcon from '@mui/icons-material/Report';
-import SpeedIcon from '@mui/icons-material/Speed';
-import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices';
-import BoltIcon from '@mui/icons-material/Bolt';
+import CategoryIcon from "@mui/icons-material/Category";
+import ReportIcon from "@mui/icons-material/Report";
+import SpeedIcon from "@mui/icons-material/Speed";
+import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices";
+import BoltIcon from "@mui/icons-material/Bolt";
+import * as projectService from "../../services/projectService";
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -146,7 +147,31 @@ export default function Project(props) {
 
     onSubmit: (values) => {
       setLoading(true);
-      //Send values to the backend
+      if (props.type === "add") {
+        projectService
+          .addProject(values)
+          .then(() => {
+            setLoading(false);
+            navigate(AppRoutes.project_list.path);
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(error);
+            setLoading(false);
+          });
+      }
+      else if (props.type === "edit") {
+        projectService.updateProject(values, id)
+            .then(() => {
+                setLoading(false);
+                navigate(AppRoutes.project_list.path);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert(error);
+                setLoading(false);
+            });
+    }
     },
   });
 
@@ -587,7 +612,7 @@ export default function Project(props) {
             <FormButton
               variant="contained"
               color="primary"
-              startIcon={<CategoryIcon/>}
+              startIcon={<CategoryIcon />}
               sx={{
                 mr: 2,
               }}
@@ -602,7 +627,7 @@ export default function Project(props) {
             <FormButton
               variant="contained"
               color="primary"
-              startIcon={<ElectricalServicesIcon/>}
+              startIcon={<ElectricalServicesIcon />}
               sx={{
                 mr: 2,
               }}
@@ -617,7 +642,7 @@ export default function Project(props) {
             <FormButton
               variant="contained"
               color="primary"
-              startIcon={<SpeedIcon/>}
+              startIcon={<SpeedIcon />}
               sx={{
                 mr: 2,
               }}
@@ -632,7 +657,7 @@ export default function Project(props) {
             <FormButton
               variant="contained"
               color="primary"
-              startIcon={<BoltIcon/>}
+              startIcon={<BoltIcon />}
               sx={{
                 mr: 2,
               }}
@@ -646,7 +671,7 @@ export default function Project(props) {
             </FormButton>
             <FormButton
               variant="contained"
-              startIcon={<ReportIcon/>}
+              startIcon={<ReportIcon />}
               color="primary"
               sx={{
                 mr: 2,
