@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTopbarContext } from '../../Contexts/TopbarContext';
 import ListPage from '../../Components/ListPage/ListPage';
 import { AppRoutes } from '../../Data/AppRoutes';
+import * as customerService from '../../services/customerService'
 
 const columns = [
     { id: 'firstName', label: 'First Name', align: 'left' },
@@ -20,6 +21,27 @@ export default function CustomerList() {
     const [rows, setRows] = useState([
         { id: 0, firstName: 'John', lastName: 'Doe', category: 'CUSTOMER', address: 'No. 380, Walawwaththa, Dadalla, Galle', contact: '1234567890', }
     ]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    useEffect(() => {
+        setPage(0);
+        setRowsPerPage(5);
+    }, []);
+
+    useEffect(() => {
+        customerService.listCustomers(page + 1, rowsPerPage)
+            .then(
+                customers => {
+                    setRows(customers);
+                }
+            )
+            .catch(
+                error => {
+                    console.log(error);
+                }
+            )
+    }, [page, rowsPerPage]);
 
     const navigate = useNavigate();
 
@@ -33,7 +55,7 @@ export default function CustomerList() {
                 onSearchClick: (e) => { },
             }}
             onRowClick={(e, id) => {
-                console.log(id);
+                navigate(AppRoutes.customer_view.path.replace(':id', id));
             }}
             onAddButtonClick={(e) => {
                 navigate(AppRoutes.customer_add.path)
@@ -41,11 +63,11 @@ export default function CustomerList() {
             tablePaginationProps={{
                 rowsPerPageOptions: [5, 10, 25, 100],
                 component: "div",
-                rowsPerPage: 5,
-                page: 0,
-                count: 100,
-                onPageChange: (e, page) => { console.log(page); },
-                onRowsPerPageChange: (e) => { console.log(e.target.value); }
+                rowsPerPage: rowsPerPage,
+                page: page,
+                count: -1,
+                onPageChange: (e, page) => { setPage(page); },
+                onRowsPerPageChange: (e) => { setRowsPerPage(e.target.value); }
             }}
         />
     );

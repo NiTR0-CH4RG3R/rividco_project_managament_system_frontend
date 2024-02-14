@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTopbarContext } from '../../Contexts/TopbarContext';
 import ListPage from '../../Components/ListPage/ListPage';
 import { AppRoutes } from '../../Data/AppRoutes';
+import * as systemUserService from '../../services/systemUserService'
 
 const columns = [
     { id: 'firstName', label: 'First Name', align: 'left' },
@@ -21,6 +22,23 @@ export default function SystemUserList() {
     const [rows, setRows] = useState([
         { id: 0, firstName: 'John', lastName: 'Doe', role: 'ADMIN', status: 'ACTIVE', contact: '1234567890', }
     ]);
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    useEffect(() => {
+        systemUserService.listSystemUsers(page + 1, rowsPerPage)
+            .then(
+                customers => {
+                    setRows(customers);
+                }
+            )
+            .catch(
+                error => {
+                    console.log(error);
+                }
+            )
+    }, [page, rowsPerPage]);
 
     const navigate = useNavigate();
 
@@ -42,11 +60,11 @@ export default function SystemUserList() {
             tablePaginationProps={{
                 rowsPerPageOptions: [5, 10, 25, 100],
                 component: "div",
-                rowsPerPage: 5,
-                page: 0,
-                count: 100,
-                onPageChange: (e, page) => { console.log(page); },
-                onRowsPerPageChange: (e) => { console.log(e.target.value); }
+                rowsPerPage: rowsPerPage,
+                page: page,
+                count: -1,
+                onPageChange: (e, page) => { setPage(page); },
+                onRowsPerPageChange: (e) => { setRowsPerPage(e.target.value); }
             }}
         />
     );

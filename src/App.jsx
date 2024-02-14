@@ -31,7 +31,7 @@ export default function App() {
                     <CssBaseline />
                     <Routes>
                         <Route path='/login' element={<Login />} />
-                        <Route element={<RequireAuth allowedRoles={['USER']} />} >
+                        <Route element={<RequireAuth allowedRoles={['User']} />} >
                             <Route path='/' element={<Layout />}>
                                 {routes.map((route) => (
                                     <Route key={route} path={route.path} element={route.component} />

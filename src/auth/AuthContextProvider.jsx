@@ -11,6 +11,7 @@ export const AuthContextProvider = ({ children }) => {
         // Install the axios interceptors to attach the token to the request.
         const requestInterceptor = axios.interceptors.request.use(
             (config) => {
+                if (auth?.userId) config.params = { ...config.params, userId: auth.userId };
                 if (!auth?.accessToken) return config;
                 if (!config.headers['Authorization'])
                     config.headers['Authorization'] = `Bearer ${auth.accessToken}`;

@@ -2,6 +2,8 @@ import Axios from 'axios';
 
 const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
+console.log(baseURL);
+
 const axios = Axios.create({
     baseURL: baseURL,
     headers: {
