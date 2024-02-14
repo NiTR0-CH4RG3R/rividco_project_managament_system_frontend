@@ -1,4 +1,3 @@
-import { Modal, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,7 +16,6 @@ import { AppRoutes } from "../../../Data/AppRoutes";
 import FormTextField from "../../../Components/StyledComponents/FormTextField";
 import FormClearButton from "../../../Components/StyledComponents/FormClearButton";
 import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSaveLoadingButton";
-import CloseIcon from "@mui/icons-material/Close";
 
 
 export default function ProjectServicesForm(props) {
@@ -30,11 +28,11 @@ export default function ProjectServicesForm(props) {
     //load status type from the backend
     setStatusType([
       {
-        value: "On going",
+        value: "onGoing",
         label: "On going",
       },
       {
-        value: "Completed",
+        value: "completed",
         label: "Completed",
       },
     ]);
@@ -53,17 +51,17 @@ export default function ProjectServicesForm(props) {
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
     props.type === "add"
-      ? "Add a new Project"
+      ? "Add a new Project Service"
       : props.type === "edit"
-      ? "Edit Project"
-      : `View Project`
+      ? "Edit Project Service"
+      : `Project Services`
   );
   setSubtitle(
     props.type === "add"
-      ? "You can add a new project here."
+      ? "You can add a new project services here."
       : props.type === "edit"
-      ? "You can edit project details here."
-      : `You can view project details here.`
+      ? "You can edit project services details here."
+      : `You can view project services details here.`
   );
 
   const [loading, setLoading] = useState(false);
@@ -81,14 +79,13 @@ export default function ProjectServicesForm(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
-    handleClose,
-    submitForm,
+    
   } = useFormik({
     initialValues: {
-      //customer: "",
+
       description: "",
       status: "",
-      conductedBY: "",
+      conductedBy: "",
       dueDate: "",
       
       selectedEmployee: {
@@ -172,10 +169,10 @@ export default function ProjectServicesForm(props) {
         <Grid item xs={12}>
           <FormTextField
             required
-            placeholder="Select a Coordinator"
-            id="coordinator"
-            name="coordinator"
-            label="Coordinator"
+            placeholder="Conducted By"
+            id="conductedBy"
+            name="conductedBy"
+            label="Conducted By"
             fullWidth
             size="small"
             onClick={() => {
