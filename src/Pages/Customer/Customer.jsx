@@ -29,13 +29,13 @@ export default function Customer(props) {
     const [customer, setCustomer] = useState({
         firstName: "",
         lastName: "",
+        category: "",
         address: "",
         email: "",
-        category: "",
+        phone01: "",
+        phone02: "",
+        customerRegistrationNumber: "",
         profession: "",
-        customerId: "",
-        mobileNumber: "",
-        officeNumber: "",
         comment: "",
     });
 
@@ -51,9 +51,9 @@ export default function Customer(props) {
                         email: customer.email,
                         category: customer.category,
                         profession: customer.profession,
-                        customerId: customer.customerId,
-                        mobileNumber: customer.phone1,
-                        officeNumber: customer.phone2,
+                        customerRegistrationNumber: customer.customerRegistrationNumber,
+                        phone1: customer.phone1,
+                        phone2: customer.phone2,
                         comment: customer.comment,
                     })
                 }
@@ -126,7 +126,30 @@ export default function Customer(props) {
         validationSchema: customerValidation,
         onSubmit: (values) => {
             setLoading(true);
-            // Send values to the backend
+            if (props.type === "add") {
+                customerService.addCustomer(values)
+                    .then(() => {
+                        setLoading(false);
+                        navigate(AppRoutes.customer_list.path);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert(error);
+                        setLoading(false);
+                    });
+            }
+            else if (props.type === "edit") {
+                customerService.updateCustomer(values, id)
+                    .then(() => {
+                        setLoading(false);
+                        navigate(AppRoutes.customer_list.path);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert(error);
+                        setLoading(false);
+                    });
+            }
         },
     });
 
@@ -272,8 +295,8 @@ export default function Customer(props) {
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
-                        error={touched.customerId && errors.customerId}
-                        helperText={touched.customerId ? errors.customerId : ""}
+                        error={touched.customerRegistrationNumber && errors.customerRegistrationNumber}
+                        helperText={touched.customerRegistrationNumber ? errors.customerRegistrationNumber : ""}
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -289,8 +312,8 @@ export default function Customer(props) {
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
-                        error={touched.mobileNumber && errors.mobileNumber}
-                        helperText={touched.mobileNumber ? errors.mobileNumber : ""}
+                        error={touched.phone01 && errors.phone01}
+                        helperText={touched.phone01 ? errors.phone01 : ""}
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -305,8 +328,8 @@ export default function Customer(props) {
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
-                        error={touched.officeNumber && errors.officeNumber}
-                        helperText={touched.officeNumber ? errors.officeNumber : ""}
+                        error={touched.phone02 && errors.phone02}
+                        helperText={touched.phone02 ? errors.phone02 : ""}
                     />
                 </Grid>
                 <Grid item xs={12}>
