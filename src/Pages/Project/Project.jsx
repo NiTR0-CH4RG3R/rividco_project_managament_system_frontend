@@ -28,6 +28,7 @@ import FormButton from "../../Components/StyledComponents/FormButton";
 import WarrentyField from "../../Components/WarrentyField/WarrentyField";
 import CategoryIcon from '@mui/icons-material/Category';
 import ReportIcon from '@mui/icons-material/Report';
+import SpeedIcon from '@mui/icons-material/Speed';
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -613,6 +614,7 @@ export default function Project(props) {
             <FormButton
               variant="contained"
               color="primary"
+              startIcon={<SpeedIcon/>}
               sx={{
                 mr: 2,
               }}
