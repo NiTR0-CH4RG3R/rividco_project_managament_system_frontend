@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState} from 'react'
 import { Box, Grid, MenuItem, Avatar } from '@mui/material'
 //import Modal from '@mui/material/Modal';
 import { useFormik } from 'formik'
@@ -46,7 +46,8 @@ export default function SystemUser(props) {
     //const ProfilePictureUploader = () => {
     const [file, setFile] = useState(null)
     const [imagePreview, setImagePreview] = useState(null)
-    const inputRef = useRef()
+    
+    //const inputRef = useRef()
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0]
@@ -62,19 +63,23 @@ export default function SystemUser(props) {
         }
     }
 
-    const handleButtonClick = () => {
+    const handleUploadClick = () => {
         // Trigger the input field when the button is clicked to change the photo
-        inputRef.current.click()
+        //inputRef.current.click()
+        document.getElementById('profile-picture-input').click();
+        console.log('File Uploaded:', file);   
     }
 
     const handleSaveClick = () => {
         // Display the uploaded image
         if (file) {
-            console.log('File uploaded:', file)
+            console.log('Profile picture saved:', file)
             setImagePreview(URL.createObjectURL(file))
+            alert("Profile Picture Upload Successfully")
+
 
             // Reset file state after saving
-            setFile(null)
+            //setFile(null)
         } else {
             console.log('No new photo selected.')
         }
@@ -100,11 +105,11 @@ export default function SystemUser(props) {
             officeNo: '',
             userName: '',
             password: '',
-            comment: '',
+            comment: '', 
         },
         onSubmit: (values) => {
             console.log('form values', values)
-            //alert('Form submitted successfully:', values)
+            // alert('Form submitted successfully:', values)
             // You can handle the form submission logic here
         },
         validationSchema: SystemUserValidation,
@@ -114,6 +119,7 @@ export default function SystemUser(props) {
     const navi = useNavigate()
 
     return (
+
         <Box
             component="form"
             onReset={handleReset}
@@ -124,33 +130,60 @@ export default function SystemUser(props) {
             alignItems="center"
             flexDirection="column"
             width="70%"
+            marginTop="150px"
         >
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
+            <Grid container>
+                <Grid item xs={6}>
                     <Avatar
                         alt="Profile Picture"
                         src={imagePreview}
-                        sx={{ width: 100, height: 100 }}
+                        sx={{ width: 200, height: 200 }}
                     />
                     <input
-                    
                         accept="image/*"
-                        ref={inputRef}
+                        id="profile-picture-input"
                         style={{ display: 'none' }}
                         type="file"
                         onChange={handleFileChange}
                     />
+
+                    <Grid item xs={5.5} spacing={2} marginTop={1}>
                     <FormButton
+                        fullWidth
                         variant="contained"
-                        
+                            onClick={() => {
+                                handleUploadClick();
+                        }}
+                    >
+                        Upload
+                    </FormButton>
+                </Grid>
+                <Grid item xs={5.5} spacing={2} marginTop={1} marginBottom={2}>
+                    <FormButton
+                        fullWidth
+                        variant="contained"
                         onClick={() => {
-                            handleButtonClick()
                             handleSaveClick()
                         }}
                     >
-                        {file ? 'Edit Profile' : 'Upload Photo'}
+                        Save
                     </FormButton>
                 </Grid>
+                    
+                </Grid>
+            </Grid>
+                
+
+                
+                
+
+            
+
+
+
+
+            <Grid container spacing={2}>
+                
 
                 <Grid item xs={6}>
                     <FormTextField
@@ -170,6 +203,8 @@ export default function SystemUser(props) {
                         helperText={touched.firstName ? errors.firstName : ''}
                     />
                 </Grid>
+
+                
 
                 <Grid item xs={6}>
                     <FormTextField
