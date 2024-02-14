@@ -30,6 +30,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import ReportIcon from '@mui/icons-material/Report';
 import SpeedIcon from '@mui/icons-material/Speed';
 import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices';
+import BoltIcon from '@mui/icons-material/Bolt';
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -631,6 +632,7 @@ export default function Project(props) {
             <FormButton
               variant="contained"
               color="primary"
+              startIcon={<BoltIcon/>}
               sx={{
                 mr: 2,
               }}
