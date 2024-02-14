@@ -27,6 +27,7 @@ import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoa
 import FormButton from "../../Components/StyledComponents/FormButton";
 import WarrentyField from "../../Components/WarrentyField/WarrentyField";
 import CategoryIcon from '@mui/icons-material/Category';
+import ReportIcon from '@mui/icons-material/Report';
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -639,6 +640,7 @@ export default function Project(props) {
             </FormButton>
             <FormButton
               variant="contained"
+              startIcon={<ReportIcon/>}
               color="primary"
               sx={{
                 mr: 2,
