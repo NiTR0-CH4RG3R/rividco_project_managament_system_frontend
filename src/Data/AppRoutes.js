@@ -15,6 +15,7 @@ import TaskList from "../Pages/CIA/TaskList";
 import ProjectTest from "../Pages/Project/ProjectTest/ProjectTest"
 import ProjectItems from "../Pages/Project/ProjectItems/ProjectItems"
 import ProjectResources from "../Pages/Project/ProjectResources/ProjectResources"
+import ProjectServices from "../Pages/Project/ProjectServices/ProjectServices"
 import Home from "../Pages/Home/Home";
 import Test from "../Pages/Test/Test";
 import CommisionReport from "../Pages/Project/CommisionReport";
@@ -51,6 +52,7 @@ export const AppRoutes = {
     project_services_list: { path: "/project/services/list", component: <> </>, },
     project_test_list: { path: "/project/test", component: <ProjectTest />, },
     project_items_list: { path: "/project/items", component: <ProjectItems />, },
+    project_services_list: { path: "/project/service", component: <ProjectServices />, },
     project_resources_list: { path: "/project/resources", component: <ProjectResources />, },
     project_commsion_report:{path:"/project/report/:id",component:<CommisionReport/>},
     
