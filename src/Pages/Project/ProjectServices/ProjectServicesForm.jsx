@@ -58,7 +58,7 @@ export default function ProjectServicesForm(props) {
   );
   setSubtitle(
     props.type === "add"
-      ? "You can add a new project services here."
+      ? "You can add a new project service here."
       : props.type === "edit"
       ? "You can edit project services details here."
       : `You can view project services details here.`
