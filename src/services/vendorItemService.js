@@ -26,3 +26,17 @@ export async function listVendorItems(page, itemsPerPage) {
 
     return vendorItems;
 }
+
+export async function getVendorItem(id) {
+    let vendorItems = {};
+
+    try {
+        const response = await get(`${VENDORITEM_URL}/${id}`);
+        vendorItems = response?.data;
+    }
+    catch (error) {
+        console.error(error);
+    }
+
+    return vendorItems;
+}
