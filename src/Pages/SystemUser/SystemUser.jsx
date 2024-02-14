@@ -67,22 +67,25 @@ export default function SystemUser(props) {
         // Trigger the input field when the button is clicked to change the photo
         //inputRef.current.click()
         document.getElementById('profile-picture-input').click();
-        console.log('File Uploaded:', file);   
-    }
-
-    const handleSaveClick = () => {
-        // Display the uploaded image
+        //console.log('File Uploaded:', file); 
+        
+        //Display the uploaded image
         if (file) {
-            console.log('Profile picture saved:', file)
+            //console.log('Profile picture saved:', file)
             setImagePreview(URL.createObjectURL(file))
-            alert("Profile Picture Upload Successfully")
-
 
             // Reset file state after saving
             //setFile(null)
-        } else {
-            console.log('No new photo selected.')
-        }
+        } 
+
+        
+    }
+
+    const handleRemoveClick = () => {
+        setFile(null);
+        setImagePreview(null);
+        console.log('Profile Picture Removed')
+        
     }
 
     const {
@@ -111,6 +114,7 @@ export default function SystemUser(props) {
             console.log('form values', values)
             // alert('Form submitted successfully:', values)
             // You can handle the form submission logic here
+            console.log("Profile Picture:", file)
         },
         validationSchema: SystemUserValidation,
     })
@@ -163,10 +167,10 @@ export default function SystemUser(props) {
                         fullWidth
                         variant="contained"
                         onClick={() => {
-                            handleSaveClick()
+                            handleRemoveClick();
                         }}
                     >
-                        Save
+                        Remove
                     </FormButton>
                 </Grid>
                     
