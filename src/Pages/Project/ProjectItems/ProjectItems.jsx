@@ -17,6 +17,8 @@ export default function ProjectItems() {
     setTitle("Project items");
     setSubtitle("You can view and manage all the project items here.");
 
+    const [openPopUp, setOpenPopup] = useState(false)
+
     const [rows, setRows] = useState([
         { vendorItem: 'item 1', serialNumber: '111QWERT', warrantyPeriod: '2 Months', conductedDate: '09/09/2023', comment: 'comment 1', },
     ]);
