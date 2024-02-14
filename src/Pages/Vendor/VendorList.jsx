@@ -21,6 +21,9 @@ export default function VendorList() {
         { id: 0, registration: 'V001', name: 'NC Enterprices', address: 'No. 380, Walawwaththa, Dadalla, Galle', email: 'idontknow@gmail.com', contact: '1234567890', }
     ]);
 
+    const[page,setPage]=useState(0);
+    const[rowsPerPage,setRowsPerPage]=useState(5);
+
     const navigate = useNavigate();
 
     return (
