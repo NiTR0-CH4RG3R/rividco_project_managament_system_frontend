@@ -40,3 +40,21 @@ export async function getVendorItem(id) {
 
     return vendorItems;
 }
+
+export async function addVendorItem(vendorItem) {
+    try {
+        await post(VENDORITEM_URL, vendorItem);
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+
+export async function updateVendorItem(vendorItem, id) {
+    try {
+        await put(`${VENDORITEM_URL}/${id}`, vendorItem);
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
