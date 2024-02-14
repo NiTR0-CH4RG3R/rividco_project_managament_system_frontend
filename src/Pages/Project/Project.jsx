@@ -29,6 +29,7 @@ import WarrentyField from "../../Components/WarrentyField/WarrentyField";
 import CategoryIcon from '@mui/icons-material/Category';
 import ReportIcon from '@mui/icons-material/Report';
 import SpeedIcon from '@mui/icons-material/Speed';
+import ElectricalServicesIcon from '@mui/icons-material/ElectricalServices';
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -600,6 +601,7 @@ export default function Project(props) {
             <FormButton
               variant="contained"
               color="primary"
+              startIcon={<ElectricalServicesIcon/>}
               sx={{
                 mr: 2,
               }}
