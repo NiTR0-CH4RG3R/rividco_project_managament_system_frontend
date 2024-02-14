@@ -579,6 +579,16 @@ export default function Project(props) {
         )}
         {props.type === "view" && (
           <>
+          <FormButton
+              variant="contained"
+              color="primary"
+              sx={{
+                mr: 2,
+              }}
+              onClick={() => navigate(`${AppRoutes.project_resources_list.path.replace(':id',id)}`)}
+            >
+              Resources
+            </FormButton>
             <FormButton
               variant="contained"
               color="primary"
