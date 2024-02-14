@@ -17,7 +17,8 @@ const taskStatusValidation = yup.object().shape({
   status: yup.string().required('Required'),
 })
 
-function TaskForm() {
+function TaskForm(props) {
+  const { setOpenPopup } = props
   const {
     values,
     errors,
@@ -34,6 +35,7 @@ function TaskForm() {
     },
     onSubmit: (values) => {
       console.log('form values', values)
+      setOpenPopup(false)
     },
 
     validationSchema: taskStatusValidation,

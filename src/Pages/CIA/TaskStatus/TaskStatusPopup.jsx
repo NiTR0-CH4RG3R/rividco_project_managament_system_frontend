@@ -8,7 +8,7 @@ export default function TaskStatusPopup(props) {
     <Dialog open={openPopUp} onClose={() => setOpenPopup(false)}>
       <DialogTitle>Add New Task Status</DialogTitle>
       <DialogContent>
-        <TaskForm />
+        <TaskForm setOpenPopup={setOpenPopup} />
       </DialogContent>
     </Dialog>
   )
