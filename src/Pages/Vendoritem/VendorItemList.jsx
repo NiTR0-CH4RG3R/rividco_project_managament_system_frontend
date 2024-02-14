@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTopbarContext } from '../../Contexts/TopbarContext';
 import ListPage from '../../Components/ListPage/ListPage';
 import { AppRoutes } from '../../Data/AppRoutes';
+import * as vendorItemService from '../../services/vendorItemService';
 
 const columns = [
     { id: 'itemName', label: 'Item Name', align: 'left' },
@@ -21,6 +22,20 @@ export default function VendorList() {
     const [rows, setRows] = useState([
         { id: 0, itemName: 'Converter', vendor: 'NC Enterprices', address: 'No. 380, Walawwaththa, Dadalla, Galle', price: 800.0, capacity: 180.0, warrenty: 360, }
     ]);
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    useEffect(() => {
+        setPage(0);
+        setRowsPerPage(5);
+    }, []);
+
+    useEffect(()=>{
+        //add here
+    },[page,rowsPerPage]);
+
+
 
     const navigate = useNavigate();
 
