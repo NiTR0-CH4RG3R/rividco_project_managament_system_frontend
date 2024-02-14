@@ -6,7 +6,7 @@ export default function ProjectResourcesPopup(props) {
   const { openPopUp, setOpenPopup } = props
   return (
     <Dialog open={openPopUp} onClose={() => setOpenPopup(false)}>
-      <DialogTitle>Add New Item</DialogTitle>
+      <DialogTitle>Add New Resource</DialogTitle>
       <DialogContent>
         <ProjectResourcesForm />
       </DialogContent>

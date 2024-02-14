@@ -1,47 +1,69 @@
-import { Box, Grid } from '@mui/material'
-import React, { useState } from 'react'
-import ProjectTable from '../ProjectResources/ProjectResourcesTable'
-import { useTopbarContext } from '../../../Contexts/TopbarContext'
-import FormSaveLoadingButton from '../../../Components/StyledComponents/FormSaveLoadingButton'
+import React, { useState } from "react";
+import { useTopbarContext } from "../../../Contexts/TopbarContext";
+import ListPage from "../../../Components/ListPage/ListPage";
+import { useNavigate } from "react-router-dom";
 import ProjectResourcesPopup from '../ProjectResources/ProjectResourcesPopup'
 
+const columns = [
+  { id: "resourceName", label: "Resource Name", align: "left" },
+  { id: "addedBy", label: "Added By", align: "left" },
+  { id: "addedDate", label: "Added Date", align: "left" },
+  { id: "comment", label: "Comment", align: "center" },
+];
 
 export default function ProjectResources() {
     const { setTitle, setSubtitle } = useTopbarContext();
     setTitle("Project Resources");
     setSubtitle("You can view and manage all the project resources here.");
 
-    const [openPopUp, setOpenPopup] = useState(false)
+  const [openPopUp, setOpenPopup] = useState(false);
 
+  const [rows, setRows] = useState([
+    {
+        resourceName: "Resourece 1",
+        addedBy: "User 1",
+        addedDate: "02/01/2024",
+        comment: "comment 1",
+    },
+  ]);
 
-    return (
-        <div>
+  const navigate = useNavigate();
 
-            <Box>
-                <Grid container spacing={1} sx={{ width: "100%" }}>
-
-                    {/* ---------------- resource Table ------------------ */}
-                    <Grid item xs={8} sx={{ padding: "4em 2em 0em 4em !important" }}>
-                        <ProjectTable />
-                    </Grid>
-
-
-                    {/* ---------------- resource button ------------------ */}
-                    <Grid item xs={4} sx={{ padding: "4em 2em 0em 6em !important" }}>
-
-                    <FormSaveLoadingButton onClick={() => setOpenPopup(true)}>
-              Add New Resource
-            </FormSaveLoadingButton>
-                    </Grid>
-
-                 </Grid>
-        
-        <ProjectResourcesPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} />
-                
-            </Box>
-
-        </div>
-    );
+  return (
+    <>
+      <ListPage
+        columns={columns}
+        rows={rows}
+        searchBarProps={{
+          searchBy: "location",
+          onSearchChange: (e) => {
+            console.log(e.target.value);
+          },
+          onSearchClick: (e) => {},
+        }}
+        onRowClick={(e, id) => {
+          console.log(id);
+        }}
+        onAddButtonClick={(e) => {
+          setOpenPopup(true);
+        }}
+        tablePaginationProps={{
+          rowsPerPageOptions: [5, 10, 25, 100],
+          component: "div",
+          rowsPerPage: 5,
+          page: 0,
+          count: 100,
+          onPageChange: (e, page) => {
+            console.log(page);
+          },
+          onRowsPerPageChange: (e) => {
+            console.log(e.target.value);
+          },
+        }}
+        disableSearchBar
+        // customUpperBar={<UpperBar />}
+      />
+      <ProjectResourcesPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} />
+    </>
+  );
 }
-
-
