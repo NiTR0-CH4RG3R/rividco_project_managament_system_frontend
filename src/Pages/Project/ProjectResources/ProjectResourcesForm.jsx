@@ -1,36 +1,227 @@
-import React from 'react'
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { category } from './ProjectResourcesData';
-import { useFormik } from 'formik';
-import * as yup from 'yup'
-import { ClearAll, Save } from '@mui/icons-material';
-import { styled } from '@mui/material/styles';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+// import React from 'react'
+// import Box from '@mui/material/Box';
+// import TextField from '@mui/material/TextField';
+// import MenuItem from '@mui/material/MenuItem';
+// import Stack from '@mui/material/Stack';
+// import Button from '@mui/material/Button';
+// import { category } from './ProjectResourcesData';
+// import { useFormik } from 'formik';
+// import * as yup from 'yup'
+// import { ClearAll, Save } from '@mui/icons-material';
+// import { styled } from '@mui/material/styles';
+// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
- /* ---------------- Validation part ------------------ */
-const ProjectResourcesValidation = yup.object().shape({
-  status: yup.string().required('Required')
+//  /* ---------------- Validation part ------------------ */
+// const ProjectResourcesValidation = yup.object().shape({
+//   category: yup.string().required('Required')
   
-})
+// })
 
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
+// const VisuallyHiddenInput = styled('input')({
+//   clip: 'rect(0 0 0 0)',
+//   clipPath: 'inset(50%)',
+//   height: 1,
+//   overflow: 'hidden',
+//   position: 'absolute',
+//   bottom: 0,
+//   left: 0,
+//   whiteSpace: 'nowrap',
+//   width: 1,
+// });
 
-function ProjectResourcesForm() {
+// function ProjectResourcesForm() {
 
+//   const {
+//     values,
+//     errors,
+//     touched,
+//     handleBlur,
+//     handleChange,
+//     handleSubmit,
+//     handleReset,
+//     submitForm,
+//     } = useFormik({
+//     initialValues :{
+      
+//       category :'',
+//       resourceName :'',
+//       comment :''
+
+//     },
+//     onSubmit: (values) => {
+//       console.log('form values', values)
+//     },
+
+//     validationSchema:ProjectResourcesValidation
+//   })
+
+//   return (
+//     <>
+//       <form onSubmit={handleSubmit}>
+
+//       <Box
+//         component="form"
+//         sx={{
+//           '& .MuiTextField-root': { m: 1, width: '50ch' },
+//         }}
+//         noValidate
+//           autoComplete="off"
+//           height="50vh"
+//           flexDirection="column"
+//       >   
+//           {/* ---------------- Name field ------------------ */}
+//           <div>
+//             <TextField
+                
+//                 id="resourceName"
+//                 name='resourceName'
+//                 label="Resource Name"
+//                 value={values.resourceName}
+//                 onChange={handleChange}
+//             >
+//           </TextField>
+//           </div>
+
+//           {/* ---------------- category field ------------------ */}
+//           <div>
+//           <TextField
+//               required
+//               id="category"
+//               name="category"
+//               select
+//               label="Category"
+//               value={values.category}
+//               onBlur={handleBlur}
+//               error={touched.category && errors.category}
+//               helperText={touched.category ? errors.category : ''}
+//               onChange={handleChange}
+                
+//           >
+//             {category.map((option) => (
+//               <MenuItem key={option.value} value={option.value}>
+//                 {option.label}
+//               </MenuItem>
+//             ))}
+//           </TextField>
+//           </div>          
+        
+
+//           {/* ---------------- comment field ------------------ */}
+//           <div>
+//           <TextField
+//             id="comment"
+//             name='comment'
+//             label="Comments"
+//             multiline
+//             rows={5}
+//             value={values.comment}
+//             onChange={handleChange}
+//           />
+//           </div>
+
+//           {/* ---------------- Button placement ------------------ */}
+
+//           <Button
+//             component="label"
+//             role={undefined}
+//             variant="contained"
+//             tabIndex={-1}
+//             startIcon={<CloudUploadIcon />}
+//           >
+//             Upload file
+//             <VisuallyHiddenInput type="file" />
+//            </Button>
+
+//           <div>
+//               <Stack spacing={1} direction="row" justifyContent="flex-end">
+                  
+//                   <Button  variant="contained" startIcon={<ClearAll/>} onClick={handleReset}>  Clear  </Button>
+//                   <Button  variant="contained" startIcon={<Save/>} onClick={submitForm}>  Save  </Button>
+                  
+//               </Stack>
+//           </div>
+//       </Box>
+
+//       </form>
+    
+//     </>
+//   )
+// }
+
+// export default ProjectResourcesForm
+
+import { useState, useEffect } from "react";
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import Grid from "@mui/material/Grid";
+import SaveIcon from "@mui/icons-material/Save";
+import ClearAllIcon from "@mui/icons-material/ClearAll";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import VendorModal from "../../../Components/ModalWindow/VendorModal";
+import { IconButton } from "@mui/material";
+import { GridClearIcon } from "@mui/x-data-grid";
+import { addProjectValidation } from "../../../Validation/AddProjectValidation";
+import { useTopbarContext } from "../../../Contexts/TopbarContext";
+import { AppRoutes } from "../../../Data/AppRoutes";
+import FormTextField from "../../../Components/StyledComponents/FormTextField";
+import FormClearButton from "../../../Components/StyledComponents/FormClearButton";
+import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSaveLoadingButton";
+
+export default function ProjectResourcesForm(props) {
+  const [categoryType, setcategoryType] = useState([]);
+  function loadProjectData(id) {
+    //add here
+  }
+
+  function loadcategoryType() {
+    //load status type from the backend
+    setcategoryType([
+      {
+        value: "categoryOne",
+        label: "Category One",
+      },
+      {
+        value: "categoryTwo",
+        label: "Category Two",
+      },
+    ]);
+  }
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    
+      loadcategoryType();
+
+    if (props.type !== "add") {
+      loadProjectData(id);
+    }
+  }, []);
+
+  const { setTitle, setSubtitle } = useTopbarContext();
+  setTitle(
+    props.type === "add"
+      ? "Add a new Project Service"
+      : props.type === "edit"
+      ? "Edit Project Service"
+      : `Project Resources`
+  );
+  setSubtitle(
+    props.type === "add"
+      ? "You can add a new project resource here."
+      : props.type === "edit"
+      ? "You can edit project resource details here."
+      : `You can view project resource details here.`
+  );
+
+  const [loading, setLoading] = useState(false);
+  //for modal
+  const [openVendor, setOpenVendor] = useState(false);
+
+
+  //set initial values in formik
   const {
     values,
     errors,
@@ -39,114 +230,154 @@ function ProjectResourcesForm() {
     handleChange,
     handleSubmit,
     handleReset,
-    submitForm,
-    } = useFormik({
-    initialValues :{
+    setFieldValue,
+    
+  } = useFormik({
+    initialValues: {
+
+      resourceName: "",
+      category: "",
+      comment: "",
+   
       
-      category :'',
-      resourceName :'',
-      comment :''
+      selectedVendor: {
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
+      },
 
     },
+
+    validationSchema: addProjectValidation,
+
     onSubmit: (values) => {
-      console.log('form values', values)
+      setLoading(true);
+      //Send values to the backend
     },
+  });
 
-    validationSchema:ProjectResourcesValidation
-  })
+  const navigate = useNavigate();
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      onReset={handleReset}
+      noValidate
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      width={"100%"}
+    >
+      <Grid container spacing={2}>
 
-      <Box
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 1, width: '50ch' },
-        }}
-        noValidate
-          autoComplete="off"
-          height="50vh"
-          flexDirection="column"
-      >   
-          {/* ---------------- Name field ------------------ */}
-          <div>
-            <TextField
-                
-                id="resourceName"
-                name='resourceName'
-                label="Resource Name"
-                value={values.resourceName}
-                onChange={handleChange}
-            >
-          </TextField>
-          </div>
+      <Grid item xs={12}>
+          <FormTextField
+            required
+            placeholder="Please Enter The Resource Name"
+            id="resourceName"
+            name="resourceName"
+            label="Resource Name"
+            multiline
+            maxRows={4}
+            fullWidth
+            size="small"
+            value={values.resourceName} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            onBlur={handleBlur}
+            error={touched.resourceName && errors.resourceName}
+            helperText={touched.resourceName ? errors.resourceName : ""}
+          />
+        </Grid>
 
-          {/* ---------------- category field ------------------ */}
-          <div>
-          <TextField
-              required
-              id="category"
-              name="category"
-              select
-              label="Category"
-              value={values.category}
-              onBlur={handleBlur}
-              error={touched.category && errors.category}
-              helperText={touched.category ? errors.category : ''}
-              onChange={handleChange}
-                
+        
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            id="category"
+            name="category"
+            select
+            label="Category"
+            fullWidth
+            size="small"
+            value={values.category} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            onBlur={handleBlur}
+            error={touched.category && errors.category}
+            helperText={touched.category ? errors.category : ""}
           >
-            {category.map((option) => (
+            {categoryType.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
-          </TextField>
-          </div>          
-        
-
-          {/* ---------------- comment field ------------------ */}
-          <div>
-          <TextField
+          </FormTextField>
+        </Grid>
+       
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            placeholder="Please Enter Comments"
             id="comment"
-            name='comment'
-            label="Comments"
+            name="comment"
+            label="Comment"
             multiline
-            rows={5}
-            value={values.comment}
-            onChange={handleChange}
+            maxRows={4}
+            fullWidth
+            size="small"
+            value={values.comment} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            onBlur={handleBlur}
+            error={touched.comment && errors.comment}
+            helperText={touched.comment ? errors.comment : ""}
           />
-          </div>
+        </Grid>
+        </Grid>
+      <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
+        {props.type !== "view" && (
+          <>
 
-          {/* ---------------- Button placement ------------------ */}
+            
+            <FormClearButton
+              variant="contained"
+              size="large"
+              sx={{
+                mr: 2,
+              }}
+              color="primary"
+              startIcon={<ClearAllIcon />}
+              type="reset"
+            >
+              Clear
+            </FormClearButton>
 
-          <Button
-            component="label"
-            role={undefined}
-            variant="contained"
-            tabIndex={-1}
-            startIcon={<CloudUploadIcon />}
-          >
-            Upload file
-            <VisuallyHiddenInput type="file" />
-           </Button>
-
-          <div>
-              <Stack spacing={1} direction="row" justifyContent="flex-end">
-                  
-                  <Button  variant="contained" startIcon={<ClearAll/>} onClick={handleReset}>  Clear  </Button>
-                  <Button  variant="contained" startIcon={<Save/>} onClick={submitForm}>  Save  </Button>
-                  
-              </Stack>
-          </div>
+            <FormSaveLoadingButton
+              color="primary"
+              type="submit"
+              size="large"
+              loading={loading}
+              loadingPosition="start"
+              startIcon={<SaveIcon />}
+              variant="contained"
+            >
+              <span>Save</span>
+            </FormSaveLoadingButton>
+          </>
+        )}
+        
       </Box>
 
-      </form>
+      <VendorModal
+        openVendor={openVendor}
+        setOpenVendor={setOpenVendor}
+        sendData={setFieldValue}
+      />
     
-    </>
-  )
+    </Box>
+  );
 }
-
-export default ProjectResourcesForm
-
