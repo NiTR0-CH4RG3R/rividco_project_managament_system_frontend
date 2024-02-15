@@ -26,36 +26,15 @@ export default function Customer(props) {
     const [categoryType, setCategoryType] = useState([]);
     const [openProjectFilter, setOpenProjectFilter] = useState(false);
 
-    const [customer, setCustomer] = useState({
-        firstName: "",
-        lastName: "",
-        category: "",
-        address: "",
-        email: "",
-        phone01: "",
-        phone02: "",
-        customerRegistrationNumber: "",
-        profession: "",
-        comment: "",
-    });
 
-    function loadCustomerData(id) {
+
+    function loadCustomerData(id, setValues) {
         // Load customer data from the backend
         customerService.getCustomer(id)
             .then(
                 customer => {
-                    setCustomer({
-                        firstName: customer.firstName,
-                        lastName: customer.lastName,
-                        address: customer.address,
-                        email: customer.email,
-                        category: customer.category,
-                        profession: customer.profession,
-                        customerRegistrationNumber: customer.customerRegistrationNumber,
-                        phone1: customer.phone1,
-                        phone2: customer.phone2,
-                        comment: customer.comment,
-                    })
+
+                    setValues(customer);
                 }
             )
             .catch(
@@ -86,13 +65,7 @@ export default function Customer(props) {
 
     const { id } = useParams();
 
-    useEffect(() => {
-        loadCategoryType();
 
-        if (props.type !== "add") {
-            loadCustomerData(id);
-        }
-    }, []);
 
     const { setTitle, setSubtitle } = useTopbarContext();
     setTitle(
@@ -119,9 +92,19 @@ export default function Customer(props) {
         handleChange,
         handleSubmit,
         handleReset,
+        setValues,
     } = useFormik({
         initialValues: {
-            ...customer
+            firstName: "",
+            lastName: "",
+            category: "",
+            address: "",
+            email: "",
+            phone01: "",
+            phone02: "",
+            customerRegistrationNumber: "",
+            profession: "",
+            comments: "",
         },
         validationSchema: customerValidation,
         onSubmit: (values) => {
@@ -152,6 +135,31 @@ export default function Customer(props) {
             }
         },
     });
+
+    useEffect(() => {
+        loadCategoryType();
+
+        if (props.type !== "add") {
+            loadCustomerData(id, setValues);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        if (props.type === "add") {
+            setValues({
+                firstName: "",
+                lastName: "",
+                category: "",
+                address: "",
+                email: "",
+                phone01: "",
+                phone02: "",
+                customerRegistrationNumber: "",
+                profession: "",
+                comments: "",
+            });
+        }
+    }, [props.type]);
 
     const navigate = useNavigate();
 
@@ -287,11 +295,11 @@ export default function Customer(props) {
                     <FormTextField
                         required
                         placeholder="Please Enter Customer Id"
-                        name="customerId"
+                        name="customerRegistrationNumber"
                         label="Customer Id"
                         fullWidth
                         size="small"
-                        value={values.customerId} //set value using formik
+                        value={values.customerRegistrationNumber} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
@@ -304,11 +312,11 @@ export default function Customer(props) {
                         required
                         placeholder="07xxxxxxxx"
                         id="c_mobile_no"
-                        name="mobileNumber"
+                        name="phone01"
                         label="Mobile No "
                         fullWidth
                         size="small"
-                        value={values.mobileNumber} //set value using formik
+                        value={values.phone01} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
@@ -320,11 +328,11 @@ export default function Customer(props) {
                     <FormTextField
                         placeholder="0xxxxxxxxx"
                         id="c_office_no"
-                        name="officeNumber"
+                        name="phone02"
                         label="Office No"
                         fullWidth
                         size="small"
-                        value={values.officeNumber} //set value using formik
+                        value={values.phone02} //set value using formik
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
@@ -336,13 +344,13 @@ export default function Customer(props) {
                     <FormTextField
                         placeholder="Please Enter Your Comment"
                         id="c_comment"
-                        name="comment"
+                        name="comments"
                         label="Comment"
                         multiline
                         rows={4}
                         fullWidth
                         size="small"
-                        value={values.comment} //set value using formikß
+                        value={values.comments} //set value using formikß
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
                     />
@@ -387,7 +395,7 @@ export default function Customer(props) {
                             size="large"
                             color="primary"
                             startIcon={<EditIcon />}
-                            onClick={() => navigate(`${AppRoutes.customer_edit.path.replace(':id', id)}}`)}
+                            onClick={() => navigate(`${AppRoutes.customer_edit.path.replace(':id', id)}`)}
                         >
                             Edit
                         </FormButton>
