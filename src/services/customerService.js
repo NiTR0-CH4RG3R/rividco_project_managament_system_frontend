@@ -25,6 +25,29 @@ export async function listCustomers(page, itemsPerPage) {
     return customers;
 }
 
+export async function listAllCustomers() {
+    const customers = [];
+
+    try {
+        const response = await get(`${CUSTOMER_URL}/all`);
+        response?.data?.forEach((customer) => {
+            customers.push({
+                id: customer.id,
+                firstName: customer.firstName,
+                lastName: customer.lastName,
+                category: customer.category,
+                address: customer.address,
+                contact: customer.phone01
+            })
+        })
+    }
+    catch (error) {
+        console.error(error);
+    }
+
+    return customers;
+}
+
 export async function getCustomer(id) {
     let customer = {};
 

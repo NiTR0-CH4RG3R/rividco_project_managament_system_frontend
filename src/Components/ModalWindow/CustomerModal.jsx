@@ -1,121 +1,107 @@
-import { Modal, Button } from "@mui/material";
-import { Box, Typography } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { Modal, Button, Box, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import * as customerService from "../../services/customerService";
 
-export default function CustomerModal(props) {
+export default function CustomerModal({ openCustomer, setOpenCustomer, sendData }) {
 
-  const { openCustomer, setOpenCustomer, sendData } = props;
+    const customercols = [
+        { field: 'firstName', headerName: 'First Name', align: 'left' },
+        { field: 'lastName', headerName: 'Last Name', align: 'left' },
+        { field: 'category', headerName: 'Category', align: 'left' },
+        { field: 'address', headerName: 'Address', align: 'left' },
+        { field: 'contact', headerName: 'Contact Number' }
+    ]
 
+    const [rows, setRows] = useState([]);
+    const [loadidng, setLoading] = useState(false);
 
-  const customercols = [
-    {
-      field: 'userId',
-      headerName: 'User ID',
-      align: 'center',
-      headerAlign: 'center',
-    },
-    {
-      field: 'id',
-      headerName: 'ID',
-      align: 'center',
-      headerAlign: 'center',
-    },
-    {
-      field: 'title',
-      headerName: 'Title',
-      align: 'center',
-      headerAlign: 'center',
-    },
-    {
-      field: 'completed',
-      headerName: 'Completed',
-      align: 'center',
-      headerAlign: 'center',
-    },
-  ]
+    useEffect(() => {
+        setLoading(true);
+        customerService.listAllCustomers()
+            .then((customers) => {
+                setRows(customers);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setLoading(false);
+            });
+    }, []);
 
-  const handleClose = () => {
-    setOpenCustomer(false);
-  };
+    const handleClose = () => {
+        setOpenCustomer(false);
+    };
 
-  const [rows, setRows] = useState([]);
+    return (
+        <>
+            {
+                loadidng ?
+                    <div>Loading...</div>
+                    :
+                    <Modal open={openCustomer} onClose={handleClose}>
+                        <Box
+                            sx={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                minWidth: 800,
+                                minHeight: 400,
+                                bgcolor: "background.paper",
+                                boxShadow: 24,
+                                p: 4,
+                            }}
+                        >
+                            <Typography variant="h6">Customer Modal</Typography>
 
-  useEffect(() => {
-    // Fetch data from REST endpoint using axios
-    axios
+                            <div style={{ height: 400, width: '100%' }}>
+                                <DataGrid
+                                    rows={rows}
+                                    columns={customercols}
+                                    disableColumnFilter
+                                    disableColumnSelector
+                                    disableDensitySelector
+                                    slots={{ toolbar: GridToolbar }}
+                                    slotProps={{
+                                        toolbar: {
+                                            showQuickFilter: true,
+                                        },
+                                    }}
+                                    onRowClick={({ row }) => {
+                                        sendData('selectedCustomer', row)
+                                        setOpenCustomer(false)
+                                    }}
 
-      .get('https://jsonplaceholder.typicode.com/todos')
+                                    pagination
+                                />
+                            </div>
 
-      .then((response) => {
-        setRows(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "end",
+                                    padding: "1em 2em 0em 2em !important",
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        width: "8.5rem",
+                                        margin: "1em 0.5em !important",
 
-  return (
-    <Modal open={openCustomer} onClose={handleClose}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          minWidth: 800,
-          minHeight: 400,
-          bgcolor: "background.paper",
-          boxShadow: 24,
-          p: 4,
-        }}
-      >
-        <Typography variant="h6">Customer Modal</Typography>
-
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            rows={rows}
-            columns={customercols}
-            disableColumnFilter
-            disableColumnSelector
-            disableDensitySelector
-            slots={{ toolbar: GridToolbar }}
-            slotProps={{
-              toolbar: {
-                showQuickFilter: true,
-              },
-            }}
-            onRowClick={({ row }) => {
-              sendData('selectedCustomer', row)
-              setOpenCustomer(false)
-            }}
-          />
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            padding: "1em 2em 0em 2em !important",
-          }}
-        >
-          <Button
-            variant="contained"
-            sx={{
-              width: "8.5rem",
-              margin: "1em 0.5em !important",
-              
-            }}
-            color="primary"
-            startIcon={<CloseIcon />}
-            onClick={handleClose}
-          >
-            Close
-          </Button>
-        </div>
-      </Box>
-    </Modal>
-  );
+                                    }}
+                                    color="primary"
+                                    startIcon={<CloseIcon />}
+                                    onClick={handleClose}
+                                >
+                                    Close
+                                </Button>
+                            </div>
+                        </Box>
+                    </Modal>
+            }
+        </>
+    );
 }

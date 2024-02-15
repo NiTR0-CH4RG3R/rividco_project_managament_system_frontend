@@ -26,6 +26,30 @@ export async function listSystemUsers(page, itemsPerPage) {
     return systemUsers;
 }
 
+export async function listAllSystemUsers() {
+    const systemUsers = [];
+
+    try {
+        const response = await get(`${VENDOR_URL}/all`);
+        response?.data?.forEach((systemUser) => {
+            systemUsers.push({
+                id: systemUser.id,
+                firstName: systemUser.firstName,
+                lastName: systemUser.lastName,
+                username: systemUser.username,
+                role: systemUser.role,
+                address: systemUser.address,
+                contact: systemUser.phone01
+            })
+        })
+    }
+    catch (error) {
+        console.error(error);
+    }
+
+    return systemUsers;
+}
+
 export async function getSystemUser(id) {
     let systemUser = {};
 

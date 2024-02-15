@@ -25,6 +25,29 @@ export async function listProjects(page, itemsPerPage) {
     return projects;
 }
 
+export async function listAllProjects() {
+    const projects = [];
+
+    try {
+        const response = await get(`${PROJECT_URL}/all`);
+        response?.data?.forEach((project) => {
+            projects.push({
+                id: project.id,
+                name: project.name,
+                description: project.description,
+                startDate: project.startDate,
+                endDate: project.endDate,
+                status: project.status
+            })
+        })
+    }
+    catch (error) {
+        console.error(error);
+    }
+
+    return projects;
+}
+
 export async function getProject(id) {
     let project = {};
 

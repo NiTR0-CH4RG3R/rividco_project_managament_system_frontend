@@ -23,6 +23,27 @@ export async function listVendors(page, itemsPerPage) {
     return vendors;
 }
 
+export async function listAllVendors() {
+    const vendors = [];
+
+    try {
+        const response = await get(`${VENDOR_URL}/all`);
+        response?.data?.forEach((vendor) => {
+            vendors.push({
+                id: vendor.id,
+                name: vendor.name,
+                address: vendor.address,
+                contact: vendor.phone1
+            })
+        })
+    }
+    catch (error) {
+        console.error(error);
+    }
+
+    return vendors;
+}
+
 export async function getVendor(id) {
     let vendor = {};
 
