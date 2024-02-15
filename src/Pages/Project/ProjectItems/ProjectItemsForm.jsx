@@ -7,7 +7,7 @@ import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import VendorModal from "../../../Components/ModalWindow/VendorModal";
+import VendorItemModal from "../../../Components/ModalWindow/VendorItemModal";
 import { IconButton } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
 import { addProjectValidation } from "../../../Validation/AddProjectValidation";
@@ -50,7 +50,7 @@ export default function ProjectItemsForm(props) {
 
   const [loading, setLoading] = useState(false);
   //for modal
-  const [openVendor, setOpenVendor] = useState(false);
+  const [openVendorItem, setOpenVendorItem] = useState(false);
 
 
   //set initial values in formik
@@ -72,7 +72,7 @@ export default function ProjectItemsForm(props) {
       comment: "",
       dueDate: "",
       
-      selectedVendor: {
+      selectedVendorItem: {
         userId: null,
         id: null,
         title: null,
@@ -115,17 +115,17 @@ export default function ProjectItemsForm(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedVendor?.title && props.type !== "view") {
-                setOpenVendor(true);
+              if (!values.selectedVendorItem?.title && props.type !== "view") {
+                setOpenVendorItem(true);
               }
             }}
-            value={values.selectedVendor?.title ?? ""}
+            value={values.selectedVendorItem?.title ?? ""}
             InputProps={{
               endAdornment: (
                 <IconButton
-                  onClick={() => setFieldValue("selectedVendor", "")}
+                  onClick={() => setFieldValue("selectedVendorItem", "")}
                   sx={{
-                    visibility: values.selectedVendor?.title
+                    visibility: values.selectedVendorItem?.title
                       ? "visible"
                       : "hidden",
                   }}
@@ -137,11 +137,11 @@ export default function ProjectItemsForm(props) {
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedVendor?.title && errors.selectedVendor?.title
+              touched.selectedVendorItem?.title && errors.selectedVendorItem?.title
             }
             helperText={
-              touched.selectedVendor?.title
-                ? errors.selectedVendor?.title
+              touched.selectedVendorItem?.title
+                ? errors.selectedVendorItem?.title
                 : ""
             }
           />
@@ -235,9 +235,9 @@ export default function ProjectItemsForm(props) {
         
       </Box>
 
-      <VendorModal
-        openVendor={openVendor}
-        setOpenVendor={setOpenVendor}
+      <VendorItemModal
+        openVendorItem={openVendorItem}
+        setOpenVendorItem={setOpenVendorItem}
         sendData={setFieldValue}
       />
     
