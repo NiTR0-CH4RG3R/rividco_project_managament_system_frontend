@@ -35,8 +35,19 @@ import * as projectService from "../../services/projectService";
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
-  function loadProjectData(id) {
-    //add here
+  function loadProjectData(id,setValues) {
+    //Load data
+    projectService.getProject(id)
+      .then(
+        project =>{
+          setValues(project);
+        }
+      )
+      .catch(
+        error=>{
+          console.log(error);
+        }
+      )
   }
 
   function loadStatusType() {
@@ -59,9 +70,17 @@ export default function Project(props) {
     loadStatusType();
 
     if (props.type !== "add") {
-      loadProjectData(id);
+      loadProjectData(id,setValues);
     }
   }, []);
+
+  useEffect(()=>{
+    if(props.type ==="add"){
+      setValues({
+
+      });
+    }
+  },[props.type]);
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
@@ -97,6 +116,7 @@ export default function Project(props) {
     handleReset,
     setFieldValue,
     submitForm,
+    setValues,
   } = useFormik({
     initialValues: {
       //customer: "",
