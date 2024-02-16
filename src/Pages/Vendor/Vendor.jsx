@@ -194,7 +194,7 @@ export default function Vendor(props) {
                     <FormTextField
                         required
                         placeholder="Please enter registration number"
-                        name="email"
+                        name="vendorRegistrationNumber"
                         label="Registration Number"
                         fullWidth
                         size="small"
