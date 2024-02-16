@@ -6,7 +6,7 @@ import { AppRoutes } from "../../Data/AppRoutes";
 import * as vendorService from "../../services/vendorService";
 
 const columns = [
-    { id: "vendorRegistrationNumber", label: "Vendor Registration No.", align: "left" },
+    { id: "vendorRegistrationNumber", label: "Vendor Registration No", align: "left" },
     { id: "name", label: "Name", align: "left" },
     { id: "address", label: "Address", align: "left" },
     { id: "email", label: "Email", align: "left" },
