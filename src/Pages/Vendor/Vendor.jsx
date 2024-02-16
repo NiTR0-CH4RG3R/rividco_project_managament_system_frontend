@@ -21,8 +21,15 @@ import FormButton from "../../Components/StyledComponents/FormButton";
 import * as vendorService from "../../services/vendorService";
 
 export default function Vendor(props) {
-  function loadVendorData(id) {
-    //add here
+  function loadVendorData(id, setValues) {
+    vendorService
+      .getVendor(id)
+      .then((vendor) => {
+        setValues(vendor);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const { id } = useParams();
@@ -31,8 +38,25 @@ export default function Vendor(props) {
   useEffect(() => {
     if (props.type !== "add") {
       loadVendorData(id);
+
+      if (props.type !== "add") {
+        loadVendorData(id, setValues);
+      }
     }
   }, []);
+  useEffect(() => {
+    if (props.type === "add") {
+      setValues({
+        name: "",
+        address: "",
+        email: "",
+        registrationNumber: "",
+        mobileNumber: "",
+        officeNumber: "",
+        comment: "",
+      });
+    }
+  }, [props.type]);
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
@@ -60,6 +84,7 @@ export default function Vendor(props) {
     handleSubmit,
     handleReset,
     submitForm,
+    setValues
   } = useFormik({
     initialValues: {
       name: "",
