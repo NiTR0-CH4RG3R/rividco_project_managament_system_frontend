@@ -8,12 +8,7 @@ export async function listVendors(page, itemsPerPage) {
     try {
         const response = await get(VENDOR_URL, { page, pageSize: itemsPerPage });
         response?.data?.forEach((vendor) => {
-            vendors.push({
-                id: vendor.id,
-                name: vendor.name,
-                address: vendor.address,
-                contact: vendor.phone1
-            })
+            vendors.push(vendor)
         })
     }
     catch (error) {
@@ -29,12 +24,7 @@ export async function listAllVendors() {
     try {
         const response = await get(`${VENDOR_URL}/all`);
         response?.data?.forEach((vendor) => {
-            vendors.push({
-                id: vendor.id,
-                name: vendor.name,
-                address: vendor.address,
-                contact: vendor.phone1
-            })
+            vendors.push(vendor)
         })
     }
     catch (error) {
