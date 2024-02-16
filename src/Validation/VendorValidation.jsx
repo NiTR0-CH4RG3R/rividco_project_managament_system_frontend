@@ -2,12 +2,12 @@ import * as yup from "yup";
 
 export const vendorValidation = yup.object().shape({
   name: yup.string().required("Required"),
-  registrationNumber: yup.string().required("Required"),
+  vendorRegistrationNumber: yup.string().required("Required"),
   
   address: yup.string().required("Required"),
   email: yup.string().email("Please enter a valid email").required("Required"),
   
-  mobileNumber: yup
+  phone01: yup
     .string()
     .matches(
       /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/,
@@ -15,7 +15,7 @@ export const vendorValidation = yup.object().shape({
     )
     .min(10)
     .required("Required"),
-  officeNumber: yup
+  phone02: yup
     .string()
     .matches(
       /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/,
