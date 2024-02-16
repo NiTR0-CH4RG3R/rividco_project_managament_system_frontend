@@ -8,14 +8,7 @@ export async function listProjects(page, itemsPerPage) {
     try {
         const response = await get(PROJECT_URL, { page, pageSize: itemsPerPage });
         response?.data?.forEach((project) => {
-            projects.push({
-                id: project.id,
-                name: project.name,
-                description: project.description,
-                startDate: project.startDate,
-                endDate: project.endDate,
-                status: project.status
-            })
+            projects.push(project)
         })
     }
     catch (error) {

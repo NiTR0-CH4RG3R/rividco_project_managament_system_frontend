@@ -139,7 +139,6 @@ export default function Vendoritem(props) {
             setValues({
                 product_name: "",
                 price: "",
-                vendor: "",
                 warranty_duration: "",
                 capacity: "",
                 brand: "",
