@@ -9,7 +9,7 @@ export default function VendorItemModal(props) {
   const { openVendorItem, setOpenVendorItem, sendData } = props;
 
   const vendoritemcols = [
-    { field: "itemName", headerName: "Item Name", align: "left" },
+    { field: "productName", headerName: "Item Name", align: "left" },
     { field: "vendor", headerName: "Vendor", align: "left" },
     { field: "brand", headerName: "Brand", align: "left" },
     { field: "price", headerName: "Price", align: "left" },
