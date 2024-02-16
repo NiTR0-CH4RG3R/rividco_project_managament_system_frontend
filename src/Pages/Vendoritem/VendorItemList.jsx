@@ -45,6 +45,7 @@ export default function VendorList() {
             .listVendorItems(page + 1, rowsPerPage)
             .then((Vendoritems) => {
                 setRows(Vendoritems);
+                
             })
 
             .catch((error) => {

@@ -8,7 +8,7 @@ export async function listVendorItems(page, itemsPerPage) {
     try {
         const response = await get(VENDORITEM_URL, { page, pageSize: itemsPerPage });
         response?.data?.forEach((vendorItem) => {
-            vendorItems.push({ vendorItem })
+            vendorItems.push(vendorItem)
         })
     }
     catch (error) {

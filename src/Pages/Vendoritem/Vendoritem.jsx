@@ -25,6 +25,53 @@ import WarrentyField from "../../Components/WarrentyField/WarrentyField";
 import * as vendorItemService from "../../services/vendorItemService";
 
 export default function Vendoritem(props) {
+    function loadVendorData(id, setValues) {
+        vendorItemService
+            .getVendorItem(id)
+            .then((vendorItem) => {
+                setValues(vendorItem);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    useEffect(() => {
+        if (props.type === "add") {
+            setValues({
+                product_name: "",
+                price: "",
+                warranty_duration: "",
+                capacity: "",
+                brand: "",
+                productCode: "",
+                comments: "",
+                selectedVendor: {
+                    id: null,
+                    name: null,
+                },
+            });
+        }
+    }, [props.type]);
+
+    const { setTitle, setSubtitle } = useTopbarContext();
+    setTitle(
+        props.type === "add"
+            ? "Add a new Vendor Item"
+            : props.type === "edit"
+                ? "Edit Vendor Item"
+                : `View Vendor Item`
+    );
+    setSubtitle(
+        props.type === "add"
+            ? "You can add a new vendor item here."
+            : props.type === "edit"
+                ? "You can edit vendor item details here."
+                : `You can view vendor item details here.`
+    );
+
+    const [openVendor, setOpenVendor] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const {
         values,
@@ -51,7 +98,7 @@ export default function Vendoritem(props) {
                 name: null,
             },
         },
-        validationSchema: VendoritemValidation,
+        //validationSchema: VendoritemValidation,
         onSubmit: (values) => {
             setLoading(true);
             if (props.type === "add") {
@@ -91,39 +138,12 @@ export default function Vendoritem(props) {
         },
     });
 
-    function loadVendorData(id, setValues) {
-        vendorItemService
-            .getVendorItem(id)
-            .then((vendorItem) => {
-                setValues(vendorItem);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
+    
     const { id } = useParams();
 
 
 
-    const { setTitle, setSubtitle } = useTopbarContext();
-    setTitle(
-        props.type === "add"
-            ? "Add a new Vendor Item"
-            : props.type === "edit"
-                ? "Edit Vendor Item"
-                : `View Vendor Item`
-    );
-    setSubtitle(
-        props.type === "add"
-            ? "You can add a new vendor item here."
-            : props.type === "edit"
-                ? "You can edit vendor item details here."
-                : `You can view vendor item details here.`
-    );
-
-    const [openVendor, setOpenVendor] = useState(false);
-    const [loading, setLoading] = useState(false);
+   
 
     //set initial values in formik
 
@@ -134,23 +154,7 @@ export default function Vendoritem(props) {
         }
     }, []);
 
-    useEffect(() => {
-        if (props.type === "add") {
-            setValues({
-                product_name: "",
-                price: "",
-                warranty_duration: "",
-                capacity: "",
-                brand: "",
-                productCode: "",
-                comments: "",
-                selectedVendor: {
-                    id: null,
-                    name: null,
-                },
-            });
-        }
-    }, [props.type]);
+    
 
     const navigation = useNavigate();
 
@@ -278,6 +282,7 @@ export default function Vendoritem(props) {
                 </Grid>
                 <Grid item xs={6}>
                     <FormTextField
+                        required
                         placeholder="Enter brand name (e.g., SolarTech, HydroPower Solutions)"
                         id="brand"
                         name="brand"
