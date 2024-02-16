@@ -25,20 +25,43 @@ import WarrentyField from "../../Components/WarrentyField/WarrentyField";
 import * as vendorItemService from "../../services/vendorItemService";
 
 export default function Vendoritem(props) {
-  function loadVendorData(id) {
-    //add here
+  function loadVendorData(id, setValues) {
+    vendorItemService
+      .getVendorItem(id)
+      .then((vendorItem) => {
+        setValues(vendorItem);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const { id } = useParams();
 
   useEffect(() => {
-    console.log(props);
-
     if (props.type !== "add") {
-      console.log(id);
-      loadVendorData(id);
+      loadVendorData(id, setValues);
     }
   }, []);
+
+  useEffect(() => {
+    if (props.type === "add") {
+      setValues({
+        product_name: "",
+        price: "",
+        vendor: "",
+        warranty_duration: "",
+        capacity: "",
+        brand: "",
+        productCode: "",
+        comments: "",
+        selectedVendor: {
+          id: null,
+          title: null,
+        },
+      });
+    }
+  }, [props.type]);
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
@@ -70,6 +93,7 @@ export default function Vendoritem(props) {
     handleReset,
     setFieldValue,
     submitForm,
+    setValues
   } = useFormik({
     initialValues: {
       product_name: "",
@@ -81,10 +105,8 @@ export default function Vendoritem(props) {
       productCode: "",
       comments: "",
       selectedVendor: {
-        userId: null,
         id: null,
         title: null,
-        completed: true,
       },
     },
     validationSchema: VendoritemValidation,
@@ -92,7 +114,16 @@ export default function Vendoritem(props) {
       setLoading(true);
       if (props.type === "add") {
         vendorItemService
-          .addVendorItem(values)
+          .addVendorItem({
+            productName:values.product_name,
+            price:values.price,
+            vendorId:values.selectedVendor.id,
+            warrantyDuration:values.warranty_duration,
+            capacity:values.capacity,
+            brand:values.brand,
+            productCode:values.productCode,
+            comments:values.comments,
+          })
           .then(() => {
             setLoading(false);
             navigation(AppRoutes.vendor_item_list.path);
