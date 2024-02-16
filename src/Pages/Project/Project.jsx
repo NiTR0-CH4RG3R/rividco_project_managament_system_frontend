@@ -92,21 +92,21 @@ export default function Project(props) {
 
         selectedCustomer: {
           id: null,
-          title: null,
+          firstName: null,
         },
 
         selectedEmployee: {
           id: null,
-          title: null,
+          firstName: null,
         },
 
         selectedReferenceBy: {
           id: null,
-          title: null,
+          firstName: null,
         },
         selectedSalesPerson: {
           id: null,
-          title: null,
+          firstName: null,
         },
       });
     }
@@ -167,21 +167,21 @@ export default function Project(props) {
 
       selectedCustomer: {
         id: null,
-        title: null,
+        firstName: null,
       },
 
       selectedEmployee: {
         id: null,
-        title: null,
+        firstName: null,
       },
 
       selectedReferenceBy: {
         id: null,
-        title: null,
+        firstName: null,
       },
       selectedSalesPerson: {
         id: null,
-        title: null,
+        firstName: null,
       },
     },
 
@@ -260,17 +260,17 @@ export default function Project(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedCustomer?.title && props.type !== "view") {
+              if (!values.selectedCustomer?.firstName && props.type !== "view") {
                 setOpenCustomer(true);
               }
             }}
-            value={values.selectedCustomer?.title ?? ""}
+            value={values.selectedCustomer?.firstName ?? ""}
             InputProps={{
               endAdornment: (
                 <IconButton
                   onClick={() => setFieldValue("selectedCustomer", "")}
                   sx={{
-                    visibility: values.selectedCustomer?.title
+                    visibility: values.selectedCustomer?.firstName
                       ? "visible"
                       : "hidden",
                   }}
@@ -282,11 +282,11 @@ export default function Project(props) {
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedCustomer?.title && errors.selectedCustomer?.title
+              touched.selectedCustomer?.firstName && errors.selectedCustomer?.firstName
             }
             helperText={
-              touched.selectedCustomer?.title
-                ? errors.selectedCustomer?.title
+              touched.selectedCustomer?.firstName
+                ? errors.selectedCustomer?.firstName
                 : ""
             }
           />
@@ -388,17 +388,17 @@ export default function Project(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedReferenceBy?.title && props.type !== "view") {
+              if (!values.selectedReferenceBy?.firstName && props.type !== "view") {
                 setOpenReferenceBy(true);
               }
             }}
-            value={values.selectedReferenceBy?.title ?? ""}
+            value={values.selectedReferenceBy?.firstName ?? ""}
             InputProps={{
               endAdornment: (
                 <IconButton
                   onClick={() => setFieldValue("selectedReferenceBy", "")}
                   sx={{
-                    visibility: values.selectedReferenceBy?.title
+                    visibility: values.selectedReferenceBy?.firstName
                       ? "visible"
                       : "hidden",
                   }}
@@ -410,12 +410,12 @@ export default function Project(props) {
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedReferenceBy?.title &&
-              errors.selectedReferenceBy?.title
+              touched.selectedReferenceBy?.firstName &&
+              errors.selectedReferenceBy?.firstName
             }
             helperText={
-              touched.selectedReferenceBy?.title
-                ? errors.selectedReferenceBy?.title
+              touched.selectedReferenceBy?.firstName
+                ? errors.selectedReferenceBy?.firstName
                 : ""
             }
           />
@@ -447,17 +447,17 @@ export default function Project(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedEmployee?.title && props.type !== "view") {
+              if (!values.selectedEmployee?.firstName && props.type !== "view") {
                 setOpenEmployee(true);
               }
             }}
-            value={values.selectedEmployee?.title ?? ""}
+            value={values.selectedEmployee?.firstName ?? ""}
             InputProps={{
               endAdornment: (
                 <IconButton
                   onClick={() => setFieldValue("selectedEmployee", "")}
                   sx={{
-                    visibility: values.selectedEmployee?.title
+                    visibility: values.selectedEmployee?.firstName
                       ? "visible"
                       : "hidden",
                   }}
@@ -469,11 +469,11 @@ export default function Project(props) {
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedEmployee?.title && errors.selectedEmployee?.title
+              touched.selectedEmployee?.firstName && errors.selectedEmployee?.firstName
             }
             helperText={
-              touched.selectedEmployee?.title
-                ? errors.selectedEmployee?.title
+              touched.selectedEmployee?.firstName
+                ? errors.selectedEmployee?.firstName
                 : ""
             }
           />
@@ -589,17 +589,17 @@ export default function Project(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedSalesPerson?.title && props.type !== "view") {
+              if (!values.selectedSalesPerson?.firstName && props.type !== "view") {
                 setOpenSalesPerson(true);
               }
             }}
-            value={values.selectedSalesPerson?.title ?? ""}
+            value={values.selectedSalesPerson?.firstName ?? ""}
             InputProps={{
               endAdornment: (
                 <IconButton
                   onClick={() => setFieldValue("selectedSalesPerson", "")}
                   sx={{
-                    visibility: values.selectedSalesPerson?.title
+                    visibility: values.selectedSalesPerson?.firstName
                       ? "visible"
                       : "hidden",
                   }}
@@ -611,12 +611,12 @@ export default function Project(props) {
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedSalesPerson?.title &&
-              errors.selectedSalesPerson?.title
+              touched.selectedSalesPerson?.firstName &&
+              errors.selectedSalesPerson?.firstName
             }
             helperText={
-              touched.selectedSalesPerson?.title
-                ? errors.selectedSalesPerson?.title
+              touched.selectedSalesPerson?.firstName
+                ? errors.selectedSalesPerson?.firstName
                 : ""
             }
           />
