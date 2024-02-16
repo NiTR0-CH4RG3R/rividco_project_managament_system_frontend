@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import { IconButton, MenuItem } from '@mui/material'
@@ -25,6 +25,7 @@ import FormClearButton from '../../Components/StyledComponents/FormClearButton'
 import FormButton from '../../Components/StyledComponents/FormButton'
 import FormEditButton from '../../Components/StyledComponents/FormEditButton'
 import { AppRoutes } from '../../Data/AppRoutes'
+import * as taskService from '../../services/taskService';
 
 export default function Task(props) {
     const { setTitle, setSubtitle } = useTopbarContext()
@@ -61,19 +62,19 @@ export default function Task(props) {
             selectedCustomer: {
                 userId: null,
                 id: null,
-                title: null,
+                firstName: null,
                 completed: true,
             },
             selectedProject: {
                 userId: null,
                 id: null,
-                title: null,
+                firstName: null,
                 completed: true,
             },
             selectedEmployee: {
                 userId: null,
                 id: null,
-                title: null,
+                firstName: null,
                 completed: true,
             },
             status: '',
@@ -81,10 +82,60 @@ export default function Task(props) {
             comment: '',
         },
         onSubmit: (values) => {
-            console.log('form values', values)
+            taskService.addTask({
+                category: values.category,
+                requestedBy: values.selectedCustomer.id,
+                assignedTo: values.selectedEmployee.id,
+                urgencyLevel: values.urgency,
+                projectId: values.selectedProject.id,
+                callBackNumber: values.callbacknumber,
+                description: values.description,
+                comments: values.comment,
+            })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
         validationSchema: taskValidation,
     })
+
+    useEffect(() => {
+        if (props.type === 'view' || props.type === 'edit') {
+            taskService.getTask(id)
+                .then((task) => {
+                    setFieldValue('description', task.description)
+                    setFieldValue('category', task.category)
+                    setFieldValue('callbacknumber', task.callbackNumber)
+                    setFieldValue('selectedCustomer', {
+                        userId: task.requestedBy.id,
+                        id: task.requestedBy.id,
+                        firstName: task.requestedBy.firstName,
+                        completed: true,
+                    })
+                    setFieldValue('selectedProject', {
+                        userId: task.project.id,
+                        id: task.project.id,
+                        firstName: task.project.firstName,
+                        completed: true,
+                    })
+                    setFieldValue('selectedEmployee', {
+                        userId: task.assignedTo.id,
+                        id: task.assignedTo.id,
+                        firstName: task.assignedTo.firstName,
+                        completed: true,
+                    })
+                    setFieldValue('status', task.status)
+                    setFieldValue('urgency', task.urgencyLevel)
+                    setFieldValue('comment', task.comments)
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [props.type])
 
     const { id } = useParams()
     const navi = useNavigate()
@@ -174,17 +225,17 @@ export default function Task(props) {
                         size='small'
                         required
                         onClick={() => {
-                            if (!values.selectedCustomer?.title && props.type !== 'view') {
+                            if (!values.selectedCustomer?.firstName && props.type !== 'view') {
                                 setOpenCustomer(true)
                             }
                         }}
-                        value={values.selectedCustomer?.title ?? ''}
+                        value={values.selectedCustomer?.firstName ?? ''}
                         InputProps={{
                             endAdornment: (
                                 <IconButton
                                     onClick={() => setFieldValue('selectedCustomer', '')}
                                     sx={{
-                                        visibility: values.selectedCustomer?.title
+                                        visibility: values.selectedCustomer?.firstName
                                             ? 'visible'
                                             : 'hidden',
                                     }}
@@ -195,11 +246,11 @@ export default function Task(props) {
                         }}
                         disabled={props.type === 'view'}
                         error={
-                            touched.selectedCustomer?.title && errors.selectedCustomer?.title
+                            touched.selectedCustomer?.firstName && errors.selectedCustomer?.firstName
                         }
                         helperText={
-                            touched.selectedCustomer?.title
-                                ? errors.selectedCustomer?.title
+                            touched.selectedCustomer?.firstName
+                                ? errors.selectedCustomer?.firstName
                                 : ''
                         }
                     />
@@ -229,17 +280,17 @@ export default function Task(props) {
                         fullWidth
                         size='small'
                         onClick={() => {
-                            if (!values.selectedProject?.title && props.type !== 'view') {
+                            if (!values.selectedProject?.firstName && props.type !== 'view') {
                                 setOpenProject(true)
                             }
                         }}
-                        value={values.selectedProject?.title ?? ''}
+                        value={values.selectedProject?.firstName ?? ''}
                         InputProps={{
                             endAdornment: (
                                 <IconButton
                                     onClick={() => setFieldValue('selectedProject', '')}
                                     sx={{
-                                        visibility: values.selectedProject?.title
+                                        visibility: values.selectedProject?.firstName
                                             ? 'visible'
                                             : 'hidden',
                                     }}
@@ -261,17 +312,17 @@ export default function Task(props) {
                         fullWidth
                         size='small'
                         onClick={() => {
-                            if (!values.selectedEmployee?.title && props.type !== 'view') {
+                            if (!values.selectedEmployee?.firstName && props.type !== 'view') {
                                 setOpenEmployee(true)
                             }
                         }}
-                        value={values.selectedEmployee?.title ?? ''}
+                        value={values.selectedEmployee?.firstName ?? ''}
                         InputProps={{
                             endAdornment: (
                                 <IconButton
                                     onClick={() => setFieldValue('selectedEmployee', '')}
                                     sx={{
-                                        visibility: values.selectedEmployee?.title
+                                        visibility: values.selectedEmployee?.firstName
                                             ? 'visible'
                                             : 'hidden',
                                     }}
