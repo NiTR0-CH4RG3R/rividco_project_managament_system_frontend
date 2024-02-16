@@ -50,9 +50,9 @@ export default function Vendor(props) {
         name: "",
         address: "",
         email: "",
-        registrationNumber: "",
-        mobileNumber: "",
-        officeNumber: "",
+        vendorRegistrationNumber: "",
+        phone01: "",
+        phone02: "",
         comment: "",
       });
     }
@@ -90,9 +90,9 @@ export default function Vendor(props) {
       name: "",
       address: "",
       email: "",
-      registrationNumber: "",
-      mobileNumber: "",
-      officeNumber: "",
+      vendorRegistrationNumber: "",
+      phone01: "",
+      phone02: "",
       comment: "",
     },
     validationSchema: vendorValidation,
@@ -203,13 +203,13 @@ export default function Vendor(props) {
             label="Registration Number"
             fullWidth
             size="small"
-            value={values.registrationNumber}
+            value={values.vendorRegistrationNumber}
             onChange={handleChange}
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            error={touched.registrationNumber && errors.registrationNumber}
+            error={touched.vendorRegistrationNumber && errors.vendorRegistrationNumber}
             helperText={
-              touched.registrationNumber ? errors.registrationNumber : ""
+              touched.vendorRegistrationNumber ? errors.vendorRegistrationNumber : ""
             }
           />
         </Grid>
@@ -218,31 +218,31 @@ export default function Vendor(props) {
           <FormTextField
             required
             placeholder="07xxxxxxxx"
-            name="mobileNumber"
+            name="phone01"
             label="Mobile No "
             fullWidth
             size="small"
-            value={values.mobileNumber}
+            value={values.phone01}
             onChange={handleChange}
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            error={touched.mobileNumber && errors.mobileNumber}
-            helperText={touched.mobileNumber ? errors.mobileNumber : ""}
+            error={touched.phone01 && errors.phone01}
+            helperText={touched.phone01 ? errors.phone01 : ""}
           />
         </Grid>
         <Grid item xs={6}>
           <FormTextField
             placeholder="0xxxxxxxxx"
-            name="officeNumber"
+            name="phone02"
             label="Office No"
             fullWidth
             size="small"
-            value={values.officeNumber}
+            value={values.phone02}
             onChange={handleChange}
             disabled={props.type === "view"}
             onBlur={handleBlur}
-            error={touched.officeNumber && errors.officeNumber}
-            helperText={touched.officeNumber ? errors.officeNumber : ""}
+            error={touched.phone02 && errors.phone02}
+            helperText={touched.phone02 ? errors.phone02 : ""}
           />
         </Grid>
         <Grid item xs={12}>
