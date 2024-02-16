@@ -13,7 +13,7 @@ export default function ReferenceByModal(props) {
     { field: "lastName", headerName: "Last Name", align: "left" },
     { field: "category", headerName: "Category", align: "left" },
     { field: "address", headerName: "Address", align: "left" },
-    { field: "contact", headerName: "Contact Number" },
+    { field: "phone01", headerName: "Contact Number" },
   ];
 
   const handleClose = () => {

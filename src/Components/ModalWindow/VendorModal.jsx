@@ -9,11 +9,11 @@ export default function VendorModal(props) {
   const { openVendor, setOpenVendor, sendData } = props;
 
   const vendorcols = [
-    { field: "vendorName", headerName: "Name", align: "left" },
+    { field: "name", headerName: "Name", align: "left" },
     { field: "address", headerName: "Address", align: "left" },
     { field: "email", headerName: "Email", align: "left" },
 
-    { field: "contact", headerName: "Contact Number" },
+    { field: "phone01", headerName: "Contact Number" },
   ];
 
   const handleClose = () => {
