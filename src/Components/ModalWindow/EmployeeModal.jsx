@@ -40,64 +40,66 @@ export default function EmployeeModal(props) {
 
   return (
     <>
-      loadidng ?<div>Loading...</div>:
-      <Modal open={openEmployee} onClose={handleClose}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            minWidth: 800,
-            minHeight: 400,
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-          }}
-        >
-          <Typography variant="h6">Employee Modal</Typography>
-
-          <div style={{ height: 400, width: "100%" }}>
-            <DataGrid
-              rows={rows}
-              columns={employeecols}
-              disableColumnFilter
-              disableColumnSelector
-              disableDensitySelector
-              slots={{ toolbar: GridToolbar }}
-              slotProps={{
-                toolbar: {
-                  showQuickFilter: true,
-                },
-              }}
-              onRowClick={({ row }) => {
-                sendData("selectedEmployee", row);
-                setOpenEmployee(false);
-              }}
-
-              pagination
-            />
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "end",
-              padding: "1em 2em 0em 2em !important",
+      {loadidng ? (
+        <div>Loading...</div>
+      ) : (
+        <Modal open={openEmployee} onClose={handleClose}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              minWidth: 800,
+              minHeight: 400,
+              bgcolor: "background.paper",
+              boxShadow: 24,
+              p: 4,
             }}
           >
-            <Button
-              variant="contained"
-              sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
-              color="primary"
-              startIcon={<CloseIcon />}
-              onClick={handleClose}
+            <Typography variant="h6">Employee Modal</Typography>
+
+            <div style={{ height: 400, width: "100%" }}>
+              <DataGrid
+                rows={rows}
+                columns={employeecols}
+                disableColumnFilter
+                disableColumnSelector
+                disableDensitySelector
+                slots={{ toolbar: GridToolbar }}
+                slotProps={{
+                  toolbar: {
+                    showQuickFilter: true,
+                  },
+                }}
+                onRowClick={({ row }) => {
+                  sendData("selectedEmployee", row);
+                  setOpenEmployee(false);
+                }}
+                pagination
+              />
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "end",
+                padding: "1em 2em 0em 2em !important",
+              }}
             >
-              Close
-            </Button>
-          </div>
-        </Box>
-      </Modal>
+              <Button
+                variant="contained"
+                sx={{ width: "8.5rem", margin: "1em 0.5em !important" }}
+                color="primary"
+                startIcon={<CloseIcon />}
+                onClick={handleClose}
+              >
+                Close
+              </Button>
+            </div>
+          </Box>
+        </Modal>
+      )}
     </>
   );
 }
