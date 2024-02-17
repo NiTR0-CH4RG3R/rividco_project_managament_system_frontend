@@ -109,22 +109,21 @@ export default function Task(props) {
                     setFieldValue('category', task.category)
                     setFieldValue('callbacknumber', task.callbackNumber)
                     setFieldValue('selectedCustomer', {
-                        userId: task.requestedBy.id,
+                        
                         id: task.requestedBy.id,
                         firstName: task.requestedBy.firstName,
-                        completed: true,
+                        
                     })
                     setFieldValue('selectedProject', {
-                        userId: task.project.id,
+                        
                         id: task.project.id,
-                        firstName: task.project.firstName,
-                        completed: true,
+                        
                     })
                     setFieldValue('selectedEmployee', {
-                        userId: task.assignedTo.id,
+                        
                         id: task.assignedTo.id,
                         firstName: task.assignedTo.firstName,
-                        completed: true,
+                        
                     })
                     setFieldValue('status', task.status)
                     setFieldValue('urgency', task.urgencyLevel)
