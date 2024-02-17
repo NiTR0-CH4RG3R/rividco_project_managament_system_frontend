@@ -442,7 +442,7 @@ export default function Task(props) {
                             <FormButton
                                 variant="contained"
                                 size="large"
-                                color="success"
+                                color="primary"
                                 onClick={() => navi(`${AppRoutes.cia_resources_add.path}`)} //navigate to add task resources
                                 startIcon={<AddBox />}
                             >
