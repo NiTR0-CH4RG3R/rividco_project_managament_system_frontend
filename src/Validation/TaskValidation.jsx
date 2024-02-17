@@ -11,6 +11,6 @@ export const taskValidation = yup.object().shape({
     .min(10)
     .required('Required'),
   selectedCustomer: yup.object({
-    title: yup.string().required('Required'),
+    firstName: yup.string().required('Required'),
   }),
 })
