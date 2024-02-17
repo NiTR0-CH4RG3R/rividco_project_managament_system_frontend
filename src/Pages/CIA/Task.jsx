@@ -449,9 +449,10 @@ export default function Task(props) {
                                 Add Task Resources
                             </FormButton>
                             <FormClearButton
+                                color='primary'
                                 variant="contained"
                                 size="large"
-                                onClick={handleReset}
+                                type='reset'
                                 startIcon={<ClearAll />}
                             >
                                 Clear
@@ -461,7 +462,7 @@ export default function Task(props) {
                                 variant="contained"
                                 size="large"
                                 startIcon={<Save />}
-                                //onClick={submitForm}
+                                
                                 type='submit'
                                 loading={loading}
 
