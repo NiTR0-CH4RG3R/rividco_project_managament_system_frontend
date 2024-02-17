@@ -462,6 +462,8 @@ export default function Task(props) {
                                 startIcon={<Save />}
                                 //onClick={submitForm}
                                 type='submit'
+                                loading={loading}
+                                
                             >
                                 Save
                             </FormSaveLoadingButton>
