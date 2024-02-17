@@ -259,7 +259,7 @@ export default function Task(props) {
                         <Grid container xs={12} sx={{ justifyContent: 'right' }}>
                             <FormButton
                                 variant="contained"
-                                color="success"
+                                color="primary"
                                 onClick={() => navi(`${AppRoutes.customer_add.path}`)}
                                 startIcon={<AddBox />}
                             >
@@ -408,7 +408,7 @@ export default function Task(props) {
                             <FormButton
                                 variant="contained"
                                 size="large"
-                                color="success"
+                                color="primary"
                                 onClick={() => navi(`${AppRoutes.cia_status.path}`)} //navigate to the taskstatus page
                                 startIcon={<History />}
                             >
@@ -418,7 +418,7 @@ export default function Task(props) {
                             <FormButton
                                 variant="contained"
                                 size="large"
-                                color="success"
+                                color="primary"
                                 onClick={() => navi(`${AppRoutes.cia_resources_view.path}`)} //navigate to the view task resouce page
                                 startIcon={<Visibility />}
                             >
