@@ -457,13 +457,14 @@ export default function Task(props) {
                                 Clear
                             </FormClearButton>
                             <FormSaveLoadingButton
+                                color='primary'
                                 variant="contained"
                                 size="large"
                                 startIcon={<Save />}
                                 //onClick={submitForm}
                                 type='submit'
                                 loading={loading}
-                                
+
                             >
                                 Save
                             </FormSaveLoadingButton>
