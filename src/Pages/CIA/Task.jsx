@@ -60,22 +60,21 @@ export default function Task(props) {
             category: '',
             callbacknumber: '',
             selectedCustomer: {
-                userId: null,
+                
                 id: null,
                 firstName: null,
-                completed: true,
+                
             },
             selectedProject: {
-                userId: null,
+                
                 id: null,
-                firstName: null,
-                completed: true,
+                
             },
             selectedEmployee: {
-                userId: null,
+                
                 id: null,
                 firstName: null,
-                completed: true,
+                
             },
             status: '',
             urgency: '',
@@ -280,17 +279,17 @@ export default function Task(props) {
                         fullWidth
                         size='small'
                         onClick={() => {
-                            if (!values.selectedProject?.firstName && props.type !== 'view') {
+                            if (!values.selectedProject?.id && props.type !== 'view') {
                                 setOpenProject(true)
                             }
                         }}
-                        value={values.selectedProject?.firstName ?? ''}
+                        value={values.selectedProject?.id ?? ''}
                         InputProps={{
                             endAdornment: (
                                 <IconButton
                                     onClick={() => setFieldValue('selectedProject', '')}
                                     sx={{
-                                        visibility: values.selectedProject?.firstName
+                                        visibility: values.selectedProject?.id
                                             ? 'visible'
                                             : 'hidden',
                                     }}
