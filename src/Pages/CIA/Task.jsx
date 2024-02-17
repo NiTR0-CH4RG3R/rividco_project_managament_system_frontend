@@ -103,23 +103,29 @@ export default function Task(props) {
       comment: "",
     },
     onSubmit: (values) => {
-      taskService
-        .addTask({
-          category: values.category,
-          requestedBy: values.selectedCustomer.id,
-          assignedTo: values.selectedEmployee.id,
-          urgencyLevel: values.urgency,
-          projectId: values.selectedProject.id,
-          callBackNumber: values.callbacknumber,
-          description: values.description,
-          comments: values.comment,
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      setLoading(true);
+      if (props.type === "add") {
+        taskService
+          .addTask({
+            category: values.category,
+            requestedBy: values.selectedCustomer.id,
+            assignedTo: values.selectedEmployee.id,
+            urgencyLevel: values.urgency,
+            projectId: values.selectedProject.id,
+            callBackNumber: values.callbacknumber,
+            description: values.description,
+            comments: values.comment,
+          })
+          .then(() => {
+            setLoading(false);
+            navi(AppRoutes.cia_list.path);
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error);
+            setLoading(false);
+          });
+      }
     },
     validationSchema: taskValidation,
   });
