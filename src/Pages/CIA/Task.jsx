@@ -81,7 +81,7 @@ export default function Task(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
-    submitForm,
+    setValues,
   } = useFormik({
     initialValues: {
       description: "",
