@@ -98,7 +98,7 @@ export default function Vendoritem(props) {
                 name: null,
             },
         },
-        //validationSchema: VendoritemValidation,
+        validationSchema: VendoritemValidation,
         onSubmit: (values) => {
             setLoading(true);
             if (props.type === "add") {
