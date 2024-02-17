@@ -460,7 +460,8 @@ export default function Task(props) {
                                 variant="contained"
                                 size="large"
                                 startIcon={<Save />}
-                                onClick={submitForm}
+                                //onClick={submitForm}
+                                type='submit'
                             >
                                 Save
                             </FormSaveLoadingButton>
