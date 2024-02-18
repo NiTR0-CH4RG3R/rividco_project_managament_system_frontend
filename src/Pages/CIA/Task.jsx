@@ -35,23 +35,23 @@ export default function Task(props) {
     taskService
       .getTask(id)
       .then((task) => {
-        setFieldValue("description", task.description);
-        setFieldValue("category", task.category);
-        setFieldValue("callbacknumber", task.callbackNumber);
-        setFieldValue("selectedCustomer", {
+        setValues("description", task.description);
+        setValues("category", task.category);
+        setValues("callbacknumber", task.callbackNumber);
+        setValues("selectedCustomer", {
           id: task.requestedBy.id,
           firstName: task.requestedBy.firstName,
         });
-        setFieldValue("selectedProject", {
+        setValues("selectedProject", {
           id: task.project.id,
         });
-        setFieldValue("selectedEmployee", {
+        setValues("selectedEmployee", {
           id: task.assignedTo.id,
           firstName: task.assignedTo.firstName,
         });
-        setFieldValue("status", task.status);
-        setFieldValue("urgency", task.urgencyLevel);
-        setFieldValue("comment", task.comments);
+        setValues("status", task.status);
+        setValues("urgency", task.urgencyLevel);
+        setValues("comment", task.comments);
       })
       .catch((error) => {
         console.log(error);
