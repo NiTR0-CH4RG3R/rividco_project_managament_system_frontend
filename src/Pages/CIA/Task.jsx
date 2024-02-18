@@ -125,30 +125,52 @@ export default function Task(props) {
             alert(error);
             setLoading(false);
           });
+      } else if (props.type === "edit") {
+        taskService
+          .updateTask(values, id)
+          .then(() => {
+            setLoading(false);
+            navi(AppRoutes.cia_list.path);
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(error);
+            setLoading(false);
+          });
       }
-      else if (props.type === "edit") {
-        taskService.updateTask(values, id)
-            .then(() => {
-                setLoading(false);
-                navi(AppRoutes.cia_list.path);
-            })
-            .catch((error) => {
-                console.error(error);
-                alert(error);
-                setLoading(false);
-            });
-    }
     },
     validationSchema: taskValidation,
   });
 
   useEffect(() => {
     if (props.type === "view" || props.type === "edit") {
-      loadTaskData(id,setValues);
+      loadTaskData(id, setValues);
     }
   }, [id]);
 
-  
+  useEffect(() => {
+    if (props.type === "add") {
+      setValues({
+        description: "",
+        category: "",
+        callbacknumber: "",
+        selectedCustomer: {
+          id: null,
+          firstName: null,
+        },
+        selectedProject: {
+          id: null,
+        },
+        selectedEmployee: {
+          id: null,
+          firstName: null,
+        },
+        status: "",
+        urgency: "",
+        comment: "",
+      });
+    }
+  }, [props.type]);
 
   const { id } = useParams();
   const navi = useNavigate();
