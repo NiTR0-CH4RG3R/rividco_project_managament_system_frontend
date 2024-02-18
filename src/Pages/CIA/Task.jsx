@@ -126,6 +126,18 @@ export default function Task(props) {
             setLoading(false);
           });
       }
+      else if (props.type === "edit") {
+        taskService.updateTask(values, id)
+            .then(() => {
+                setLoading(false);
+                navi(AppRoutes.cia_list.path);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert(error);
+                setLoading(false);
+            });
+    }
     },
     validationSchema: taskValidation,
   });
