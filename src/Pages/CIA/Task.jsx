@@ -30,6 +30,9 @@ import * as taskService from "../../services/taskService";
 export default function Task(props) {
   const { setTitle, setSubtitle } = useTopbarContext();
   const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const navi = useNavigate();
+  
 
   function loadTaskData(id, setValues) {
     taskService
@@ -105,6 +108,7 @@ export default function Task(props) {
     onSubmit: (values) => {
       setLoading(true);
       if (props.type === "add") {
+        console.log(values);
         taskService
           .addTask({
             category: values.category,
@@ -172,8 +176,7 @@ export default function Task(props) {
     }
   }, [props.type]);
 
-  const { id } = useParams();
-  const navi = useNavigate();
+  
 
   const [openCustomer, setOpenCustomer] = useState(false);
   const [openProject, setOpenProject] = useState(false);
