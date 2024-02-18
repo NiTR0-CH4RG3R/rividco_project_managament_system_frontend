@@ -144,32 +144,11 @@ export default function Task(props) {
 
   useEffect(() => {
     if (props.type === "view" || props.type === "edit") {
-      taskService
-        .getTask(id)
-        .then((task) => {
-          setFieldValue("description", task.description);
-          setFieldValue("category", task.category);
-          setFieldValue("callbacknumber", task.callbackNumber);
-          setFieldValue("selectedCustomer", {
-            id: task.requestedBy.id,
-            firstName: task.requestedBy.firstName,
-          });
-          setFieldValue("selectedProject", {
-            id: task.project.id,
-          });
-          setFieldValue("selectedEmployee", {
-            id: task.assignedTo.id,
-            firstName: task.assignedTo.firstName,
-          });
-          setFieldValue("status", task.status);
-          setFieldValue("urgency", task.urgencyLevel);
-          setFieldValue("comment", task.comments);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      loadTaskData(id,setValues);
     }
-  }, [props.type]);
+  }, [id]);
+
+  
 
   const { id } = useParams();
   const navi = useNavigate();
