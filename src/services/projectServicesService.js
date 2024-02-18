@@ -39,3 +39,12 @@ export async function addService(service) {
         console.error(error);
     }
 }
+
+export async function updateService(service, id) {
+    try {
+        await put(`${SERVICE_URL}/${id}`, service);
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
