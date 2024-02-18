@@ -49,13 +49,12 @@ export const AppRoutes = {
     project_add: { path: "/project/add", component: <Project type="add" /> },
     project_view: { path: "/project/view/:id", component: <Project type="view" />, },
     project_edit: { path: "/project/edit/:id", component: <Project type="edit" />, },
-    project_services_list: { path: "/project/services/list", component: <> </>, },
-    project_test_list: { path: "/project/test", component: <ProjectTest />, },
+    project_test_list: { path: "/project/view/:id/test", component: <ProjectTest />, },
     project_items_list: { path: "/project/items", component: <ProjectItems />, },
     project_services_list: { path: "/project/service", component: <ProjectServices />, },
     project_resources_list: { path: "/project/resources", component: <ProjectResources />, },
-    project_commsion_report:{path:"/project/report/:id",component:<CommisionReport/>},
-    
+    project_commsion_report: { path: "/project/report/:id", component: <CommisionReport /> },
+
 
     /* CIA related routes */
     cia_list: { path: "/cia/list", component: <TaskList /> },
