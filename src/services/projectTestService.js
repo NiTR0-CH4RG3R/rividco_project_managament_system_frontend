@@ -40,3 +40,12 @@ export async function addTest(test) {
         console.error(error);
     }
 }
+
+export async function updateTest(test, id) {
+    try {
+        await put(`${TEST_URL}/${id}`, test);
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
