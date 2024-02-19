@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
 import * as systemUserService from "../../services/systemUserService";
+import { IconButton } from "@mui/material";
 
 export default function EmployeeModal(props) {
   const { openEmployee, setOpenEmployee, sendData } = props;
@@ -58,6 +59,17 @@ export default function EmployeeModal(props) {
             }}
           >
             <Typography variant="h6">Employee Modal</Typography>
+            <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
 
             <div style={{ height: 400, width: "100%" }}>
               <DataGrid
@@ -80,7 +92,7 @@ export default function EmployeeModal(props) {
               />
             </div>
 
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "end",
@@ -96,7 +108,7 @@ export default function EmployeeModal(props) {
               >
                 Close
               </Button>
-            </div>
+            </div> */}
           </Box>
         </Modal>
       )}
