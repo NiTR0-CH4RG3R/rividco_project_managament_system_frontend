@@ -32,11 +32,11 @@ export default function ProjectServicesForm(props) {
     //load status type from the backend
     setResultType([
       {
-        value: "pass",
+        value: true,
         label: "Pass",
       },
       {
-        value: "fail",
+        value: false,
         label: "Fail",
       },
     ]);
@@ -106,7 +106,8 @@ export default function ProjectServicesForm(props) {
             name: values.testName,
             conductedBy: values.selectedEmployee.id,
             conductedDate: values.conductedDate,
-            //no status type in the database
+
+            passed: values.result,
           })
           .then(() => {
             setLoading(false);
