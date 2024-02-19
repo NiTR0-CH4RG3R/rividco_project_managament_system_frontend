@@ -9,6 +9,7 @@ import { ClearAll, Save } from '@mui/icons-material'
 import FormTextField from '../../../Components/StyledComponents/FormTextField'
 import FormClearButton from '../../../Components/StyledComponents/FormClearButton'
 import FormSaveLoadingButton from '../../../Components/StyledComponents/FormSaveLoadingButton'
+import Grid from "@mui/material/Grid"
 
 {
   /* ---------------- Validation part ------------------ */
@@ -48,6 +49,7 @@ function TaskForm(props) {
       onSubmit={handleSubmit}
       display="flex"
       flexDirection="column"
+      width={"100%"}
       sx={{
         '& .MuiTextField-root': {
           margin: 1,
@@ -55,23 +57,29 @@ function TaskForm(props) {
       }}
     >
       {/* ---------------- Task field ------------------ */}
-
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
       <FormTextField
         disabled
         id="task"
         name="task"
         label="Task ID"
+        fullWidth
+        size="small"
         value={values.task}
       ></FormTextField>
-
+        </Grid>
       {/* ---------------- Status field ------------------ */}
 
+      <Grid item xs={12}>
       <FormTextField
         required
         id="status"
         name="status"
         select
         label="Status"
+        fullWidth
+        size="small"
         value={values.status}
         onBlur={handleBlur}
         error={touched.status && errors.status}
@@ -84,18 +92,23 @@ function TaskForm(props) {
           </MenuItem>
         ))}
       </FormTextField>
+      </Grid>
 
       {/* ---------------- comment field ------------------ */}
-
+      <Grid item xs={12}>
       <FormTextField
         id="comment"
         name="comment"
         label="Comment"
         multiline
         rows={5}
+        fullWidth
+            size="small"
         value={values.comment}
         onChange={handleChange}
       />
+        </Grid>
+      </Grid>
 
       {/* ---------------- Button placement ------------------ */}
 
