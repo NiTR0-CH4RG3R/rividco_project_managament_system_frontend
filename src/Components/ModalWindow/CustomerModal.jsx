@@ -3,6 +3,7 @@ import { Modal, Button, Box, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import * as customerService from "../../services/customerService";
+import { IconButton } from '@mui/material';
 
 export default function CustomerModal({
   openCustomer,
@@ -59,6 +60,19 @@ export default function CustomerModal({
           >
             <Typography variant="h6">Customer Modal</Typography>
 
+            <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position:'absolute',
+              right:8,
+              top:8
+            }}
+            >
+              <CloseIcon/>
+
+            </IconButton>
+
             <div style={{ height: 400, width: "100%" }}>
               <DataGrid
                 rows={rows}
@@ -87,7 +101,7 @@ export default function CustomerModal({
                 padding: "1em 2em 0em 2em !important",
               }}
             >
-              <Button
+              {/* <Button
                 variant="contained"
                 sx={{
                   width: "8.5rem",
@@ -98,7 +112,7 @@ export default function CustomerModal({
                 onClick={handleClose}
               >
                 Close
-              </Button>
+              </Button> */}
             </div>
           </Box>
         </Modal>
