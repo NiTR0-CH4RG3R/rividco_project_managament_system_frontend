@@ -6,6 +6,7 @@ import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
+import { IconButton } from "@mui/material";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -57,6 +58,17 @@ export default function CommisionReportModal(props) {
         }}
       >
         <Typography variant="h6">Upload Commision Report</Typography>
+        <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
 
         <div style={{ height: 400, width: "100%" }}>
           <DataGrid
@@ -95,7 +107,7 @@ export default function CommisionReportModal(props) {
             Upload file
             <VisuallyHiddenInput type="file" />
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             sx={{
               width: "8.5rem",
@@ -106,7 +118,7 @@ export default function CommisionReportModal(props) {
             onClick={handleClose}
           >
             Close
-          </Button>
+          </Button> */}
         </div>
       </Box>
     </Modal>
