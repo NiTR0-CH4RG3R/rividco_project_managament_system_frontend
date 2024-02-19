@@ -91,14 +91,14 @@ export default function ProjectServicesForm(props) {
 
       description: "",
       status: "",
-      conductedBy: "",
+      //conductedBy: "",
       dueDate: "",
       
       selectedEmployee: {
-        userId: null,
+        
         id: null,
-        title: null,
-        completed: true,
+        firstName: null,
+        
       },
 
     },
@@ -108,6 +108,15 @@ export default function ProjectServicesForm(props) {
     onSubmit: (values) => {
       setLoading(true);
       //Send values to the backend
+      if(modeType==='add'){
+        projectServicesService.addService({
+          description:values.description,
+          satatus:values.status,
+          conductedBy:values.selectedEmployee.id,
+          conductedDate:values.dueDate,
+
+        })
+      }
     },
   });
 
@@ -182,17 +191,17 @@ export default function ProjectServicesForm(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedEmployee?.title && modeType !== "view") {
+              if (!values.selectedEmployee?.firstName && modeType !== "view") {
                 setOpenEmployee(true);
               }
             }}
-            value={values.selectedEmployee?.title ?? ""}
+            value={values.selectedEmployee?.firstName ?? ""}
             InputProps={{
               endAdornment: (
                 <IconButton
                   onClick={() => setFieldValue("selectedEmployee", "")}
                   sx={{
-                    visibility: values.selectedEmployee?.title
+                    visibility: values.selectedEmployee?.firstName
                       ? "visible"
                       : "hidden",
                   }}
@@ -204,11 +213,11 @@ export default function ProjectServicesForm(props) {
             disabled={modeType === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedEmployee?.title && errors.selectedEmployee?.title
+              touched.selectedEmployee?.firstName && errors.selectedEmployee?.firstName
             }
             helperText={
-              touched.selectedEmployee?.title
-                ? errors.selectedEmployee?.title
+              touched.selectedEmployee?.firstName
+                ? errors.selectedEmployee?.firstName
                 : ""
             }
           />
