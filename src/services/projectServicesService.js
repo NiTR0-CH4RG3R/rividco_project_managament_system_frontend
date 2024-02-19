@@ -7,7 +7,7 @@ export async function listService(projectId, page, itemsPerPage) {
     try {
         const response = await get(`${SERVICE_URL}`, { projectId, page, pageSize: itemsPerPage });
         response?.data?.forEach((service) => {
-            servicess.push(service)
+            services.push(service)
         })
     }
     catch (error) {
