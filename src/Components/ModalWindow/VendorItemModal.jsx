@@ -4,6 +4,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import * as vendorItemService from "../../services/vendorItemService";
 import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 
 export default function VendorItemModal(props) {
   const { openVendorItem, setOpenVendorItem, sendData } = props;
@@ -57,6 +58,17 @@ export default function VendorItemModal(props) {
             }}
           >
             <Typography variant="h6">Vendor Item Modal</Typography>
+            <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
 
             <div style={{ height: 400, width: "100%" }}>
               <DataGrid
@@ -79,7 +91,7 @@ export default function VendorItemModal(props) {
               />
             </div>
 
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "end",
@@ -95,7 +107,7 @@ export default function VendorItemModal(props) {
               >
                 Close
               </Button>
-            </div>
+            </div> */}
           </Box>
         </Modal>
       )}
