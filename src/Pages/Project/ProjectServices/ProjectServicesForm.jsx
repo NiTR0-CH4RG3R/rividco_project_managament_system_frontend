@@ -18,9 +18,7 @@ import FormClearButton from "../../../Components/StyledComponents/FormClearButto
 import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSaveLoadingButton";
 import EditIcon from "@mui/icons-material/Edit";
 import FormButton from "../../../Components/StyledComponents/FormButton";
-import * as projectServicesService from '../../../services/projectServicesService';
-
-
+import * as projectServicesService from "../../../services/projectServicesService";
 
 export default function ProjectServicesForm(props) {
   const [statusType, setStatusType] = useState([]);
@@ -74,7 +72,6 @@ export default function ProjectServicesForm(props) {
   //for modal
   const [openEmployee, setOpenEmployee] = useState(false);
 
-
   //set initial values in formik
   const {
     values,
@@ -85,22 +82,17 @@ export default function ProjectServicesForm(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
-    
   } = useFormik({
     initialValues: {
-
       description: "",
       status: "",
       //conductedBy: "",
       dueDate: "",
-      
+
       selectedEmployee: {
-        
         id: null,
         firstName: null,
-        
       },
-
     },
 
     validationSchema: addProjectValidation,
@@ -108,14 +100,43 @@ export default function ProjectServicesForm(props) {
     onSubmit: (values) => {
       setLoading(true);
       //Send values to the backend
-      if(modeType==='add'){
-        projectServicesService.addService({
-          description:values.description,
-          satatus:values.status,
-          conductedBy:values.selectedEmployee.id,
-          conductedDate:values.dueDate,
-
-        })
+      if (modeType === "add") {
+        projectServicesService
+          .addService({
+            description: values.description,
+            satatus: values.status,
+            conductedBy: values.selectedEmployee.id,
+            conductedDate: values.dueDate,
+          })
+          .then(() => {
+            setLoading(false);
+            navigate(AppRoutes.project_services_list.path);
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(error);
+            setLoading(false);
+          });
+      } else if (modeType === "edit") {
+        projectServicesService
+          .updateService(
+            {
+              description: values.description,
+              satatus: values.status,
+              conductedBy: values.selectedEmployee.id,
+              conductedDate: values.dueDate,
+            },
+            id
+          )
+          .then(() => {
+            setLoading(false);
+            navigate(AppRoutes.project_services_list.path);
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(error);
+            setLoading(false);
+          });
       }
     },
   });
@@ -135,8 +156,6 @@ export default function ProjectServicesForm(props) {
       width={"100%"}
     >
       <Grid container spacing={2}>
-
-        
         <Grid item xs={12}>
           <FormTextField
             required
@@ -180,7 +199,7 @@ export default function ProjectServicesForm(props) {
             ))}
           </FormTextField>
         </Grid>
-       
+
         <Grid item xs={12}>
           <FormTextField
             required
@@ -213,7 +232,8 @@ export default function ProjectServicesForm(props) {
             disabled={modeType === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedEmployee?.firstName && errors.selectedEmployee?.firstName
+              touched.selectedEmployee?.firstName &&
+              errors.selectedEmployee?.firstName
             }
             helperText={
               touched.selectedEmployee?.firstName
@@ -223,7 +243,6 @@ export default function ProjectServicesForm(props) {
           />
         </Grid>
 
-        
         <Grid item xs={12}>
           <FormTextField
             required
@@ -243,12 +262,10 @@ export default function ProjectServicesForm(props) {
             helperText={touched.dueDate ? errors.dueDate : ""}
           />
         </Grid>
-        </Grid>
+      </Grid>
       <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
         {modeType !== "view" && (
           <>
-
-            
             <FormClearButton
               variant="contained"
               size="large"
@@ -275,7 +292,7 @@ export default function ProjectServicesForm(props) {
             </FormSaveLoadingButton>
           </>
         )}
-        
+
         {modeType === "view" && (
           <>
             <FormButton
@@ -289,7 +306,6 @@ export default function ProjectServicesForm(props) {
             </FormButton>
           </>
         )}
-        
       </Box>
 
       <EmployeeModal
@@ -297,7 +313,6 @@ export default function ProjectServicesForm(props) {
         setOpenEmployee={setOpenEmployee}
         sendData={setFieldValue}
       />
-    
     </Box>
   );
 }
