@@ -16,10 +16,14 @@ import { AppRoutes } from "../../../Data/AppRoutes";
 import FormTextField from "../../../Components/StyledComponents/FormTextField";
 import FormClearButton from "../../../Components/StyledComponents/FormClearButton";
 import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSaveLoadingButton";
+import EditIcon from "@mui/icons-material/Edit";
+import FormButton from "../../../Components/StyledComponents/FormButton";
 
 
 export default function ProjectServicesForm(props) {
   const [statusType, setStatusType] = useState([]);
+  const [modeType, setModeType] = useState(props.type);
+
   function loadProjectData(id) {
     //add here
   }
@@ -43,23 +47,23 @@ export default function ProjectServicesForm(props) {
   useEffect(() => {
     loadStatusType();
 
-    if (props.type !== "add") {
+    if (modeType !== "add") {
       loadProjectData(id);
     }
   }, []);
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
-    props.type === "add"
+    modeType === "add"
       ? "Add a new Project Service"
-      : props.type === "edit"
+      : modeType === "edit"
       ? "Edit Project Service"
       : `Project Services`
   );
   setSubtitle(
-    props.type === "add"
+    modeType === "add"
       ? "You can add a new project service here."
-      : props.type === "edit"
+      : modeType === "edit"
       ? "You can edit project services details here."
       : `You can view project services details here.`
   );
@@ -135,7 +139,7 @@ export default function ProjectServicesForm(props) {
             size="small"
             value={values.description} //set value using formik
             onChange={handleChange} //get onchange value using formik
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             error={touched.description && errors.description}
             helperText={touched.description ? errors.description : ""}
@@ -153,7 +157,7 @@ export default function ProjectServicesForm(props) {
             size="small"
             value={values.status} //set value using formik
             onChange={handleChange} //get onchange value using formik
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             error={touched.status && errors.status}
             helperText={touched.status ? errors.status : ""}
@@ -176,7 +180,7 @@ export default function ProjectServicesForm(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedEmployee?.title && props.type !== "view") {
+              if (!values.selectedEmployee?.title && modeType !== "view") {
                 setOpenEmployee(true);
               }
             }}
@@ -195,7 +199,7 @@ export default function ProjectServicesForm(props) {
                 </IconButton>
               ),
             }}
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             error={
               touched.selectedEmployee?.title && errors.selectedEmployee?.title
@@ -221,7 +225,7 @@ export default function ProjectServicesForm(props) {
             size="small"
             value={values.startDate} //set value using formik
             onChange={handleChange} //get onchange value using formik
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             InputLabelProps={{ shrink: true }}
             error={touched.dueDate && errors.dueDate}
@@ -230,7 +234,7 @@ export default function ProjectServicesForm(props) {
         </Grid>
         </Grid>
       <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
-        {props.type !== "view" && (
+        {modeType !== "view" && (
           <>
 
             
@@ -258,6 +262,20 @@ export default function ProjectServicesForm(props) {
             >
               <span>Save</span>
             </FormSaveLoadingButton>
+          </>
+        )}
+        
+        {modeType === "view" && (
+          <>
+            <FormButton
+              variant="contained"
+              size="large"
+              color="primary"
+              startIcon={<EditIcon />}
+              onClick={() => setModeType("edit")}
+            >
+              Edit
+            </FormButton>
           </>
         )}
         

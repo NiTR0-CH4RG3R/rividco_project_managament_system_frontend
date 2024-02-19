@@ -19,6 +19,8 @@ export default function ProjectServices() {
         setSubtitle("You can view and manage all the project services here.");
     
   const [openPopUp, setOpenPopup] = useState(false);
+  const[modeType,setModeType]=useState();
+
 
   const [rows, setRows] = useState([
     {
@@ -45,9 +47,11 @@ export default function ProjectServices() {
           onSearchClick: (e) => {},
         }}
         onRowClick={(e, id) => {
-          console.log(id);
-        }}
-        onAddButtonClick={(e) => {
+          setModeType("view");
+          setOpenPopup(true);
+      }}
+      onAddButtonClick={(e) => {
+          setModeType("add");
           setOpenPopup(true);
         }}
         tablePaginationProps={{
@@ -66,7 +70,7 @@ export default function ProjectServices() {
         disableSearchBar
         // customUpperBar={<UpperBar />}
       />
-      <ProjectServicesPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} />
+      <ProjectServicesPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} type={modeType} />
     </>
   );
 }
