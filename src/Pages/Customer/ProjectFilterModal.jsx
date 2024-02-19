@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import * as projectService from "../../services/projectService";
 import CloseIcon from "@mui/icons-material/Close";
 import { useParams } from "react-router-dom";
+import { IconButton } from "@mui/material";
 
 export default function ProjectFilterModal(props) {
   const { openProjectFilter, setOpenProjectFilter, id } = props;
@@ -46,6 +47,17 @@ export default function ProjectFilterModal(props) {
             }}
           >
             <Typography variant="h6">Project Modal</Typography>
+            <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
             <div style={{ height: 400, width: "100%" }}>
               <DataGrid
                 rows={rows}
@@ -62,7 +74,7 @@ export default function ProjectFilterModal(props) {
                 pagination
               />
             </div>
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "end",
@@ -78,7 +90,7 @@ export default function ProjectFilterModal(props) {
               >
                 Close
               </Button>
-            </div>
+            </div> */}
           </Box>
         </Modal>
       )}
