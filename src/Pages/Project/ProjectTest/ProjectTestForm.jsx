@@ -21,6 +21,16 @@ import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSave
 export default function ProjectServicesForm(testId) {
     const [statusType, setResultType] = useState([]);
     const[modeType,setModeType]=useState();
+    useEffect(() => {
+        
+        // Set modeType based on testId
+        if (testId === null) {
+            setModeType("add");
+        } else {
+            setModeType("view");
+        }
+    }, [testId]); // Adding testId as a dependency to useEffect
+    
 
 
     function loadProjectData(id) {
@@ -45,18 +55,11 @@ export default function ProjectServicesForm(testId) {
 
     useEffect(() => {
         loadStatusType();
-    
+
         if (props.type !== "add") {
             loadProjectData(id);
         }
-    
-        // Set modeType based on testId
-        if (testId === null) {
-            setModeType("add");
-        } else {
-            setModeType("view");
-        }
-    }, [testId]);
+    }, []);
 
     const { setTitle, setSubtitle } = useTopbarContext();
     setTitle(
