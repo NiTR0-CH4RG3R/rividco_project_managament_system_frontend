@@ -47,8 +47,8 @@ export default function ProjectTest() {
     useEffect(() => {
         projectTestService.listTests(id,page + 1, rowsPerPage)
             .then(
-                customers => {
-                    setRows(customers);
+                test => {
+                    setRows(test);
                 }
             )
             .catch(
