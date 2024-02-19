@@ -1,60 +1,60 @@
 export const categories = [
   {
-    value: 'complaint',
+    value: 'Complaint',
     label: 'Complaint',
   },
   {
-    value: 'inquiry',
+    value: 'Inquiry',
     label: 'Inquiry',
   },
   {
-    value: 'activity',
+    value: 'Activity',
     label: 'Activity',
   },
 ]
 
 export const statuses = [
   {
-    value: 'active',
+    value: 'Active',
     label: 'Active',
   },
   {
-    value: 'on_hold',
-    label: 'On Hold',
+    value: 'Onhold',
+    label: 'Onhold',
   },
   {
-    value: 'waiting',
-    label: 'Waiting',
+    value: 'WaitingFor',
+    label: 'WaitingFor',
   },
   {
-    value: 'rejected',
+    value: 'Rejected',
     label: 'Rejected',
   },
   {
-    value: 'completed',
-    label: 'Completed',
+    value: 'Done',
+    label: 'Done',
   },
 ]
 
 export const urgencies = [
   {
-    value: 'critical',
+    value: 'Critical',
     label: 'Critical',
   },
   {
-    value: 'high_priority',
-    label: 'High Priority',
+    value: 'High',
+    label: 'High',
   },
   {
-    value: 'neutral',
+    value: 'Neutral',
     label: 'Neutral',
   },
   {
-    value: 'low_priority',
-    label: 'Low Priority',
+    value: 'Low',
+    label: 'Low',
   },
   {
-    value: 'unknown',
+    value: 'Unknown',
     label: 'Unknown',
   },
 ]
