@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import { IconButton, MenuItem } from "@mui/material";
-import { useFormik } from "formik";
-import CustomerModal from "../../Components/ModalWindow/CustomerModal";
-import ProjectModal from "../../Components/ModalWindow/ProjectModal";
-import EmployeeModal from "../../Components/ModalWindow/EmployeeModal";
-import { categories, statuses, urgencies } from "./TaskData";
-import { taskValidation } from "../../Validation/TaskValidation";
-import { GridClearIcon } from "@mui/x-data-grid";
-import { useNavigate, useParams } from "react-router";
-import { useTopbarContext } from "../../Contexts/TopbarContext";
+import React, { useEffect, useState } from 'react'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+import { IconButton, MenuItem } from '@mui/material'
+import { useFormik } from 'formik'
+import CustomerModal from '../../Components/ModalWindow/CustomerModal'
+import ProjectModal from '../../Components/ModalWindow/ProjectModal'
+import EmployeeModal from '../../Components/ModalWindow/EmployeeModal'
+import { categories, statuses, urgencies } from './TaskData'
+import { taskValidation } from '../../Validation/TaskValidation'
+import { GridClearIcon } from '@mui/x-data-grid'
+import { useNavigate, useParams } from 'react-router'
+import { useTopbarContext } from '../../Contexts/TopbarContext'
 import {
   AddBox,
   ClearAll,
@@ -18,62 +18,46 @@ import {
   History,
   Save,
   Visibility,
-} from "@mui/icons-material";
-import FormTextField from "../../Components/StyledComponents/FormTextField";
-import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
-import FormClearButton from "../../Components/StyledComponents/FormClearButton";
-import FormButton from "../../Components/StyledComponents/FormButton";
-import FormEditButton from "../../Components/StyledComponents/FormEditButton";
-import { AppRoutes } from "../../Data/AppRoutes";
-import * as taskService from "../../services/taskService";
+} from '@mui/icons-material'
+import FormTextField from '../../Components/StyledComponents/FormTextField'
+import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
+import FormClearButton from '../../Components/StyledComponents/FormClearButton'
+import FormButton from '../../Components/StyledComponents/FormButton'
+import FormEditButton from '../../Components/StyledComponents/FormEditButton'
+import { AppRoutes } from '../../Data/AppRoutes'
+import * as taskService from '../../services/taskService'
 
 export default function Task(props) {
-  const { setTitle, setSubtitle } = useTopbarContext();
-  const [loading, setLoading] = useState(false);
-  const { id } = useParams();
-  const navi = useNavigate();
-  
+  const { setTitle, setSubtitle } = useTopbarContext()
+  const [loading, setLoading] = useState(false)
+  const { id } = useParams()
+  const navigate = useNavigate()
 
   function loadTaskData(id, setValues) {
     taskService
       .getTask(id)
       .then((task) => {
-        setValues("description", task.description);
-        setValues("category", task.category);
-        setValues("callbacknumber", task.callbackNumber);
-        setValues("selectedCustomer", {
-          id: task.requestedBy.id,
-          firstName: task.requestedBy.firstName,
-        });
-        setValues("selectedProject", {
-          id: task.project.id,
-        });
-        setValues("selectedEmployee", {
-          id: task.assignedTo.id,
-          firstName: task.assignedTo.firstName,
-        });
-        setValues("status", task.status);
-        setValues("urgency", task.urgencyLevel);
-        setValues("comment", task.comments);
+        setValues(task)
       })
       .catch((error) => {
-        console.log(error);
-      });
+        console.log(error)
+      })
   }
+
   setTitle(
-    props.type === "add"
-      ? "Add a new CIA Task"
-      : props.type === "edit"
-      ? "Edit CIA Task"
+    props.type === 'add'
+      ? 'Add a new CIA Task'
+      : props.type === 'edit'
+      ? 'Edit CIA Task'
       : `View CIA Task`
-  );
+  )
   setSubtitle(
-    props.type === "add"
-      ? "You can add new CIA task here."
-      : props.type === "edit"
-      ? "You can edit CIA task details here."
+    props.type === 'add'
+      ? 'You can add new CIA task here.'
+      : props.type === 'edit'
+      ? 'You can edit CIA task details here.'
       : `You can view CIA task details here.`
-  );
+  )
 
   const {
     values,
@@ -87,9 +71,9 @@ export default function Task(props) {
     setValues,
   } = useFormik({
     initialValues: {
-      description: "",
-      category: "",
-      callbacknumber: "",
+      description: '',
+      category: '',
+      callbacknumber: '',
       selectedCustomer: {
         id: null,
         firstName: null,
@@ -101,14 +85,14 @@ export default function Task(props) {
         id: null,
         firstName: null,
       },
-      status: "",
-      urgency: "",
-      comment: "",
+      status: '',
+      urgency: '',
+      comment: '',
     },
     onSubmit: (values) => {
-      setLoading(true);
-      if (props.type === "add") {
-        console.log(values);
+      setLoading(true)
+      if (props.type === 'add') {
+        console.log(values)
         taskService
           .addTask({
             category: values.category,
@@ -121,43 +105,43 @@ export default function Task(props) {
             comments: values.comment,
           })
           .then(() => {
-            setLoading(false);
-            navi(AppRoutes.cia_list.path);
+            setLoading(false)
+            navigate(AppRoutes.cia_list.path)
           })
           .catch((error) => {
-            console.log(error);
-            alert(error);
-            setLoading(false);
-          });
-      } else if (props.type === "edit") {
+            console.log(error)
+            alert(error)
+            setLoading(false)
+          })
+      } else if (props.type === 'edit') {
         taskService
           .updateTask(values, id)
           .then(() => {
-            setLoading(false);
-            navi(AppRoutes.cia_list.path);
+            setLoading(false)
+            navigate(AppRoutes.cia_list.path)
           })
           .catch((error) => {
-            console.error(error);
-            alert(error);
-            setLoading(false);
-          });
+            console.error(error)
+            alert(error)
+            setLoading(false)
+          })
       }
     },
     validationSchema: taskValidation,
-  });
+  })
 
   useEffect(() => {
-    if (props.type === "view" || props.type === "edit") {
-      loadTaskData(id, setValues);
+    if (props.type === 'view' || props.type === 'edit') {
+      loadTaskData(id, setValues)
     }
-  }, [id]);
+  }, [id])
 
   useEffect(() => {
-    if (props.type === "add") {
+    if (props.type === 'add') {
       setValues({
-        description: "",
-        category: "",
-        callbacknumber: "",
+        description: '',
+        category: '',
+        callbacknumber: '',
         selectedCustomer: {
           id: null,
           firstName: null,
@@ -169,18 +153,16 @@ export default function Task(props) {
           id: null,
           firstName: null,
         },
-        status: "",
-        urgency: "",
-        comment: "",
-      });
+        status: '',
+        urgency: '',
+        comment: '',
+      })
     }
-  }, [props.type]);
+  }, [props.type])
 
-  
-
-  const [openCustomer, setOpenCustomer] = useState(false);
-  const [openProject, setOpenProject] = useState(false);
-  const [openEmployee, setOpenEmployee] = useState(false);
+  const [openCustomer, setOpenCustomer] = useState(false)
+  const [openProject, setOpenProject] = useState(false)
+  const [openEmployee, setOpenEmployee] = useState(false)
 
   return (
     <Box
@@ -210,8 +192,8 @@ export default function Task(props) {
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.description && errors.description}
-            helperText={touched.description ? errors.description : ""}
-            disabled={props.type === "view"}
+            helperText={touched.description ? errors.description : ''}
+            disabled={props.type === 'view'}
           />
         </Grid>
         <Grid item xs={6}>
@@ -226,7 +208,7 @@ export default function Task(props) {
             value={values.category}
             onChange={handleChange}
             onBlur={handleBlur}
-            disabled={props.type === "view"}
+            disabled={props.type === 'view'}
           >
             {categories.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -249,8 +231,8 @@ export default function Task(props) {
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.callbacknumber && errors.callbacknumber}
-            helperText={touched.callbacknumber ? errors.callbacknumber : ""}
-            disabled={props.type === "view"}
+            helperText={touched.callbacknumber ? errors.callbacknumber : ''}
+            disabled={props.type === 'view'}
           />
         </Grid>
         <Grid item xs={10}>
@@ -265,27 +247,27 @@ export default function Task(props) {
             onClick={() => {
               if (
                 !values.selectedCustomer?.firstName &&
-                props.type !== "view"
+                props.type !== 'view'
               ) {
-                setOpenCustomer(true);
+                setOpenCustomer(true)
               }
             }}
-            value={values.selectedCustomer?.firstName ?? ""}
+            value={values.selectedCustomer?.firstName ?? ''}
             InputProps={{
               endAdornment: (
                 <IconButton
-                  onClick={() => setFieldValue("selectedCustomer", "")}
+                  onClick={() => setFieldValue('selectedCustomer', '')}
                   sx={{
                     visibility: values.selectedCustomer?.firstName
-                      ? "visible"
-                      : "hidden",
+                      ? 'visible'
+                      : 'hidden',
                   }}
                 >
                   <GridClearIcon />
                 </IconButton>
               ),
             }}
-            disabled={props.type === "view"}
+            disabled={props.type === 'view'}
             error={
               touched.selectedCustomer?.firstName &&
               errors.selectedCustomer?.firstName
@@ -293,18 +275,18 @@ export default function Task(props) {
             helperText={
               touched.selectedCustomer?.firstName
                 ? errors.selectedCustomer?.firstName
-                : ""
+                : ''
             }
           />
         </Grid>
 
-        {(props.type === "add" || props.type === "edit") && (
+        {(props.type === 'add' || props.type === 'edit') && (
           <Grid item xs={2}>
-            <Grid container xs={12} sx={{ justifyContent: "right" }}>
+            <Grid container xs={12} sx={{ justifyContent: 'right' }}>
               <FormButton
                 variant="contained"
                 color="primary"
-                onClick={() => navi(`${AppRoutes.customer_add.path}`)}
+                onClick={() => navigate(`${AppRoutes.customer_add.path}`)}
                 startIcon={<AddBox />}
               >
                 Add Guest
@@ -322,26 +304,26 @@ export default function Task(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedProject?.id && props.type !== "view") {
-                setOpenProject(true);
+              if (!values.selectedProject?.id && props.type !== 'view') {
+                setOpenProject(true)
               }
             }}
-            value={values.selectedProject?.id ?? ""}
+            value={values.selectedProject?.id ?? ''}
             InputProps={{
               endAdornment: (
                 <IconButton
-                  onClick={() => setFieldValue("selectedProject", "")}
+                  onClick={() => setFieldValue('selectedProject', '')}
                   sx={{
                     visibility: values.selectedProject?.id
-                      ? "visible"
-                      : "hidden",
+                      ? 'visible'
+                      : 'hidden',
                   }}
                 >
                   <GridClearIcon />
                 </IconButton>
               ),
             }}
-            disabled={props.type === "view"}
+            disabled={props.type === 'view'}
           />
         </Grid>
 
@@ -356,27 +338,27 @@ export default function Task(props) {
             onClick={() => {
               if (
                 !values.selectedEmployee?.firstName &&
-                props.type !== "view"
+                props.type !== 'view'
               ) {
-                setOpenEmployee(true);
+                setOpenEmployee(true)
               }
             }}
-            value={values.selectedEmployee?.firstName ?? ""}
+            value={values.selectedEmployee?.firstName ?? ''}
             InputProps={{
               endAdornment: (
                 <IconButton
-                  onClick={() => setFieldValue("selectedEmployee", "")}
+                  onClick={() => setFieldValue('selectedEmployee', '')}
                   sx={{
                     visibility: values.selectedEmployee?.firstName
-                      ? "visible"
-                      : "hidden",
+                      ? 'visible'
+                      : 'hidden',
                   }}
                 >
                   <GridClearIcon />
                 </IconButton>
               ),
             }}
-            disabled={props.type === "view"}
+            disabled={props.type === 'view'}
           />
         </Grid>
         <Grid item xs={6}>
@@ -391,7 +373,7 @@ export default function Task(props) {
             value={values.status}
             onChange={handleChange}
             onBlur={handleBlur}
-            disabled={props.type === "view"}
+            disabled={props.type === 'view'}
           >
             {statuses.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -413,7 +395,7 @@ export default function Task(props) {
             value={values.urgency}
             onChange={handleChange}
             onBlur={handleBlur}
-            disabled={props.type === "view"}
+            disabled={props.type === 'view'}
           >
             {urgencies.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -436,7 +418,7 @@ export default function Task(props) {
             value={values.comment}
             onChange={handleChange}
             onBlur={handleBlur}
-            disabled={props.type === "view"}
+            disabled={props.type === 'view'}
           />
         </Grid>
         {/*Clear , Save Buttons on the add, edit, view forms*/}
@@ -447,16 +429,18 @@ export default function Task(props) {
           pt={3}
           justifyContent="flex-end"
           sx={{
-            "& .MuiButton-root": { m: 1 },
+            '& .MuiButton-root': { m: 1 },
           }}
         >
-          {props.type === "view" && (
+          {props.type === 'view' && (
             <>
               <FormButton
                 variant="contained"
                 size="large"
                 color="primary"
-                onClick={() => navi(`${AppRoutes.cia_status.path}`)} //navigate to the taskstatus page
+                onClick={() =>
+                  navigate(`${AppRoutes.cia_status.path.replace(':id', id)}`)
+                } //navigate to the taskstatus page
                 startIcon={<History />}
               >
                 View Status History
@@ -466,7 +450,11 @@ export default function Task(props) {
                 variant="contained"
                 size="large"
                 color="primary"
-                onClick={() => navi(`${AppRoutes.cia_resources_view.path}`)} //navigate to the view task resouce page
+                onClick={() =>
+                  navigate(
+                    `${AppRoutes.cia_resources_view.path.replace(':id', id)}`
+                  )
+                } //navigate to the view task resouce page
                 startIcon={<Visibility />}
               >
                 View Task Resources
@@ -475,7 +463,9 @@ export default function Task(props) {
               <FormEditButton
                 variant="contained"
                 size="large"
-                onClick={() => navi(`${AppRoutes.cia_edit.path}/${id}`)} //navigate to edit task page
+                onClick={() =>
+                  navigate(`${AppRoutes.cia_edit.path.replace(':id', id)}`)
+                } //navigate to edit task page
                 startIcon={<Edit />}
               >
                 Edit
@@ -483,14 +473,18 @@ export default function Task(props) {
             </>
           )}
 
-          {(props.type === "add" || props.type === "edit") && (
+          {(props.type === 'add' || props.type === 'edit') && (
             <>
-              {" "}
+              {' '}
               <FormButton
                 variant="contained"
                 size="large"
                 color="primary"
-                onClick={() => navi(`${AppRoutes.cia_resources_add.path}`)} //navigate to add task resources
+                onClick={() =>
+                  navigate(
+                    `${AppRoutes.cia_resources_add.path.replace(':id', id)}`
+                  )
+                } //navigate to add task resources
                 startIcon={<AddBox />}
               >
                 Add Task Resources
@@ -535,5 +529,5 @@ export default function Task(props) {
         sendData={setFieldValue}
       />
     </Box>
-  );
+  )
 }
