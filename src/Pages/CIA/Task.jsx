@@ -26,6 +26,7 @@ import FormButton from '../../Components/StyledComponents/FormButton'
 import FormEditButton from '../../Components/StyledComponents/FormEditButton'
 import { AppRoutes } from '../../Data/AppRoutes'
 import * as taskService from '../../services/taskService'
+import * as taskStatusService from '../../services/taskStatusService'
 
 export default function Task(props) {
   const { setTitle, setSubtitle } = useTopbarContext()
@@ -34,14 +35,27 @@ export default function Task(props) {
   const navigate = useNavigate()
 
   function loadTaskData(id, setValues) {
-    taskService
-      .getTask(id)
-      .then((task) => {
-        setValues(task)
+    taskService.getTask(id).then((task) => {
+      setValues({
+        description: task.description,
+        category: task.category,
+        callbacknumber: task.callBackNumber,
+        selectedCustomer: {
+          id: task.requestedBy,
+          firstName: null,
+        },
+        selectedProject: {
+          id: task.projectId,
+        },
+        selectedEmployee: {
+          id: task.assignedTo,
+          firstName: null,
+        },
+        status: '',
+        urgency: task.urgencyLevel,
+        comment: task.comments,
       })
-      .catch((error) => {
-        console.log(error)
-      })
+    })
   }
 
   setTitle(
@@ -93,15 +107,19 @@ export default function Task(props) {
       setLoading(true)
       if (props.type === 'add') {
         console.log(values)
-        taskService
-          .addTask({
-            category: values.category,
-            requestedBy: values.selectedCustomer.id,
-            assignedTo: values.selectedEmployee.id,
-            urgencyLevel: values.urgency,
-            projectId: values.selectedProject.id,
-            callBackNumber: values.callbacknumber,
-            description: values.description,
+        taskService.addTask({
+          category: values.category,
+          requestedBy: values.selectedCustomer.id,
+          assignedTo: values.selectedEmployee.id,
+          urgencyLevel: values.urgency,
+          projectId: values.selectedProject.id,
+          callBackNumber: values.callbacknumber,
+          description: values.description,
+          comments: values.comment,
+        })
+        taskStatusService
+          .addStatus({
+            status: values.status,
             comments: values.comment,
           })
           .then(() => {
@@ -114,8 +132,9 @@ export default function Task(props) {
             setLoading(false)
           })
       } else if (props.type === 'edit') {
-        taskService
-          .updateTask(values, id)
+        taskService.updateTask(values, id)
+        taskStatusService
+          .updateStatus(values, id)
           .then(() => {
             setLoading(false)
             navigate(AppRoutes.cia_list.path)
