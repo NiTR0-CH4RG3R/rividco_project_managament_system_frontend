@@ -3,12 +3,12 @@ import React from 'react'
 import ProjectResourcesForm from './ProjectResourcesForm'
 
 export default function ProjectResourcesPopup(props) {
-  const { openPopUp, setOpenPopup } = props
+  const { openPopUp, setOpenPopup,type } = props
   return (
     <Dialog open={openPopUp} onClose={() => setOpenPopup(false)}>
       <DialogTitle>Add New Resource</DialogTitle>
       <DialogContent>
-        <ProjectResourcesForm />
+        <ProjectResourcesForm type={type} />
       </DialogContent>
     </Dialog>
   )

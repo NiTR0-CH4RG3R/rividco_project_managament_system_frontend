@@ -20,7 +20,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import FormButton from "../../../Components/StyledComponents/FormButton";
-
+import EditIcon from "@mui/icons-material/Edit";
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -36,6 +36,8 @@ const VisuallyHiddenInput = styled('input')({
 
 export default function ProjectResourcesForm(props) {
   const [categoryType, setcategoryType] = useState([]);
+  const [modeType, setModeType] = useState(props.type);
+
   function loadProjectData(id) {
     //add here
   }
@@ -62,23 +64,23 @@ export default function ProjectResourcesForm(props) {
     
       loadcategoryType();
 
-    if (props.type !== "add") {
+    if (modeType !== "add") {
       loadProjectData(id);
     }
   }, []);
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
-    props.type === "add"
+    modeType === "add"
       ? "Add a new Project Service"
-      : props.type === "edit"
+      : modeType === "edit"
       ? "Edit Project Service"
       : `Project Resources`
   );
   setSubtitle(
-    props.type === "add"
+    modeType === "add"
       ? "You can add a new project resource here."
-      : props.type === "edit"
+      : modeType === "edit"
       ? "You can edit project resource details here."
       : `You can view project resource details here.`
   );
@@ -153,7 +155,7 @@ export default function ProjectResourcesForm(props) {
             size="small"
             value={values.resourceName} //set value using formik
             onChange={handleChange} //get onchange value using formik
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             error={touched.resourceName && errors.resourceName}
             helperText={touched.resourceName ? errors.resourceName : ""}
@@ -172,7 +174,7 @@ export default function ProjectResourcesForm(props) {
             size="small"
             value={values.category} //set value using formik
             onChange={handleChange} //get onchange value using formik
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             error={touched.category && errors.category}
             helperText={touched.category ? errors.category : ""}
@@ -198,7 +200,7 @@ export default function ProjectResourcesForm(props) {
             size="small"
             value={values.comment} //set value using formik
             onChange={handleChange} //get onchange value using formik
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             error={touched.comment && errors.comment}
             helperText={touched.comment ? errors.comment : ""}
@@ -211,7 +213,7 @@ export default function ProjectResourcesForm(props) {
 
 
       <Box display="flex" pt={3} width="100%" justifyContent="space-around">
-        {props.type !== "view" && (
+        {modeType !== "view" && (
           <>
         
         <FormButton 
@@ -253,7 +255,19 @@ export default function ProjectResourcesForm(props) {
           </>
         )}
         
-        
+        {modeType === "view" && (
+          <>
+            <FormButton
+              variant="contained"
+              size="large"
+              color="primary"
+              startIcon={<EditIcon />}
+              onClick={() => setModeType("edit")}
+            >
+              Edit
+            </FormButton>
+          </>
+        )}
 
       </Box>
       

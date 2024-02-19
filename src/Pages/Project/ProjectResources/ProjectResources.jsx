@@ -17,6 +17,8 @@ export default function ProjectResources() {
     setSubtitle("You can view and manage all the project resources here.");
 
   const [openPopUp, setOpenPopup] = useState(false);
+  const[modeType,setModeType]=useState();
+
 
   const [rows, setRows] = useState([
     {
@@ -42,9 +44,11 @@ export default function ProjectResources() {
           onSearchClick: (e) => {},
         }}
         onRowClick={(e, id) => {
-          console.log(id);
+          setModeType("view");
+          setOpenPopup(true);
         }}
         onAddButtonClick={(e) => {
+          setModeType("add");
           setOpenPopup(true);
         }}
         tablePaginationProps={{
@@ -63,7 +67,7 @@ export default function ProjectResources() {
         disableSearchBar
         // customUpperBar={<UpperBar />}
       />
-      <ProjectResourcesPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} />
+      <ProjectResourcesPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} type={modeType} />
     </>
   );
 }
