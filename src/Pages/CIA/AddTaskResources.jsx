@@ -12,8 +12,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ListPage from '../../Components/ListPage/ListPage'
 import { AppRoutes } from '../../Data/AppRoutes'
 import { Remove } from '@mui/icons-material'
+import * as taskResourceService from "../../services/taskResourceService"
+import { useFormik } from "formik"
+import TaskResourcesValidation from '../../Validation/TaskResourcesValidation'
 
 const AddTaskResources = (props) => {
+
+    const [loading, setLoading] = useState(false);
 
     const { setTitle, setSubtitle } = useTopbarContext()
     setTitle(
@@ -32,7 +37,7 @@ const AddTaskResources = (props) => {
     const handleAddField = () => {
         setFields([...fields, { category: '', file: null, comment: '' }]);
     };
-
+ 
     const handleRemoveField = (index) => {
         const newFields = [...fields];
         newFields.splice(index, 1);
@@ -45,9 +50,61 @@ const AddTaskResources = (props) => {
         setFields(newFields);
     };
 
-    const handleSubmit = () => {
-        console.log('Submitted fields:', fields);
-    };
+    const {
+        values,
+        errors,
+        touched,
+        handleBlur,
+        handleSubmit,
+        handleReset,
+        setValues,
+    } = useFormik({
+        initialValues: {
+            category: fields.map((fld) => fld.category),
+            files: fields.map((fld) => fld.file),
+            comment: fields.map((fld) => fld.comment),
+        },
+        validationSchema: TaskResourcesValidation,
+        onSubmit: (values) => {
+            setLoading(true);
+            if (props.type === "add") {
+                taskResourceService.AddTaskResources(values)
+                    .then(() => {
+                        setLoading(false);
+                        navi(AppRoutes.cia_resources_add.path);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert(error);
+                        setLoading(false);
+                    });
+            }
+            else if (props.type === "edit") {
+                taskResourceService.updateTaskResources(values, id)
+                    .then(() => {
+                        setLoading(false);
+                        navi(AppRoutes.cia_resources_edit.path);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert(error);
+                        setLoading(false);
+                    });
+            }
+        },
+    });
+
+    useEffect(() => {
+        if (props.type === "add") {
+            setValues({
+                category: "",
+                file: "",
+                comment: "",
+            });
+        }
+    }, [props.type]);
+
+    
 
     const columns = [
         { id: 'category', label: 'Category', align: 'left' },
