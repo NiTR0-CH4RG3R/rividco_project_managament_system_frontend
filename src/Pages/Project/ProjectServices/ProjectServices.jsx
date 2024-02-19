@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useTopbarContext } from "../../../Contexts/TopbarContext";
 import ListPage from "../../../Components/ListPage/ListPage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useParams} from "react-router-dom";
 import ProjectServicesPopup from '../ProjectServices/ProjectServicesPopup'
 import * as projectServicesServive from '../../../services/projectServicesService';
 
@@ -21,6 +21,9 @@ export default function ProjectServices() {
     
   const [openPopUp, setOpenPopup] = useState(false);
   const[modeType,setModeType]=useState();
+  const { id } = useParams();
+  const[page,setPage]=useState(0);
+  const[rowsPerPage,setRowsPerPage]=useState(5);
 
 
   const [rows, setRows] = useState([
@@ -32,6 +35,25 @@ export default function ProjectServices() {
         dueDate: "02/01/2024",
     },
   ]);
+
+  useEffect(() => {
+    setPage(0);
+    setRowsPerPage(5);
+}, []);
+
+useEffect(() => {
+  projectServicesServive.listService(id,page + 1, rowsPerPage)
+      .then(
+          service => {
+              setRows(service);
+          }
+      )
+      .catch(
+          error => {
+              console.log(error);
+          }
+      )
+}, [id,page, rowsPerPage]);
 
   const navigate = useNavigate();
 
