@@ -44,6 +44,20 @@ export default function ProjectTest() {
         setRowsPerPage(5);
     }, []);
 
+    useEffect(() => {
+        projectTestService.listTests(id,page + 1, rowsPerPage)
+            .then(
+                customers => {
+                    setRows(customers);
+                }
+            )
+            .catch(
+                error => {
+                    console.log(error);
+                }
+            )
+    }, [id,page, rowsPerPage]);
+
 
    
 
