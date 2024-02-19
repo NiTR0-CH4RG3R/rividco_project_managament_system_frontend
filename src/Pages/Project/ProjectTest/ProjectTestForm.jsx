@@ -18,7 +18,7 @@ import FormClearButton from "../../../Components/StyledComponents/FormClearButto
 import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSaveLoadingButton";
 import EditIcon from "@mui/icons-material/Edit";
 import FormButton from "../../../Components/StyledComponents/FormButton";
-import * as projectTestService from '../../../services/projectTestService';
+import * as projectTestService from "../../../services/projectTestService";
 
 export default function ProjectServicesForm(props) {
   const [statusType, setResultType] = useState([]);
@@ -90,9 +90,8 @@ export default function ProjectServicesForm(props) {
       conductedDate: "",
 
       selectedEmployee: {
-        
         id: null,
-        firstName:null,
+        firstName: null,
       },
     },
 
@@ -101,13 +100,42 @@ export default function ProjectServicesForm(props) {
     onSubmit: (values) => {
       setLoading(true);
       //Send values to the backend
-      if(modeType ==='add'){
-        projectTestService.addTest({
-          name:values.testName,
-          conductedBy:values.selectedEmployee.id,
-          conductedDate:values.conductedDate,
-          //no status type in the database 
-        })
+      if (modeType === "add") {
+        projectTestService
+          .addTest({
+            name: values.testName,
+            conductedBy: values.selectedEmployee.id,
+            conductedDate: values.conductedDate,
+            //no status type in the database
+          })
+          .then(() => {
+            setLoading(false);
+            navigate(AppRoutes.project_test_list.path);
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(error);
+            setLoading(false);
+          });
+      } else if (modeType === "edit") {
+        projectTestService
+          .updateTest(
+            {
+              name: values.testName,
+              conductedBy: values.selectedEmployee.id,
+              conductedDate: values.conductedDate,
+            },
+            id
+          )
+          .then(() => {
+            setLoading(false);
+            navigate(AppRoutes.project_test_list.path);
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(error);
+            setLoading(false);
+          });
       }
     },
   });
@@ -203,7 +231,8 @@ export default function ProjectServicesForm(props) {
             disabled={modeType === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedEmployee?.firstName && errors.selectedEmployee?.firstName
+              touched.selectedEmployee?.firstName &&
+              errors.selectedEmployee?.firstName
             }
             helperText={
               touched.selectedEmployee?.firstName
