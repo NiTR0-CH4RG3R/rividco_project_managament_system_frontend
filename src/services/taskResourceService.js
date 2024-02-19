@@ -2,7 +2,7 @@ import { get, post, put, del } from '../api/axios'
 
 const TASKRESOURCE_URL = '/TaskResource'
 
-export async function AddTaskResources(page, itemsPerPage) {
+export async function ListTaskResources(page, itemsPerPage) {
     // Implementation of AddTaskResources function
     const resources = [];
 
@@ -24,6 +24,15 @@ export async function AddTaskResources(page, itemsPerPage) {
     return resources;
 };
 
+export async function AddTaskResources(resources, id) {
+    try {
+        await post(`${TASKRESOURCE_URL}/${id}`, resources);
+    }
+    catch (error) {
+        console.error(error);
+    }    
+};
+
 export async function updateTaskResources(resources, id) {
     try {
         await put(`${TASKRESOURCE_URL}/${id}`, resources);
@@ -31,5 +40,4 @@ export async function updateTaskResources(resources, id) {
     catch (error) {
         console.error(error);
     }
-}
-
+};
