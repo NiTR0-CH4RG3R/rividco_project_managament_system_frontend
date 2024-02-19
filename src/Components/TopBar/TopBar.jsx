@@ -35,7 +35,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
     }
     //add the function
     const handleLogoutButtonClick = () => {
-        
+        navigate('/login');
     }
 
     return (
