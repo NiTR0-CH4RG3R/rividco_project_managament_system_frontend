@@ -18,8 +18,9 @@ import FormClearButton from "../../../Components/StyledComponents/FormClearButto
 import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSaveLoadingButton";
 
 
-export default function ProjectServicesForm(props) {
+export default function ProjectServicesForm(testId) {
     const [statusType, setResultType] = useState([]);
+    const[modeType,setModeType]=useState();
 
 
     function loadProjectData(id) {
@@ -44,11 +45,18 @@ export default function ProjectServicesForm(props) {
 
     useEffect(() => {
         loadStatusType();
-
+    
         if (props.type !== "add") {
             loadProjectData(id);
         }
-    }, []);
+    
+        // Set modeType based on testId
+        if (testId === null) {
+            setModeType("add");
+        } else {
+            setModeType("view");
+        }
+    }, [testId]);
 
     const { setTitle, setSubtitle } = useTopbarContext();
     setTitle(
