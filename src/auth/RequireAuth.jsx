@@ -4,10 +4,11 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 const disableAuth = (process.env.REACT_APP_AUTH_DISABLED !== undefined);
 
 export default function RequireAuth({ allowedRoles }) {
+    //return <Outlet/> //comment this
     const { auth } = useAuthContext();
     const location = useLocation();
 
-    if (disableAuth) return <Outlet />//disable login
+    if (disableAuth) return <Outlet />//disable login uncomment this 
 
     if (!auth?.userId) {
         return <Navigate to='/login' state={{ from: location }} replace />;

@@ -18,6 +18,8 @@ export default function ProjectItems() {
   setSubtitle("You can view and manage all the project items here.");
 
   const [openPopUp, setOpenPopup] = useState(false);
+  const[modeType,setModeType]=useState();
+
 
   const [rows, setRows] = useState([
     {
@@ -44,9 +46,11 @@ export default function ProjectItems() {
           onSearchClick: (e) => {},
         }}
         onRowClick={(e, id) => {
-          console.log(id);
+          setModeType("view");
+          setOpenPopup(true);
         }}
         onAddButtonClick={(e) => {
+          setModeType("add");
           setOpenPopup(true);
         }}
         tablePaginationProps={{
@@ -65,7 +69,7 @@ export default function ProjectItems() {
         disableSearchBar
         // customUpperBar={<UpperBar />}
       />
-      <ProjectItemsPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} />
+      <ProjectItemsPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} type={modeType}/>
     </>
   );
 }

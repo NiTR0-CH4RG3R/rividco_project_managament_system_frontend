@@ -17,9 +17,14 @@ import FormTextField from "../../../Components/StyledComponents/FormTextField";
 import FormClearButton from "../../../Components/StyledComponents/FormClearButton";
 import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSaveLoadingButton";
 import WarrentyField from "../../../Components/WarrentyField/WarrentyField";
+import FormButton from "../../../Components/StyledComponents/FormButton";
+import EditIcon from "@mui/icons-material/Edit";
 
 export default function ProjectItemsForm(props) {
   const [statusType, setStatusType] = useState([]);
+  const [modeType, setModeType] = useState(props.type);
+
+
   function loadProjectData(id) {
     //add here
   }
@@ -27,23 +32,23 @@ export default function ProjectItemsForm(props) {
   const { id } = useParams();
 
   useEffect(() => {
-    if (props.type !== "add") {
+    if (modeType !== "add") {
       loadProjectData(id);
     }
   }, []);
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
-    props.type === "add"
+    modeType === "add"
       ? "Add a new Project Service"
-      : props.type === "edit"
+      : modeType === "edit"
       ? "Edit Project Service"
       : `Project Services`
   );
   setSubtitle(
-    props.type === "add"
+    modeType === "add"
       ? "You can add a new project services here."
-      : props.type === "edit"
+      : modeType === "edit"
       ? "You can edit project services details here."
       : `You can view project services details here.`
   );
@@ -115,7 +120,7 @@ export default function ProjectItemsForm(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedVendorItem?.title && props.type !== "view") {
+              if (!values.selectedVendorItem?.title && modeType !== "view") {
                 setOpenVendorItem(true);
               }
             }}
@@ -134,7 +139,7 @@ export default function ProjectItemsForm(props) {
                 </IconButton>
               ),
             }}
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             error={
               touched.selectedVendorItem?.title && errors.selectedVendorItem?.title
@@ -161,7 +166,7 @@ export default function ProjectItemsForm(props) {
             size="small"
             value={values.description} //set value using formik
             onChange={handleChange} //get onchange value using formik
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             error={touched.description && errors.description}
             helperText={touched.description ? errors.description : ""}
@@ -174,7 +179,7 @@ export default function ProjectItemsForm(props) {
             //required={true}
             name="warrantyPeriod"
             onChange={handleChange}
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             fullWidth={true}
             size="small"
@@ -194,7 +199,7 @@ export default function ProjectItemsForm(props) {
             size="small"
             value={values.comment} //set value using formik
             onChange={handleChange} //get onchange value using formik
-            disabled={props.type === "view"}
+            disabled={modeType === "view"}
             onBlur={handleBlur}
             error={touched.comment && errors.comment}
             helperText={touched.comment ? errors.comment : ""}
@@ -202,7 +207,7 @@ export default function ProjectItemsForm(props) {
         </Grid>
         </Grid>
       <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
-        {props.type !== "view" && (
+        {modeType !== "view" && (
           <>
 
             
@@ -230,6 +235,20 @@ export default function ProjectItemsForm(props) {
             >
               <span>Save</span>
             </FormSaveLoadingButton>
+          </>
+        )}
+
+      {modeType === "view" && (
+          <>
+            <FormButton
+              variant="contained"
+              size="large"
+              color="primary"
+              startIcon={<EditIcon />}
+              onClick={() => setModeType("edit")}
+            >
+              Edit
+            </FormButton>
           </>
         )}
         
