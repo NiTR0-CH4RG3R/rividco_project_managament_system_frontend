@@ -254,7 +254,10 @@ export default function ProjectResourcesForm(props) {
             </FormSaveLoadingButton>
           </>
         )}
-        
+        </Box>
+           
+           <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
+
         {modeType === "view" && (
           <>
             <FormButton
