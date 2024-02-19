@@ -58,11 +58,14 @@ const AddTaskResources = (props) => {
         handleSubmit,
         handleReset,
         setValues,
+        setFieldValue,
     } = useFormik({
         initialValues: {
-            category: fields.map((fld) => fld.category),
-            files: fields.map((fld) => fld.file),
-            comment: fields.map((fld) => fld.comment),
+            fields: fields.map((fld) => ({
+                category: fld.category,
+                file: fld.file,
+                comment: fld.comment,
+            })),
         },
         validationSchema: TaskResourcesValidation,
         onSubmit: (values) => {
@@ -83,7 +86,7 @@ const AddTaskResources = (props) => {
                 taskResourceService.updateTaskResources(values, id)
                     .then(() => {
                         setLoading(false);
-                        navi(AppRoutes.cia_resources_edit.path);
+                        navi(AppRoutes.cia_resources_view.path);
                     })
                     .catch((error) => {
                         console.error(error);
@@ -134,6 +137,7 @@ const AddTaskResources = (props) => {
             height="100vh"
             flexDirection="column"
             width="90%"
+            onReset={handleReset}
         >
             {props.type === 'add' && (
             <Grid container spacing={2} sx={{ width: '70%', marginBottom: '1rem' }}>
@@ -158,12 +162,14 @@ const AddTaskResources = (props) => {
                         <FormTextField
                             select
                             variant="outlined"
-                            value={field.category}
+                            value={values.category}
                             onChange={(e) => handleChange(index, 'category', e.target.value)}
                             label="Category"
                             required
                             fullWidth
                             size='small'
+                            error={touched.category && errors.category}
+                            helperText={touched.category ? errors.category : ""}
                         >
                             <MenuItem value="images">Image</MenuItem>
                             <MenuItem value="documents">Document</MenuItem>
@@ -181,6 +187,8 @@ const AddTaskResources = (props) => {
                             onChange={(e) => handleChange(index, 'file', e.target.files[0])}
                             required
                             size='small'
+                            error={touched.files && errors.files}
+                            helperText={touched.files ? errors.files : ""}
                         />
                     </Grid>
                     )}
@@ -198,6 +206,8 @@ const AddTaskResources = (props) => {
                             rows={2}
                             value={field.comment}
                             onChange={(e) => handleChange(index, 'comment', e.target.value)}
+                            error={touched.comment && errors.comment}
+                            helperText={touched.comment ? errors.comment : ""}
                         />
                     </Grid>
                     )}
