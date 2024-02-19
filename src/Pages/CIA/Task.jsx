@@ -26,6 +26,9 @@ import FormButton from '../../Components/StyledComponents/FormButton'
 import FormEditButton from '../../Components/StyledComponents/FormEditButton'
 import { AppRoutes } from '../../Data/AppRoutes'
 import * as taskService from '../../services/taskService'
+import * as customerService from '../../services/customerService'
+import * as projectService from '../../services/projectService'
+import * as systemUserService from '../../services/systemUserService'
 import * as taskStatusService from '../../services/taskStatusService'
 
 export default function Task(props) {
@@ -36,7 +39,7 @@ export default function Task(props) {
 
   function loadTaskData(id, setValues) {
     taskService.getTask(id).then((task) => {
-      setValues({
+      let taskValues = {
         description: task.description,
         category: task.category,
         callbacknumber: task.callBackNumber,
@@ -54,7 +57,21 @@ export default function Task(props) {
         status: '',
         urgency: task.urgencyLevel,
         comment: task.comments,
+      }
+
+      //send request to get customer, employee, project details from the backend
+      customerService.getCustomer(task.requestedBy).then((customer) => {
+        task.selectedCustomer.firstName = customer.firstName
       })
+
+      projectService.getProject(task.projectId).then((project) => {
+        task.selectedProject.projectId = project.projectId
+      })
+
+      systemUserService.getSystemUser(task.assignedTo).then((systemuser) => {
+        task.selectedEmployee.firstName = systemuser.firstName
+      })
+      setValues(taskValues)
     })
   }
 
