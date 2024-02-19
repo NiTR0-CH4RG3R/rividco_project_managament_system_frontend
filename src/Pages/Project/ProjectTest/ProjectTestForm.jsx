@@ -101,6 +101,14 @@ export default function ProjectServicesForm(props) {
     onSubmit: (values) => {
       setLoading(true);
       //Send values to the backend
+      if(modeType ==='add'){
+        projectTestService.addTest({
+          name:values.testName,
+          conductedBy:values.selectedEmployee.id,
+          conductedDate:values.conductedDate,
+          //no status type in the database 
+        })
+      }
     },
   });
 
