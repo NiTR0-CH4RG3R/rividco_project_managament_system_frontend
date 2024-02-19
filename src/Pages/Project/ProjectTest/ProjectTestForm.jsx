@@ -18,12 +18,13 @@ import FormClearButton from "../../../Components/StyledComponents/FormClearButto
 import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSaveLoadingButton";
 import EditIcon from "@mui/icons-material/Edit";
 import FormButton from "../../../Components/StyledComponents/FormButton";
+import * as projectTestService from '../../../services/projectTestService';
 
 export default function ProjectServicesForm(props) {
   const [statusType, setResultType] = useState([]);
   const [modeType, setModeType] = useState(props.type);
 
-  function loadProjectData(id) {
+  function loadProjectTestData(id) {
     //add here
   }
 
@@ -47,7 +48,7 @@ export default function ProjectServicesForm(props) {
     loadStatusType();
 
     if (modeType !== "add") {
-      loadProjectData(id);
+      loadProjectTestData(id);
     }
   }, []);
 
@@ -89,10 +90,9 @@ export default function ProjectServicesForm(props) {
       conductedDate: "",
 
       selectedEmployee: {
-        userId: null,
+        
         id: null,
-        title: null,
-        completed: true,
+        firstName:null,
       },
     },
 
