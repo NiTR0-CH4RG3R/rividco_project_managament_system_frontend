@@ -4,6 +4,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import * as customerService from "../../services/customerService";
 import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 
 export default function ReferenceByModal(props) {
   const { openReferenceBy, setOpenReferenceBy, sendData } = props;
@@ -57,6 +58,17 @@ export default function ReferenceByModal(props) {
             }}
           >
             <Typography variant="h6">Customer Modal</Typography>
+            <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
             <div style={{ height: 400, width: "100%" }}>
               <DataGrid
                 rows={rows}
@@ -77,7 +89,7 @@ export default function ReferenceByModal(props) {
                 pagination
               />
             </div>
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "end",
@@ -96,7 +108,7 @@ export default function ReferenceByModal(props) {
               >
                 Close
               </Button>
-            </div>
+            </div> */}
           </Box>
         </Modal>
       )}
