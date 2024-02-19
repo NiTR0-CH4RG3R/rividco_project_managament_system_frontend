@@ -1,9 +1,10 @@
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useTopbarContext } from "../../../Contexts/TopbarContext";
 import ListPage from "../../../Components/ListPage/ListPage";
-import { useNavigate } from "react-router-dom";
-import ProjectTestPopup from '../ProjectTest/ProjectTestPopup'
+import { useNavigate,useParams } from "react-router-dom";
+import ProjectTestPopup from '../ProjectTest/ProjectTestPopup';
+
 
 const columns = [
     { id: "testName", label: "Test Name", align: "left" },
@@ -22,6 +23,9 @@ export default function ProjectTest() {
     const [openPopUp, setOpenPopup] = useState(false);
     const [testId, setTestId] = useState(null);
     const[modeType,setModeType]=useState();
+    const[page,setPage]=useState(0);
+    const[rowsPerPage,setRowsPerPage]=useState(5);
+    const { id } = useParams();
 
     const [rows, setRows] = useState([
         {
@@ -32,6 +36,14 @@ export default function ProjectTest() {
             comment: "comment",
         },
     ]);
+
+    useEffect(() => {
+        setPage(0);
+        setRowsPerPage(5);
+    }, []);
+
+
+   
 
     const navigate = useNavigate();
 
