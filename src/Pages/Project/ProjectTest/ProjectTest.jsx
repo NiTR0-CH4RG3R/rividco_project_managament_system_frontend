@@ -21,6 +21,7 @@ export default function ProjectTest() {
 
     const [openPopUp, setOpenPopup] = useState(false);
     const [testId, setTestId] = useState(null);
+    const[modeType,setModeType]=useState();
 
     const [rows, setRows] = useState([
         {
@@ -47,10 +48,12 @@ export default function ProjectTest() {
                     onSearchClick: (e) => { },
                 }}
                 onRowClick={(e, id) => {
+                    setModeType("view");
                     setTestId(id);
                     setOpenPopup(true);
                 }}
                 onAddButtonClick={(e) => {
+                    setModeType("add");
                     setOpenPopup(true);
                 }}
                 tablePaginationProps={{
@@ -69,7 +72,7 @@ export default function ProjectTest() {
                 disableSearchBar
             // customUpperBar={<UpperBar />}
             />
-            <ProjectTestPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} testId={testId} />
+            <ProjectTestPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} testId={testId} type={modeType} />
         </>
     );
 }
