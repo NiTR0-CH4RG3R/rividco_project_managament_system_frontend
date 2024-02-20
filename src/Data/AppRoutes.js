@@ -7,7 +7,7 @@ import Task from "../Pages/CIA/Task";
 import AddTaskResources from "../Pages/CIA/AddTaskResources";
 import Vendoritem from "../Pages/Vendoritem/Vendoritem";
 import SystemUserList from "../Pages/SystemUser/SystemUserList";
-import TaskStatus from "../Pages/CIA/TaskStatus";
+import TaskStatus from "../Pages/CIA/TaskStatus/TaskStatus";
 import Project from "../Pages/Project/Project";
 import VendorList from "../Pages/Vendor/VendorList";
 import ProjectList from "../Pages/Project/ProjectList";
