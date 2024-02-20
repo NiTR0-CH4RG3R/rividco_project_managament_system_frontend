@@ -32,7 +32,7 @@ export const SideNavigationPanelData =
             subMenu: [
                 { name: "List Projects", path: Routes.project_list.path, component: Routes.project_list.component },
                 { name: "Add Project", path: Routes.project_add.path, component: Routes.project_add.component },
-                { name: "List Services", path: Routes.project_services_list.path, component: Routes.project_services_list.component }
+                { name: "Pending Services", path: Routes.project_pending_services.path, component: Routes.project_pending_services.component }
             ]
         },
 
