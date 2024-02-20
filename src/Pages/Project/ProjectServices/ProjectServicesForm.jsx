@@ -19,9 +19,25 @@ import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSave
 import EditIcon from "@mui/icons-material/Edit";
 import FormButton from "../../../Components/StyledComponents/FormButton";
 import * as projectServicesService from "../../../services/projectServicesService";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 export default function ProjectServicesForm(props) {
-  const [statusType, setStatusType] = useState([]);
+  const [statusType, setStatusType, priorityType, setPriorityType] = useState([]);
   const [modeType, setModeType] = useState(props.type);
 
   function loadProjectData(id) {
@@ -32,12 +48,34 @@ export default function ProjectServicesForm(props) {
     //load status type from the backend
     setStatusType([
       {
-        value: "onGoing",
-        label: "On going",
+        value: "pending",
+        label: "Pending",
       },
       {
-        value: "completed",
-        label: "Completed",
+        value: "done",
+        label: "Done",
+      },
+    ]);
+  }
+
+  function loadPriorityType() {
+    //load priority type from the backend
+    setPriorityType([
+      {
+        value: "urgent",
+        label: "Urgent",
+      },
+      {
+        value: "high",
+        label: "High",
+      },
+      {
+        value: "normal",
+        label: "Normal",
+      },
+      {
+        value: "urgent",
+        label: "Urgent",
       },
     ]);
   }
@@ -84,11 +122,22 @@ export default function ProjectServicesForm(props) {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      description: "",
-      status: "",
-      //conductedBy: "",
+      
+      
       dueDate: "",
-
+      id:"",
+      projectId:"",
+      plannedDate:"",
+      status: "",
+      conductedBy: "",
+      conductedDate:"",
+      priorityType:"",
+      description: "",
+      servicereportURL:"",
+      lastupdatedDate:"",
+      lastupdateBy:"",
+      serviceLevel:"",
+      
       selectedEmployee: {
         id: null,
         firstName: null,
@@ -156,23 +205,64 @@ export default function ProjectServicesForm(props) {
       width={"100%"}
     >
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+
+      <Grid item xs={12}>
           <FormTextField
             required
-            placeholder="Please Enter The Description"
-            id="description"
-            name="description"
-            label="Description"
+            placeholder="Please Enter The ID"
+            id="id"
+            name="id"
+            label="ID"
             multiline
             maxRows={4}
             fullWidth
             size="small"
-            value={values.description} //set value using formik
+            value={values.id} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={modeType === "view"}
             onBlur={handleBlur}
-            error={touched.description && errors.description}
-            helperText={touched.description ? errors.description : ""}
+            error={touched.id && errors.id}
+            helperText={touched.id ? errors.id : ""}
+          />
+        </Grid>
+
+      <Grid item xs={12}>
+          <FormTextField
+            required
+            placeholder="Please Enter The Project ID"
+            id="projectId"
+            name="projectId"
+            label="Project ID"
+            multiline
+            maxRows={4}
+            fullWidth
+            size="small"
+            value={values.projectId} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={modeType === "view"}
+            onBlur={handleBlur}
+            error={touched.projectId && errors.projectId}
+            helperText={touched.projectId ? errors.projectId : ""}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            type="date"
+            placeholder="Select the Planned Date"
+            id="plannedDate"
+            name="plannedDate"
+            label="Planned Date"
+            fullWidth
+            size="small"
+            value={values.startDate} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={modeType === "view"}
+            onBlur={handleBlur}
+            InputLabelProps={{ shrink: true }}
+            error={touched.plannedDate && errors.plannedDate}
+            helperText={touched.plannedDate ? errors.plannedDate : ""}
           />
         </Grid>
 
@@ -242,15 +332,163 @@ export default function ProjectServicesForm(props) {
             }
           />
         </Grid>
+            
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            placeholder="Conducted Date"
+            id="conductedDate"
+            name="conductedDate"
+            label="Conducted Date"
+            multiline
+            maxRows={4}
+            fullWidth
+            size="small"
+            value={values.conductedDate} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={modeType === "view"}
+            onBlur={handleBlur}
+            error={touched.conductedDate && errors.conductedDate}
+            helperText={touched.conductedDate ? errors.conductedDate : ""}
+          />
+        </Grid>
+        
+
+        {/* <Grid item xs={12}>
+          <FormTextField
+            required
+            id="priority"
+            name="priority"
+            select
+            label="priority"
+            fullWidth
+            size="small"
+            value={values.priority} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={modeType === "view"}
+            onBlur={handleBlur}
+            error={touched.priority && errors.priority}
+            helperText={touched.priority ? errors.priority : ""}
+          >
+            {priorityType.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </FormTextField>
+        </Grid> */}
+
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            placeholder="Please Enter The Description"
+            id="description"
+            name="description"
+            label="Description"
+            multiline
+            maxRows={4}
+            fullWidth
+            size="small"
+            value={values.description} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={modeType === "view"}
+            onBlur={handleBlur}
+            error={touched.description && errors.description}
+            helperText={touched.description ? errors.description : ""}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            placeholder="Please Enter Service Report URL"
+            id="servicereportURL"
+            name="servicereportURL"
+            label="Service Report URL"
+            multiline
+            maxRows={4}
+            fullWidth
+            size="small"
+            value={values.servicereportURL} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={modeType === "view"}
+            onBlur={handleBlur}
+            error={touched.servicereportURL && errors.servicereportURL}
+            helperText={touched.servicereportURL ? errors.servicereportURL : ""}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            placeholder="Please Enter Service Level"
+            id="serviceLevel"
+            name="serviceLevel"
+            label="Service Level"
+            multiline
+            maxRows={4}
+            fullWidth
+            size="small"
+            value={values.serviceLevel} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={modeType === "view"}
+            onBlur={handleBlur}
+            error={touched.serviceLevel && errors.serviceLevel}
+            helperText={touched.serviceLevel ? errors.serviceLevel : ""}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            placeholder="Last Updated By"
+            id="lastupdateBy"
+            name="lastupdateBy"
+            label="Last Update By"
+            fullWidth
+            size="small"
+            onClick={() => {
+              if (!values.selectedEmployee?.firstName && modeType !== "view") {
+                setOpenEmployee(true);
+              }
+            }}
+            value={values.selectedEmployee?.firstName ?? ""}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  onClick={() => setFieldValue("selectedEmployee", "")}
+                  sx={{
+                    visibility: values.selectedEmployee?.firstName
+                      ? "visible"
+                      : "hidden",
+                  }}
+                >
+                  <GridClearIcon />
+                </IconButton>
+              ),
+            }}
+            disabled={modeType === "view"}
+            onBlur={handleBlur}
+            error={
+              touched.selectedEmployee?.firstName &&
+              errors.selectedEmployee?.firstName
+            }
+            helperText={
+              touched.selectedEmployee?.firstName
+                ? errors.selectedEmployee?.firstName
+                : ""
+            }
+          />
+        </Grid>
 
         <Grid item xs={12}>
           <FormTextField
             required
             type="date"
-            placeholder="Select the Due Date"
-            id="dueDate"
-            name="dueDate"
-            label="Due Date"
+            placeholder="Select the last updated Date"
+            id="lastupdatedDate"
+            name="lastupdatedDate"
+            label="Last Updated Date"
             fullWidth
             size="small"
             value={values.startDate} //set value using formik
@@ -258,14 +496,34 @@ export default function ProjectServicesForm(props) {
             disabled={modeType === "view"}
             onBlur={handleBlur}
             InputLabelProps={{ shrink: true }}
-            error={touched.dueDate && errors.dueDate}
-            helperText={touched.dueDate ? errors.dueDate : ""}
+            error={touched.lastupdatedDate && errors.lastupdatedDate}
+            helperText={touched.lastupdatedDate ? errors.lastupdatedDate : ""}
           />
         </Grid>
+      
       </Grid>
-      <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
+
+      <Stack direction="row" spacing={18}>
+      <Box display="flex" pt={3} width="100%" justifyContent="flex-start" >
+        
+      <FormButton 
+            size="small"
+            // fullWidth={true}
+            component="label"
+            role={undefined}
+            variant="contained"
+            tabIndex={-1}
+            startIcon={<CloudUploadIcon />}
+          >
+            Service Report Upload 
+            <VisuallyHiddenInput type="file" />
+           </FormButton>
+           </Box>
+
+           <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
         {modeType !== "view" && (
           <>
+                     
             <FormClearButton
               variant="contained"
               size="large"
@@ -307,6 +565,8 @@ export default function ProjectServicesForm(props) {
           </>
         )}
       </Box>
+      </Stack>
+      
 
       <EmployeeModal
         openEmployee={openEmployee}
