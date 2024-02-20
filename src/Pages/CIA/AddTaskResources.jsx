@@ -121,9 +121,31 @@ const AddTaskResources = (props) => {
         { id: 0, category: 'Image', filelink: 'file path or file link', comment: 'newly updated', addedby: 'john silva', addeddate: '2024-01-30', }
     ]);
 
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    useEffect(() => {
+        setPage(0);
+        setRowsPerPage(5);
+    }, []);
+
+    useEffect(() => {
+        taskResourceService.ListTaskResources(page + 1, rowsPerPage)
+            .then(
+                resources => {
+                    setRows(resources);
+                }
+            )
+            .catch(
+                error => {
+                    console.log(error);
+                }
+            )
+    }, [page, rowsPerPage]);
+
     const { id } = useParams()
     const navi = useNavigate()
-
+ 
 
     return (
         
@@ -283,7 +305,7 @@ const AddTaskResources = (props) => {
                         onSearchClick: (e) => { },
                     }}
                     onRowClick={(e, id) => {
-                        console.log(id);
+                        navi(AppRoutes.cia_resources_view.path.replace(':id', id))
                     }}
                     onAddButtonClick={(e) => {
                         navi(AppRoutes.cia_resources_add.path)
@@ -291,11 +313,11 @@ const AddTaskResources = (props) => {
                     tablePaginationProps={{
                         rowsPerPageOptions: [5, 10, 25, 100],
                         component: "div",
-                        rowsPerPage: 5,
-                        page: 0,
-                        count: 100,
-                        onPageChange: (e, page) => { console.log(page); },
-                        onRowsPerPageChange: (e) => { console.log(e.target.value); }
+                        rowsPerPage: rowsPerPage,
+                        page: page,
+                        count: -1,
+                        onPageChange: (e, page) => { setPage(page); },
+                        onRowsPerPageChange: (e) => { setRowsPerPage(e.target.value); }
                     }}
                 /> 
             )}
