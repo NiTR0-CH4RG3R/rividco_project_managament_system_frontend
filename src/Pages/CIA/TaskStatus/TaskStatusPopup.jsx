@@ -1,18 +1,17 @@
 import { Dialog, DialogContent, DialogTitle } from '@mui/material'
 import React from 'react'
-import TaskForm from './TaskForm'
+import TaskStatusForm from './TaskStatusForm'
 import CloseIcon from '@mui/icons-material/Close'
 import IconButton from '@mui/material/IconButton'
 
 export default function TaskStatusPopup(props) {
-  const { openPopUp, setOpenPopup } = props
+  const { openPopUp, setOpenPopup, taskId, type } = props
   const handleClose = () => {
     setOpenPopup(false);
   };
 
   return (
     <Dialog open={openPopUp} onClose={() => setOpenPopup(false)}>
-      <DialogTitle>Add New Task Status</DialogTitle>
       <IconButton
           aria-label="close"
           onClick={handleClose}
@@ -24,9 +23,11 @@ export default function TaskStatusPopup(props) {
         >
           <CloseIcon />
         </IconButton>
-
+      <DialogTitle>
+        {taskId === null ? <>Add New Task</> : <>Show Task</>}
+      </DialogTitle>
       <DialogContent>
-        <TaskForm setOpenPopup={setOpenPopup} />
+        <TaskStatusForm taskId={taskId} type={type} />
       </DialogContent>
     </Dialog>
   )
