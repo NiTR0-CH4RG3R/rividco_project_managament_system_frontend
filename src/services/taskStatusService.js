@@ -1,51 +1,56 @@
-import { get, post, put, del } from '../api/axios';
-
-const STATUS_URL ='/taskStatus'
+import { get, post, put, del } from '../api/axios'
+const TASKSTATUS_URL = '/TaskStatus'
 
 export async function listTaskStatus(taskId, page, itemsPerPage) {
-    const statuses = [];
+  const taskstatuses = []
 
-    try {
-        const response = await get(`${STATUS_URL}`, { projectId, page, pageSize: itemsPerPage });
-        response?.data?.forEach((status) => {
-            statuses.push(status)
-        })
-    }
-    catch (error) {
-        console.error(error);
-    }
+  try {
+    const response = await get(`${TASKSTATUS_URL}`, {
+      taskId,
+      page,
+      pageSize: itemsPerPage,
+    })
+    response?.data?.forEach((status) => {
+      taskstatuses.push(status)
+    })
+  } catch (error) {
+    console.error(error)
+  }
 
-    return statuses;
+  return taskstatuses
 }
 
-export async function getStatus(id) {
-    let status = {};
+export async function getTaskStatus(id) {
+  let taskstatus = {}
 
-    try {
-        const response = await get(`${STATUS_URL}/${id}`);
-        status = response?.data;
-    }
-    catch (error) {
-        console.error(error);
-    }
+  try {
+    const response = await get(`${TASKSTATUS_URL}/${id}`)
+    taskstatus = response?.data
+  } catch (error) {
+    console.error(error)
+  }
 
-    return status;
+  return taskstatus
 }
 
-export async function addStatus(status) {
-    try {
-        await post(`${STATUS_URL}`, status);
-    }
-    catch (error) {
-        console.error(error);
-    }
+export async function addTaskStatus(taskstatus) {
+  let addedtaskstatus = {}
+  try {
+    const response = await post(`${TASKSTATUS_URL}`, taskstatus)
+    addedtaskstatus = response?.data
+  } catch (error) {
+    console.error(error)
+  }
+  return addedtaskstatus
 }
 
-export async function updateStatus(status, id) {
-    try {
-        await put(`${STATUS_URL}/${id}`, status);
-    }
-    catch (error) {
-        console.error(error);
-    }
+export async function updateTaskStatus(taskstatus, id) {
+  let updatedtaskstatus = {}
+  try {
+    const response = await put(`${TASKSTATUS_URL}/${id}`, taskstatus)
+    updatedtaskstatus = response?.data
+  } catch (error) {
+    console.error(error)
+  }
+  return updatedtaskstatus
 }
