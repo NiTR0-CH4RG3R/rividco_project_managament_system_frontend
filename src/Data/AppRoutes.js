@@ -16,6 +16,7 @@ import ProjectTest from "../Pages/Project/ProjectTest/ProjectTest"
 import ProjectItems from "../Pages/Project/ProjectItems/ProjectItems"
 import ProjectResources from "../Pages/Project/ProjectResources/ProjectResources"
 import ProjectServices from "../Pages/Project/ProjectServices/ProjectServices"
+import PendingServices from "../Pages/Project/PendingServices"
 import Home from "../Pages/Home/Home";
 import Test from "../Pages/Test/Test";
 import CommisionReport from "../Pages/Project/CommisionReport";
@@ -54,6 +55,7 @@ export const AppRoutes = {
     project_services_list: { path: "/project/service", component: <ProjectServices />, },
     project_resources_list: { path: "/project/resources", component: <ProjectResources />, },
     project_commsion_report: { path: "/project/report/:id", component: <CommisionReport /> },
+    project_pending_services: { path: "/project/pendingservices", component: <PendingServices/> },
 
 
     /* CIA related routes */
