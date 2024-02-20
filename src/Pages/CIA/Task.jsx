@@ -161,9 +161,12 @@ export default function Task(props) {
         taskService
           .updateTask(values, id)
           .then(() => {
-            setLoading(false)
-            navigate(AppRoutes.cia_list.path)
+            taskStatusService.updateTaskStatus(values, id).then(() => {
+              setLoading(false)
+              navigate(AppRoutes.cia_list.path)
+            })
           })
+
           .catch((error) => {
             console.error(error)
             alert(error)
