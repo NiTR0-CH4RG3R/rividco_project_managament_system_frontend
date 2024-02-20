@@ -19,25 +19,25 @@ import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSave
 import EditIcon from "@mui/icons-material/Edit";
 import FormButton from "../../../Components/StyledComponents/FormButton";
 import * as projectServicesService from "../../../services/projectServicesService";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { styled } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { styled } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
 
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
   height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
+  overflow: "hidden",
+  position: "absolute",
   bottom: 0,
   left: 0,
-  whiteSpace: 'nowrap',
+  whiteSpace: "nowrap",
   width: 1,
 });
 
 export default function ProjectServicesForm(props) {
-  const [statusType, setStatusType, priorityType, setPriorityType] = useState([]);
+  const [statusType, setStatusType] = useState([]);
+  const [priorityType, setPriorityType] = useState([]);
   const [modeType, setModeType] = useState(props.type);
 
   function loadProjectData(id) {
@@ -84,6 +84,7 @@ export default function ProjectServicesForm(props) {
 
   useEffect(() => {
     loadStatusType();
+    loadPriorityType();
 
     if (modeType !== "add") {
       loadProjectData(id);
@@ -122,22 +123,20 @@ export default function ProjectServicesForm(props) {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      
-      
       dueDate: "",
-      id:"",
-      projectId:"",
-      plannedDate:"",
+      id: "",
+      projectId: "",
+      plannedDate: "",
       status: "",
       conductedBy: "",
-      conductedDate:"",
-      priorityType:"",
+      conductedDate: "",
+      priority: "",
       description: "",
-      servicereportURL:"",
-      lastupdatedDate:"",
-      lastupdateBy:"",
-      serviceLevel:"",
-      
+      servicereportURL: "",
+      lastupdatedDate: "",
+      lastupdateBy: "",
+      serviceLevel: "",
+
       selectedEmployee: {
         id: null,
         firstName: null,
@@ -205,8 +204,7 @@ export default function ProjectServicesForm(props) {
       width={"100%"}
     >
       <Grid container spacing={2}>
-
-      <Grid item xs={12}>
+        <Grid item xs={12}>
           <FormTextField
             required
             placeholder="Please Enter The ID"
@@ -226,7 +224,7 @@ export default function ProjectServicesForm(props) {
           />
         </Grid>
 
-      <Grid item xs={12}>
+        <Grid item xs={12}>
           <FormTextField
             required
             placeholder="Please Enter The Project ID"
@@ -332,7 +330,7 @@ export default function ProjectServicesForm(props) {
             }
           />
         </Grid>
-            
+
         <Grid item xs={12}>
           <FormTextField
             required
@@ -352,15 +350,14 @@ export default function ProjectServicesForm(props) {
             helperText={touched.conductedDate ? errors.conductedDate : ""}
           />
         </Grid>
-        
 
-        {/* <Grid item xs={12}>
+        <Grid item xs={12}>
           <FormTextField
             required
             id="priority"
             name="priority"
             select
-            label="priority"
+            label="Priorty"
             fullWidth
             size="small"
             value={values.priority} //set value using formik
@@ -376,7 +373,7 @@ export default function ProjectServicesForm(props) {
               </MenuItem>
             ))}
           </FormTextField>
-        </Grid> */}
+        </Grid>
 
         <Grid item xs={12}>
           <FormTextField
@@ -500,13 +497,11 @@ export default function ProjectServicesForm(props) {
             helperText={touched.lastupdatedDate ? errors.lastupdatedDate : ""}
           />
         </Grid>
-      
       </Grid>
 
       <Stack direction="row" spacing={18}>
-      <Box display="flex" pt={3} width="100%" justifyContent="flex-start" >
-        
-      <FormButton 
+        <Box display="flex" pt={3} width="100%" justifyContent="flex-start">
+          <FormButton
             size="small"
             // fullWidth={true}
             component="label"
@@ -515,58 +510,56 @@ export default function ProjectServicesForm(props) {
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
           >
-            Service Report Upload 
+            Service Report Upload
             <VisuallyHiddenInput type="file" />
-           </FormButton>
-           </Box>
+          </FormButton>
+        </Box>
 
-           <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
-        {modeType !== "view" && (
-          <>
-                     
-            <FormClearButton
-              variant="contained"
-              size="large"
-              sx={{
-                mr: 2,
-              }}
-              color="primary"
-              startIcon={<ClearAllIcon />}
-              type="reset"
-            >
-              Clear
-            </FormClearButton>
+        <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
+          {modeType !== "view" && (
+            <>
+              <FormClearButton
+                variant="contained"
+                size="large"
+                sx={{
+                  mr: 2,
+                }}
+                color="primary"
+                startIcon={<ClearAllIcon />}
+                type="reset"
+              >
+                Clear
+              </FormClearButton>
 
-            <FormSaveLoadingButton
-              color="primary"
-              type="submit"
-              size="large"
-              loading={loading}
-              loadingPosition="start"
-              startIcon={<SaveIcon />}
-              variant="contained"
-            >
-              <span>Save</span>
-            </FormSaveLoadingButton>
-          </>
-        )}
+              <FormSaveLoadingButton
+                color="primary"
+                type="submit"
+                size="large"
+                loading={loading}
+                loadingPosition="start"
+                startIcon={<SaveIcon />}
+                variant="contained"
+              >
+                <span>Save</span>
+              </FormSaveLoadingButton>
+            </>
+          )}
 
-        {modeType === "view" && (
-          <>
-            <FormButton
-              variant="contained"
-              size="large"
-              color="primary"
-              startIcon={<EditIcon />}
-              onClick={() => setModeType("edit")}
-            >
-              Edit
-            </FormButton>
-          </>
-        )}
-      </Box>
+          {modeType === "view" && (
+            <>
+              <FormButton
+                variant="contained"
+                size="large"
+                color="primary"
+                startIcon={<EditIcon />}
+                onClick={() => setModeType("edit")}
+              >
+                Edit
+              </FormButton>
+            </>
+          )}
+        </Box>
       </Stack>
-      
 
       <EmployeeModal
         openEmployee={openEmployee}
