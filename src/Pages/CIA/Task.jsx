@@ -159,12 +159,22 @@ export default function Task(props) {
           })
       } else if (props.type === 'edit') {
         taskService
-          .updateTask(values, id)
+          .updateTask(
+            {
+              category: values.category,
+              requestedBy: values.selectedCustomer.id,
+              assignedTo: values.selectedEmployee.id,
+              urgencyLevel: values.urgency,
+              projectId: values.selectedProject.id,
+              callBackNumber: values.callbacknumber,
+              description: values.description,
+              comments: values.comment,
+            },
+            id
+          )
           .then(() => {
-            taskStatusService.updateTaskStatus(values, id).then(() => {
-              setLoading(false)
-              navigate(AppRoutes.cia_list.path)
-            })
+            setLoading(false)
+            navigate(AppRoutes.cia_list.path)
           })
 
           .catch((error) => {
