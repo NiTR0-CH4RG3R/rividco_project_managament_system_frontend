@@ -107,7 +107,7 @@ const AddTaskResources = (props) => {
         }
     }, [props.type]);
 
-    
+    // TaskResources List 
 
     const columns = [
         { id: 'category', label: 'Category', align: 'left' },
@@ -178,7 +178,9 @@ const AddTaskResources = (props) => {
                 
             {fields.map((field, index) => (
                 <Grid container spacing={2} key={index} sx={{ width: '70%', marginBottom: '1rem' }}>
+
                     {/* ---------------Category Field---------------- */}
+
                     {props.type === 'add' && (
                     <Grid item xs={4}>
                         <FormTextField
@@ -201,6 +203,7 @@ const AddTaskResources = (props) => {
                     )}
 
                     {/* ---------------FileUpload Field---------------- */}
+
                     {props.type === 'add' && (
                     <Grid item xs={4}>
                         <FormTextField
@@ -234,7 +237,7 @@ const AddTaskResources = (props) => {
                     </Grid>
                     )}
 
-                    {/* Add button */}
+                    {/* -----------------Add button----------------- */}
 
                     {props.type === 'add' && (
                     <Grid item xs={2}>
@@ -248,7 +251,7 @@ const AddTaskResources = (props) => {
                     </Grid>
                     )}
 
-                    {/* Remove button */}
+                    {/* ----------------Remove button---------------- */}
 
                     {props.type === 'add' && (
                     <Grid item xs={2}>
@@ -267,11 +270,14 @@ const AddTaskResources = (props) => {
                 </Grid>
             ))}
 
-            {/* Buttons Section */}
+            {/* ----------------------------Buttons Section------------------------------ */}
+
             {props.type === 'add' && (
             <Box display="flex" width="70%" justifyContent="flex-end">
                 <div style={{ display: 'flex', justifyContent: 'end', padding: '1em 2em 0em 2em' }}>
-                    {/* Clear Button */}
+
+                    {/* ---------------------Clear Button------------------ */}
+
                     <FormClearButton
                         variant="contained"
                         sx={{ width: '8.5rem', margin: '1em 0.5em' }}
@@ -282,7 +288,8 @@ const AddTaskResources = (props) => {
                         Clear
                     </FormClearButton>
 
-                    {/* Save Button */}
+                    {/* --------------------Save Button-------------------- */}
+
                     <FormSaveLoadingButton
                         color="primary"
                         onClick={handleSubmit}
@@ -295,6 +302,9 @@ const AddTaskResources = (props) => {
                 </div>
             </Box>
             )}
+
+            {/* --------------------------TaskResources List------------------------ */}
+
             {props.type === 'view' && (
                 <ListPage
                     columns={columns}
