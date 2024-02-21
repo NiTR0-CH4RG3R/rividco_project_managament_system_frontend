@@ -179,7 +179,7 @@ export default function SystemUser(props) {
                 handleUploadClick();
               }}
             >
-              Upload
+              ADD PHOTO
             </FormButton>
           </Grid>
           <Grid item xs={5.5} spacing={2} marginTop={1} marginBottom={2}>
