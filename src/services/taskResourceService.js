@@ -14,6 +14,8 @@ export async function ListTaskResources(page, itemsPerPage) {
                 category: resources.category,
                 file: resources.file,
                 comment: resources.category,
+                addedby: resources.addedby,
+                addeddate: resources.addeddate,
             })
         })
     }
