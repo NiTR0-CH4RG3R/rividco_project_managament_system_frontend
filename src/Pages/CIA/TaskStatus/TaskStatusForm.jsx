@@ -175,6 +175,7 @@ function TaskStatusForm(props) {
             size="small"
             value={values.comment}
             onChange={handleChange}
+            disabled={modeType === 'view'}
           />
         </Grid>
       </Grid>
