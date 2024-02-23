@@ -55,7 +55,7 @@ function TaskStatusForm(props) {
     loadTaskStatusType()
 
     if (modeType !== 'add') {
-      loadTaskStatusData(id)
+      loadTaskStatusData(id, setValues)
     }
   }, [])
 
@@ -72,6 +72,7 @@ function TaskStatusForm(props) {
     handleSubmit,
     handleReset,
     submitForm,
+    setValues,
   } = useFormik({
     initialValues: {
       status: '',
