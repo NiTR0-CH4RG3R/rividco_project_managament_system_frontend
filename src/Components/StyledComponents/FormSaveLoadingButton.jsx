@@ -1,22 +1,28 @@
-import { Button } from "@mui/material";
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
+import Button, { ButtonProps } from "@mui/material/Button";
 
-// const FormClearButton = styled(Button)(({ theme }) => ({
-//   //add styles here
-// }));
-// export default FormClearButton;
+const FormSaveLodingButton = styled(Button)(({ theme }) => ({
+  boxShadow: "-moz-initial",
+  textTransform: "none",
+  fontSize: 16,
+  padding: "6px 12px",
+  border: "1px solid",
+  lineHeight: 1.5,
+  backgroundColor: "#0063cc",
+  borderColor: "#0063cc",
 
-const FormClearButton = styled.button`
-  border: 2px solid rgb(175, 76, 175);
-  background-color: rgb(175, 76, 175);
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.5s all ease-out;
-`;
-
-export default FormClearButton;
+  "&:hover": {
+    backgroundColor: "#0069d9",
+    borderColor: "#0062cc",
+    boxShadow: "none",
+  },
+  "&:active": {
+    boxShadow: "none",
+    backgroundColor: "#0062cc",
+    borderColor: "#005cbf",
+  },
+  "&:focus": {
+    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+  },
+}));
+export default FormSaveLodingButton;
