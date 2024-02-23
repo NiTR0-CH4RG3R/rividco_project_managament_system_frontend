@@ -7,24 +7,24 @@ import IconButton from '@mui/material/IconButton'
 export default function TaskStatusPopup(props) {
   const { openPopUp, setOpenPopup, taskId, type } = props
   const handleClose = () => {
-    setOpenPopup(false);
-  };
+    setOpenPopup(false)
+  }
 
   return (
     <Dialog open={openPopUp} onClose={() => setOpenPopup(false)}>
       <IconButton
-          aria-label="close"
-          onClick={handleClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
+        aria-label="close"
+        onClick={handleClose}
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: 8,
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
       <DialogTitle>
-        {taskId === null ? <>Add New Task</> : <>Show Task</>}
+        {type === 'add' ? <>Add New Status</> : <>View and Edit Status</>}
       </DialogTitle>
       <DialogContent>
         <TaskStatusForm taskId={taskId} type={type} />
