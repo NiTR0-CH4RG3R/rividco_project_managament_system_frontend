@@ -4,17 +4,17 @@ import MenuItem from '@mui/material/MenuItem'
 import { statuses } from '../TaskData'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import SaveIcon from "@mui/icons-material/Save";
-import ClearAllIcon from "@mui/icons-material/ClearAll";
+import SaveIcon from '@mui/icons-material/Save'
+import ClearAllIcon from '@mui/icons-material/ClearAll'
 import FormTextField from '../../../Components/StyledComponents/FormTextField'
 import FormClearButton from '../../../Components/StyledComponents/FormClearButton'
 import FormSaveLoadingButton from '../../../Components/StyledComponents/FormSaveLoadingButton'
-import Grid from "@mui/material/Grid"
+import Grid from '@mui/material/Grid'
+import * as taskService from '../../../services/taskService'
 import * as taskStatusService from '../../../services/taskStatusService'
 import { AppRoutes } from '../../../Data/AppRoutes'
-import EditIcon from "@mui/icons-material/Edit";
+import EditIcon from '@mui/icons-material/Edit'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useTopbarContext } from '../../../Contexts/TopbarContext'
 import FormButton from '../../../Components/StyledComponents/FormButton'
 
 {
@@ -25,64 +25,44 @@ const taskStatusValidation = yup.object().shape({
 })
 
 function TaskStatusForm(props) {
-  const [taskStatusType, setTaskStatusType] = useState([]);
-  const [modeType, setModeType] = useState(props.type);
+  const [taskStatusType, setTaskStatusType] = useState([])
+  const [modeType, setModeType] = useState(props.type)
+  const { id } = useParams()
 
   function loadTaskStatusData(id, setValues) {
     taskStatusService
       .getTaskStatus(id)
-      .then((taskstatus)=>{
+      .then((taskstatus) => {
         let taskStatusValues = {
-          status : taskstatus.status,
-          comment : taskstatus.comments
-
+          status: taskstatus.status,
+          comment: taskstatus.comments,
         }
 
         setValues(taskStatusValues)
       })
 
-      .catch((error)=>{
+      .catch((error) => {
         console.log(error)
       })
   }
 
   function loadTaskStatusType() {
     //load status type from the backend
-    setTaskStatusType(statuses);
+    setTaskStatusType(statuses)
   }
 
-  const { id } = useParams();
-
   useEffect(() => {
-    loadTaskStatusType();
+    loadTaskStatusType()
 
-    if (modeType !== "add") {
-      loadTaskStatusData(id);
+    if (modeType !== 'add') {
+      loadTaskStatusData(id)
     }
-  }, []);
+  }, [])
 
-  const { setTitle, setSubtitle } = useTopbarContext();
-  setTitle(
-    modeType === "add"
-      ? "Add a new Task Status"
-      : modeType === "edit"
-      ? "Edit Task Status"
-      : `Task Status`
-  );
-  setSubtitle(
-    modeType === "add"
-      ? "You can add a new task status here."
-      : modeType === "edit"
-      ? "You can edit task status details here."
-      : `You can view task status details here.`
-  );
-
-  const [loading, setLoading] = useState(false);
-  //for modal
-  const [openEmployee, setOpenEmployee] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   //set initial values in formik
-  
+
   const {
     values,
     errors,
@@ -98,48 +78,49 @@ function TaskStatusForm(props) {
       comment: '',
     },
     onSubmit: (values) => {
-      setLoading(true);
+      setLoading(true)
+
       //Send values to the backend
-      if (modeType === "add") {
+      if (modeType === 'add') {
         taskStatusService
           .addTaskStatus({
             status: values.status,
             comments: values.comment,
           })
           .then(() => {
-            setLoading(false);
-            navigate(AppRoutes.cia_status.path);
+            setLoading(false)
+            navigate(AppRoutes.cia_status.path)
           })
           .catch((error) => {
-            console.error(error);
-            alert(error);
-            setLoading(false);
-          });
-      } else if (modeType === "edit") {
+            console.error(error)
+            alert(error)
+            setLoading(false)
+          })
+      } else if (modeType === 'edit') {
         taskStatusService
-          .updateTaskStatus({
-            status: values.status,
-            comments: values.comment,
-          },
+          .updateTaskStatus(
+            {
+              status: values.status,
+              comments: values.comment,
+            },
             id
           )
           .then(() => {
-            setLoading(false);
-            navigate(AppRoutes.cia_status.path);
+            setLoading(false)
+            navigate(AppRoutes.cia_status.path)
           })
           .catch((error) => {
-            console.error(error);
-            alert(error);
-            setLoading(false);
-          });
+            console.error(error)
+            alert(error)
+            setLoading(false)
+          })
       }
-    
     },
 
     validationSchema: taskStatusValidation,
-  });
+  })
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <Box
@@ -148,61 +129,59 @@ function TaskStatusForm(props) {
       onSubmit={handleSubmit}
       display="flex"
       flexDirection="column"
-      width={"100%"}
+      width={'100%'}
       sx={{
         '& .MuiTextField-root': {
           margin: 1,
         },
       }}
     >
-
       {/* ---------------- Status form ------------------ */}
-    <Grid>
-      <Grid item xs={12}>
-      <FormTextField
-        required
-        placeholder="Please Enter Task Status"
-        id="status"
-        name="status"
-        select
-        label="Status"
-        fullWidth
-        size="small"
-        value={values.status}
-        onBlur={handleBlur}
-        error={touched.status && errors.status}
-        helperText={touched.status ? errors.status : ''}
-        onChange={handleChange}
-        disabled={modeType === "view"}
-      >
-        {statuses.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </FormTextField>
-      </Grid>
-
-
-      <Grid item xs={12}>
-      <FormTextField
-        id="comment"
-        name="comment"
-        label="Comment"
-        multiline
-        rows={5}
-        fullWidth
+      <Grid>
+        <Grid item xs={12}>
+          <FormTextField
+            required
+            placeholder="Please Enter Task Status"
+            id="status"
+            name="status"
+            select
+            label="Status"
+            fullWidth
             size="small"
-        value={values.comment}
-        onChange={handleChange}
-      />
+            value={values.status}
+            onBlur={handleBlur}
+            error={touched.status && errors.status}
+            helperText={touched.status ? errors.status : ''}
+            onChange={handleChange}
+            disabled={modeType === 'view'}
+          >
+            {statuses.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </FormTextField>
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormTextField
+            id="comment"
+            name="comment"
+            label="Comment"
+            multiline
+            rows={5}
+            fullWidth
+            size="small"
+            value={values.comment}
+            onChange={handleChange}
+          />
         </Grid>
       </Grid>
 
       {/* ---------------- Button placement ------------------ */}
 
       <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
-        {modeType !== "view" && (
+        {modeType !== 'view' && (
           <>
             <FormClearButton
               variant="contained"
@@ -230,14 +209,14 @@ function TaskStatusForm(props) {
             </FormSaveLoadingButton>
           </>
         )}
-        {modeType === "view" && (
+        {modeType === 'view' && (
           <>
             <FormButton
               variant="contained"
               size="large"
               color="primary"
               startIcon={<EditIcon />}
-              onClick={() => setModeType("edit")}
+              onClick={() => setModeType('edit')}
             >
               Edit
             </FormButton>
