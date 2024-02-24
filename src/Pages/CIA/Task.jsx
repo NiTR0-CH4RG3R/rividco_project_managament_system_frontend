@@ -56,7 +56,6 @@ export default function Task(props) {
             id: task.assignedTo,
             firstName: null,
           },
-          //status: '',
           urgency: task.urgencyLevel,
           comment: task.comments,
         }
@@ -418,27 +417,29 @@ export default function Task(props) {
             disabled={props.type === 'view'}
           />
         </Grid>
-        <Grid item xs={6}>
-          <FormTextField
-            id="status"
-            name="status"
-            label="Status"
-            select
-            variant="outlined"
-            fullWidth
-            size="small"
-            value={values.status}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            disabled={props.type === 'view'}
-          >
-            {statuses.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </FormTextField>
-        </Grid>
+        {(props.type === 'add' || props.type === 'view') && (
+          <Grid item xs={6}>
+            <FormTextField
+              id="status"
+              name="status"
+              label="Status"
+              select
+              variant="outlined"
+              fullWidth
+              size="small"
+              value={values.status}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              disabled={props.type === 'view'}
+            >
+              {statuses.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </FormTextField>
+          </Grid>
+        )}
         <Grid item xs={6}>
           <FormTextField
             id="urgency"
