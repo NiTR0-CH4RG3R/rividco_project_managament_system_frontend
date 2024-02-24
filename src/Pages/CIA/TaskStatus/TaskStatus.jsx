@@ -20,7 +20,7 @@ function TaskStatus() {
   setSubtitle('You can view and manage Statuses of a CIA task here.')
 
   const [openPopUp, setOpenPopup] = useState(false)
-  const [taskId, setTaskId] = useState(null)
+  const [statusId, setStatusId] = useState(null)
   const [modeType, setModeType] = useState()
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -65,7 +65,7 @@ function TaskStatus() {
         }}
         onRowClick={(e, id) => {
           setModeType('view')
-          setTaskId(id)
+          setStatusId(id)
           setOpenPopup(true)
         }}
         onAddButtonClick={(e) => {
@@ -76,13 +76,13 @@ function TaskStatus() {
           rowsPerPageOptions: [5, 10, 25, 100],
           component: 'div',
           rowsPerPage: rowsPerPage,
-          page: 0,
-          count: 100,
+          page: page,
+          count: -1,
           onPageChange: (e, page) => {
-            console.log(page)
+            setPage(page)
           },
           onRowsPerPageChange: (e) => {
-            console.log(e.target.value)
+            setRowsPerPage(e.target.value)
           },
         }}
         disableSearchBar
@@ -90,7 +90,7 @@ function TaskStatus() {
       <TaskStatusPopup
         openPopUp={openPopUp}
         setOpenPopup={setOpenPopup}
-        taskId={taskId}
+        statusId={statusId}
         type={modeType}
       />
     </>
