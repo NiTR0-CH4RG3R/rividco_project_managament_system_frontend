@@ -17,8 +17,8 @@ const columns = [
 
 export default function TaskList() {
   const { setTitle, setSubtitle } = useTopbarContext()
-  setTitle('CIA Task Projects')
-  setSubtitle('You can view and manage all the projects here.')
+  setTitle('CIA Task List')
+  setSubtitle('You can view and manage all the CIA tasks here.')
 
   const [rows, setRows] = useState([
     {
@@ -39,13 +39,10 @@ export default function TaskList() {
   }, [])
 
   useEffect(() => {
-    taskService.listTasks(page + 1, rowsPerPage).then((task) => {
-      setRows(task)
-    })
-    taskStatusService
-      .listTaskStatus(page + 1, rowsPerPage)
-      .then((taskstatuses) => {
-        setRows(taskstatuses)
+    taskService
+      .listTasks(page + 1, rowsPerPage)
+      .then((task) => {
+        setRows(task)
       })
       .catch((error) => {
         console.log(error)
