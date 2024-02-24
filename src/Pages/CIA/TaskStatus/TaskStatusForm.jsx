@@ -10,7 +10,6 @@ import FormTextField from '../../../Components/StyledComponents/FormTextField'
 import FormClearButton from '../../../Components/StyledComponents/FormClearButton'
 import FormSaveLoadingButton from '../../../Components/StyledComponents/FormSaveLoadingButton'
 import Grid from '@mui/material/Grid'
-import * as taskService from '../../../services/taskService'
 import * as taskStatusService from '../../../services/taskStatusService'
 import { AppRoutes } from '../../../Data/AppRoutes'
 import EditIcon from '@mui/icons-material/Edit'
@@ -27,11 +26,14 @@ const taskStatusValidation = yup.object().shape({
 function TaskStatusForm(props) {
   const [taskStatusType, setTaskStatusType] = useState([])
   const [modeType, setModeType] = useState(props.type)
+  const [statusId, setStatusId] = useState(props.statusId)
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
   const { id } = useParams()
 
   function loadTaskStatusData(id, setValues) {
     taskStatusService
-      .getTaskStatus(id)
+      .getTaskStatus(statusId)
       .then((taskstatus) => {
         let taskStatusValues = {
           status: taskstatus.status,
@@ -50,16 +52,6 @@ function TaskStatusForm(props) {
     //load status type from the backend
     setTaskStatusType(statuses)
   }
-
-  useEffect(() => {
-    loadTaskStatusType()
-
-    if (modeType !== 'add') {
-      loadTaskStatusData(id, setValues)
-    }
-  }, [id])
-
-  const [loading, setLoading] = useState(false)
 
   //set initial values in formik
 
@@ -84,12 +76,13 @@ function TaskStatusForm(props) {
       if (modeType === 'add') {
         taskStatusService
           .addTaskStatus({
-            taskId: props.taskId,
+            taskId: id,
             status: values.status,
             comments: values.comment,
           })
           .then(() => {
             setLoading(false)
+
             navigate(AppRoutes.cia_status.path)
           })
           .catch((error) => {
@@ -101,14 +94,15 @@ function TaskStatusForm(props) {
         taskStatusService
           .updateTaskStatus(
             {
-              taskId: props.taskId,
+              taskId: id,
               status: values.status,
               comments: values.comment,
             },
-            id
+            statusId
           )
           .then(() => {
             setLoading(false)
+
             navigate(AppRoutes.cia_status.path)
           })
           .catch((error) => {
@@ -122,7 +116,13 @@ function TaskStatusForm(props) {
     validationSchema: taskStatusValidation,
   })
 
-  const navigate = useNavigate()
+  useEffect(() => {
+    loadTaskStatusType()
+
+    if (modeType !== 'add') {
+      loadTaskStatusData(id, setValues)
+    }
+  }, [id])
 
   return (
     <Box
