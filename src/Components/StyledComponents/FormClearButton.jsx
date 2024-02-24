@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import styled from "styled-components";
+import styled from "@mui/material/Button";
 
 const FormClearButton = styled(Button)(({ theme }) => ({
   boxShadow: "-moz-initial",
