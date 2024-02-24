@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import IconButton from '@mui/material/IconButton'
 
 export default function TaskStatusPopup(props) {
-  const { openPopUp, setOpenPopup, taskId, type } = props
+  const { openPopUp, setOpenPopup, statusId, type } = props
   const handleClose = () => {
     setOpenPopup(false)
   }
@@ -27,7 +27,7 @@ export default function TaskStatusPopup(props) {
         {type === 'add' ? <>Add New Status</> : <>View and Edit Status</>}
       </DialogTitle>
       <DialogContent>
-        <TaskStatusForm taskId={taskId} type={type} />
+        <TaskStatusForm statusId={statusId} type={type} />
       </DialogContent>
     </Dialog>
   )
