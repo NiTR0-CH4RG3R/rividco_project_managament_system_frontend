@@ -111,10 +111,10 @@ const AddTaskResources = (props) => {
 
     const columns = [
         { id: 'category', label: 'Category', align: 'left' },
-        { id: 'filelink', label: 'File Link', align: 'left' },
-        { id: 'comment', label: 'Comment', align: 'left' },
-        { id: 'addedby', label: 'Added By', align: 'left' },
-        { id: 'addeddate', label: 'Added Date' },
+        { id: 'url', label: 'File Link', align: 'left' },
+        { id: 'comments', label: 'Comment', align: 'left' },
+        { id: 'lastUpdatedBy', label: 'Added By', align: 'left' },
+        { id: 'lastUpdatedDateTime', label: 'Added Date' },
     ];
 
     const [rows, setRows] = useState([
