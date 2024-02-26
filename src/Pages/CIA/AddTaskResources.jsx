@@ -118,6 +118,8 @@ const AddTaskResources = (props) => {
             height="100vh"
             flexDirection="column"
             width="90%"
+            onSubmit={handleSubmit}
+            onReset={handleReset}
         >
             <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -146,23 +148,41 @@ const AddTaskResources = (props) => {
 
                 </Grid>
                 <Grid item xs={6}>
-                    <FormTextField
+                    {/* <FormTextField
                         required
                         type='file'
                         name="file"
                         size="small"
                         fullWidth
                         value={values.url} //set value using formik
-                        onChange={handleChange} //get onchange value using formik
+                        onChange={(e) => {
+                            handleChange(e); // Update formik values
+                        }} //get onchange value using formik
+                        accept=".pdf,.doc,.docx,.txt" 
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
                         error={touched.url && errors.url}
                         helperText={touched.url ? errors.url : ''}
-                    />
+                    /> */}
+                    <input
+        type="file"
+        id="url"
+        name="url"
+        onChange={(e) => {
+            handleChange(e); // Update formik values
+        }}
+        onBlur={handleBlur}
+        disabled={props.type === "view"}
+        accept=".pdf,.doc,.docx,.txt" // Optional: specify accepted file types
+    />
+    {touched.url && errors.url && (
+        <div>{errors.url}</div>
+    )}
                 </Grid>
                 <Grid item xs ={12}>
                     <FormTextField
                         multiline
+                        placeholder="Please Enter a comment"
                         rows={4}
                         fullWidth
                         name='comment'
