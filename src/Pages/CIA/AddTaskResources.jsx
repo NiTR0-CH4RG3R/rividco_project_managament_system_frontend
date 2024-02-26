@@ -160,6 +160,7 @@ const AddTaskResources = (props) => {
             flexDirection="column"
             width="90%"
             onReset={handleReset}
+            onSubmit={handleSubmit}
         >
             {props.type === 'add' && (
             <Grid container spacing={2} sx={{ width: '70%', marginBottom: '1rem' }}>
@@ -171,6 +172,7 @@ const AddTaskResources = (props) => {
                     label="TaskId"
                     fullWidth
                     size='small'
+                    // value={}
                 />
             </Grid>
             </Grid>
@@ -188,6 +190,7 @@ const AddTaskResources = (props) => {
                             variant="outlined"
                             value={values.category}
                             onChange={(e) => handleChange(index, 'category', e.target.value)}
+                            onBlur={handleBlur}
                             label="Category"
                             required
                             fullWidth
@@ -210,6 +213,7 @@ const AddTaskResources = (props) => {
                             type="file"
                             fullWidth
                             onChange={(e) => handleChange(index, 'file', e.target.files[0])}
+                            onBlur={handleBlur}
                             required
                             size='small'
                             error={touched.files && errors.files}
@@ -231,6 +235,7 @@ const AddTaskResources = (props) => {
                             rows={2}
                             value={field.comment}
                             onChange={(e) => handleChange(index, 'comment', e.target.value)}
+                            onBlur={handleBlur}
                             error={touched.comment && errors.comment}
                             helperText={touched.comment ? errors.comment : ""}
                         />
@@ -255,7 +260,7 @@ const AddTaskResources = (props) => {
 
                     {props.type === 'add' && (
                     <Grid item xs={2}>
-                    {index !== 0 && ( // Conditionally render the Remove button
+                    {index !== 0 && ( 
                         <FormButton
                             variant="outlined"
                             color="error"
