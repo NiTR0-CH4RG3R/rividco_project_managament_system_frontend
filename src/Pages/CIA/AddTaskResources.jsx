@@ -5,13 +5,23 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AppRoutes } from '../../Data/AppRoutes'
 import FormTextField from '../../Components/StyledComponents/FormTextField'
 import { resourceCategory } from './TaskData'
+import * as taskResourceService from '../../services/taskResourceService'
+import { useFormik } from 'formik'
+import TaskResourcesValidation from '../../Validation/TaskResourcesValidation'
+import SaveIcon from '@mui/icons-material/Save'
+import ClearAllIcon from '@mui/icons-material/ClearAll'
+import FormClearButton from '../../Components/StyledComponents/FormClearButton'
+import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
+
 
 const AddTaskResources = (props) => {
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
+    const [modeType, setModeType] = useState(props.type)
+    const [resourceId, setResorceId] = useState(props.resorceId)
     const { id } = useParams()
-    const navi = useNavigate()
-    const [taskStatusType, setTaskResourceType] = useState([])
+    const navigate = useNavigate()
+    const [taskResourceType, setTaskResourceType] = useState([])
 
     const { setTitle, setSubtitle } = useTopbarContext()
     setTitle(
@@ -25,16 +35,82 @@ const AddTaskResources = (props) => {
             : `You can CIA Task Resource details here.`
     )
 
+    function loadTaskResourceData(id, setValues) {
+        taskResourceService
+        .getTaskResource(resourceId)
+        .then((taskresource) => {
+            let taskResourceValues = {
+                category: taskresource.category,
+                url: taskresource.url,
+                comment: taskresource.comments,
+            }
+
+            setValues(taskResourceValues)
+        })
+
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
     function loadTaskResourceType() {
         //load status type from the backend
         setTaskResourceType(resourceCategory)
-      }
+    }
+    
+    const {
+        values,
+        errors,
+        touched,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        handleReset,
+        setValues,
+    } = useFormik({
+        initialValues: {
+            category: '',
+            url: '',
+            comment: '',
+        },
+        onSubmit: (values) => {
+            setLoading(true)
+
+            if(modeType === 'add') {
+                taskResourceService
+                    .addTaskResource({
+                        taskId: id,
+                        category: values.category,
+                        url: values.url,
+                        comments: values.comment,
+                    })
+                    .then(() => {
+                        setLoading(false)
+
+                        navigate(AppRoutes.cia_resources_add.path)
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                        alert(error)
+                        setLoading(false)
+                    })
+            }
+        },
+        validationSchema: TaskResourcesValidation,
+    })
+
+    useEffect(() => {
+        loadTaskResourceType()
+
+        if(modeType !== 'add') {
+            loadTaskResourceData(id, setValues)
+        }
+    }, [id])
 
     return (
         
         <Box
             component="form"
-            noValidate
             autoComplete="off"
             display="flex"
             justifyContent="center"
@@ -54,12 +130,12 @@ const AddTaskResources = (props) => {
                         label="Category"
                         fullWidth
                         size="small"
-                        // value={values.firstName} //set value using formik
-                        // onChange={handleChange} //get onchange value using formik
-                        // disabled={props.type === "view"}
-                        // onBlur={handleBlur}
-                        // error={touched.firstName && errors.firstName}
-                        // helperText={touched.firstName ? errors.firstName : ""}
+                        value={values.category} //set value using formik
+                        onChange={handleChange} //get onchange value using formik
+                        disabled={props.type === "view"}
+                        onBlur={handleBlur}
+                        error={touched.category && errors.category}
+                        helperText={touched.category ? errors.category : ''}
                     >
                          {resourceCategory.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -73,15 +149,15 @@ const AddTaskResources = (props) => {
                     <FormTextField
                         required
                         type='file'
-                        name="lastName"
+                        name="file"
                         size="small"
                         fullWidth
-                        // value={values.lastName} //set value using formik
-                        // onChange={handleChange} //get onchange value using formik
-                        // disabled={props.type === "view"}
-                        // onBlur={handleBlur}
-                        // error={touched.lastName && errors.lastName}
-                        // helperText={touched.lastName ? errors.lastName : ""}
+                        value={values.url} //set value using formik
+                        onChange={handleChange} //get onchange value using formik
+                        disabled={props.type === "view"}
+                        onBlur={handleBlur}
+                        error={touched.url && errors.url}
+                        helperText={touched.url ? errors.url : ''}
                     />
                 </Grid>
                 <Grid item xs ={12}>
@@ -92,9 +168,45 @@ const AddTaskResources = (props) => {
                         name='comment'
                         label='Comment'
                         required
+                        value={values.comment} //set value using formik
+                        onChange={handleChange} //get onchange value using formik
+                        disabled={props.type === "view"}
+                        onBlur={handleBlur}
+                        error={touched.comment && errors.comment}
+                        helperText={touched.comment ? errors.comment : ''}
                     />
                 </Grid>
             </Grid>
+        <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
+        {modeType !== 'view' && (
+          <>
+            <FormClearButton
+              variant="contained"
+              size="large"
+              sx={{
+                mr: 2,
+              }}
+              color="primary"
+              startIcon={<ClearAllIcon />}
+              type="reset"
+            >
+              Clear
+            </FormClearButton>
+
+            <FormSaveLoadingButton
+              color="primary"
+              type="submit"
+              size="large"
+              loading={loading}
+              loadingPosition="start"
+              startIcon={<SaveIcon />}
+              variant="contained"
+            >
+              <span>Save</span>
+            </FormSaveLoadingButton>
+          </>
+        )}
+        </Box>
         </Box>
         
     );
