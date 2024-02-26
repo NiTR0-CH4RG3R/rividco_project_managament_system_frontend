@@ -58,3 +58,18 @@ export const urgencies = [
     label: 'Unknown',
   },
 ]
+
+export const resourceCategory = [
+  {
+    value: 'Image',
+    label: 'Image',
+  },
+  {
+    value: 'Document',
+    label: 'Document',
+  },
+  {
+    value: 'Other',
+    label: 'Other',
+  },
+]
