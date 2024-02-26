@@ -2,9 +2,10 @@ import React from 'react'
 import ListPage from '../../Components/ListPage/ListPage';
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useTopbarContext } from '../../../Contexts/TopbarContext'
-import * as taskResorceService from '../../../services/taskResourceService'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useTopbarContext } from '../../Contexts/TopbarContext'
+import * as taskResourceService from '../../services/taskResourceService'
+import { AppRoutes } from '../../Data/AppRoutes';
 
 const columns = [
   { id: 'category', label: 'Category', align: 'left' },
@@ -20,9 +21,12 @@ function TaskResourceList() {
   setTitle('CIA Task Resource List')
   setSubtitle('You can view CIA Task Resource details here.')
 
-    const [page, setPage] = useState(0)
-    const [rowsPerPage, setRowsPerPage] = useState(5)
-    const { id } = useParams()
+  // const [ResourceId, setResourceId] = useState(null)
+  // const [modeType, setModeType] = useState()
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
+  const { id } = useParams()
+  const navigate = useNavigate()
   
     const [rows, setRows] = React.useState([
       {
@@ -40,10 +44,10 @@ function TaskResourceList() {
     }, [])
   
     useEffect(() => {
-      taskResorceService
+      taskResourceService
         .listTaskResourceService(id, page + 1, rowsPerPage)
-        .then((taskresorce) => {
-          setRows(taskresorce)
+        .then((taskresource) => {
+          setRows(taskresource)
         })
         .catch((error) => {
           console.log(error)
@@ -56,20 +60,18 @@ function TaskResourceList() {
         columns={columns}
         rows={rows}
         searchBarProps={{
-          searchBy: 'location',
+          searchBy: 'category',
           onSearchChange: (e) => {
             console.log(e.target.value)
           },
           onSearchClick: (e) => {},
         }}
         onRowClick={(e, id) => {
-          setModeType('view')
-          setStatusId(id)
-          setOpenPopup(true)
+          // setModeType('view')
+          // setResourceId(id)
         }}
         onAddButtonClick={(e) => {
-          setModeType('add')
-          setOpenPopup(true)
+          navigate(AppRoutes.cia_resources_add.path)
         }}
         tablePaginationProps={{
           rowsPerPageOptions: [5, 10, 25, 100],

@@ -4,7 +4,7 @@ const TASKRESOURCE_URL = '/TaskResource'
 
 export async function listTaskResourceService(taskId , page, itemsPerPage) {
 
-    const taskResource = []
+    const taskresources = []
 
     try {
         const response = await get(`${TASKRESOURCE_URL}`, {
@@ -13,13 +13,13 @@ export async function listTaskResourceService(taskId , page, itemsPerPage) {
             pageSize: itemsPerPage,
         })
         response?.data?.forEach((resource) => {
-            taskResource.push(resource)
+            taskresources.push(resource)
         })
     } catch (error) {
         console.error(error)
     }
 
-    return taskResource
+    return taskresources
 }
 
 export async function getTaskResource(id) {
@@ -28,20 +28,20 @@ export async function getTaskResource(id) {
     try {
         const response = await get(`${TASKRESOURCE_URL}/${id}`)
         taskresource = response?.data
-    } catch {
+    } catch (error) {
         console.error(error)
     }
 
     return taskresource
 }
 
-export async function addTaskResource(taskResorce) {
+export async function addTaskResource(taskresource) {
     let addedtaskresource = {}
 
     try {
-        const response = await post(`${TASKRESOURCE_URL}`, taskResorce)
+        const response = await post(`${TASKRESOURCE_URL}`, taskresource)
         addedtaskresource = response?.data
-    } catch {
+    } catch (error) {
         console.error(error)
     }
 

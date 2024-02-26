@@ -20,6 +20,7 @@ import PendingServices from '../Pages/Project/PendingServices'
 import Home from '../Pages/Home/Home'
 import Test from '../Pages/Test/Test'
 import CommisionReport from '../Pages/Project/CommisionReport'
+import TaskResourceList from '../Pages/CIA/TaskResourceList'
 
 export const AppRoutes = {
   home: { path: '/home', component: <Home /> },
@@ -108,7 +109,7 @@ export const AppRoutes = {
   },
   cia_resources_view: {
     path: '/cia/resource/view/:id',
-    component: <AddTaskResources type="view" />,
+    component: <TaskResourceList />,
   },
   cia_status: { path: '/cia/view/:id/status', component: <TaskStatus /> },
 
