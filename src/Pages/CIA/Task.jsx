@@ -37,41 +37,52 @@ export default function Task(props) {
   const { id } = useParams()
   const navigate = useNavigate()
 
+  async function loadCustomer(id) {
+    return customerService.getCustomer(id).then((customer) => {
+      return {
+        id: customer.id,
+        firstName: customer.firstName,
+      }
+    })
+  }
+
+  async function loadEmployee(id) {
+    return systemUserService.getSystemUser(id).then((systemuser) => {
+      return {
+        id: systemuser.id,
+        firstName: systemuser.firstName,
+      }
+    })
+  }
+
+  async function loadProject(id) {
+    return projectService.getProject(id).then((project) => {
+      return {
+        id: project.projectId,
+      }
+    })
+  }
+
   function loadTaskData(id, setValues) {
     taskService
       .getTask(id)
-      .then((task) => {
-        let taskValues = {
+      .then(async (task) => {
+        const [customer, project, employee] = await Promise.all([
+          loadCustomer(task.requestedBy),
+          loadProject(task.projectId),
+          loadEmployee(task.assignedTo),
+        ])
+        const taskValues = {
           description: task.description,
           category: task.category,
           callbacknumber: task.callBackNumber,
-          selectedCustomer: {
-            id: task.requestedBy,
-            firstName: null,
-          },
-          selectedProject: {
-            id: task.projectId,
-          },
-          selectedEmployee: {
-            id: task.assignedTo,
-            firstName: null,
-          },
+          selectedCustomer: customer,
+          selectedProject: project,
+          selectedEmployee: employee,
+          status: task.status,
           urgency: task.urgencyLevel,
           comment: task.comments,
         }
-
-        //send request to get customer, employee, project details from the backend
-        /* customerService.getCustomer(task.requestedBy).then((customer) => {
-          task.selectedCustomer.firstName = customer.firstName
-        })
-
-        projectService.getProject(task.projectId).then((project) => {
-          task.selectedProject.projectId = project.projectId
-        })
-
-        systemUserService.getSystemUser(task.assignedTo).then((systemuser) => {
-          task.selectedEmployee.firstName = systemuser.firstName
-        }) */
         setValues(taskValues)
       })
       .catch((error) => {
