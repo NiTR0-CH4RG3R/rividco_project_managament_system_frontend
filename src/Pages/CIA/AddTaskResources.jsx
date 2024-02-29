@@ -165,19 +165,20 @@ const AddTaskResources = (props) => {
                         helperText={touched.url ? errors.url : ''}
                     /> */}
                     <input
-        type="file"
-        id="url"
-        name="url"
-        onChange={(e) => {
-            handleChange(e); // Update formik values
-        }}
-        onBlur={handleBlur}
-        disabled={props.type === "view"}
-        accept=".pdf,.doc,.docx,.txt" // Optional: specify accepted file types
-    />
-    {touched.url && errors.url && (
-        <div>{errors.url}</div>
-    )}
+                        type="file"
+                        id="url"
+                        name="url"
+                        onChange={(e) => {
+                            handleChange(e); // Update formik values
+                        }}
+                        onBlur={handleBlur}
+                        disabled={props.type === "view"}
+                        accept=".pdf,.doc,.docx,.txt" // Optional: specify accepted file types
+                    />
+                    {touched.url && errors.url && (
+                    <div>{errors.url}</div>
+                    )}
+
                 </Grid>
                 <Grid item xs ={12}>
                     <FormTextField
@@ -197,6 +198,7 @@ const AddTaskResources = (props) => {
                     />
                 </Grid>
             </Grid>
+            
         <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
         {modeType !== 'view' && (
           <>
