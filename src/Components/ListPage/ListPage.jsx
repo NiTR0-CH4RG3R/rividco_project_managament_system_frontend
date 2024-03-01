@@ -66,14 +66,15 @@ export default function ListPage({
         justifyContent="center"
         alignItems="center"
         p={4}
-        
       >
         {!disableSearchBar && <SearchBar {...searchBarProps} />}
         {customUpperBar}
       </Box>
-      <Paper elevation={4}   sx={{ maxHeight: "90%",borderRadius:"8px" }}>
-        <TableContainer sx={{ maxHeight: "90%" ,borderRadius:'8px 8px 0px 0px'}}>
-          <ListTable stickyHeader aria-label="simple table" size="small" >
+      <Paper elevation={4} sx={{ maxHeight: "90%", borderRadius: "8px" }}>
+        <TableContainer
+          sx={{ maxHeight: "90%", borderRadius: "8px 8px 0px 0px" }}
+        >
+          <ListTable stickyHeader aria-label="simple table" size="small">
             <TableHead>
               <TableRow key={0}>
                 {columns.map((column) => (
