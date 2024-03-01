@@ -300,6 +300,8 @@ export default function Project(props) {
                 ? errors.selectedCustomer?.firstName
                 : ""
             }
+            variant="filled"
+
           />
         </Grid>
         <Grid item xs={6}>
@@ -319,6 +321,7 @@ export default function Project(props) {
             InputLabelProps={{ shrink: true }}
             error={touched.startDate && errors.startDate}
             helperText={touched.startDate ? errors.startDate : ""}
+            variant="filled"
           />
         </Grid>
 
@@ -339,6 +342,7 @@ export default function Project(props) {
             onBlur={handleBlur}
             error={touched.description && errors.description}
             helperText={touched.description ? errors.description : ""}
+            variant="filled"
           />
         </Grid>
 
@@ -351,6 +355,7 @@ export default function Project(props) {
             onBlur={handleBlur}
             fullWidth={true}
             size="small"
+            variant="filled"
           />
         </Grid>
         <Grid item xs={6}>
@@ -368,6 +373,7 @@ export default function Project(props) {
             onBlur={handleBlur}
             error={touched.status && errors.status}
             helperText={touched.status ? errors.status : ""}
+            variant="filled"
           >
             {statusType.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -388,6 +394,7 @@ export default function Project(props) {
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
             onBlur={handleBlur}
+            variant="filled"
           />
         </Grid>
         <Grid item xs={6}>
@@ -429,6 +436,7 @@ export default function Project(props) {
                 ? errors.selectedReferenceBy?.firstName
                 : ""
             }
+            variant="filled"
           />
         </Grid>
         <Grid item xs={6}>
@@ -446,6 +454,7 @@ export default function Project(props) {
             onBlur={handleBlur}
             error={touched.location && errors.location}
             helperText={touched.location ? errors.location : ""}
+            variant="filled"
           />
         </Grid>
         <Grid item xs={6}>
@@ -487,6 +496,7 @@ export default function Project(props) {
                 ? errors.selectedEmployee?.firstName
                 : ""
             }
+            variant="filled"
           />
         </Grid>
 
@@ -512,6 +522,7 @@ export default function Project(props) {
                 ? errors.electricityTariffStructure
                 : ""
             }
+            variant="filled"
           />
         </Grid>
         <Grid item xs={6}>
@@ -536,6 +547,7 @@ export default function Project(props) {
                 ? errors.electricityAccountNumber
                 : ""
             }
+            variant="filled"
           />
         </Grid>
 
@@ -556,6 +568,7 @@ export default function Project(props) {
             helperText={
               touched.electricityBoardArea ? errors.electricityBoardArea : ""
             }
+            variant="filled"
           />
         </Grid>
         <Grid item xs={6}>
@@ -575,6 +588,7 @@ export default function Project(props) {
             InputLabelProps={{ shrink: true }}
             error={touched.commisionDate && errors.commisionDate}
             helperText={touched.commisionDate ? errors.commisionDate : ""}
+            variant="filled"
           />
         </Grid>
         <Grid item xs={6}>
@@ -589,6 +603,7 @@ export default function Project(props) {
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
             onBlur={handleBlur}
+            variant="filled"
           />
         </Grid>
         <Grid item xs={6}>
@@ -630,6 +645,7 @@ export default function Project(props) {
                 ? errors.selectedSalesPerson?.firstName
                 : ""
             }
+            variant="filled"
           />
         </Grid>
 
@@ -646,6 +662,7 @@ export default function Project(props) {
             value={values.comment} //set value using formikß
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
+            variant="filled"
           />
         </Grid>
       </Grid>
