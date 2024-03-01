@@ -40,9 +40,7 @@ export default function SalesPersonModal(props) {
 
   return (
     <>
-      {loadidng ? (
-        <div>Loading...</div>
-      ) : (
+      
         <Modal open={openSalesPerson} onClose={handleClose}>
           <Box
             sx={{
@@ -113,7 +111,7 @@ export default function SalesPersonModal(props) {
             </div> */}
           </Box>
         </Modal>
-      )}
+      
     </>
   );
 }
