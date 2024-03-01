@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-
 import Grid from "@mui/material/Grid";
-
 import SaveIcon from "@mui/icons-material/Save";
-
+import Paper from "@mui/material/Paper";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
@@ -168,9 +166,18 @@ export default function Vendoritem(props) {
             justifyContent="center"
             alignItems="center"
             flexDirection="column"
-            width={"70%"}
+            padding={5}
         >
-            <Grid container spacing={2}>
+            <Grid container component={Paper} 
+                sx={{
+                    p : 2,
+                    borderRadius: 3,
+                    '& .MuiGrid-item' : {
+                        padding: 1
+                    },
+                }}
+                elevation={4}
+            >
                 <Grid item xs={6}>
                     <FormTextField
                         required
@@ -185,6 +192,8 @@ export default function Vendoritem(props) {
                         onBlur={handleBlur}
                         error={touched.product_name && errors.product_name}
                         helperText={touched.product_name ? errors.product_name : ""}
+                        variant="filled"
+
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -223,6 +232,8 @@ export default function Vendoritem(props) {
                         helperText={
                             touched.selectedVendor?.name ? errors.selectedVendor?.name : ""
                         }
+                        variant="filled"
+
                     />
                 </Grid>
 
@@ -243,6 +254,8 @@ export default function Vendoritem(props) {
                         onBlur={handleBlur}
                         error={touched.price && errors.price}
                         helperText={touched.price ? errors.price : ""}
+                        variant="filled"
+
                     />
                 </Grid>
 
@@ -260,6 +273,8 @@ export default function Vendoritem(props) {
                         helperText={
                             touched.warranty_duration ? errors.warranty_duration : ""
                         }
+                        variant="filled"
+
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -278,6 +293,8 @@ export default function Vendoritem(props) {
                         onBlur={handleBlur}
                         error={touched.capacity && errors.capacity}
                         helperText={touched.capacity ? errors.capacity : ""}
+                        variant="filled"
+
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -295,6 +312,8 @@ export default function Vendoritem(props) {
                         onBlur={handleBlur}
                         error={touched.brand && errors.brand}
                         helperText={touched.brand ? errors.brand : ""}
+                        variant="filled"
+
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -312,6 +331,8 @@ export default function Vendoritem(props) {
                         onBlur={handleBlur}
                         error={touched.productCode && errors.productCode}
                         helperText={touched.productCode ? errors.productCode : ""}
+                        variant="filled"
+
                     />
                 </Grid>
 
@@ -328,6 +349,8 @@ export default function Vendoritem(props) {
                         value={values.comments} //set value using formikß
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
+                        variant="filled"
+
                     />
                 </Grid>
             </Grid>
@@ -335,7 +358,7 @@ export default function Vendoritem(props) {
                 {props.type !== "view" && (
                     <>
                         <FormClearButton
-                            variant="contained"
+                            variant="outlined"
                             size="large"
                             sx={{
                                 mr: 2,
