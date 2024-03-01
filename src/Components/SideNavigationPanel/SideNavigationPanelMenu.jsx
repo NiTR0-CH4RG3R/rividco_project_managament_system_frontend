@@ -34,6 +34,12 @@ export default function SideNavigationPanelMenu({ name, icon, subMenu }) {
               key={subItem.name}
               onClick={() => navigate(subItem.path)}
               selected={location.pathname === subItem.path}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#062fc2", // Change this to your desired hover color
+                },
+                
+              }}
             >
               <ListItemText
                 primaryTypographyProps={{
