@@ -40,9 +40,7 @@ export default function ReferenceByModal(props) {
 
   return (
     <>
-      {loadidng ? (
-        <div>Loading...</div>
-      ) : (
+      
         <Modal open={openReferenceBy} onClose={handleClose}>
           <Box
             sx={{
@@ -113,7 +111,7 @@ export default function ReferenceByModal(props) {
             </div> */}
           </Box>
         </Modal>
-      )}
+      
     </>
   );
 }
