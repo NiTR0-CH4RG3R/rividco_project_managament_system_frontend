@@ -56,7 +56,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
         justifyContent: "space-between",
         alignItems: "center",
         p: 2,
-        backgroundColor:"#808080"
+        backgroundColor:"#071024"
       }}
     >
       {/* Back Button */}
