@@ -381,7 +381,7 @@ export default function Customer(props) {
                 {props.type !== "view" && (
                     <>
                         <FormClearButton
-                            variant="contained"
+                            variant="outlined"
                             size="large"
                             color="primary"
                             startIcon={<ClearAllIcon />}
