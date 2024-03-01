@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
+import Paper from "@mui/material/Paper"
 import { IconButton, MenuItem } from '@mui/material'
 import { useFormik } from 'formik'
 import CustomerModal from '../../Components/ModalWindow/CustomerModal'
@@ -83,7 +84,7 @@ export default function Task(props) {
           urgency: task.urgencyLevel,
           comment: task.comments,
         }
-        setValues(taskValues)
+        setValues(taskValues) 
       })
       .catch((error) => {
         console.log(error)
@@ -241,16 +242,24 @@ export default function Task(props) {
       justifyContent="center"
       alignItems="center"
       flexDirection="column"
-      width="70%"
+      padding={5}
     >
-      <Grid container spacing={2}>
+      <Grid container component={Paper} 
+                sx={{
+                    p : 2,
+                    borderRadius: 3,
+                    '& .MuiGrid-item' : {
+                        padding: 1
+                    },
+                }}
+                elevation={4}>
         <Grid item xs={12}>
           <FormTextField
             id="description"
             name="description"
             label="Description"
             placeholder="Enter any description"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             multiline
@@ -269,7 +278,7 @@ export default function Task(props) {
             name="category"
             label="Category"
             select
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.category}
@@ -290,7 +299,7 @@ export default function Task(props) {
             name="callbacknumber"
             label="Callback Number"
             placeholder="Enter telephone number"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             required
@@ -307,7 +316,7 @@ export default function Task(props) {
             id="requested_by"
             name="requested_by"
             label="Requested Customer"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             required
@@ -367,7 +376,7 @@ export default function Task(props) {
             id="project_regarding"
             name="project_regarding"
             label="Project Regarding"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             onClick={() => {
@@ -399,7 +408,7 @@ export default function Task(props) {
             id="assigned_to"
             name="assigned_to"
             label="Assigned Employee"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             onClick={() => {
@@ -435,7 +444,7 @@ export default function Task(props) {
               name="status"
               label="Status"
               select
-              variant="outlined"
+              variant="filled"
               fullWidth
               size="small"
               value={values.status}
@@ -457,7 +466,7 @@ export default function Task(props) {
             name="urgency"
             label="Urgency Level"
             select
-            variant="outlined"
+            variant="filled"
             defaultValue="None"
             fullWidth
             size="small"
@@ -479,7 +488,7 @@ export default function Task(props) {
             name="comment"
             label="Comment"
             placeholder="Enter any comment"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             multiline
