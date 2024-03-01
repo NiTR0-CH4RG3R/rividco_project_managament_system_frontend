@@ -42,9 +42,7 @@ export default function EmployeeModal(props) {
 
   return (
     <>
-      {loadidng ? (
-        <div>Loading...</div>
-      ) : (
+      
         <Modal open={openEmployee} onClose={handleClose}>
           <Box
             sx={{
@@ -119,7 +117,7 @@ export default function EmployeeModal(props) {
             </div> */}
           </Box>
         </Modal>
-      )}
+      
     </>
   );
 }
