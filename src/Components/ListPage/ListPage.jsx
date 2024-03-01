@@ -72,7 +72,7 @@ export default function ListPage({
       </Box>
       <Paper elevation={4} sx={{ maxHeight: "90%" }}>
         <TableContainer sx={{ maxHeight: "90%" }}>
-          <ListTable stickyHeader aria-label="simple table">
+          <ListTable stickyHeader aria-label="simple table" >
             <TableHead>
               <TableRow key={0}>
                 {columns.map((column) => (
@@ -91,11 +91,20 @@ export default function ListPage({
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody
+            sx={{
+              '& .MuiTableRow-hover:hover': {
+                backgroundColor: 'red',
+              }
+            }}
+            >
+            
               {rows.map((row) => (
                 <TableRow
                   key={row[0]}
                   sx={{
+                    
+                    
                     "&:last-child td, &:last-child th": { border: 0 },
                     cursor: "pointer",
                   }}
