@@ -500,7 +500,7 @@ export default function Task(props) {
           />
         </Grid>
         {/*Clear , Save Buttons on the add, edit, view forms*/}
-
+        </Grid>
         <Box
           display="flex"
           width="100%"
@@ -569,7 +569,7 @@ export default function Task(props) {
               </FormButton>
               <FormClearButton
                 color="primary"
-                variant="contained"
+                variant="outliend"
                 size="large"
                 type="reset"
                 startIcon={<ClearAll />}
@@ -589,7 +589,7 @@ export default function Task(props) {
             </>
           )}
         </Box>
-      </Grid>
+      
 
       <CustomerModal
         openCustomer={openCustomer}
