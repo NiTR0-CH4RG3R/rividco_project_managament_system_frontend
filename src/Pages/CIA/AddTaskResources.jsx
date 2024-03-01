@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, MenuItem, Box } from '@mui/material'
+import Paper from "@mui/material/Paper"
 import { useTopbarContext } from '../../Contexts/TopbarContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AppRoutes } from '../../Data/AppRoutes'
@@ -111,23 +112,31 @@ const AddTaskResources = (props) => {
         
         <Box
             component="form"
-            autoComplete="off"
+            onReset={handleReset}
+            onSubmit={handleSubmit}
+            noValidate
             display="flex"
             justifyContent="center"
             alignItems="center"
-            height="100vh"
             flexDirection="column"
-            width="90%"
-            onSubmit={handleSubmit}
-            onReset={handleReset}
+            padding={5}
         >
-            <Grid container spacing={2}>
+            <Grid container component={Paper} 
+                sx={{
+                    p : 2,
+                    borderRadius: 3,
+                    '& .MuiGrid-item' : {
+                        padding: 1
+                    },
+                }}
+                elevation={4}>
                 <Grid item xs={6}>
                     <FormTextField
                         required
                         placeholder="Please Enter Task Resource Category"
                         id="category"
                         name="category"
+                        variant="filled"
                         select
                         label="Category"
                         fullWidth
@@ -186,6 +195,7 @@ const AddTaskResources = (props) => {
                         placeholder="Please Enter a comment"
                         rows={4}
                         fullWidth
+                        variant="filled"
                         name='comment'
                         label='Comment'
                         required
