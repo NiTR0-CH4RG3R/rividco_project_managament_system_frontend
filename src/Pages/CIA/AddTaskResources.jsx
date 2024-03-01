@@ -213,7 +213,7 @@ const AddTaskResources = (props) => {
         {modeType !== 'view' && (
           <>
             <FormClearButton
-              variant="contained"
+              variant="outlined"
               size="large"
               sx={{
                 mr: 2,
