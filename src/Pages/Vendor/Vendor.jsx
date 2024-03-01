@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-
+import { Paper } from "@mui/material";
 import Grid from "@mui/material/Grid";
-
 import SaveIcon from "@mui/icons-material/Save";
-
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
@@ -135,9 +133,18 @@ export default function Vendor(props) {
             justifyContent="center"
             alignItems="center"
             flexDirection="column"
-            width={"70%"}
+            padding={5}
         >
-            <Grid container spacing={2}>
+            <Grid container component={Paper} 
+                sx={{
+                    p : 2,
+                    borderRadius: 3,
+                    '& .MuiGrid-item' : {
+                        padding: 1
+                    },
+                }}
+                elevation={4}
+            >
                 <Grid item xs={12}>
                     <FormTextField
                         required
@@ -152,6 +159,8 @@ export default function Vendor(props) {
                         onBlur={handleBlur}
                         error={touched.name && errors.name}
                         helperText={touched.name ? errors.name : ""}
+                        variant="filled"
+
                     />
                 </Grid>
 
@@ -171,6 +180,8 @@ export default function Vendor(props) {
                         onBlur={handleBlur}
                         error={touched.address && errors.address}
                         helperText={touched.address ? errors.address : ""}
+                        variant="filled"
+
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -188,6 +199,8 @@ export default function Vendor(props) {
                         onBlur={handleBlur}
                         error={touched.email && errors.email}
                         helperText={touched.email ? errors.email : ""}
+                        variant="filled"
+
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -206,6 +219,8 @@ export default function Vendor(props) {
                         helperText={
                             touched.vendorRegistrationNumber ? errors.vendorRegistrationNumber : ""
                         }
+                        variant="filled"
+
                     />
                 </Grid>
 
@@ -223,6 +238,8 @@ export default function Vendor(props) {
                         onBlur={handleBlur}
                         error={touched.phone01 && errors.phone01}
                         helperText={touched.phone01 ? errors.phone01 : ""}
+                        variant="filled"
+
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -238,6 +255,8 @@ export default function Vendor(props) {
                         onBlur={handleBlur}
                         error={touched.phone02 && errors.phone02}
                         helperText={touched.phone02 ? errors.phone02 : ""}
+                        variant="filled"
+
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -252,6 +271,8 @@ export default function Vendor(props) {
                         value={values.comments} //set value using formikß
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
+                        variant="filled"
+
                     />
                 </Grid>
             </Grid>
@@ -260,7 +281,7 @@ export default function Vendor(props) {
                 {props.type !== "view" && (
                     <>
                         <FormClearButton
-                            variant="contained"
+                            variant="outlined"
                             size="large"
                             sx={{
                                 mr: 2,
