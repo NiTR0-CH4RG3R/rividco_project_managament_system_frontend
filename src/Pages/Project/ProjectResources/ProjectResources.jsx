@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTopbarContext } from "../../../Contexts/TopbarContext";
 import ListPage from "../../../Components/ListPage/ListPage";
 import { useNavigate } from "react-router-dom";
-import ProjectResourcesPopup from '../ProjectResources/ProjectResourcesPopup'
+import ProjectResourcesPopup from "../ProjectResources/ProjectResourcesPopup";
 
 const columns = [
   { id: "resourceName", label: "Resource Name", align: "left" },
@@ -12,20 +12,19 @@ const columns = [
 ];
 
 export default function ProjectResources() {
-    const { setTitle, setSubtitle } = useTopbarContext();
-    setTitle("Project Resources");
-    setSubtitle("You can view and manage all the project resources here.");
+  const { setTitle, setSubtitle } = useTopbarContext();
+  setTitle("Project Resources");
+  setSubtitle("You can view and manage all the project resources here.");
 
   const [openPopUp, setOpenPopup] = useState(false);
-  const[modeType,setModeType]=useState();
-
+  const [modeType, setModeType] = useState();
 
   const [rows, setRows] = useState([
     {
-        resourceName: "Resourece 1",
-        addedBy: "User 1",
-        addedDate: "02/01/2024",
-        comment: "comment 1",
+      resourceName: "Resourece 1",
+      addedBy: "User 1",
+      addedDate: "02/01/2024",
+      comment: "comment 1",
     },
   ]);
 
@@ -34,6 +33,7 @@ export default function ProjectResources() {
   return (
     <>
       <ListPage
+        tiptitle={"Add New Project Resource"}
         columns={columns}
         rows={rows}
         searchBarProps={{
@@ -67,7 +67,11 @@ export default function ProjectResources() {
         disableSearchBar
         // customUpperBar={<UpperBar />}
       />
-      <ProjectResourcesPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} type={modeType} />
+      <ProjectResourcesPopup
+        openPopUp={openPopUp}
+        setOpenPopup={setOpenPopup}
+        type={modeType}
+      />
     </>
   );
 }
