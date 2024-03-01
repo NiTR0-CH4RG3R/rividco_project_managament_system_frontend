@@ -18,8 +18,7 @@ export default function ProjectItems() {
   setSubtitle("You can view and manage all the project items here.");
 
   const [openPopUp, setOpenPopup] = useState(false);
-  const[modeType,setModeType]=useState();
-
+  const [modeType, setModeType] = useState();
 
   const [rows, setRows] = useState([
     {
@@ -36,6 +35,7 @@ export default function ProjectItems() {
   return (
     <>
       <ListPage
+        tiptitle={"Add New Project Item"}
         columns={columns}
         rows={rows}
         searchBarProps={{
@@ -69,7 +69,11 @@ export default function ProjectItems() {
         disableSearchBar
         // customUpperBar={<UpperBar />}
       />
-      <ProjectItemsPopup openPopUp={openPopUp} setOpenPopup={setOpenPopup} type={modeType}/>
+      <ProjectItemsPopup
+        openPopUp={openPopUp}
+        setOpenPopup={setOpenPopup}
+        type={modeType}
+      />
     </>
   );
 }
