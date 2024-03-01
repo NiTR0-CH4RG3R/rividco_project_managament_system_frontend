@@ -6,6 +6,7 @@ import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
 import * as systemUserService from "../../services/systemUserService";
 import { IconButton } from "@mui/material";
+import { sx } from "@mui/system";
 
 export default function EmployeeModal(props) {
   const { openEmployee, setOpenEmployee, sendData } = props;
@@ -56,6 +57,7 @@ export default function EmployeeModal(props) {
               bgcolor: "background.paper",
               boxShadow: 24,
               p: 4,
+              borderRadius: 3,
             }}
           >
             <Typography variant="h6">Employee Modal</Typography>
@@ -73,12 +75,13 @@ export default function EmployeeModal(props) {
 
             <div style={{ height: 400, width: "100%" }}>
               <DataGrid
+              
                 rows={rows}
                 columns={employeecols}
                 disableColumnFilter
                 disableColumnSelector
                 disableDensitySelector
-                slots={{ toolbar: GridToolbar }}
+                //slots={{ toolbar: GridToolbar }}
                 slotProps={{
                   toolbar: {
                     showQuickFilter: true,
@@ -89,6 +92,11 @@ export default function EmployeeModal(props) {
                   setOpenEmployee(false);
                 }}
                 pagination
+                // sx={{
+                //   '& .MuiDataGrid-root .MuiDataGrid-header': {
+                //     backgroundColor: 'lightblue', // Replace with your desired color
+                //   },
+                // }}
               />
             </div>
 
