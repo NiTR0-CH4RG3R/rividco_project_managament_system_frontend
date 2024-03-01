@@ -7,6 +7,7 @@ import SideNavigationPanelMenu from "./SideNavigationPanelMenu";
 export default function SideNavigationPanel({
   SideNavigationPanelMenuItems = [],
   drawerWidth = 254,
+  drawerBackgroundColor = "#071024",
 }) {
   return (
     <Drawer
@@ -15,6 +16,7 @@ export default function SideNavigationPanel({
         flexShrink: 0,
         width: `${drawerWidth}px`,
         height: "100vh",
+        
       }}
       PaperProps={{
         /* NOTE : Giving this elevation property higher values makes the color of the paper apear brighter. I do not know what's causing this. I never found any documentation about this, but I suspect that's material ui's doin. */
@@ -23,6 +25,8 @@ export default function SideNavigationPanel({
         sx: {
           width: `${drawerWidth}px`,
           boxSizing: "border-box",
+          backgroundColor:drawerBackgroundColor,
+          color:"white"
         },
       }}
       anchor="left"
