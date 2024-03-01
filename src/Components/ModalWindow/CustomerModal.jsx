@@ -41,9 +41,7 @@ export default function CustomerModal({
 
   return (
     <>
-      {loadidng ? (
-        <div>Loading...</div>
-      ) : (
+      
         <Modal open={openCustomer} onClose={handleClose}>
           <Box
             sx={{
@@ -117,7 +115,7 @@ export default function CustomerModal({
             </div>
           </Box>
         </Modal>
-      )}
+      
     </>
   );
 }
