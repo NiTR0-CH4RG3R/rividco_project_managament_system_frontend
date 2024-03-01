@@ -72,7 +72,7 @@ export default function ListPage({
       </Box>
       <Paper elevation={4} sx={{ maxHeight: "90%" }}>
         <TableContainer sx={{ maxHeight: "90%" }}>
-          <ListTable stickyHeader aria-label="simple table" >
+          <ListTable stickyHeader aria-label="simple table" size="small" >
             <TableHead>
               <TableRow key={0}>
                 {columns.map((column) => (
