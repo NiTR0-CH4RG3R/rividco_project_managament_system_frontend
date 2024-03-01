@@ -1,74 +1,85 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTopbarContext } from '../../Contexts/TopbarContext';
-import ListPage from '../../Components/ListPage/ListPage';
-import { AppRoutes } from '../../Data/AppRoutes';
-import * as customerService from '../../services/customerService'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTopbarContext } from "../../Contexts/TopbarContext";
+import ListPage from "../../Components/ListPage/ListPage";
+import { AppRoutes } from "../../Data/AppRoutes";
+import * as customerService from "../../services/customerService";
 
 const columns = [
-    { id: 'firstName', label: 'First Name', align: 'left' },
-    { id: 'lastName', label: 'Last Name', align: 'left' },
-    { id: 'category', label: 'Category', align: 'left' },
-    { id: 'address', label: 'Address', align: 'left' },
-    { id: 'contact', label: 'Contact Number' },
+  { id: "firstName", label: "First Name", align: "left" },
+  { id: "lastName", label: "Last Name", align: "left" },
+  { id: "category", label: "Category", align: "left" },
+  { id: "address", label: "Address", align: "left" },
+  { id: "contact", label: "Contact Number" },
 ];
 
 export default function CustomerList() {
-    const { setTitle, setSubtitle } = useTopbarContext();
-    setTitle("List Customers");
-    setSubtitle("You can view and manage all the customers here.");
+  const { setTitle, setSubtitle } = useTopbarContext();
+  setTitle("List Customers");
+  setSubtitle("You can view and manage all the customers here.");
 
-    const [rows, setRows] = useState([
-        { id: 0, firstName: 'John', lastName: 'Doe', category: 'CUSTOMER', address: 'No. 380, Walawwaththa, Dadalla, Galle', contact: '1234567890', }
-    ]);
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rows, setRows] = useState([
+    {
+      id: 0,
+      firstName: "John",
+      lastName: "Doe",
+      category: "CUSTOMER",
+      address: "No. 380, Walawwaththa, Dadalla, Galle",
+      contact: "1234567890",
+    },
+  ]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-    useEffect(() => {
-        setPage(0);
-        setRowsPerPage(5);
-    }, []);
+  useEffect(() => {
+    setPage(0);
+    setRowsPerPage(5);
+  }, []);
 
-    useEffect(() => {
-        customerService.listCustomers(page + 1, rowsPerPage)
-            .then(
-                customers => {
-                    setRows(customers);
-                }
-            )
-            .catch(
-                error => {
-                    console.log(error);
-                }
-            )
-    }, [page, rowsPerPage]);
+  useEffect(() => {
+    customerService
+      .listCustomers(page + 1, rowsPerPage)
+      .then((customers) => {
+        setRows(customers);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [page, rowsPerPage]);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <ListPage
-            columns={columns}
-            rows={rows}
-            searchBarProps={{
-                searchBy: 'name',
-                onSearchChange: (e) => { console.log(e.target.value); },
-                onSearchClick: (e) => { },
-            }}
-            onRowClick={(e, id) => {
-                navigate(AppRoutes.customer_view.path.replace(':id', id));
-            }}
-            onAddButtonClick={(e) => {
-                navigate(AppRoutes.customer_add.path)
-            }}
-            tablePaginationProps={{
-                rowsPerPageOptions: [5, 10, 25, 100],
-                component: "div",
-                rowsPerPage: rowsPerPage,
-                page: page,
-                count: -1,
-                onPageChange: (e, page) => { setPage(page); },
-                onRowsPerPageChange: (e) => { setRowsPerPage(e.target.value); }
-            }}
-        />
-    );
+  return (
+    <ListPage
+      tiptitle={"Add New Customer"}
+      columns={columns}
+      rows={rows}
+      searchBarProps={{
+        searchBy: "name",
+        onSearchChange: (e) => {
+          console.log(e.target.value);
+        },
+        onSearchClick: (e) => {},
+      }}
+      onRowClick={(e, id) => {
+        navigate(AppRoutes.customer_view.path.replace(":id", id));
+      }}
+      onAddButtonClick={(e) => {
+        navigate(AppRoutes.customer_add.path);
+      }}
+      tablePaginationProps={{
+        rowsPerPageOptions: [5, 10, 25, 100],
+        component: "div",
+        rowsPerPage: rowsPerPage,
+        page: page,
+        count: -1,
+        onPageChange: (e, page) => {
+          setPage(page);
+        },
+        onRowsPerPageChange: (e) => {
+          setRowsPerPage(e.target.value);
+        },
+      }}
+    />
+  );
 }
