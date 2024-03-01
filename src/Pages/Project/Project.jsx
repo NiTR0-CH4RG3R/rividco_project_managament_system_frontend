@@ -258,6 +258,7 @@ export default function Project(props) {
             padding: 1
         },
         }}
+        elevation={4}
 
       >
         <Grid item xs={6}>
