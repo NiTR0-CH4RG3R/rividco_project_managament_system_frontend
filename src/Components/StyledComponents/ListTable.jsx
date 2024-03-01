@@ -3,6 +3,6 @@ import { styled, alpha } from "@mui/system";
 
 
 const ListTable = styled(Table)(({ theme }) => ({
-  //add styles here
+  //borderRadius: theme.spacing(1),
 }));
 export default ListTable;
