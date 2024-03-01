@@ -40,9 +40,7 @@ export default function VendorItemModal(props) {
 
   return (
     <>
-      {loadidng ? (
-        <div>Loading...</div>
-      ) : (
+      
         <Modal open={openVendorItem} onClose={handleClose}>
           <Box
             sx={{
@@ -112,7 +110,7 @@ export default function VendorItemModal(props) {
             </div> */}
           </Box>
         </Modal>
-      )}
+      
     </>
   );
 }
