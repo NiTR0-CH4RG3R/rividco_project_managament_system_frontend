@@ -250,7 +250,16 @@ export default function Project(props) {
       flexDirection="column"
       padding={5}
     >
-      <Grid container spacing={2}>
+      <Grid container component={Paper}
+        sx={{
+          p:2,
+          borderRadius:3,
+          '& .MuiGrid-item' : {
+            padding: 1
+        },
+        }}
+
+      >
         <Grid item xs={6}>
           <FormTextField
             required
