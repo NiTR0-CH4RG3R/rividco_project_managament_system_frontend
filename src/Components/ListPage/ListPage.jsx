@@ -12,6 +12,8 @@ import {
 import { Add, Tab } from "@mui/icons-material";
 import SearchBar from "../SearchBar/SearchBar";
 import ListTable from "../../Components/StyledComponents/ListTable";
+import Tooltip from "@mui/material/Tooltip";
+import { useState } from "react";
 
 export default function ListPage({
   columns = [
@@ -45,6 +47,7 @@ export default function ListPage({
     { name: "Cupcake", calories: 305, fat: 3.7, carbs: 67, protein: 4.3 },
     { name: "Gingerbread", calories: 356, fat: 16.0, carbs: 49, protein: 3.9 },
   ],
+
   searchBarProps = {
     searchBy: "name",
     onSearchChange: (e) => {
@@ -57,6 +60,8 @@ export default function ListPage({
   tablePaginationProps = {},
   disableSearchBar = false,
   customUpperBar = undefined,
+
+  tiptitle,
 }) {
   return (
     <Box width="90%" height="70%" display="flex" flexDirection="column">
@@ -134,21 +139,23 @@ export default function ListPage({
       </Paper>
 
       <Box width="100%" display="flex" justifyContent="flex-end" mt={5}>
-        <IconButton
-          type="button"
-          sx={{
-            position: "fixed",
-            bottom: "5%",
-            right: "2%",
-            boxShadow: 3,
-            backgroundColor: "background.paper",
-            color: "text",
-            p: 2,
-          }}
-          onClick={onAddButtonClick}
-        >
-          <Add />
-        </IconButton>
+        <Tooltip title={tiptitle}>
+          <IconButton
+            type="button"
+            sx={{
+              position: "fixed",
+              bottom: "5%",
+              right: "2%",
+              boxShadow: 3,
+              backgroundColor: "background.paper",
+              color: "text",
+              p: 2,
+            }}
+            onClick={onAddButtonClick}
+          >
+            <Add />
+          </IconButton>
+        </Tooltip>
       </Box>
     </Box>
   );
