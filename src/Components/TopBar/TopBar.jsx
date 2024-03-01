@@ -61,7 +61,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
       {/* Back Button */}
       <Box display="flex" flexDirection="row" justifyContent="flex-start">
         <div className="backBtn">
-          <Tooltip title="Back to Previous">
+          <Tooltip title="Back">
             <IconButton
               type="button"
               sx={{
