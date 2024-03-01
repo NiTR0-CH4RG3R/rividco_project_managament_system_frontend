@@ -11,6 +11,7 @@ const FormClearButton = styled(Button)(({ theme }) => ({
   //backgroundColor: "#0063cc",
   borderColor: "#c70000",
   color:"#c70000",
+  borderRadius:"8px",
 
   "&:hover": {
     backgroundColor: "#c70000",
