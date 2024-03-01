@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Grid, MenuItem, Avatar } from "@mui/material";
-
+import Paper from "@mui/material/Paper"
 import { useFormik } from "formik";
 import SystemUserValidation from "../../Validation/SystemUserValidation";
 import { useParams, useNavigate } from "react-router-dom";
@@ -153,7 +153,7 @@ export default function SystemUser(props) {
       justifyContent="center"
       alignItems="center"
       flexDirection="column"
-      width="70%"
+      padding={5}
       marginTop="150px"
     >
       <Grid container>
@@ -196,7 +196,16 @@ export default function SystemUser(props) {
         </Grid>
       </Grid>
 
-      <Grid container spacing={2}>
+      <Grid container component={Paper} 
+          sx={{
+            p : 2,
+            borderRadius: 3,
+            '& .MuiGrid-item' : {
+              padding: 1
+            },
+          }}
+          elevation={4}
+      >
         <Grid item xs={6}>
           <FormTextField
             required
@@ -204,7 +213,7 @@ export default function SystemUser(props) {
             name="firstName"
             label="First Name"
             placeholder="First Name"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.firstName} //set value using formik
@@ -223,7 +232,7 @@ export default function SystemUser(props) {
             name="lastName"
             label="Last Name"
             placeholder="Last Name"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.lastName} //set value using formik
@@ -243,7 +252,7 @@ export default function SystemUser(props) {
             label="Address"
             placeholder="Address"
             multiline
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.address} //set value using formik
@@ -262,7 +271,7 @@ export default function SystemUser(props) {
             name="email"
             label="E-mail"
             placeholder="E-mail"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.email} //set value using formik
@@ -281,7 +290,7 @@ export default function SystemUser(props) {
             name="role"
             label="Role"
             select
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.role} //set value using formik
@@ -306,7 +315,7 @@ export default function SystemUser(props) {
             name="mobileNo"
             label="Mobile No:"
             placeholder="Mobile No:"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.mobileNo} //set value using formik
@@ -324,7 +333,7 @@ export default function SystemUser(props) {
             name="officeNo"
             label="Office No:"
             placeholder="Office No:"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.officeNo} //set value using formik
@@ -343,7 +352,7 @@ export default function SystemUser(props) {
             name="userName"
             label="Username"
             placeholder="Username"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.userName} //set value using formik
@@ -361,7 +370,7 @@ export default function SystemUser(props) {
             name="password"
             label="Password"
             placeholder="password"
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             value={values.password} //set value using formik
@@ -380,7 +389,7 @@ export default function SystemUser(props) {
             label="Comment"
             placeholder="Please Enter Your Comment"
             multiline
-            variant="outlined"
+            variant="filled"
             fullWidth
             size="small"
             rows={4}
@@ -391,6 +400,7 @@ export default function SystemUser(props) {
             error={touched.comment && errors.comment}
             helperText={touched.comment ? errors.comment : ""}
           />
+        </Grid>
         </Grid>
 
         <Box
@@ -438,7 +448,6 @@ export default function SystemUser(props) {
             </>
           )}
         </Box>
-      </Grid>
     </Box>
   );
 }
