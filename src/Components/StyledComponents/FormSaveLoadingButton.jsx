@@ -8,18 +8,18 @@ const FormSaveLodingButton = styled(Button)(({ theme }) => ({
   padding: "6px 12px",
   border: "1px solid",
   lineHeight: 1.5,
-  backgroundColor: "#0063cc",
-  borderColor: "#0063cc",
+  backgroundColor: "#0D9488",
+  borderColor: "#0FB0A2",
 
   "&:hover": {
-    backgroundColor: "#0069d9",
-    borderColor: "#0062cc",
+    backgroundColor: "#0FB0A2",
+    borderColor: "#0FB0A2",
     boxShadow: "none",
   },
   "&:active": {
     boxShadow: "none",
-    backgroundColor: "#0062cc",
-    borderColor: "#005cbf",
+    backgroundColor: "#085E57",
+    borderColor: "#085E57",
   },
   "&:focus": {
     boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",

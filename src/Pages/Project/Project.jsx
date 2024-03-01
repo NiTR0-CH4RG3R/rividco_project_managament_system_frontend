@@ -247,7 +247,7 @@ export default function Project(props) {
       justifyContent="center"
       alignItems="center"
       flexDirection="column"
-      width={"70%"}
+      padding={5}
     >
       <Grid container spacing={2}>
         <Grid item xs={6}>

@@ -20,6 +20,7 @@ export async function listCustomers(page, itemsPerPage) {
     }
     catch (error) {
         console.error(error);
+        Promise.reject(error);
     }
 
     return customers;

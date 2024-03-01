@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -173,9 +174,19 @@ export default function Customer(props) {
             justifyContent="center"
             alignItems="center"
             flexDirection="column"
-            width="70%"
+            padding={5}
+
         >
-            <Grid container spacing={2}>
+            <Grid container component={Paper} 
+                sx={{
+                    p : 2,
+                    borderRadius: 3,
+                    '& .MuiGrid-item' : {
+                        padding: 1
+                    },
+                }}
+                elevation={4}
+            >
                 <Grid item xs={6}>
                     <FormTextField
                         required
@@ -190,6 +201,7 @@ export default function Customer(props) {
                         onBlur={handleBlur}
                         error={touched.firstName && errors.firstName}
                         helperText={touched.firstName ? errors.firstName : ""}
+                        variant="filled"
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -206,6 +218,7 @@ export default function Customer(props) {
                         onBlur={handleBlur}
                         error={touched.lastName && errors.lastName}
                         helperText={touched.lastName ? errors.lastName : ""}
+                        variant="filled"
                     />
                 </Grid>
 
@@ -226,6 +239,7 @@ export default function Customer(props) {
                         onBlur={handleBlur}
                         error={touched.address && errors.address}
                         helperText={touched.address ? errors.address : ""}
+                        variant="filled"
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -244,6 +258,7 @@ export default function Customer(props) {
                         onBlur={handleBlur}
                         error={touched.email && errors.email}
                         helperText={touched.email ? errors.email : ""}
+                        variant="filled"
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -261,6 +276,7 @@ export default function Customer(props) {
                         onBlur={handleBlur}
                         error={touched.category && errors.category}
                         helperText={touched.category ? errors.category : ""}
+                        variant="filled"
                     >
                         {categoryType.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -289,6 +305,7 @@ export default function Customer(props) {
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
                         onBlur={handleBlur}
+                        variant="filled"
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -305,6 +322,7 @@ export default function Customer(props) {
                         onBlur={handleBlur}
                         error={touched.customerRegistrationNumber && errors.customerRegistrationNumber}
                         helperText={touched.customerRegistrationNumber ? errors.customerRegistrationNumber : ""}
+                        variant="filled"
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -322,6 +340,7 @@ export default function Customer(props) {
                         onBlur={handleBlur}
                         error={touched.phone01 && errors.phone01}
                         helperText={touched.phone01 ? errors.phone01 : ""}
+                        variant="filled"
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -338,6 +357,7 @@ export default function Customer(props) {
                         onBlur={handleBlur}
                         error={touched.phone02 && errors.phone02}
                         helperText={touched.phone02 ? errors.phone02 : ""}
+                        variant="filled"
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -353,6 +373,7 @@ export default function Customer(props) {
                         value={values.comments} //set value using formikß
                         onChange={handleChange} //get onchange value using formik
                         disabled={props.type === "view"}
+                        variant="filled"
                     />
                 </Grid>
             </Grid>
