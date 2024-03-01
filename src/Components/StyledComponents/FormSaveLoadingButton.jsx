@@ -10,6 +10,7 @@ const FormSaveLodingButton = styled(Button)(({ theme }) => ({
   lineHeight: 1.5,
   backgroundColor: "#28a745",
   borderColor: "#0FB0A2",
+  borderRadius:"8px",
 
   "&:hover": {
     backgroundColor: "#04704b",
