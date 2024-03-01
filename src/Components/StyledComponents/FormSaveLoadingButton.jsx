@@ -8,13 +8,14 @@ const FormSaveLodingButton = styled(Button)(({ theme }) => ({
   padding: "6px 12px",
   border: "1px solid",
   lineHeight: 1.5,
-  backgroundColor: "#0D9488",
+  backgroundColor: "#28a745",
   borderColor: "#0FB0A2",
 
   "&:hover": {
-    backgroundColor: "#0FB0A2",
+    backgroundColor: "#04704b",
     borderColor: "#0FB0A2",
     boxShadow: "none",
+    transform: "scale(1.1)",
   },
   "&:active": {
     boxShadow: "none",
