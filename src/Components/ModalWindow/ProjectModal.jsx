@@ -40,9 +40,7 @@ export default function ProjectModal(props) {
 
   return (
     <>
-      {loadidng ? (
-        <div>Loading...</div>
-      ) : (
+      
         <Modal open={openProject} onClose={handleClose}>
           <Box
             sx={{
@@ -111,7 +109,7 @@ export default function ProjectModal(props) {
             </div> */}
           </Box>
         </Modal>
-      )}
+      
     </>
   );
 }
