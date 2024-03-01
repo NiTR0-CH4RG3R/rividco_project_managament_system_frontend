@@ -55,6 +55,8 @@ export default function VendorModal(props) {
               bgcolor: "background.paper",
               boxShadow: 24,
               p: 4,
+              borderRadius: 3
+
             }}
           >
             <Typography variant="h6">Vendor Modal</Typography>
