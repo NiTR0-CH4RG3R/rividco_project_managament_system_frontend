@@ -18,6 +18,7 @@ import {
   History,
   Save,
   Visibility,
+  WhatsApp,
 } from '@mui/icons-material'
 import FormTextField from '../../Components/StyledComponents/FormTextField'
 import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
@@ -244,6 +245,68 @@ export default function Task(props) {
       width="70%"
     >
       <Grid container spacing={2}>
+        <Grid item xs={props.type === 'view' ? 12 : 10}>
+          <FormTextField
+            id="requested_by"
+            name="requested_by"
+            label="Requested Customer"
+            variant="outlined"
+            fullWidth
+            size="small"
+            required
+            onClick={() => {
+              if (
+                !values.selectedCustomer?.firstName &&
+                props.type !== 'view'
+              ) {
+                setOpenCustomer(true)
+              }
+            }}
+            value={values.selectedCustomer?.firstName ?? ''}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  onClick={() => setFieldValue('selectedCustomer', '')}
+                  sx={{
+                    visibility: values.selectedCustomer?.firstName
+                      ? 'visible'
+                      : 'hidden',
+                  }}
+                  disabled={props.type === 'view'}
+                >
+                  {(props.type === 'add' || props.type === 'edit') && (
+                    <GridClearIcon />
+                  )}
+                </IconButton>
+              ),
+            }}
+            disabled={props.type === 'view'}
+            error={
+              touched.selectedCustomer?.firstName &&
+              errors.selectedCustomer?.firstName
+            }
+            helperText={
+              touched.selectedCustomer?.firstName
+                ? errors.selectedCustomer?.firstName
+                : ''
+            }
+          />
+        </Grid>
+        {(props.type === 'add' || props.type === 'edit') && (
+          <Grid item xs={2}>
+            <Grid container xs={12} sx={{ justifyContent: 'right' }}>
+              <FormButton
+                variant="contained"
+                color="primary"
+                onClick={() => navigate(`${AppRoutes.customer_add.path}`)}
+                startIcon={<AddBox />}
+              >
+                Add Guest
+              </FormButton>
+            </Grid>
+          </Grid>
+        )}
+
         <Grid item xs={12}>
           <FormTextField
             id="description"
@@ -254,6 +317,7 @@ export default function Task(props) {
             fullWidth
             size="small"
             multiline
+            rows={4}
             required
             value={values.description}
             onChange={handleChange}
@@ -284,12 +348,12 @@ export default function Task(props) {
             ))}
           </FormTextField>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <FormTextField
             id="callbacknumber"
             name="callbacknumber"
             label="Callback Number"
-            placeholder="Enter telephone number"
+            placeholder="+94xxxxxxxxx"
             variant="outlined"
             fullWidth
             size="small"
@@ -302,61 +366,20 @@ export default function Task(props) {
             disabled={props.type === 'view'}
           />
         </Grid>
-        <Grid item xs={10}>
-          <FormTextField
-            id="requested_by"
-            name="requested_by"
-            label="Requested Customer"
-            variant="outlined"
-            fullWidth
-            size="small"
-            required
-            onClick={() => {
-              if (
-                !values.selectedCustomer?.firstName &&
-                props.type !== 'view'
-              ) {
-                setOpenCustomer(true)
-              }
-            }}
-            value={values.selectedCustomer?.firstName ?? ''}
-            InputProps={{
-              endAdornment: (
-                <IconButton
-                  onClick={() => setFieldValue('selectedCustomer', '')}
-                  sx={{
-                    visibility: values.selectedCustomer?.firstName
-                      ? 'visible'
-                      : 'hidden',
-                  }}
-                >
-                  <GridClearIcon />
-                </IconButton>
-              ),
-            }}
-            disabled={props.type === 'view'}
-            error={
-              touched.selectedCustomer?.firstName &&
-              errors.selectedCustomer?.firstName
-            }
-            helperText={
-              touched.selectedCustomer?.firstName
-                ? errors.selectedCustomer?.firstName
-                : ''
-            }
-          />
-        </Grid>
-
-        {(props.type === 'add' || props.type === 'edit') && (
+        {values.callbacknumber && (
           <Grid item xs={2}>
             <Grid container xs={12} sx={{ justifyContent: 'right' }}>
               <FormButton
+                href={`https://wa.me/${encodeURIComponent(
+                  values.callbacknumber
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="contained"
                 color="primary"
-                onClick={() => navigate(`${AppRoutes.customer_add.path}`)}
-                startIcon={<AddBox />}
+                startIcon={<WhatsApp />}
               >
-                Add Guest
+                Whatsapp
               </FormButton>
             </Grid>
           </Grid>
@@ -385,8 +408,11 @@ export default function Task(props) {
                       ? 'visible'
                       : 'hidden',
                   }}
+                  disabled={props.type === 'view'}
                 >
-                  <GridClearIcon />
+                  {(props.type === 'add' || props.type === 'edit') && (
+                    <GridClearIcon />
+                  )}
                 </IconButton>
               ),
             }}
@@ -420,8 +446,11 @@ export default function Task(props) {
                       ? 'visible'
                       : 'hidden',
                   }}
+                  disabled={props.type === 'view'}
                 >
-                  <GridClearIcon />
+                  {(props.type === 'add' || props.type === 'edit') && (
+                    <GridClearIcon />
+                  )}
                 </IconButton>
               ),
             }}
