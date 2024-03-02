@@ -38,10 +38,12 @@ export default function SideNavigationPanelMenu({ name, icon, subMenu }) {
                 "&:hover": {
                   backgroundColor: "#302355 !important",
                   borderRadius: "8px",
+                  margin:"2px"
                 },
                 "&:focus": {
                   backgroundColor: "#302355 ",
                   borderRadius: "8px",
+                  margin:"2px"
                 },
                 
                 
