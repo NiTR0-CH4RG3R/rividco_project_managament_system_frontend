@@ -147,8 +147,8 @@ export default function ListPage({
               bottom: "5%",
               right: "2%",
               boxShadow: 3,
-              backgroundColor: "background.paper",
-              color: "text",
+              backgroundColor: "#071024",
+              color: "#FFFFFF",
               p: 2,
             }}
             onClick={onAddButtonClick}
