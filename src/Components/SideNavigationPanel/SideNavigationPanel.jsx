@@ -20,6 +20,7 @@ export default function SideNavigationPanel({
         width: `${drawerWidth}px`,
         height: "100vh",
         
+        
       }}
       PaperProps={{
         /* NOTE : Giving this elevation property higher values makes the color of the paper apear brighter. I do not know what's causing this. I never found any documentation about this, but I suspect that's material ui's doin. */
@@ -38,8 +39,8 @@ export default function SideNavigationPanel({
       <img src={imagepath} alt={photoAlt} style={{ height: 80,width:200,padding:20 }} />
       </Toolbar>
       
-      <Box sx={{ overflow: "auto" }}>
-        <List>
+      <Box sx={{ overflow: "auto" ,}}>
+        <List sx={{pt:"0px"}}>
           {SideNavigationPanelMenuItems.map((item) => (
             <SideNavigationPanelMenu
               key={item.name}
