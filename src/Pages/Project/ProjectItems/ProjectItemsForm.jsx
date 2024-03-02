@@ -212,7 +212,7 @@ export default function ProjectItemsForm(props) {
 
             
             <FormClearButton
-              variant="contained"
+              variant="outlined"
               size="large"
               sx={{
                 mr: 2,
