@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
+import FormButton from "../../Components/StyledComponents/FormButton";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -93,7 +94,7 @@ export default function CommisionReportModal(props) {
             padding: "1em 2em 0em 2em !important",
           }}
         >
-          <Button
+          <FormButton
             component="label"
             sx={{
               width: "8.5rem",
@@ -106,7 +107,7 @@ export default function CommisionReportModal(props) {
           >
             Upload file
             <VisuallyHiddenInput type="file" />
-          </Button>
+          </FormButton>
           {/* <Button
             variant="contained"
             sx={{
