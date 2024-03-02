@@ -96,7 +96,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
             sx={{ color: "#071024", p: 1 }}
             onClick={colorMode.toggleColorMode}
           >
-            <Brightness4 />
+            {/* <Brightness4 /> */}
           </IconButton>
         </Tooltip>
 
