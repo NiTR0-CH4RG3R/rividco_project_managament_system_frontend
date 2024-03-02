@@ -137,6 +137,7 @@ const AddTaskResources = (props) => {
                         id="category"
                         name="category"
                         variant="filled"
+                        title='Select a resource category'
                         select
                         label="Category"
                         fullWidth
@@ -176,6 +177,7 @@ const AddTaskResources = (props) => {
                     <input
                         type="file"
                         id="url"
+                        title='Choose a file from your files'
                         name="url"
                         onChange={(e) => {
                             handleChange(e); // Update formik values
@@ -195,6 +197,7 @@ const AddTaskResources = (props) => {
                         placeholder="Please Enter a comment"
                         rows={4}
                         fullWidth
+                        title='Enter a comment about the resource'
                         variant="filled"
                         name='comment'
                         label='Comment'
