@@ -378,18 +378,19 @@ export default function ProjectServicesForm(props) {
        
       </Grid>
 
-      <Stack direction="row" spacing={18}>
+      <Stack direction="row" spacing={25}>
         <Box display="flex" pt={3} width="100%" justifyContent="flex-start">
           <FormButton
-            size="small"
+          
+            size="large"
             // fullWidth={true}
             component="label"
             role={undefined}
             variant="contained"
-            tabIndex={-1}
+           // tabIndex={-1}
             startIcon={<CloudUploadIcon />}
           >
-            Service Report Upload
+            Report Upload
             <VisuallyHiddenInput type="file" />
           </FormButton>
         </Box>
