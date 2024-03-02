@@ -9,8 +9,8 @@ const FormButton = styled(Button)(({ theme }) => ({
   padding: "6px 12px",
   border: "1px solid",
   lineHeight: 1.5,
-  backgroundColor: "#073459",
-  borderColor: "#2e9af2",
+  backgroundColor: "#071024",
+  borderColor: "#02226A",
   borderRadius:"8px",
   
 
