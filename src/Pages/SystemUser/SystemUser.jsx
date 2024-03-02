@@ -416,7 +416,8 @@ export default function SystemUser(props) {
             <>
               {" "}
               <FormClearButton
-                variant="outlined"
+                variant="outlined
+                "
                 size="large"
                 onClick={handleReset}
                 startIcon={<ClearAllIcon />}
