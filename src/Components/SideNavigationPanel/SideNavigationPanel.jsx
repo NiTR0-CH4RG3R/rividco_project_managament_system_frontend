@@ -3,11 +3,14 @@ import List from "@mui/material/List";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import SideNavigationPanelMenu from "./SideNavigationPanelMenu";
+import imagepath from "./blueLogoAsset 1.png"
 
 export default function SideNavigationPanel({
   SideNavigationPanelMenuItems = [],
   drawerWidth = 254,
   drawerBackgroundColor = "#071024",
+  photoSrc={imagepath}, // New prop for the photo source
+  photoAlt="RIVIDCO",
 }) {
   return (
     <Drawer
@@ -31,7 +34,10 @@ export default function SideNavigationPanel({
       }}
       anchor="left"
     >
-      <Toolbar />
+      <Toolbar>
+      <img src={imagepath} alt={photoAlt} style={{ height: 80,width:200,padding:20 }} />
+      </Toolbar>
+      
       <Box sx={{ overflow: "auto" }}>
         <List>
           {SideNavigationPanelMenuItems.map((item) => (
