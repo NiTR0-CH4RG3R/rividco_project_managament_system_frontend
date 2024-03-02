@@ -26,7 +26,7 @@ export default function SideNavigationPanel({
           width: `${drawerWidth}px`,
           boxSizing: "border-box",
           backgroundColor:drawerBackgroundColor,
-          color:"white"
+          color:"#FFFFFF"
         },
       }}
       anchor="left"

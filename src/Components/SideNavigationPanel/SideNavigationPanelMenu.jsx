@@ -23,7 +23,7 @@ export default function SideNavigationPanelMenu({ name, icon, subMenu }) {
   return (
     <>
       <NavMenuitemListitemButton onClick={handleClick} selected={open}>
-        <ListItemIcon sx={{ color: "white" }}>{icon}</ListItemIcon>
+        <ListItemIcon sx={{ color: "#FFFFFF" }}>{icon}</ListItemIcon>
         <ListItemText primary={name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </NavMenuitemListitemButton>
