@@ -68,7 +68,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
             <IconButton
               type="button"
               sx={{
-                color: "grey.50",
+                color: "#071024",
                 p: 1,
                 display: backButtonVisible ? "block" : "none",
               }}
