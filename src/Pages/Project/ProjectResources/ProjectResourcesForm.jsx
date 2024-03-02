@@ -232,7 +232,7 @@ export default function ProjectResourcesForm(props) {
               variant="outlined"
               size="large"
               sx={{
-                mr: 2,
+                mr: 0,
               }}
               color="primary"
               startIcon={<ClearAllIcon />}
