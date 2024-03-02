@@ -93,7 +93,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
         <Tooltip title="Change Theme">
           <IconButton
             type="button"
-            sx={{ color: "grey.50", p: 1 }}
+            sx={{ color: "#071024", p: 1 }}
             onClick={colorMode.toggleColorMode}
           >
             <Brightness4 />
@@ -104,7 +104,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
           <IconButton
             aria-label="Account"
             type="button"
-            sx={{ color: "grey.50", p: 1 }}
+            sx={{ color: "#071024", p: 1 }}
             onClick={handleAccountButtonClick}
           >
             <AccountCircle />
@@ -115,7 +115,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
           <IconButton
             type="button"
             sx={{
-              color: "grey.50",
+              color: "#071024",
               p: 1,
               //display: logoutButtonVisible ? "block" : "none",
             }}
