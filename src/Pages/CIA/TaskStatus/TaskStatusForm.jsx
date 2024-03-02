@@ -83,7 +83,7 @@ function TaskStatusForm(props) {
           .then(() => {
             setLoading(false)
 
-            navigate(AppRoutes.cia_status.path)
+            navigate(`${AppRoutes.cia_status.path.replace(':id', id)}`)
           })
           .catch((error) => {
             console.error(error)
@@ -103,7 +103,7 @@ function TaskStatusForm(props) {
           .then(() => {
             setLoading(false)
 
-            navigate(AppRoutes.cia_status.path)
+            navigate(`${AppRoutes.cia_status.path.replace(':id', id)}`)
           })
           .catch((error) => {
             console.error(error)
