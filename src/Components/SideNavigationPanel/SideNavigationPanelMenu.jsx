@@ -36,11 +36,11 @@ export default function SideNavigationPanelMenu({ name, icon, subMenu }) {
               selected={location.pathname === subItem.path}
               sx={{
                 "&:hover": {
-                  backgroundColor: "#062fc2 !important",
+                  backgroundColor: "#302355 !important",
                   borderRadius: "8px",
                 },
                 "&:focus": {
-                  backgroundColor: "#062fc2 ",
+                  backgroundColor: "#302355 ",
                   borderRadius: "8px",
                 },
                 
