@@ -150,6 +150,10 @@ export default function ListPage({
               backgroundColor: "#071024",
               color: "#FFFFFF",
               p: 2,
+              "&:hover": {
+                backgroundColor: "#0a538f",
+                color: "#FFFFFF", 
+              },
             }}
             onClick={onAddButtonClick}
           >
