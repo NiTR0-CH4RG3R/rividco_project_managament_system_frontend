@@ -229,7 +229,7 @@ export default function ProjectResourcesForm(props) {
            </FormButton>
 
             <FormClearButton
-              variant="contained"
+              variant="outlined"
               size="large"
               sx={{
                 mr: 2,
