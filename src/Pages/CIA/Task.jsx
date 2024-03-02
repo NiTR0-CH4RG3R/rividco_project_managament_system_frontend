@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import { IconButton, MenuItem } from '@mui/material'
+import { IconButton, InputAdornment, MenuItem } from '@mui/material'
 import { useFormik } from 'formik'
 import CustomerModal from '../../Components/ModalWindow/CustomerModal'
 import ProjectModal from '../../Components/ModalWindow/ProjectModal'
@@ -198,6 +198,10 @@ export default function Task(props) {
     validationSchema: taskValidation,
   })
 
+  const isCallbackNumberValid = !!(
+    values.callbacknumber && !errors.callbacknumber
+  )
+
   useEffect(() => {
     if (props.type === 'view' || props.type === 'edit') {
       loadTaskData(id, setValues)
@@ -348,7 +352,7 @@ export default function Task(props) {
             ))}
           </FormTextField>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <FormTextField
             id="callbacknumber"
             name="callbacknumber"
@@ -359,6 +363,27 @@ export default function Task(props) {
             size="small"
             required
             value={values.callbacknumber}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  {values.callbacknumber && isCallbackNumberValid && (
+                    <IconButton
+                      href={`https://wa.me/${encodeURIComponent(
+                        values.callbacknumber
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{
+                        visibility:
+                          props.type === 'view' ? 'hidden' : 'visible',
+                      }}
+                    >
+                      <WhatsApp />
+                    </IconButton>
+                  )}
+                </InputAdornment>
+              ),
+            }}
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.callbacknumber && errors.callbacknumber}
@@ -366,7 +391,7 @@ export default function Task(props) {
             disabled={props.type === 'view'}
           />
         </Grid>
-        {values.callbacknumber && (
+        {/* {values.callbacknumber && (
           <Grid item xs={2}>
             <Grid container xs={12} sx={{ justifyContent: 'right' }}>
               <FormButton
@@ -378,12 +403,11 @@ export default function Task(props) {
                 variant="contained"
                 color="primary"
                 startIcon={<WhatsApp />}
-              >
-                Whatsapp
-              </FormButton>
+              ></FormButton>
             </Grid>
           </Grid>
         )}
+*/}
 
         <Grid item xs={6}>
           <FormTextField
