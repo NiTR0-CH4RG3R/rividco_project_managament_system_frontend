@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import EmployeeModal from "../../../Components/ModalWindow/EmployeeModal";
-import { IconButton } from "@mui/material";
+import { IconButton,Typography } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
 import { addProjectValidation } from "../../../Validation/AddProjectValidation";
 import { useTopbarContext } from "../../../Contexts/TopbarContext";
@@ -18,6 +18,7 @@ import FormClearButton from "../../../Components/StyledComponents/FormClearButto
 import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSaveLoadingButton";
 import EditIcon from "@mui/icons-material/Edit";
 import FormButton from "../../../Components/StyledComponents/FormButton";
+import FormEditButton from "../../../Components/StyledComponents/FormEditButton";
 import * as projectServicesService from "../../../services/projectServicesService";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
@@ -92,20 +93,9 @@ export default function ProjectServicesForm(props) {
   }, []);
 
   const { setTitle, setSubtitle } = useTopbarContext();
-  setTitle(
-    modeType === "add"
-      ? "Add a new Project Service"
-      : modeType === "edit"
-      ? "Edit Project Service"
-      : `Project Services`
-  );
-  setSubtitle(
-    modeType === "add"
-      ? "You can add a new project service here."
-      : modeType === "edit"
-      ? "You can edit project services details here."
-      : `You can view project services details here.`
-  );
+  setTitle("Project services");
+  setSubtitle("You can view and manage all the project services here.");
+
 
   const [loading, setLoading] = useState(false);
   //for modal
@@ -190,6 +180,15 @@ export default function ProjectServicesForm(props) {
   const navigate = useNavigate();
 
   return (
+    <>
+   <Typography sx={{fontSize:'large',pb:2,pt:2}}>
+  {modeType === "add"
+    ? "Add"
+    : modeType === "view"
+    ? "View"
+    : "Edit"
+  }
+</Typography>
     <Box
       component="form"
       onSubmit={handleSubmit}
@@ -427,7 +426,7 @@ export default function ProjectServicesForm(props) {
 
           {modeType === "view" && (
             <>
-              <FormButton
+              <FormEditButton
                 variant="contained"
                 size="large"
                 color="primary"
@@ -435,7 +434,7 @@ export default function ProjectServicesForm(props) {
                 onClick={() => setModeType("edit")}
               >
                 Edit
-              </FormButton>
+              </FormEditButton>
             </>
           )}
         </Box>
@@ -447,5 +446,6 @@ export default function ProjectServicesForm(props) {
         sendData={setFieldValue}
       />
     </Box>
+    </>
   );
 }
