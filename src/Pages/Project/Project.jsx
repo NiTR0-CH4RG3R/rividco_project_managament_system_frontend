@@ -33,6 +33,8 @@ import SpeedIcon from "@mui/icons-material/Speed";
 import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices";
 import BoltIcon from "@mui/icons-material/Bolt";
 import * as projectService from "../../services/projectService";
+import FormEditButton from "../../Components/StyledComponents/FormEditButton";
+
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -772,7 +774,7 @@ export default function Project(props) {
             >
               Commision Reports
             </FormButton>
-            <FormButton
+            <FormEditButton
               variant="contained"
               color="primary"
               startIcon={<EditIcon />}
@@ -781,7 +783,7 @@ export default function Project(props) {
               }
             >
               Edit
-            </FormButton>
+            </FormEditButton>
           </>
         )}
       </Box>
