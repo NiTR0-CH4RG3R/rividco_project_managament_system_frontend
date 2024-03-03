@@ -12,8 +12,8 @@ export default function ProjectServicesPopup(props) {
 
   return (
     <Dialog open={openPopUp} onClose={() => setOpenPopup(false)}>
-      <DialogTitle>
-        Add New Service</DialogTitle>
+      {/* <DialogTitle>
+        Add New Service</DialogTitle> */}
         <IconButton
           aria-label="close"
           onClick={handleClose}
