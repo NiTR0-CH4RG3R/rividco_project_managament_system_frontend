@@ -13,6 +13,8 @@ import { useTopbarContext } from "../../Contexts/TopbarContext";
 import { useEffect } from "react";
 import { AppRoutes } from "../../Data/AppRoutes";
 import Tooltip from "@mui/material/Tooltip";
+import Avatar from "./Avatar";
+import SystemUser from "../../Pages/SystemUser/SystemUser";
 
 export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const colorMode = useContext(ColorModeContext);
@@ -111,6 +113,13 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
             <AccountCircle />
           </IconButton>
         </Tooltip>
+        {/* <Tooltip title="Account2">
+          <Avatar
+          
+          //name={firstName}
+
+          />
+        </Tooltip> */}
 
         <Tooltip title="LogOut">
           <IconButton
