@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import VendorItemModal from "../../../Components/ModalWindow/VendorItemModal";
-import { IconButton } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
 import { addProjectValidation } from "../../../Validation/AddProjectValidation";
 import { useTopbarContext } from "../../../Contexts/TopbarContext";
@@ -19,6 +19,7 @@ import FormSaveLoadingButton from "../../../Components/StyledComponents/FormSave
 import WarrentyField from "../../../Components/WarrentyField/WarrentyField";
 import FormButton from "../../../Components/StyledComponents/FormButton";
 import EditIcon from "@mui/icons-material/Edit";
+//import { Typography } from "@mui/material/styles/createTypography";
 
 export default function ProjectItemsForm(props) {
   const [statusType, setStatusType] = useState([]);
@@ -38,20 +39,8 @@ export default function ProjectItemsForm(props) {
   }, []);
 
   const { setTitle, setSubtitle } = useTopbarContext();
-  setTitle(
-    modeType === "add"
-      ? "Add a new Project Service"
-      : modeType === "edit"
-      ? "Edit Project Service"
-      : `Project Services`
-  );
-  setSubtitle(
-    modeType === "add"
-      ? "You can add a new project services here."
-      : modeType === "edit"
-      ? "You can edit project services details here."
-      : `You can view project services details here.`
-  );
+  setTitle("Project items");
+  setSubtitle("You can view and manage all the project items here.");
 
   const [loading, setLoading] = useState(false);
   //for modal
@@ -97,6 +86,16 @@ export default function ProjectItemsForm(props) {
   const navigate = useNavigate();
 
   return (
+    <>
+   <Typography sx={{fontSize:'large',pb:2,pt:2}}>
+  {modeType === "add"
+    ? "Add"
+    : modeType === "view"
+    ? "View"
+    : "Edit"
+  }
+</Typography>
+
     <Box
       component="form"
       onSubmit={handleSubmit}
@@ -155,6 +154,7 @@ export default function ProjectItemsForm(props) {
         
         <Grid item xs={12}>
           <FormTextField
+          
             required
             placeholder="Please Enter The Description"
             id="description"
@@ -261,5 +261,6 @@ export default function ProjectItemsForm(props) {
       />
     
     </Box>
+    </>
   );
 }
