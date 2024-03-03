@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import EmployeeModal from "../../../Components/ModalWindow/EmployeeModal";
-import { IconButton } from "@mui/material";
+import { IconButton,Typography } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
 import { addProjectValidation } from "../../../Validation/AddProjectValidation";
 import { useTopbarContext } from "../../../Contexts/TopbarContext";
@@ -53,20 +53,9 @@ export default function ProjectServicesForm(props) {
   }, []);
 
   const { setTitle, setSubtitle } = useTopbarContext();
-  setTitle(
-    modeType === "add"
-      ? "Add a new Project Test"
-      : modeType === "edit"
-      ? "Edit Project Test"
-      : `Project Test`
-  );
-  setSubtitle(
-    modeType === "add"
-      ? "You can add a new project tests here."
-      : modeType === "edit"
-      ? "You can edit project test details here."
-      : `You can view project test details here.`
-  );
+  setTitle("Project Tests");
+  setSubtitle("You can view and manage all the project tests here.");
+
 
   const [loading, setLoading] = useState(false);
   //for modal
@@ -144,6 +133,15 @@ export default function ProjectServicesForm(props) {
   const navigate = useNavigate();
 
   return (
+    <>
+   <Typography sx={{fontSize:'large',pb:2,pt:2}}>
+  {modeType === "add"
+    ? "Add"
+    : modeType === "view"
+    ? "View"
+    : "Edit"
+  }
+</Typography>
     <Box
       component="form"
       onSubmit={handleSubmit}
@@ -313,5 +311,6 @@ export default function ProjectServicesForm(props) {
         sendData={setFieldValue}
       />
     </Box>
+    </>
   );
 }
