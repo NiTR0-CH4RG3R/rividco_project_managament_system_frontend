@@ -70,6 +70,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
               sx={{
                 color: "#071024",
                 p: 1,
+                mr:2,
                 display: backButtonVisible ? "block" : "none",
               }}
               onClick={handleBackButtonClick}
