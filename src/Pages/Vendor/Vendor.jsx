@@ -15,8 +15,9 @@ import { AppRoutes } from "../../Data/AppRoutes";
 import FormTextField from "../../Components/StyledComponents/FormTextField";
 import FormClearButton from "../../Components/StyledComponents/FormClearButton";
 import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
-import FormButton from "../../Components/StyledComponents/FormButton";
+import FormEditButton from "../../Components/StyledComponents/FormEditButton";
 import * as vendorService from "../../services/vendorService";
+import FormButton from "../../Components/StyledComponents/FormButton";
 
 export default function Vendor(props) {
     function loadVendorData(id, setValues) {
@@ -307,7 +308,7 @@ export default function Vendor(props) {
                     </>
                 )}
                 {props.type === "view" && (
-                    <FormButton
+                    <FormEditButton
                         variant="contained"
                         color="primary"
                         startIcon={<EditIcon />}
@@ -316,7 +317,7 @@ export default function Vendor(props) {
                         }
                     >
                         Edit
-                    </FormButton>
+                    </FormEditButton>
                 )}
             </Box>
         </Box>
