@@ -22,9 +22,9 @@ export default function ProjectTestPopup(props) {
       >
         <CloseIcon />
       </IconButton>
-      <DialogTitle>
+      {/* <DialogTitle>
         {testId === null ? <>Add New Test</> : <>Show Test</>}
-      </DialogTitle>
+      </DialogTitle> */}
       <DialogContent>
         <ProjectTestForm testId={testId} type={type} />
       </DialogContent>
