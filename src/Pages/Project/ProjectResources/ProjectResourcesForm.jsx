@@ -21,6 +21,7 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import FormButton from "../../../Components/StyledComponents/FormButton";
 import EditIcon from "@mui/icons-material/Edit";
+import Stack from "@mui/material/Stack";
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -212,67 +213,68 @@ export default function ProjectResourcesForm(props) {
         </Grid>
 
 
-      <Box display="flex" pt={3} width="100%" justifyContent="space-around">
-        {modeType !== "view" && (
-          <>
-        
-        <FormButton 
-            
+        <Stack direction="row" spacing={25}>
+        <Box display="flex" pt={3} width="100%" justifyContent="flex-start">
+          <FormButton
+          
+            size="large"
+            // fullWidth={true}
             component="label"
             role={undefined}
             variant="contained"
-            tabIndex={-1}
+           // tabIndex={-1}
             startIcon={<CloudUploadIcon />}
           >
-            Upload file
+             Upload File
             <VisuallyHiddenInput type="file" />
-           </FormButton>
-
-            <FormClearButton
-              variant="outlined"
-              size="large"
-              sx={{
-                mr: 0,
-              }}
-              color="primary"
-              startIcon={<ClearAllIcon />}
-              type="reset"
-            >
-              Clear
-            </FormClearButton>
-
-            <FormSaveLoadingButton
-              color="primary"
-              type="submit"
-              size="large"
-              loading={loading}
-              loadingPosition="start"
-              startIcon={<SaveIcon />}
-              variant="contained"
-            >
-              <span>Save</span>
-            </FormSaveLoadingButton>
-          </>
-        )}
+          </FormButton>
         </Box>
-           
-           <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
 
-        {modeType === "view" && (
-          <>
-            <FormButton
-              variant="contained"
-              size="large"
-              color="primary"
-              startIcon={<EditIcon />}
-              onClick={() => setModeType("edit")}
-            >
-              Edit
-            </FormButton>
-          </>
-        )}
+        <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
+          {modeType !== "view" && (
+            <>
+              <FormClearButton
+                variant="outlined"
+                size="large"
+                sx={{
+                  mr: 2,
+                }}
+                color="primary"
+                startIcon={<ClearAllIcon />}
+                type="reset"
+              >
+                Clear
+              </FormClearButton>
 
-      </Box>
+              <FormSaveLoadingButton
+                color="primary"
+                type="submit"
+                size="large"
+                loading={loading}
+                loadingPosition="start"
+                startIcon={<SaveIcon />}
+                variant="contained"
+              >
+                <span>Save</span>
+              </FormSaveLoadingButton>
+            </>
+          )}
+
+          {modeType === "view" && (
+            <>
+              <FormButton
+                variant="contained"
+                size="large"
+                color="primary"
+                startIcon={<EditIcon />}
+                onClick={() => setModeType("edit")}
+              >
+                Edit
+              </FormButton>
+            </>
+          )}
+        </Box>
+      </Stack>
       
 
       <VendorModal
