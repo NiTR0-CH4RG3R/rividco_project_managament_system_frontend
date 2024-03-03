@@ -24,6 +24,8 @@ export default function App() {
 
     const [theme, colorMode] = useMode();
 
+    //test comment
+
     return (
         <AuthContextProvider>
             <ColorModeContext.Provider value={colorMode}>
