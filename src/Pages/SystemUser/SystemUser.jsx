@@ -28,6 +28,7 @@ const roles = [
 ];
 
 export default function SystemUser(props) {
+  const { id } = useParams();
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle(
     props.type === "add"
@@ -140,7 +141,7 @@ export default function SystemUser(props) {
     validationSchema: SystemUserValidation,
   });
 
-  const { id } = useParams();
+  
   const navi = useNavigate();
 
   return (
