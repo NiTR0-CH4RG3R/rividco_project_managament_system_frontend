@@ -21,6 +21,8 @@ import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoa
 import FormButton from "../../Components/StyledComponents/FormButton";
 import ProjectFilterModal from "./ProjectFilterModal";
 import * as customerService from "../../services/customerService";
+import FormEditButton from "../../Components/StyledComponents/FormEditButton";
+
 
 export default function Customer(props) {
     const [loading, setLoading] = useState(false);
@@ -411,7 +413,7 @@ export default function Customer(props) {
                         >
                             Projects
                         </FormButton>
-                        <FormButton
+                        <FormEditButton
                             variant="contained"
                             size="large"
                             color="primary"
@@ -419,7 +421,7 @@ export default function Customer(props) {
                             onClick={() => navigate(`${AppRoutes.customer_edit.path.replace(':id', id)}`)}
                         >
                             Edit
-                        </FormButton>
+                        </FormEditButton>
                     </>
                 )}
             </Box>
