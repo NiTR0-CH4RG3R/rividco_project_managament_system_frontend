@@ -127,8 +127,8 @@ export default function Project(props) {
     props.type === "add"
       ? "You can add a new project here."
       : props.type === "edit"
-      ? "You can edit project details here."
-      : `You can view project details here.`
+      ? `You can edit project id:#${id} details here.`
+      : `You can view project id:#${id} details here.`
   );
 
   const [loading, setLoading] = useState(false);
