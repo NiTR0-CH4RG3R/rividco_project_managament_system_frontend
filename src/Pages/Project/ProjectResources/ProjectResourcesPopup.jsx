@@ -12,7 +12,7 @@ export default function ProjectResourcesPopup(props) {
 
   return (
     <Dialog open={openPopUp} onClose={() => setOpenPopup(false)}>
-      <DialogTitle>Add New Resource</DialogTitle>
+      {/* <DialogTitle>Add New Resource</DialogTitle> */}
       <IconButton
           aria-label="close"
           onClick={handleClose}
