@@ -82,8 +82,8 @@ export default function Customer(props) {
         props.type === "add"
             ? "You can add a new customers here."
             : props.type === "edit"
-                ? `You can edit Customer ID: #${id} details here.`
-                : `You can view Customer ID: #${id} details here.`
+                ? `You can edit customer id: #${id} details here.`
+                : `You can view customer id: #${id} details here.`
     );
 
     //set initial values in formik
