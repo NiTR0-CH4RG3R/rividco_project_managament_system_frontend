@@ -12,7 +12,7 @@ export default function ProjectItemsPopup(props) {
 
   return (
     <Dialog open={openPopUp} onClose={() => setOpenPopup(false)}>
-      <DialogTitle>Add New Item</DialogTitle>
+    {/* <DialogTitle>Add New Item</DialogTitle> */}
       <IconButton
           aria-label="close"
           onClick={handleClose}
