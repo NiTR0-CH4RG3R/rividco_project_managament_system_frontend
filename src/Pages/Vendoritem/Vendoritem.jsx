@@ -23,6 +23,7 @@ import WarrentyField from "../../Components/WarrentyField/WarrentyField";
 import * as vendorItemService from "../../services/vendorItemService";
 
 export default function Vendoritem(props) {
+    const { id } = useParams();
     function loadVendorData(id, setValues) {
         vendorItemService
             .getVendorItem(id)
@@ -64,8 +65,8 @@ export default function Vendoritem(props) {
         props.type === "add"
             ? "You can add a new vendor item here."
             : props.type === "edit"
-                ? "You can edit vendor item details here."
-                : `You can view vendor item details here.`
+                ? `You can edit vendor item id:#${id} details here.`
+                : `You can view vendor item id:#${id} details here.`
     );
 
     const [openVendor, setOpenVendor] = useState(false);
@@ -137,7 +138,7 @@ export default function Vendoritem(props) {
     });
 
     
-    const { id } = useParams();
+    
 
 
 
