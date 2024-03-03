@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import VendorModal from "../../../Components/ModalWindow/VendorModal";
-import { IconButton } from "@mui/material";
+import { IconButton,Typography } from "@mui/material";
 import { GridClearIcon } from "@mui/x-data-grid";
 import { addProjectValidation } from "../../../Validation/AddProjectValidation";
 import { useTopbarContext } from "../../../Contexts/TopbarContext";
@@ -71,20 +71,23 @@ export default function ProjectResourcesForm(props) {
   }, []);
 
   const { setTitle, setSubtitle } = useTopbarContext();
-  setTitle(
-    modeType === "add"
-      ? "Add a new Project Service"
-      : modeType === "edit"
-      ? "Edit Project Service"
-      : `Project Resources`
-  );
-  setSubtitle(
-    modeType === "add"
-      ? "You can add a new project resource here."
-      : modeType === "edit"
-      ? "You can edit project resource details here."
-      : `You can view project resource details here.`
-  );
+  // setTitle(
+  //   modeType === "add"
+  //     ? "Add a new Project Resource"
+  //     : modeType === "edit"
+  //     ? "Edit Project Resources"
+  //     : `Project Resources`
+  // );
+  // setSubtitle(
+  //   modeType === "add"
+  //     ? "You can add a new project resource here."
+  //     : modeType === "edit"
+  //     ? "You can edit project resource details here."
+  //     : `You can view project resource details here.`
+  // );
+  setTitle("Project Resources");
+  setSubtitle("You can view and manage all the project resources here.");
+
 
   const [loading, setLoading] = useState(false);
   //for modal
@@ -130,6 +133,15 @@ export default function ProjectResourcesForm(props) {
   const navigate = useNavigate();
 
   return (
+    <>
+   <Typography sx={{fontSize:'large',pb:2,pt:2}}>
+  {modeType === "add"
+    ? "Add"
+    : modeType === "view"
+    ? "View"
+    : "Edit"
+  }
+</Typography>
     <Box
       component="form"
       onSubmit={handleSubmit}
@@ -284,5 +296,6 @@ export default function ProjectResourcesForm(props) {
       />
     
     </Box>
+    </>
   );
 }
