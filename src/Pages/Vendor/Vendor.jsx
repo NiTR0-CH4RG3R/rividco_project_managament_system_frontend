@@ -60,8 +60,8 @@ export default function Vendor(props) {
         props.type === "add"
             ? "You can add a new vendor here."
             : props.type === "edit"
-                ? "You can edit vendor details here."
-                : `You can view vendor details here.`
+                ? `You can edit Vendor ID:#${id} details here.`
+                : `You can view Vendor ID:#${id} details here.`
     );
 
     //set initial values in formik
