@@ -40,8 +40,8 @@ export default function SystemUser(props) {
     props.type === "add"
       ? "You can add new system user here."
       : props.type === "edit"
-      ? "You can edit system user details here."
-      : `You can view system user details here.`
+      ? `You can edit system user id:#${id} details here.`
+      : `You can view system user id:#${id} details here.`
   );
 
   //const ProfilePictureUploader = () => {
