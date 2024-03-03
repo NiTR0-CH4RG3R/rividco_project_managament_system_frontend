@@ -24,7 +24,7 @@ export default function App() {
 
     const [theme, colorMode] = useMode();
 
-    //test comment
+    //test comment 2
 
     return (
         <AuthContextProvider>
