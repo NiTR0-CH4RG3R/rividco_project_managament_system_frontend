@@ -375,7 +375,7 @@ export default function Task(props) {
                       rel="noopener noreferrer"
                       sx={{
                         visibility:
-                          props.type === 'view' ? 'hidden' : 'visible',
+                          props.type === 'edit' ? 'hidden' : 'visible',
                       }}
                     >
                       <WhatsApp />
@@ -391,23 +391,6 @@ export default function Task(props) {
             disabled={props.type === 'view'}
           />
         </Grid>
-        {/* {values.callbacknumber && (
-          <Grid item xs={2}>
-            <Grid container xs={12} sx={{ justifyContent: 'right' }}>
-              <FormButton
-                href={`https://wa.me/${encodeURIComponent(
-                  values.callbacknumber
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="contained"
-                color="primary"
-                startIcon={<WhatsApp />}
-              ></FormButton>
-            </Grid>
-          </Grid>
-        )}
-*/}
 
         <Grid item xs={6}>
           <FormTextField
