@@ -20,6 +20,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import FormButton from "../../../Components/StyledComponents/FormButton";
+import FormEditButton from "../../../Components/StyledComponents/FormEditButton";
 import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
 
@@ -136,10 +137,10 @@ export default function ProjectResourcesForm(props) {
     <>
    <Typography sx={{fontSize:'large',pb:2,pt:2}}>
   {modeType === "add"
-    ? "Add"
+    ? "Add Resource"
     : modeType === "view"
-    ? "View"
-    : "Edit"
+    ? "View Resource"
+    : "Edit Resource"
   }
 </Typography>
     <Box
@@ -227,10 +228,11 @@ export default function ProjectResourcesForm(props) {
 
         <Stack direction="row" spacing={25}>
         <Box display="flex" pt={3} width="100%" justifyContent="flex-start">
+        {modeType !== "view" && (
           <FormButton
-          
+            
             size="large"
-            // fullWidth={true}
+            fullWidth={true}
             component="label"
             role={undefined}
             variant="contained"
@@ -240,6 +242,7 @@ export default function ProjectResourcesForm(props) {
              Upload File
             <VisuallyHiddenInput type="file" />
           </FormButton>
+        )}
         </Box>
 
         <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
@@ -271,10 +274,13 @@ export default function ProjectResourcesForm(props) {
               </FormSaveLoadingButton>
             </>
           )}
+         </Box>
+      </Stack>
+      <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
 
           {modeType === "view" && (
             <>
-              <FormButton
+              <FormEditButton
                 variant="contained"
                 size="large"
                 color="primary"
@@ -282,11 +288,10 @@ export default function ProjectResourcesForm(props) {
                 onClick={() => setModeType("edit")}
               >
                 Edit
-              </FormButton>
+              </FormEditButton>
             </>
           )}
         </Box>
-      </Stack>
       
 
       <VendorModal
