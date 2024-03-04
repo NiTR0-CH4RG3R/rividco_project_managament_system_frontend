@@ -183,10 +183,10 @@ export default function ProjectServicesForm(props) {
     <>
    <Typography sx={{fontSize:'large',pb:2,pt:2}}>
   {modeType === "add"
-    ? "Add"
+    ? "Add Services"
     : modeType === "view"
-    ? "View"
-    : "Edit"
+    ? "View Services"
+    : "Edit Services"
   }
 </Typography>
     <Box
@@ -379,6 +379,7 @@ export default function ProjectServicesForm(props) {
 
       <Stack direction="row" spacing={25}>
         <Box display="flex" pt={3} width="100%" justifyContent="flex-start">
+        {modeType !== "view" && (
           <FormButton
           
             size="large"
@@ -392,6 +393,7 @@ export default function ProjectServicesForm(props) {
             Report Upload
             <VisuallyHiddenInput type="file" />
           </FormButton>
+        )}
         </Box>
 
         <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
@@ -423,10 +425,15 @@ export default function ProjectServicesForm(props) {
               </FormSaveLoadingButton>
             </>
           )}
+              </Box>
+            </Stack>
+
+          <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
 
           {modeType === "view" && (
             <>
-              <FormEditButton
+              <FormEditButton   
+              justifyContent="flex-end"
                 variant="contained"
                 size="large"
                 color="primary"
@@ -437,8 +444,7 @@ export default function ProjectServicesForm(props) {
               </FormEditButton>
             </>
           )}
-        </Box>
-      </Stack>
+                    </Box>
 
       <EmployeeModal
         openEmployee={openEmployee}
