@@ -89,10 +89,10 @@ export default function ProjectItemsForm(props) {
     <>
    <Typography sx={{fontSize:'large',pb:2,pt:2}}>
   {modeType === "add"
-    ? "Add"
+    ? "Add Items"
     : modeType === "view"
-    ? "View"
-    : "Edit"
+    ? "View Items"
+    : "Edit Items"
   }
 </Typography>
 
