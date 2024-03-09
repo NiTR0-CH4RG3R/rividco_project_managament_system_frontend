@@ -27,7 +27,11 @@ export default function TaskStatusPopup(props) {
         {type === 'add' ? <>Add New Status</> : <>View and Edit Status</>}
       </DialogTitle>
       <DialogContent>
-        <TaskStatusForm statusId={statusId} type={type} />
+        <TaskStatusForm
+          statusId={statusId}
+          type={type}
+          handleClose={handleClose}
+        />
       </DialogContent>
     </Dialog>
   )
