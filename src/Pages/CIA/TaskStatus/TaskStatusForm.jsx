@@ -28,8 +28,11 @@ function TaskStatusForm(props) {
   const [modeType, setModeType] = useState(props.type)
   const [statusId, setStatusId] = useState(props.statusId)
   const [loading, setLoading] = useState(false)
+
   const navigate = useNavigate()
   const { id } = useParams()
+
+  const { handleClose } = props
 
   function loadTaskStatusData(id, setValues) {
     taskStatusService
@@ -82,8 +85,8 @@ function TaskStatusForm(props) {
           })
           .then(() => {
             setLoading(false)
-
-            navigate(AppRoutes.cia_status.path)
+            handleClose()
+            navigate(`${AppRoutes.cia_status.path.replace(':id', id)}`)
           })
           .catch((error) => {
             console.error(error)
@@ -102,8 +105,8 @@ function TaskStatusForm(props) {
           )
           .then(() => {
             setLoading(false)
-
-            navigate(AppRoutes.cia_status.path)
+            handleClose()
+            navigate(`${AppRoutes.cia_status.path.replace(':id', id)}`)
           })
           .catch((error) => {
             console.error(error)
