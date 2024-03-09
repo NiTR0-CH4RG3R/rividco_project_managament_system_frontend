@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import Paper from "@mui/material/Paper"
-import { IconButton, MenuItem } from '@mui/material'
+import Paper from '@mui/material/Paper'
+import { IconButton, InputAdornment, MenuItem } from '@mui/material'
 import { useFormik } from 'formik'
 import CustomerModal from '../../Components/ModalWindow/CustomerModal'
 import ProjectModal from '../../Components/ModalWindow/ProjectModal'
@@ -19,6 +19,7 @@ import {
   History,
   Save,
   Visibility,
+  WhatsApp,
 } from '@mui/icons-material'
 import FormTextField from '../../Components/StyledComponents/FormTextField'
 import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
@@ -84,7 +85,7 @@ export default function Task(props) {
           urgency: task.urgencyLevel,
           comment: task.comments,
         }
-        setValues(taskValues) 
+        setValues(taskValues)
       })
       .catch((error) => {
         console.log(error)
@@ -198,6 +199,10 @@ export default function Task(props) {
     validationSchema: taskValidation,
   })
 
+  const isCallbackNumberValid = !!(
+    values.callbacknumber && !errors.callbacknumber
+  )
+
   useEffect(() => {
     if (props.type === 'view' || props.type === 'edit') {
       loadTaskData(id, setValues)
@@ -244,15 +249,80 @@ export default function Task(props) {
       flexDirection="column"
       padding={5}
     >
-      <Grid container component={Paper} 
-                sx={{
-                    p : 2,
-                    borderRadius: 3,
-                    '& .MuiGrid-item' : {
-                        padding: 1
-                    },
-                }}
-                elevation={4}>
+      <Grid
+        container
+        component={Paper}
+        sx={{
+          p: 2,
+          borderRadius: 3,
+          '& .MuiGrid-item': {
+            padding: 1,
+          },
+        }}
+        elevation={4}
+      >
+        <Grid item xs={props.type === 'view' ? 12 : 10}>
+          <FormTextField
+            id="requested_by"
+            name="requested_by"
+            label="Requested Customer"
+            variant="filled"
+            fullWidth
+            size="small"
+            required
+            onClick={() => {
+              if (
+                !values.selectedCustomer?.firstName &&
+                props.type !== 'view'
+              ) {
+                setOpenCustomer(true)
+              }
+            }}
+            value={values.selectedCustomer?.firstName ?? ''}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  onClick={() => setFieldValue('selectedCustomer', '')}
+                  sx={{
+                    visibility: values.selectedCustomer?.firstName
+                      ? 'visible'
+                      : 'hidden',
+                  }}
+                  disabled={props.type === 'view'}
+                >
+                  {(props.type === 'add' || props.type === 'edit') && (
+                    <GridClearIcon />
+                  )}
+                </IconButton>
+              ),
+            }}
+            disabled={props.type === 'view'}
+            error={
+              touched.selectedCustomer?.firstName &&
+              errors.selectedCustomer?.firstName
+            }
+            helperText={
+              touched.selectedCustomer?.firstName
+                ? errors.selectedCustomer?.firstName
+                : ''
+            }
+          />
+        </Grid>
+        {(props.type === 'add' || props.type === 'edit') && (
+          <Grid item xs={2}>
+            <Grid container xs={12} sx={{ justifyContent: 'right' }}>
+              <FormButton
+                variant="contained"
+                color="primary"
+                onClick={() => navigate(`${AppRoutes.customer_add.path}`)}
+                startIcon={<AddBox />}
+              >
+                Add Guest
+              </FormButton>
+            </Grid>
+          </Grid>
+        )}
+
         <Grid item xs={12}>
           <FormTextField
             id="description"
@@ -263,6 +333,7 @@ export default function Task(props) {
             fullWidth
             size="small"
             multiline
+            rows={3}
             required
             value={values.description}
             onChange={handleChange}
@@ -298,12 +369,33 @@ export default function Task(props) {
             id="callbacknumber"
             name="callbacknumber"
             label="Callback Number"
-            placeholder="Enter telephone number"
+            placeholder="+94xxxxxxxxx"
             variant="filled"
             fullWidth
             size="small"
             required
             value={values.callbacknumber}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  {values.callbacknumber && isCallbackNumberValid && (
+                    <IconButton
+                      href={`https://wa.me/${encodeURIComponent(
+                        values.callbacknumber
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{
+                        visibility:
+                          props.type === 'edit' ? 'hidden' : 'visible',
+                      }}
+                    >
+                      <WhatsApp />
+                    </IconButton>
+                  )}
+                </InputAdornment>
+              ),
+            }}
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.callbacknumber && errors.callbacknumber}
@@ -311,65 +403,6 @@ export default function Task(props) {
             disabled={props.type === 'view'}
           />
         </Grid>
-        <Grid item xs={10}>
-          <FormTextField
-            id="requested_by"
-            name="requested_by"
-            label="Requested Customer"
-            variant="filled"
-            fullWidth
-            size="small"
-            required
-            onClick={() => {
-              if (
-                !values.selectedCustomer?.firstName &&
-                props.type !== 'view'
-              ) {
-                setOpenCustomer(true)
-              }
-            }}
-            value={values.selectedCustomer?.firstName ?? ''}
-            InputProps={{
-              endAdornment: (
-                <IconButton
-                  onClick={() => setFieldValue('selectedCustomer', '')}
-                  sx={{
-                    visibility: values.selectedCustomer?.firstName
-                      ? 'visible'
-                      : 'hidden',
-                  }}
-                >
-                  <GridClearIcon />
-                </IconButton>
-              ),
-            }}
-            disabled={props.type === 'view'}
-            error={
-              touched.selectedCustomer?.firstName &&
-              errors.selectedCustomer?.firstName
-            }
-            helperText={
-              touched.selectedCustomer?.firstName
-                ? errors.selectedCustomer?.firstName
-                : ''
-            }
-          />
-        </Grid>
-
-        {(props.type === 'add' || props.type === 'edit') && (
-          <Grid item xs={2}>
-            <Grid container xs={12} sx={{ justifyContent: 'right' }}>
-              <FormButton
-                variant="contained"
-                color="primary"
-                onClick={() => navigate(`${AppRoutes.customer_add.path}`)}
-                startIcon={<AddBox />}
-              >
-                Add Guest
-              </FormButton>
-            </Grid>
-          </Grid>
-        )}
 
         <Grid item xs={6}>
           <FormTextField
@@ -395,7 +428,9 @@ export default function Task(props) {
                       : 'hidden',
                   }}
                 >
-                  <GridClearIcon />
+                  {(props.type === 'add' || props.type === 'edit') && (
+                    <GridClearIcon />
+                  )}
                 </IconButton>
               ),
             }}
@@ -430,7 +465,9 @@ export default function Task(props) {
                       : 'hidden',
                   }}
                 >
-                  <GridClearIcon />
+                  {(props.type === 'add' || props.type === 'edit') && (
+                    <GridClearIcon />
+                  )}
                 </IconButton>
               ),
             }}
@@ -500,96 +537,95 @@ export default function Task(props) {
           />
         </Grid>
         {/*Clear , Save Buttons on the add, edit, view forms*/}
-        </Grid>
-        <Box
-          display="flex"
-          width="100%"
-          pt={3}
-          justifyContent="flex-end"
-          sx={{
-            '& .MuiButton-root': { m: 1 },
-          }}
-        >
-          {props.type === 'view' && (
-            <>
-              <FormButton
-                variant="contained"
-                size="large"
-                color="primary"
-                onClick={() =>
-                  navigate(`${AppRoutes.cia_status.path.replace(':id', id)}`)
-                } //navigate to the taskstatus page
-                startIcon={<History />}
-              >
-                View Status History
-              </FormButton>
+      </Grid>
+      <Box
+        display="flex"
+        width="100%"
+        pt={3}
+        justifyContent="flex-end"
+        sx={{
+          '& .MuiButton-root': { m: 1 },
+        }}
+      >
+        {props.type === 'view' && (
+          <>
+            <FormButton
+              variant="contained"
+              size="large"
+              color="primary"
+              onClick={() =>
+                navigate(`${AppRoutes.cia_status.path.replace(':id', id)}`)
+              } //navigate to the taskstatus page
+              startIcon={<History />}
+            >
+              View Status History
+            </FormButton>
 
-              <FormButton
-                variant="contained"
-                size="large"
-                color="primary"
-                onClick={() =>
-                  navigate(
-                    `${AppRoutes.cia_resources_view.path.replace(':id', id)}`
-                  )
-                } //navigate to the view task resouce page
-                startIcon={<Visibility />}
-              >
-                View Task Resources
-              </FormButton>
+            <FormButton
+              variant="contained"
+              size="large"
+              color="primary"
+              onClick={() =>
+                navigate(
+                  `${AppRoutes.cia_resources_view.path.replace(':id', id)}`
+                )
+              } //navigate to the view task resouce page
+              startIcon={<Visibility />}
+            >
+              View Task Resources
+            </FormButton>
 
-              <FormEditButton
-                variant="contained"
-                size="large"
-                onClick={() =>
-                  navigate(`${AppRoutes.cia_edit.path.replace(':id', id)}`)
-                } //navigate to edit task page
-                startIcon={<Edit />}
-              >
-                Edit
-              </FormEditButton>
-            </>
-          )}
+            <FormEditButton
+              variant="contained"
+              size="large"
+              onClick={() =>
+                navigate(`${AppRoutes.cia_edit.path.replace(':id', id)}`)
+              } //navigate to edit task page
+              startIcon={<Edit />}
+            >
+              Edit
+            </FormEditButton>
+          </>
+        )}
 
-          {(props.type === 'add' || props.type === 'edit') && (
-            <>
-              {' '}
-              <FormButton
-                variant="contained"
-                size="large"
-                color="primary"
-                onClick={() =>
-                  navigate(
-                    `${AppRoutes.cia_resources_add.path.replace(':id', id)}`
-                  )
-                } //navigate to add task resources
-                startIcon={<AddBox />}
-              >
-                Add Task Resources
-              </FormButton>
-              <FormClearButton
-                color="primary"
-                variant="outliend"
-                size="large"
-                type="reset"
-                startIcon={<ClearAll />}
-              >
-                Clear
-              </FormClearButton>
-              <FormSaveLoadingButton
-                color="primary"
-                variant="contained"
-                size="large"
-                startIcon={<Save />}
-                type="submit"
-                loading={loading}
-              >
-                Save
-              </FormSaveLoadingButton>
-            </>
-          )}
-        </Box>
-      
+        {(props.type === 'add' || props.type === 'edit') && (
+          <>
+            {' '}
+            <FormButton
+              variant="contained"
+              size="large"
+              color="primary"
+              onClick={() =>
+                navigate(
+                  `${AppRoutes.cia_resources_add.path.replace(':id', id)}`
+                )
+              } //navigate to add task resources
+              startIcon={<AddBox />}
+            >
+              Add Task Resources
+            </FormButton>
+            <FormClearButton
+              color="primary"
+              variant="outliend"
+              size="large"
+              type="reset"
+              startIcon={<ClearAll />}
+            >
+              Clear
+            </FormClearButton>
+            <FormSaveLoadingButton
+              color="primary"
+              variant="contained"
+              size="large"
+              startIcon={<Save />}
+              type="submit"
+              loading={loading}
+            >
+              Save
+            </FormSaveLoadingButton>
+          </>
+        )}
+      </Box>
 
       <CustomerModal
         openCustomer={openCustomer}
