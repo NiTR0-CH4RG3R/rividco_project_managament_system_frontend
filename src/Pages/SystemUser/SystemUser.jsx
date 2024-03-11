@@ -155,10 +155,10 @@ export default function SystemUser(props) {
       alignItems="center"
       flexDirection="column"
       padding={5}
-      marginTop="150px"
+      marginTop="200px"
     >
       <Grid container>
-        <Grid item xs={6}>
+        <Grid item xs={6} marginTop={2}>
           <Avatar
             alt="Profile Picture"
             src={imagePreview}
@@ -172,7 +172,7 @@ export default function SystemUser(props) {
             onChange={handleFileChange}
           />
 
-          <Grid item xs={5.5} spacing={2} marginTop={1}>
+          <Grid item xs={4} spacing={2} marginTop={1}>
             <FormButton
               fullWidth
               variant="contained"
@@ -180,10 +180,10 @@ export default function SystemUser(props) {
                 handleUploadClick();
               }}
             >
-              ADD PHOTO
+              Add Photo
             </FormButton>
           </Grid>
-          <Grid item xs={5.5} spacing={2} marginTop={1} marginBottom={2}>
+          <Grid item xs={4} spacing={2} marginTop={1} marginBottom={2}>
             <FormButton
               fullWidth
               variant="contained"
