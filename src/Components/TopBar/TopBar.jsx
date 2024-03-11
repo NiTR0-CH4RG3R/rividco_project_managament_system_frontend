@@ -94,13 +94,13 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
       {/* Right side icons */}
       <Box display="flex" justifyContent="flex-end" alignItems="center">
         <Tooltip title="Change Theme">
-          <IconButton
+          {/* <IconButton
             type="button"
             sx={{ color: "#071024", p: 1 }}
             onClick={colorMode.toggleColorMode}
           >
-            {/* <Brightness4 /> */}
-          </IconButton>
+            
+          </IconButton> */}
         </Tooltip>
 
         <Tooltip title="Account">
