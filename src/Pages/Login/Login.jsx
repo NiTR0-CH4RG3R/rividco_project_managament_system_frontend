@@ -8,6 +8,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import useAuthContext from '../../auth/useAuthContext'
 import * as authService from '../../services/authService';
 import { AppRoutes } from '../../Data/AppRoutes'
+import imagePath from './blueLogoAsset 1.png';
+import backgroundImage from './Background.jpg';
 
 const Login = () => {
 
@@ -56,9 +58,29 @@ const Login = () => {
     return (
         <Box
             display='flex'
+            flexDirection='row'
+            width='100vw'
+            height='100vh'
+        >
+        <Box
+            display='flex'
+            flexDirection='row'
+            width='60%'
+            height='100%'
+            justifyContent='left'
+        >
+            <img
+                src={backgroundImage}
+                alt='SolarImage'
+                style={{width:'100vw', height:'100vh'}}
+            />
+        </Box>
+        <Box
+            display='flex'
+            flexDirection='row'
             width='100%'
             height='100%'
-            justifyContent='center'
+            justifyContent='right'
             alignItems='center'
         >
             <Paper
@@ -66,10 +88,15 @@ const Login = () => {
                 sx={{
                     p: 2,
                     borderRadius: 2,
-                    width: '50%',
-                    maxWidth: '400px'
+                    width: '100%',
+                    height: '100%',
                 }}
             >
+                <img
+                    src={imagePath}
+                    alt="companyLogo"
+                    style={{ width: '25vw', height: '10vh', marginLeft:'7vw', marginTop:'20vh' }}
+                />
                 <Grid
                     container
 
@@ -88,13 +115,13 @@ const Login = () => {
                         setPassword('');
                     }}
                 >
-                    <Grid item xs={12} mb={2}>
+                    <Grid item xs={12} mb={2} style={{marginTop:'2vh'}}>
                         <Typography variant='h1' fontWeight='bold'>
                             LOG IN
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={8} style={{marginLeft:'6vw', marginTop:'2vh'}}>
                         <FormTextField
                             fullWidth
                             id="username"
@@ -112,7 +139,7 @@ const Login = () => {
                         />
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={8} style={{marginLeft:'6vw', marginTop:'1vh'}}>
                         <FormTextField
                             fullWidth
                             type='password'
@@ -137,6 +164,7 @@ const Login = () => {
                         direction='row'
                         justifyContent='center'
                         alignItems='center'
+                        style={{marginLeft:'9vw'}}
 
                         sx={{
                             mt: 2,
@@ -174,6 +202,7 @@ const Login = () => {
                     </Grid>
                 </Grid>
             </Paper>
+        </Box>
         </Box>
 
     )
