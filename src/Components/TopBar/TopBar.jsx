@@ -8,6 +8,7 @@ import {
   Brightness4,
   AccountCircle,
   Logout,
+  Home,
 } from "@mui/icons-material";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
 import { useEffect } from "react";
@@ -27,11 +28,13 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
 
   const [backButtonVisible, setBackButtonVisible] = useState(false);
   const [logoutButtonVisible, setLogoutButtonVisible] = useState(false);
+  const [homebuttonVisible, setHomeButtonVisible] = useState(false);
 
   useEffect(() => {
     const isHomePage = location.pathname === "/home";
     setBackButtonVisible(!isHomePage);
     setLogoutButtonVisible(isHomePage);
+    setHomeButtonVisible(!isHomePage);
   }, [location.pathname]);
 
   const handleAccountButtonClick = () => {
@@ -44,6 +47,10 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   //add the function
   const handleLogoutButtonClick = () => {
     navigate("/login");
+  };
+
+  const handleHomeButtonClick = () => {
+    navigate("/home");
   };
 
   return (
@@ -101,6 +108,20 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
           >
             
           </IconButton> */}
+        </Tooltip>
+
+        <Tooltip title="Home">
+          <IconButton
+            type="button"
+            sx={{
+              color: "#071024",
+              p: 1,
+              display: homebuttonVisible ? "" : "none",
+            }}
+            onClick={handleHomeButtonClick}
+          >
+            <Home />
+          </IconButton>
         </Tooltip>
 
         <Tooltip title="Account">
