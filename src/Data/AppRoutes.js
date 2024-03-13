@@ -23,7 +23,7 @@ import CommisionReport from '../Pages/Project/CommisionReport'
 import TaskResourceList from '../Pages/CIA/TaskResourceList'
 
 export const AppRoutes = {
-  home: { path: '/home', component: <Home /> },
+  home: { path: '/', component: <Home /> },
 
   test: { path: '/test', component: <Test /> },
 

@@ -63,7 +63,7 @@ export default function ProjectList() {
         onSearchClick: (e) => {},
       }}
       onRowClick={(e, id) => {
-        console.log(id);
+        navigate(AppRoutes.project_view.path.replace(":id", id));
       }}
       onAddButtonClick={(e) => {
         navigate(AppRoutes.project_add.path);
