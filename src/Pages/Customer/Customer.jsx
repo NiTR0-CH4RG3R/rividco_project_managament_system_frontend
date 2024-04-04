@@ -455,7 +455,6 @@ export default function Customer(props) {
             horizontal: "center",
             marginTop: "64px",
           }}
-          //transitionDuration={100}
           TransitionComponent={Slide}
         >
           <MuiAlert
@@ -464,22 +463,12 @@ export default function Customer(props) {
             onClose={handleCloseSuccessMessage}
             severity="success"
             sx={{
-              fontSize: "1.5rem", 
-              textAlign: "center", 
+              fontSize: "1.5rem",
+              textAlign: "center",
               display: "flex",
               alignItems: "center",
-              borderRadius:"8px",
+              borderRadius: "8px",
             }}
-            //   action={
-            //     <IconButton
-            //         size="small"
-            //         aria-label="close"
-            //         color="inherit"
-            //         onClick={handleCloseSuccessMessage}
-            //     >
-            //         <CloseIcon fontSize="small" />
-            //     </IconButton>
-            // }
           >
             {props.type === "add"
               ? "Customer added successfully!"
