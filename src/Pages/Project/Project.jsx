@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
-
 import Box from "@mui/material/Box";
-
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-
 import SaveIcon from "@mui/icons-material/Save";
-
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
@@ -34,7 +30,9 @@ import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices";
 import BoltIcon from "@mui/icons-material/Bolt";
 import * as projectService from "../../services/projectService";
 import FormEditButton from "../../Components/StyledComponents/FormEditButton";
-
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import Slide from "@mui/material/Slide";
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -137,6 +135,11 @@ export default function Project(props) {
   const [openEmployee, setOpenEmployee] = useState(false);
   const [openReferenceBy, setOpenReferenceBy] = useState(false);
   const [openSalesPerson, setOpenSalesPerson] = useState(false);
+  const [successMessageOpen, setSuccessMessageOpen] = useState(false);
+
+  const handleCloseSuccessMessage = () => {
+    setSuccessMessageOpen(false);
+  };
 
   //set initial values in formik
   const {
@@ -191,6 +194,7 @@ export default function Project(props) {
     validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
+      setSuccessMessageOpen(true);
       setLoading(true);
       if (props.type === "add") {
         projectService
@@ -252,16 +256,17 @@ export default function Project(props) {
       flexDirection="column"
       padding={5}
     >
-      <Grid container component={Paper}
+      <Grid
+        container
+        component={Paper}
         sx={{
-          p:2,
-          borderRadius:3,
-          '& .MuiGrid-item' : {
-            padding: 1
-        },
+          p: 2,
+          borderRadius: 3,
+          "& .MuiGrid-item": {
+            padding: 1,
+          },
         }}
         elevation={4}
-
       >
         <Grid item xs={6}>
           <FormTextField
@@ -273,7 +278,10 @@ export default function Project(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedCustomer?.firstName && props.type !== "view") {
+              if (
+                !values.selectedCustomer?.firstName &&
+                props.type !== "view"
+              ) {
                 setOpenCustomer(true);
               }
             }}
@@ -295,7 +303,8 @@ export default function Project(props) {
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedCustomer?.firstName && errors.selectedCustomer?.firstName
+              touched.selectedCustomer?.firstName &&
+              errors.selectedCustomer?.firstName
             }
             helperText={
               touched.selectedCustomer?.firstName
@@ -303,7 +312,6 @@ export default function Project(props) {
                 : ""
             }
             variant="filled"
-
           />
         </Grid>
         <Grid item xs={6}>
@@ -408,7 +416,10 @@ export default function Project(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedReferenceBy?.firstName && props.type !== "view") {
+              if (
+                !values.selectedReferenceBy?.firstName &&
+                props.type !== "view"
+              ) {
                 setOpenReferenceBy(true);
               }
             }}
@@ -469,7 +480,10 @@ export default function Project(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedEmployee?.firstName && props.type !== "view") {
+              if (
+                !values.selectedEmployee?.firstName &&
+                props.type !== "view"
+              ) {
                 setOpenEmployee(true);
               }
             }}
@@ -491,7 +505,8 @@ export default function Project(props) {
             disabled={props.type === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedEmployee?.firstName && errors.selectedEmployee?.firstName
+              touched.selectedEmployee?.firstName &&
+              errors.selectedEmployee?.firstName
             }
             helperText={
               touched.selectedEmployee?.firstName
@@ -617,7 +632,10 @@ export default function Project(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedSalesPerson?.firstName && props.type !== "view") {
+              if (
+                !values.selectedSalesPerson?.firstName &&
+                props.type !== "view"
+              ) {
                 setOpenSalesPerson(true);
               }
             }}
@@ -810,6 +828,36 @@ export default function Project(props) {
         setOpenSalesPerson={setOpenSalesPerson}
         sendData={setFieldValue}
       />
+
+      <Snackbar
+        open={successMessageOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSuccessMessage}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+          marginTop: "64px",
+        }}
+        TransitionComponent={Slide}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseSuccessMessage}
+          severity="success"
+          sx={{
+            fontSize: "1.5rem",
+            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            borderRadius: "8px",
+          }}
+        >
+          {props.type === "add"
+            ? "Project added successfully!"
+            : "Project details updated successfully!"}
+        </MuiAlert>
+      </Snackbar>
     </Box>
   );
 }
