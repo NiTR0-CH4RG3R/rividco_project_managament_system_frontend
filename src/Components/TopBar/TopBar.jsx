@@ -50,7 +50,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   };
 
   const handleHomeButtonClick = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   return (
