@@ -12,9 +12,7 @@ function TopBarAvatar({ name, userRole, avtarImageLink, click }) {
         onClick={click}
         sx={{
           color: "#071024",
-          p: 1,
-          width: 32,
-          height: 32,
+
           "&:hover": {
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
             borderRadius: "50%",
