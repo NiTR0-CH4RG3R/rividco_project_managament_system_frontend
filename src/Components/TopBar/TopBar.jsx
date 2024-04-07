@@ -17,7 +17,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Avatar from "./Avatar";
 import SystemUser from "../../Pages/SystemUser/SystemUser";
 import { AuthContext } from "../../auth/AuthContextProvider";
-import {getSystemUser} from "../../services/systemUserService";
+import { getSystemUser } from "../../services/systemUserService";
 
 export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const colorMode = useContext(ColorModeContext);
@@ -135,10 +135,10 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
 
         <Tooltip title="Account">
           <Avatar
-          name={systemUserFirstName}
-          userRole={systemUserRole}
-          avtarImageLink={systemUserImageLink}
-          click={handleAccountButtonClick}
+            name={systemUserFirstName}
+            userRole={systemUserRole}
+            avtarImageLink={systemUserImageLink}
+            click={handleAccountButtonClick}
           />
         </Tooltip>
 
@@ -166,7 +166,6 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
             <AccountCircle />
           </IconButton>
         </Tooltip> */}
-        
 
         <Tooltip title="LogOut">
           <IconButton
