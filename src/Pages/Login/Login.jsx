@@ -54,6 +54,10 @@ const Login = () => {
             );
     };
 
+    const handleReset = () => {
+        navigate('/reset')
+    }
+
 
     return (
         <Box
@@ -156,6 +160,12 @@ const Login = () => {
                             error={passwordError}
                             helperText={passwordError && 'Password is required'}
                         />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Typography onClick={handleReset} variant='h5' style={{ margin: '2%', textAlign: 'left', color: 'black' }}>
+                            Forgot Password?
+                        </Typography>
                     </Grid>
 
                     <Grid
