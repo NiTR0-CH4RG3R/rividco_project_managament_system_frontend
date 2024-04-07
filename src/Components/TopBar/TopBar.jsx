@@ -16,6 +16,7 @@ import { AppRoutes } from "../../Data/AppRoutes";
 import Tooltip from "@mui/material/Tooltip";
 import Avatar from "./Avatar";
 import SystemUser from "../../Pages/SystemUser/SystemUser";
+import { AuthContext } from "../../auth/AuthContextProvider";
 
 export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const colorMode = useContext(ColorModeContext);
@@ -25,6 +26,9 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const navigate = useNavigate();
 
   const location = useLocation();
+
+  const { auth } = useContext(AuthContext);
+  const userId = auth.userId;
 
   const [backButtonVisible, setBackButtonVisible] = useState(false);
   const [logoutButtonVisible, setLogoutButtonVisible] = useState(false);
