@@ -32,12 +32,14 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const userId = auth.userId;
 
   const [systemUserFirstName, setSystemUserFirstName] = useState("");
+  const [systemUserImageLink, setSystemUserImageLink] = useState("");
 
   useEffect(() => {
     const fetchSystemUserData = async () => {
       try {
         const systemUser = await getSystemUser(userId);
         setSystemUserFirstName(systemUser.firstName);
+        setSystemUserImageLink(systemUser.profilePicture);
       } catch (error) {
         console.error("Error fetching system user data:", error);
       }
@@ -155,9 +157,9 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
         </Tooltip>
         <Tooltip title="Account2">
           <Avatar
-
-          //name={firstName}
           name={systemUserFirstName}
+          avtarImageLink={systemUserImageLink}
+          click={handleAccountButtonClick}
           />
         </Tooltip>
 
