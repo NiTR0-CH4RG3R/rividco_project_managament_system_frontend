@@ -133,6 +133,15 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
           </IconButton> */}
         </Tooltip>
 
+        <Tooltip title="Account">
+          <Avatar
+          name={systemUserFirstName}
+          userRole={systemUserRole}
+          avtarImageLink={systemUserImageLink}
+          click={handleAccountButtonClick}
+          />
+        </Tooltip>
+
         <Tooltip title="Home">
           <IconButton
             type="button"
@@ -147,7 +156,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
           </IconButton>
         </Tooltip>
 
-        <Tooltip title="Account">
+        {/* <Tooltip title="Account">
           <IconButton
             aria-label="Account"
             type="button"
@@ -156,15 +165,8 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
           >
             <AccountCircle />
           </IconButton>
-        </Tooltip>
-        <Tooltip title="Account2">
-          <Avatar
-          name={systemUserFirstName}
-          userRole={systemUserRole}
-          avtarImageLink={systemUserImageLink}
-          click={handleAccountButtonClick}
-          />
-        </Tooltip>
+        </Tooltip> */}
+        
 
         <Tooltip title="LogOut">
           <IconButton
