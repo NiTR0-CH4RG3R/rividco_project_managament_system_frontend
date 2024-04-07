@@ -17,6 +17,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Avatar from "./Avatar";
 import SystemUser from "../../Pages/SystemUser/SystemUser";
 import { AuthContext } from "../../auth/AuthContextProvider";
+import {getSystemUser} from "../../services/systemUserService";
 
 export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const colorMode = useContext(ColorModeContext);
@@ -29,6 +30,21 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
 
   const { auth } = useContext(AuthContext);
   const userId = auth.userId;
+
+  const [systemUserFirstName, setSystemUserFirstName] = useState("");
+
+  useEffect(() => {
+    const fetchSystemUserData = async () => {
+      try {
+        const systemUser = await getSystemUser(userId);
+        setSystemUserFirstName(systemUser.firstName);
+      } catch (error) {
+        console.error("Error fetching system user data:", error);
+      }
+    };
+
+    fetchSystemUserData();
+  }, [userId]);
 
   const [backButtonVisible, setBackButtonVisible] = useState(false);
   const [logoutButtonVisible, setLogoutButtonVisible] = useState(false);
@@ -69,9 +85,8 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
         justifyContent: "space-between",
         alignItems: "center",
         p: 2,
-        backgroundColor:"#e3e3e3",
-        color:"#071024"
-        
+        backgroundColor: "#e3e3e3",
+        color: "#071024",
       }}
     >
       {/* Back Button */}
@@ -83,7 +98,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
               sx={{
                 color: "#071024",
                 p: 1,
-                mr:2,
+                mr: 2,
                 display: backButtonVisible ? "block" : "none",
               }}
               onClick={handleBackButtonClick}
@@ -138,13 +153,13 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
             <AccountCircle />
           </IconButton>
         </Tooltip>
-        {/* <Tooltip title="Account2">
+        <Tooltip title="Account2">
           <Avatar
-          
-          //name={firstName}
 
+          //name={firstName}
+          name={systemUserFirstName}
           />
-        </Tooltip> */}
+        </Tooltip>
 
         <Tooltip title="LogOut">
           <IconButton
