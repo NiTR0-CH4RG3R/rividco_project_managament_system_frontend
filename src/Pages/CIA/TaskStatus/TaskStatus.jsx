@@ -49,7 +49,7 @@ function TaskStatus() {
       .catch((error) => {
         console.log(error)
       })
-  }, [id, page, rowsPerPage])
+  }, [id, page, rowsPerPage, openPopUp])
 
   return (
     <>
