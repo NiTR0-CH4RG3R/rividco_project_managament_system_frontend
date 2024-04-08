@@ -21,6 +21,7 @@ import Home from '../Pages/Home/Home'
 import Test from '../Pages/Test/Test'
 import CommisionReport from '../Pages/Project/CommisionReport'
 import TaskResourceList from '../Pages/CIA/TaskResourceList'
+import TaskResources from '../Pages/CIA/TaskResources'
 
 export const AppRoutes = {
   home: { path: '/', component: <Home /> },
@@ -105,7 +106,7 @@ export const AppRoutes = {
   cia_edit: { path: '/cia/edit/:id', component: <Task type="edit" /> },
   cia_resources_add: {
     path: '/cia/resource/add/:id',
-    component: <AddTaskResources type="add" />,
+    component: <TaskResources type="add" />,
   },
   cia_resources_view: {
     path: '/cia/resource/view/:id',
