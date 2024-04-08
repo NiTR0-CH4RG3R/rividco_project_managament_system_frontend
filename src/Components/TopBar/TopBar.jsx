@@ -55,7 +55,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const [homebuttonVisible, setHomeButtonVisible] = useState(false);
 
   useEffect(() => {
-    const isHomePage = location.pathname === "/home";
+    const isHomePage = location.pathname === "/";
     setBackButtonVisible(!isHomePage);
     setLogoutButtonVisible(isHomePage);
     setHomeButtonVisible(!isHomePage);
