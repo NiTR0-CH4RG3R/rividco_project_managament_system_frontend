@@ -33,6 +33,7 @@ import FormEditButton from "../../Components/StyledComponents/FormEditButton";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Slide from "@mui/material/Slide";
+import ProjectViewButton from "../../Components/StyledComponents/ProjectViewButton";
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
@@ -717,8 +718,8 @@ export default function Project(props) {
         )}
         {props.type === "view" && (
           <>
-            <FormButton
-              variant="contained"
+            <ProjectViewButton
+              variant="outlined"
               color="primary"
               startIcon={<CategoryIcon />}
               sx={{
@@ -731,9 +732,9 @@ export default function Project(props) {
               }
             >
               Items
-            </FormButton>
-            <FormButton
-              variant="contained"
+            </ProjectViewButton>
+            <ProjectViewButton
+              variant="outlined"
               color="primary"
               startIcon={<ElectricalServicesIcon />}
               sx={{
@@ -746,9 +747,9 @@ export default function Project(props) {
               }
             >
               Services
-            </FormButton>
-            <FormButton
-              variant="contained"
+            </ProjectViewButton>
+            <ProjectViewButton
+              variant="outlined"
               color="primary"
               startIcon={<SpeedIcon />}
               sx={{
@@ -761,9 +762,9 @@ export default function Project(props) {
               }
             >
               Tests
-            </FormButton>
-            <FormButton
-              variant="contained"
+            </ProjectViewButton>
+            <ProjectViewButton
+              variant="outlined"
               color="primary"
               startIcon={<BoltIcon />}
               sx={{
@@ -776,9 +777,9 @@ export default function Project(props) {
               }
             >
               Resources
-            </FormButton>
-            <FormButton
-              variant="contained"
+            </ProjectViewButton>
+            <ProjectViewButton
+              variant="outlined"
               startIcon={<ReportIcon />}
               color="primary"
               sx={{
@@ -791,7 +792,7 @@ export default function Project(props) {
               }
             >
               Commision Reports
-            </FormButton>
+            </ProjectViewButton>
             <FormEditButton
               variant="contained"
               color="primary"
