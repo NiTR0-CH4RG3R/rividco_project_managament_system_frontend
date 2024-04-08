@@ -20,7 +20,7 @@ function TopBarAvatar({ name, userRole, avtarImageLink, click }) {
         }}
       />
       <Box sx={{ ml: 1, mr: 1 }}>
-        <Typography variant="body1">{name}</Typography>
+        <Typography variant="body1" sx={{ fontSize:"16px" }}>{name}</Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           {userRole}
         </Typography>
