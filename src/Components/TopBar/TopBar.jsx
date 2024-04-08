@@ -149,6 +149,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
               color: "#071024",
               p: 1,
               display: homebuttonVisible ? "" : "none",
+              mr:2,
             }}
             onClick={handleHomeButtonClick}
           >
