@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Grid, MenuItem, Avatar } from "@mui/material";
-import Paper from "@mui/material/Paper"
+import Paper from "@mui/material/Paper";
 import { useFormik } from "formik";
 import SystemUserValidation from "../../Validation/SystemUserValidation";
 import { useParams, useNavigate } from "react-router-dom";
@@ -15,6 +15,9 @@ import FormEditButton from "../../Components/StyledComponents/FormEditButton";
 import FormSaveLoadingButton from "../../Components/StyledComponents/FormSaveLoadingButton";
 import { AppRoutes } from "../../Data/AppRoutes";
 import * as systemUserService from "../../services/systemUserService";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import Slide from "@mui/material/Slide";
 
 const roles = [
   {
@@ -49,6 +52,11 @@ export default function SystemUser(props) {
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [successMessageOpen, setSuccessMessageOpen] = useState(false);
+
+  const handleCloseSuccessMessage = () => {
+    setSuccessMessageOpen(false);
+  };
 
   //const inputRef = useRef()
 
@@ -111,6 +119,7 @@ export default function SystemUser(props) {
       comment: "",
     },
     onSubmit: (values) => {
+      setSuccessMessageOpen(true);
       setLoading(true);
       if (props.type === "add") {
         systemUserService
@@ -141,7 +150,6 @@ export default function SystemUser(props) {
     validationSchema: SystemUserValidation,
   });
 
-  
   const navi = useNavigate();
 
   return (
@@ -197,15 +205,17 @@ export default function SystemUser(props) {
         </Grid>
       </Grid>
 
-      <Grid container component={Paper} 
-          sx={{
-            p : 2,
-            borderRadius: 3,
-            '& .MuiGrid-item' : {
-              padding: 1
-            },
-          }}
-          elevation={4}
+      <Grid
+        container
+        component={Paper}
+        sx={{
+          p: 2,
+          borderRadius: 3,
+          "& .MuiGrid-item": {
+            padding: 1,
+          },
+        }}
+        elevation={4}
       >
         <Grid item xs={6}>
           <FormTextField
@@ -402,54 +412,83 @@ export default function SystemUser(props) {
             helperText={touched.comment ? errors.comment : ""}
           />
         </Grid>
-        </Grid>
+      </Grid>
 
-        <Box
-          display="flex"
-          width="100%"
-          pt={3}
-          justifyContent="flex-end"
+      <Box
+        display="flex"
+        width="100%"
+        pt={3}
+        justifyContent="flex-end"
+        sx={{
+          "& .MuiButton-root": { m: 1 },
+        }}
+      >
+        {(props.type === "add" || props.type === "edit") && (
+          <>
+            {" "}
+            <FormClearButton
+              variant="outlined
+                "
+              size="large"
+              onClick={handleReset}
+              startIcon={<ClearAllIcon />}
+            >
+              Clear
+            </FormClearButton>
+            <FormSaveLoadingButton
+              variant="contained"
+              size="large"
+              onClick={submitForm}
+              startIcon={<SaveIcon />}
+            >
+              Save
+            </FormSaveLoadingButton>
+          </>
+        )}
+        {props.type === "view" && (
+          <>
+            <FormEditButton
+              variant="contained"
+              size="large"
+              startIcon={<EditIcon />}
+              onClick={() =>
+                navi(`${AppRoutes.system_user_edit.path.replace(":id", id)}}`)
+              }
+            >
+              Edit
+            </FormEditButton>
+          </>
+        )}
+      </Box>
+      <Snackbar
+        open={successMessageOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSuccessMessage}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+          marginTop: "64px",
+        }}
+        TransitionComponent={Slide}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseSuccessMessage}
+          severity="success"
           sx={{
-            "& .MuiButton-root": { m: 1 },
+            fontSize: "1.5rem",
+            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            borderRadius: "8px",
           }}
         >
-          {(props.type === "add" || props.type === "edit") && (
-            <>
-              {" "}
-              <FormClearButton
-                variant="outlined
-                "
-                size="large"
-                onClick={handleReset}
-                startIcon={<ClearAllIcon />}
-              >
-                Clear
-              </FormClearButton>
-              <FormSaveLoadingButton
-                variant="contained"
-                size="large"
-                onClick={submitForm}
-                startIcon={<SaveIcon />}
-              >
-                Save
-              </FormSaveLoadingButton>
-            </>
-          )}
-          {props.type === "view" && (
-            <>
-              <FormEditButton
-                variant="contained"
-                size="large"
-                startIcon={<EditIcon />}
-                onClick={() =>
-                  navi(`${AppRoutes.system_user_edit.path.replace(":id", id)}}`)
-                }
-              >
-                Edit
-              </FormEditButton>
-            </>
-          )}
-        </Box>
+          {props.type === "add"
+            ? "Task added successfully!"
+            : "Task details updated successfully!"}
+        </MuiAlert>
+      </Snackbar>
     </Box>
   );
 }
