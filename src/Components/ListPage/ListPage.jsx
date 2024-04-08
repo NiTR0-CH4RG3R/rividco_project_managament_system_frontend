@@ -64,7 +64,7 @@ export default function ListPage({
   tiptitle,
 }) {
   return (
-    <Box width="90%" height="70%" display="flex" flexDirection="column">
+    <Box width="90%" height="80%" display="flex" flexDirection="column">
       <Box
         width="100%"
         display="flex"
@@ -79,7 +79,7 @@ export default function ListPage({
         <TableContainer
           sx={{ maxHeight: "90%", borderRadius: "8px 8px 0px 0px" }}
         >
-          <ListTable stickyHeader aria-label="simple table" size="small">
+          <ListTable stickyHeader aria-label="simple table" size="medium">
             <TableHead>
               <TableRow key={0}>
                 {columns.map((column) => (
@@ -152,7 +152,7 @@ export default function ListPage({
               p: 2,
               "&:hover": {
                 backgroundColor: "#0a538f",
-                color: "#FFFFFF", 
+                color: "#FFFFFF",
                 transform: "scale(1.1)",
               },
             }}
