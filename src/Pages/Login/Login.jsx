@@ -180,6 +180,7 @@ const Login = () => {
                             type='reset'
                             variant='outlined'
                             size='large'
+                            style={{marginTop:'1vw'}}
                             startIcon={<ClearAllOutlined />}
                         >
                             Clear
@@ -189,6 +190,7 @@ const Login = () => {
                             type='submit'
                             variant='contained'
                             size='large'
+                            style={{marginTop:'1vw'}}
                             startIcon={<LoginOutlined />}
                         >
                             LogIn
