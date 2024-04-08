@@ -22,6 +22,8 @@ import FormEditButton from "../../Components/StyledComponents/FormEditButton";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Slide from "@mui/material/Slide";
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import ProjectViewButton from "../../Components/StyledComponents/ProjectViewButton";
 
 export default function Customer(props) {
   const [loading, setLoading] = useState(false);
@@ -417,15 +419,16 @@ export default function Customer(props) {
           )}
           {props.type === "view" && (
             <>
-              <FormButton
-                variant="contained"
+              <ProjectViewButton
+                variant="outlined"
                 size="large"
                 color="primary"
+                startIcon={<WorkOutlineIcon/>}
                 sx={{ mr: 2 }}
                 onClick={() => setOpenProjectFilter(true)}
               >
                 Projects
-              </FormButton>
+              </ProjectViewButton>
               <FormEditButton
                 variant="contained"
                 size="large"
