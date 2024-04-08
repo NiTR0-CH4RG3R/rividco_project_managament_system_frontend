@@ -32,6 +32,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const userId = auth.userId;
 
   const [systemUserFirstName, setSystemUserFirstName] = useState("");
+  const [systemUserLastName, setSystemUserLastName] = useState("");
   const [systemUserRole, setSystemUserRole] = useState("");
   const [systemUserImageLink, setSystemUserImageLink] = useState("");
 
@@ -40,6 +41,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
       try {
         const systemUser = await getSystemUser(userId);
         setSystemUserFirstName(systemUser.firstName);
+        setSystemUserLastName(systemUser.lastName);
         setSystemUserImageLink(systemUser.profilePicture);
         setSystemUserRole(systemUser.role);
       } catch (error) {
@@ -135,7 +137,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
 
         <Tooltip title="Account">
           <Avatar
-            name={systemUserFirstName}
+            name={`${systemUserFirstName} ${systemUserLastName}`}
             userRole={systemUserRole}
             avtarImageLink={systemUserImageLink}
             click={handleAccountButtonClick}
