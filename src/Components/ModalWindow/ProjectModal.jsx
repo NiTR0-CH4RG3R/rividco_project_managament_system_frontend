@@ -1,96 +1,113 @@
-import { Modal, Button } from "@mui/material";
-import { Box, Typography } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
-import * as projectService from "../../services/projectService";
-import CloseIcon from "@mui/icons-material/Close";
-import { IconButton } from "@mui/material";
+import { Modal, Button } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
+import { useEffect, useState } from 'react'
+import * as projectService from '../../services/projectService'
+import CloseIcon from '@mui/icons-material/Close'
+import { IconButton } from '@mui/material'
 
 export default function ProjectModal(props) {
-  const { openProject, setOpenProject, sendData } = props;
+  const { openProject, setOpenProject, sendData } = props
 
   const projectcols = [
-    { field: "projectId", headerName: "Project Id", align: "left" },
-    { field: "customer", headerName: "Customer", align: "left" },
-    { field: "location", headerName: "Location", align: "left" },
-    { field: "coordinator", headerName: "Coordinator", align: "left" },
-    { field: "status", headerName: "Status" },
-  ];
+    { field: 'id', headerName: 'Project Id', width: 150 },
+    { field: 'customerId', headerName: 'Customer Id', width: 150 },
+    { field: 'address', headerName: 'Location', width: 150 },
+    { field: 'coordinatorId', headerName: 'Coordinator Id', width: 150 },
+    { field: 'status', headerName: 'Status' },
+  ]
 
   const handleClose = () => {
-    setOpenProject(false);
-  };
+    setOpenProject(false)
+  }
 
-  const [rows, setRows] = useState([]);
-  const [loadidng, setLoading] = useState(false);
+  const [rows, setRows] = useState([])
+  const [loadidng, setLoading] = useState(false)
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     projectService
       .listAllProjects()
       .then((project) => {
-        setRows(project);
-        setLoading(false);
+        setRows(project)
+        setLoading(false)
       })
       .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, []);
+        console.error(error)
+        setLoading(false)
+      })
+  }, [])
 
   return (
     <>
-      
-        <Modal open={openProject} onClose={handleClose}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              minWidth: 800,
-              minHeight: 400,
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              p: 4,
-              borderRadius: 3
+      <Modal
+        open={openProject}
+        onClose={handleClose}
+        sx={{
+          '& .MuiTypography-root': {
+            fontWeight: 'bold',
+            fontSize: '1.5rem',
+            marginBottom: '0.5rem',
+          },
+          '& .MuiDataGrid-root': {
+            border: '3px solid #ccc',
 
+            '& .MuiDataGrid-columnHeaders': {
+              backgroundColor: '#F1F3F4',
+              fontWeight: 'bold',
+              fontSize: '1.0rem',
+            },
+          },
+        }}
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            minWidth: 800,
+            minHeight: 400,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            borderRadius: 3,
+          }}
+        >
+          <Typography variant="h6">Project Modal</Typography>
+
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
             }}
           >
-            <Typography variant="h6">Project Modal</Typography>
-
-            <IconButton
-              aria-label="close"
-              onClick={handleClose}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
+            <CloseIcon />
+          </IconButton>
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={rows}
+              columns={projectcols}
+              disableColumnFilter
+              disableColumnSelector
+              disableDensitySelector
+              slots={{ toolbar: GridToolbar }}
+              slotProps={{
+                toolbar: {
+                  showQuickFilter: true,
+                },
               }}
-            >
-              <CloseIcon />
-            </IconButton>
-            <div style={{ height: 400, width: "100%" }}>
-              <DataGrid
-                rows={rows}
-                columns={projectcols}
-                disableColumnFilter
-                disableColumnSelector
-                disableDensitySelector
-                slots={{ toolbar: GridToolbar }}
-                slotProps={{
-                  toolbar: {
-                    showQuickFilter: true,
-                  },
-                }}
-                onRowClick={({ row }) => {
-                  sendData("selectedProject", row);
-                  setOpenProject(false);
-                }}
-                pagination
-              />
-            </div>
-            {/* <div
+              onRowClick={({ row }) => {
+                sendData('selectedProject', row)
+                setOpenProject(false)
+              }}
+              pagination
+            />
+          </div>
+          {/* <div
               style={{
                 display: "flex",
                 justifyContent: "end",
@@ -107,9 +124,8 @@ export default function ProjectModal(props) {
                 Close
               </Button>
             </div> */}
-          </Box>
-        </Modal>
-      
+        </Box>
+      </Modal>
     </>
-  );
+  )
 }

@@ -1,31 +1,31 @@
-import { Modal, Button } from "@mui/material";
-import { Box, Typography } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
-import * as vendorItemService from "../../services/vendorItemService";
-import CloseIcon from "@mui/icons-material/Close";
-import { IconButton } from "@mui/material";
+import { Modal, Button } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
+import { useEffect, useState } from 'react'
+import * as vendorItemService from '../../services/vendorItemService'
+import CloseIcon from '@mui/icons-material/Close'
+import { IconButton } from '@mui/material'
 
 export default function VendorItemModal(props) {
-  const { openVendorItem, setOpenVendorItem, sendData } = props;
+  const { openVendorItem, setOpenVendorItem, sendData } = props
 
   const vendoritemcols = [
-    { field: "productName", headerName: "Item Name", align: "left" },
-    { field: "vendor", headerName: "Vendor", align: "left" },
-    { field: "brand", headerName: "Brand", align: "left" },
-    { field: "price", headerName: "Price", align: "left" },
-    { field: "capacity", headerName: "Capacity" },
-  ];
+    { field: 'productName', headerName: 'Item Name', width: 150 },
+    { field: 'vendor', headerName: 'Vendor', width: 150 },
+    { field: 'brand', headerName: 'Brand', width: 150 },
+    { field: 'price', headerName: 'Price', width: 150 },
+    { field: 'capacity', headerName: 'Capacity' },
+  ]
 
   const handleClose = () => {
-    setOpenVendorItem(false);
-  };
+    setOpenVendorItem(false)
+  }
 
-  const [rows, setRows] = useState([]);
-  const [loadidng, setLoading] = useState(false);
+  const [rows, setRows] = useState([])
+  const [loadidng, setLoading] = useState(false)
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     /* vendorItemService
       .listAllVendorItem()
       .then((vendorItem) => {
@@ -36,62 +36,79 @@ export default function VendorItemModal(props) {
         console.error(error);
         setLoading(false);
       });*/
-  }, []);
+  }, [])
 
   return (
     <>
-      
-        <Modal open={openVendorItem} onClose={handleClose}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              minWidth: 800,
-              minHeight: 400,
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              p: 4,
-              borderRadius: 3
+      <Modal
+        open={openVendorItem}
+        onClose={handleClose}
+        sx={{
+          '& .MuiTypography-root': {
+            fontWeight: 'bold',
+            fontSize: '1.5rem',
+            marginBottom: '0.5rem',
+          },
+          '& .MuiDataGrid-root': {
+            border: '3px solid #ccc',
 
+            '& .MuiDataGrid-columnHeaders': {
+              backgroundColor: '#F1F3F4',
+              fontWeight: 'bold',
+              fontSize: '1.0rem',
+            },
+          },
+        }}
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            minWidth: 800,
+            minHeight: 400,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            borderRadius: 3,
+          }}
+        >
+          <Typography variant="h6">Vendor Item Modal</Typography>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
             }}
           >
-            <Typography variant="h6">Vendor Item Modal</Typography>
-            <IconButton
-              aria-label="close"
-              onClick={handleClose}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
+            <CloseIcon />
+          </IconButton>
+
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={rows}
+              columns={vendoritemcols}
+              disableColumnFilter
+              disableColumnSelector
+              disableDensitySelector
+              slots={{ toolbar: GridToolbar }}
+              slotProps={{
+                toolbar: {
+                  showQuickFilter: true,
+                },
               }}
-            >
-              <CloseIcon />
-            </IconButton>
+              onRowClick={({ row }) => {
+                sendData('selectedVendorItem', row)
+                setOpenVendorItem(false)
+              }}
+              pagination
+            />
+          </div>
 
-            <div style={{ height: 400, width: "100%" }}>
-              <DataGrid
-                rows={rows}
-                columns={vendoritemcols}
-                disableColumnFilter
-                disableColumnSelector
-                disableDensitySelector
-                slots={{ toolbar: GridToolbar }}
-                slotProps={{
-                  toolbar: {
-                    showQuickFilter: true,
-                  },
-                }}
-                onRowClick={({ row }) => {
-                  sendData("selectedVendorItem", row);
-                  setOpenVendorItem(false);
-                }}
-                pagination
-              />
-            </div>
-
-            {/* <div
+          {/* <div
               style={{
                 display: "flex",
                 justifyContent: "end",
@@ -108,9 +125,8 @@ export default function VendorItemModal(props) {
                 Close
               </Button>
             </div> */}
-          </Box>
-        </Modal>
-      
+        </Box>
+      </Modal>
     </>
-  );
+  )
 }
