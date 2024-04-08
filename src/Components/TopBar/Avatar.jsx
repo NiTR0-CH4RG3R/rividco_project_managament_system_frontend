@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 
 function TopBarAvatar({ name, userRole, avtarImageLink, click }) {
   return (
-    <Box display="flex" alignItems="center" sx={{ height: 40 }}>
+    <Box display="flex" alignItems="center" sx={{ height: 40,mr:2 }}>
       <Avatar
         alt={name}
         src={avtarImageLink}
