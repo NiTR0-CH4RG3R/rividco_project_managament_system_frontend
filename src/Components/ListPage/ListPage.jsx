@@ -64,7 +64,7 @@ export default function ListPage({
   tiptitle,
 }) {
   return (
-    <Box width="90%" height="80%" display="flex" flexDirection="column">
+    <Box width="90%" height="90%" display="flex" flexDirection="column">
       <Box
         width="100%"
         display="flex"
