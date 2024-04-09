@@ -256,7 +256,7 @@ export default function Project(props) {
       alignItems="center"
       flexDirection="column"
       padding={5}
-      height={"80%"}
+      
     >
       <Grid
         container
