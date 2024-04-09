@@ -22,9 +22,9 @@ export default function SideNavigationPanelMenu({ name, icon, subMenu }) {
 
   return (
     <>
-      <NavMenuitemListitemButton onClick={handleClick} selected={open}>
+      <NavMenuitemListitemButton onClick={handleClick} selected={open} sx={{height:"60px"}}>
         <ListItemIcon sx={{ color: "#FFFFFF" }}>{icon}</ListItemIcon>
-        <ListItemText primary={name} />
+        <ListItemText primaryTypographyProps={{fontSize: '20px'}} primary={name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </NavMenuitemListitemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -55,6 +55,7 @@ export default function SideNavigationPanelMenu({ name, icon, subMenu }) {
                   sx: {
                     display: "flex",
                     justifyContent: "flex-end",
+        
                   },
                 }}
                 secondaryTypographyProps={{
