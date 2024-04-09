@@ -271,7 +271,7 @@ export default function Task(props) {
         }}
         elevation={3}
       >
-        <Grid item xs={props.type === "view" ? 12 : 12}>
+        <Grid item xs={12}>
           <RequestedCustomerField
             values={values}
             setFieldValue={setFieldValue}
