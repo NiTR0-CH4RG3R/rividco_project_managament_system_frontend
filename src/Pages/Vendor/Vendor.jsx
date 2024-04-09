@@ -156,7 +156,7 @@ export default function Vendor(props) {
             padding: 1,
           },
         }}
-        elevation={4}
+        elevation={3}
       >
         <Grid item xs={12}>
           <FormTextField

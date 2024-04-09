@@ -268,7 +268,7 @@ export default function Task(props) {
             padding: 1,
           },
         }}
-        elevation={4}
+        elevation={3}
       >
         <Grid item xs={props.type === "view" ? 12 : 10}>
           <FormTextField
