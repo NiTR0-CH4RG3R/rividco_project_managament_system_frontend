@@ -1,12 +1,12 @@
 import { get, post, put, del } from '../api/axios'
 
-const VENDOR_URL = '/SystemUser'
+const SYSTEMUSER_URL = '/SystemUser'
 
 export async function listSystemUsers(page, itemsPerPage) {
   const systemUsers = []
 
   try {
-    const response = await get(VENDOR_URL, { page, pageSize: itemsPerPage })
+    const response = await get(SYSTEMUSER_URL, { page, pageSize: itemsPerPage })
     response?.data?.forEach((systemUser) => {
       systemUsers.push({
         id: systemUser.id,
@@ -15,7 +15,7 @@ export async function listSystemUsers(page, itemsPerPage) {
         username: systemUser.username,
         role: systemUser.role,
         address: systemUser.address,
-        contact: systemUser.phone01,
+        phone01: systemUser.phone01,
       })
     })
   } catch (error) {
@@ -29,7 +29,7 @@ export async function listAllSystemUsers() {
   const systemUsers = []
 
   try {
-    const response = await get(`${VENDOR_URL}/all`)
+    const response = await get(`${SYSTEMUSER_URL}/all`)
     response?.data?.forEach((systemUser) => {
       systemUsers.push({
         id: systemUser.id,
@@ -40,6 +40,7 @@ export async function listAllSystemUsers() {
         role: systemUser.role,
         address: systemUser.address,
         phone01: systemUser.phone01,
+        comment: systemUser.comments,
       })
     })
   } catch (error) {
@@ -53,7 +54,7 @@ export async function getSystemUser(id) {
   let systemUser = {}
 
   try {
-    const response = await get(`${VENDOR_URL}/${id}`)
+    const response = await get(`${SYSTEMUSER_URL}/${id}`)
     systemUser = response?.data
   } catch (error) {
     console.error(error)
@@ -64,7 +65,7 @@ export async function getSystemUser(id) {
 
 export async function addSystemUser(systemUser) {
   try {
-    await post(VENDOR_URL, systemUser)
+    await post(SYSTEMUSER_URL, systemUser)
   } catch (error) {
     console.error(error)
   }
@@ -72,7 +73,7 @@ export async function addSystemUser(systemUser) {
 
 export async function updateSystemUser(systemUser, id) {
   try {
-    await put(`${VENDOR_URL}/${id}`, systemUser)
+    await put(`${SYSTEMUSER_URL}/${id}`, systemUser)
   } catch (error) {
     console.error(error)
   }

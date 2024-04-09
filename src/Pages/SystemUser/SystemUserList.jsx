@@ -8,9 +8,9 @@ import * as systemUserService from "../../services/systemUserService";
 const columns = [
   { id: "firstName", label: "First Name", align: "left" },
   { id: "lastName", label: "Last Name", align: "left" },
-  { id: "role", label: "Role", align: "center" },
-  { id: "status", label: "Address", align: "center" },
-  { id: "contact", label: "Contact Number" },
+  { id: "role", label: "Role", align: "left" },
+  { id: "address", label: "Address", align: "left" },
+  { id: "phone01", label: "Contact Number" , align: "left"},
 ];
 
 export default function SystemUserList() {
@@ -59,6 +59,7 @@ export default function SystemUserList() {
       }}
       onRowClick={(e, id) => {
         console.log(id);
+        navigate(AppRoutes.system_user_view.path.replace(':id', id))
       }}
       onAddButtonClick={(e) => {
         navigate(AppRoutes.system_user_add.path);

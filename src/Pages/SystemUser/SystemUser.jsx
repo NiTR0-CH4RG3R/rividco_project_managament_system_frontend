@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Grid, MenuItem, Avatar } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { useFormik } from "formik";
@@ -33,6 +33,25 @@ const roles = [
 export default function SystemUser(props) {
   const { id } = useParams();
   const { setTitle, setSubtitle } = useTopbarContext();
+
+  function loadSystemUserData(id, setValues) { 
+    systemUserService.getSystemUser(id)
+      .then(async(systemUser) => {
+        const systemUserValues = {
+          firstName: systemUser.firstName,
+          lastName: systemUser.lastName,
+          address: systemUser.address,
+          email: systemUser.email,
+          role: systemUser.role,
+          mobileNo: systemUser.phone01,
+          officeNo: systemUser.phone02,
+          userName: systemUser.userName,
+          password: systemUser.password,
+          comment: systemUser.comments,
+        };
+        setValues(systemUserValues);  
+    });
+  }
   setTitle(
     props.type === "add"
       ? "Add a new System User"
@@ -105,6 +124,7 @@ export default function SystemUser(props) {
     handleSubmit,
     handleReset,
     submitForm,
+    setValues,
   } = useFormik({
     initialValues: {
       firstName: "",
@@ -123,7 +143,18 @@ export default function SystemUser(props) {
       setLoading(true);
       if (props.type === "add") {
         systemUserService
-          .addSystemUser(values)
+          .addSystemUser({
+            firstName: values.firstName,
+            lastName: values.lastName,
+            address: values.address,
+            email: values.email,
+            phone01: values.mobileNo,
+            phone02: values.officeNo,
+            role: values.role,
+            userName: values.userName,
+            password: values.password,
+            comments: values.comment,
+          })
           .then(() => {
             setLoading(false);
             navi(AppRoutes.system_user_list.path);
@@ -135,7 +166,18 @@ export default function SystemUser(props) {
           });
       } else if (props.type === "edit") {
         systemUserService
-          .updateSystemUser(values, id)
+          .updateSystemUser({
+            firstName: values.firstName,
+            lastName: values.lastName,
+            address: values.address,
+            email: values.email,
+            phone01: values.mobileNo,
+            phone02: values.officeNo,
+            role: values.role,
+            userName: values.userName,
+            password: values.password,
+            comments: values.comment,
+          }, id)
           .then(() => {
             setLoading(false);
             navi(AppRoutes.system_user_list.path);
@@ -149,6 +191,29 @@ export default function SystemUser(props) {
     },
     validationSchema: SystemUserValidation,
   });
+
+  useEffect(() => {
+    if (props.type === "view" || props.type === "edit") {
+      loadSystemUserData(id, setValues);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (props.type === "add") {
+      setValues({
+        firstName: "",
+        lastName: "",
+        address: "",
+        email: "",
+        role: "",
+        mobileNo: "",
+        officeNo: "",
+        userName: "",
+        password: "",
+        comment: "",
+      });
+    }
+  }, [props.type]);
 
   const navi = useNavigate();
 
@@ -374,25 +439,26 @@ export default function SystemUser(props) {
             helperText={touched.userName ? errors.userName : ""}
           />
         </Grid>
-        <Grid item xs={6}>
-          <FormTextField
-            required
-            id="password"
-            name="password"
-            label="Password"
-            placeholder="password"
-            variant="filled"
-            fullWidth
-            size="small"
-            value={values.password} //set value using formik
-            onChange={handleChange} //get onchange value using formik
-            onBlur={handleBlur}
-            disabled={props.type === "view"}
-            error={touched.password && errors.password}
-            helperText={touched.password ? errors.password : ""}
-          />
-        </Grid>
-
+        {(props.type === "add") && (
+          <Grid item xs={6}>
+            <FormTextField
+              required
+              id="password"
+              name="password"
+              label="Password"
+              placeholder="password"
+              variant="filled"
+              fullWidth
+              size="small"
+              value={values.password} //set value using formik
+              onChange={handleChange} //get onchange value using formik
+              onBlur={handleBlur}
+              disabled={props.type === "view"}
+              error={touched.password && errors.password}
+              helperText={touched.password ? errors.password : ""}
+            />
+          </Grid>
+        )}
         <Grid item xs={12}>
           <FormTextField
             id="comment"
