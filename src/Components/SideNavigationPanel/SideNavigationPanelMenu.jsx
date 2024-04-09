@@ -55,6 +55,7 @@ export default function SideNavigationPanelMenu({ name, icon, subMenu }) {
                   sx: {
                     display: "flex",
                     justifyContent: "flex-end",
+                    fontSize:"16px"
         
                   },
                 }}
