@@ -266,7 +266,8 @@ export default function Project(props) {
         component={Paper}
         sx={{
           p: 2,
-          mt:2,
+          // mt:2,
+          
           borderRadius: 3,
           "& .MuiGrid-item": {
             padding: 1,
