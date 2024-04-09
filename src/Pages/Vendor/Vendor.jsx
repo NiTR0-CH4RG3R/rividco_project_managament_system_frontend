@@ -241,7 +241,7 @@ export default function Vendor(props) {
         <Grid item xs={6}>
           <FormTextField
             required
-            placeholder="07xxxxxxxx"
+            placeholder="+94xxxxxxxxx"
             name="phone01"
             label="Mobile No "
             fullWidth
