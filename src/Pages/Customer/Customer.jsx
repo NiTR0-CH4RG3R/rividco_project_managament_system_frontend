@@ -341,7 +341,7 @@ export default function Customer(props) {
           <Grid item xs={6}>
             <FormTextField
               required
-              placeholder="07xxxxxxxx"
+              placeholder="+94xxxxxxxxx"
               id="c_mobile_no"
               name="phone01"
               label="Mobile No "
