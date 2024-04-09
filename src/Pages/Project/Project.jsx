@@ -258,6 +258,7 @@ export default function Project(props) {
       //padding={5}
       pl={5}
       pr={5}
+      height={100}
       
       
     >
