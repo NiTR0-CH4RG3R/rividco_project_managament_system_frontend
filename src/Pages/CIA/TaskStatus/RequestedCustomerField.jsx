@@ -9,7 +9,7 @@ import { AppRoutes } from "../../../Data/AppRoutes";
 import { useNavigate, useParams } from "react-router";
 import FormControl from '@mui/material/FormControl';
 
-const RequestedCustomerField = ({ values, setFieldValue, type, setOpenCustomer ,fullWidth}) => {
+const RequestedCustomerField = ({ values, setFieldValue, type, setOpenCustomer ,fullWidth,errorSend,helperTextSend}) => {
   const [openAddCustomerModal, setOpenAddCustomerModal] = useState(false);
 
   const handleAddCustomer = () => {
@@ -52,9 +52,10 @@ const RequestedCustomerField = ({ values, setFieldValue, type, setOpenCustomer ,
           ),
         }}
         disabled={type === 'view'}
-        error={values.selectedCustomer?.firstName && !values.selectedCustomer?.id}
-        helperText={values.selectedCustomer?.firstName && !values.selectedCustomer?.id ? 'Please select a customer' : ''}
-        
+        // error={values.selectedCustomer?.firstName && !values.selectedCustomer?.id}
+        // helperText={values.selectedCustomer?.firstName && !values.selectedCustomer?.id ? 'Please select a customer' : ''}
+        error={errorSend}
+        helperText={helperTextSend}
         sx={{ width: fullWidth === true ? `calc(100% - 100px)` : 'default',
                     '& .MuiInputBase-root': {
                         borderTopRightRadius: 0,borderBottomRightRadius:0

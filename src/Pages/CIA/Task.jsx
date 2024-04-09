@@ -278,6 +278,11 @@ export default function Task(props) {
             type={props.type}
             setOpenCustomer={setOpenCustomer}
             fullWidth={"100%"}
+            errorSend={touched.selectedCustomer?.firstName &&
+              errors.selectedCustomer?.firstName}
+            helperTextSend={touched.selectedCustomer?.firstName
+              ? errors.selectedCustomer?.firstName
+              : ""}
           />
         </Grid>
 
