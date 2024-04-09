@@ -10,8 +10,10 @@ export const vendorValidation = yup.object().shape({
   phone01: yup
     .string()
     .matches(
-      /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/,
-      "Please enter a valid mobile number"
+      // /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/,
+      // "Please enter a valid mobile number"
+      /^\+\d{1,3}[0-9]{9,14}$/,
+      'Please enter a valid mobile number with country code'
     )
     .min(10)
     .required("Required"),
