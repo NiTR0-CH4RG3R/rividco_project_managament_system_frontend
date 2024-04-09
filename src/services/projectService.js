@@ -40,6 +40,27 @@ export async function listAllProjects() {
   return projects
 }
 
+export async function listProjectsByCustomer(customerId) {
+  const projects = []
+
+  try {
+    const response = await get(`${PROJECT_URL}/Customer/${customerId}`)
+    projects = response?.data?.forEach((project) => {
+      projects.push({
+        id: project.id,
+        customerId: project.customerId,
+        address: project.address,
+        startDate: project.startDate,
+        coordinatorId: project.coordinatorId,
+        status: project.status,
+      })
+    })
+  } catch (error) {
+    console.error(error)
+  }
+  return projects
+}
+
 export async function getProject(id) {
   let project = {}
 
