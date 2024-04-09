@@ -255,7 +255,10 @@ export default function Project(props) {
       justifyContent="center"
       alignItems="center"
       flexDirection="column"
-      padding={5}
+      //padding={5}
+      pl={5}
+      pr={5}
+      
       
     >
       <Grid
@@ -263,9 +266,11 @@ export default function Project(props) {
         component={Paper}
         sx={{
           p: 2,
+          mt:2,
           borderRadius: 3,
           "& .MuiGrid-item": {
             padding: 1,
+            
           },
         }}
         elevation={3}
