@@ -3,7 +3,7 @@ import { Paper, Box, Grid, Typography } from '@mui/material'
 import FormTextField from '../../Components/StyledComponents/FormTextField'
 import FormClearButton from '../../Components/StyledComponents/FormClearButton'
 import FormSaveLoadingButton from '../../Components/StyledComponents/FormSaveLoadingButton'
-import { ClearAllOutlined, LoginOutlined } from '@mui/icons-material';
+import { ClearAllOutlined, LoginOutlined, Opacity } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuthContext from '../../auth/useAuthContext'
 import * as authService from '../../services/authService';
@@ -57,46 +57,50 @@ const Login = () => {
 
     return (
         <Box
-            display='flex'
-            flexDirection='row'
             width='100vw'
             height='100vh'
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="row"
+            padding={30}
+            
         >
-        <Box
-            display='flex'
-            flexDirection='row'
-            width='60%'
-            height='100%'
-            justifyContent='left'
-        >
-            <img
-                src={backgroundImage}
-                alt='SolarImage'
-                style={{width:'100vw', height:'100vh'}}
-            />
-        </Box>
-        <Box
-            display='flex'
-            flexDirection='row'
-            width='100%'
-            height='100%'
-            justifyContent='right'
-            alignItems='center'
-        >
-            <Paper
-                elevation={4}
+            <Grid
+                container
+                component={Paper}
                 sx={{
-                    p: 2,
-                    borderRadius: 2,
-                    width: '100%',
-                    height: '100%',
+                    p: 0,
+                    borderRadius: 3,
+                    "& .MuiGrid-item": {
+                        padding: 0,
+                    },
                 }}
+                elevation={3}
             >
-                <img
-                    src={imagePath}
-                    alt="companyLogo"
-                    style={{ width: '25vw', height: '10vh', marginLeft:'7vw', marginTop:'20vh' }}
-                />
+                <Box
+                    display='flex'
+                    flexDirection='row'
+                    width='50%'
+                    height='100%'
+                    justifyContent='left'
+                >
+                    <img
+                        src={backgroundImage}
+                        alt='SolarImage'
+                        style={{width:'100%', height:'100%', borderRadius:'3%'}}
+                    />
+                </Box>
+
+                <Box
+                    display='flex'
+                    flexDirection='row'
+                    width='50%'
+                    height='100%'
+                    justifyContent='right'
+                    alignItems='center'
+                >
+
                 <Grid
                     container
 
@@ -115,13 +119,22 @@ const Login = () => {
                         setPassword('');
                     }}
                 >
+
+                    <Grid item xs={12} mb={2} style={{marginTop:'3vh'}}>
+                        <img
+                            src={imagePath}
+                            alt="companyLogo"
+                            style={{ width: '15vw', height: '7vh', marginTop:'5vh' }}
+                        />
+                    </Grid>
+                    
                     <Grid item xs={12} mb={2} style={{marginTop:'2vh'}}>
-                        <Typography variant='h1' fontWeight='bold'>
+                        <Typography variant='h2' fontWeight='bold'>
                             LOG IN
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={8} style={{marginLeft:'6vw', marginTop:'2vh'}}>
+                    <Grid item xs={8} style={{marginLeft:'6vw', marginTop:'3vh'}}>
                         <FormTextField
                             fullWidth
                             id="username"
@@ -139,7 +152,7 @@ const Login = () => {
                         />
                     </Grid>
 
-                    <Grid item xs={8} style={{marginLeft:'6vw', marginTop:'1vh'}}>
+                    <Grid item xs={8} style={{marginLeft:'6vw', marginTop:'3vh'}}>
                         <FormTextField
                             fullWidth
                             type='password'
@@ -164,7 +177,7 @@ const Login = () => {
                         direction='row'
                         justifyContent='center'
                         alignItems='center'
-                        style={{marginLeft:'9vw'}}
+                        style={{marginLeft:'7vw'}}
 
                         sx={{
                             mt: 2,
@@ -203,8 +216,8 @@ const Login = () => {
                         </Typography>
                     </Grid>
                 </Grid>
-            </Paper>
-        </Box>
+                </Box>
+            </Grid>
         </Box>
 
     )
