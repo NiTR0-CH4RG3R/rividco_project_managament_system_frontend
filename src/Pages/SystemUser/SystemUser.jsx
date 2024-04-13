@@ -428,7 +428,7 @@ export default function SystemUser(props) {
           />
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={props.type === "view" ? 12 : 6}>
           <FormTextField
             required
             id="userName"
