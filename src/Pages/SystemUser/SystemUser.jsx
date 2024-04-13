@@ -200,7 +200,7 @@ export default function SystemUser(props) {
   });
 
   useEffect(() => {
-    if (props.type == "edit") {
+    if (props.type !== "add") {
       loadSystemUserData(id, setValues);
     }
   }, [id]);
