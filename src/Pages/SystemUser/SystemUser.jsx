@@ -35,7 +35,7 @@ export default function SystemUser(props) {
   const { setTitle, setSubtitle } = useTopbarContext()
 
   function loadSystemUserData(id, setValues) {
-    systemUserService.getSystemUser(id).then(async (systemUser) => {
+    systemUserService.getSystemUser(id).then((systemUser) => {
       const systemUserValues = {
         firstName: systemUser.firstName,
         lastName: systemUser.lastName,
