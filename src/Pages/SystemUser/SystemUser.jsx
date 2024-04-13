@@ -200,7 +200,7 @@ export default function SystemUser(props) {
   });
 
   useEffect(() => {
-    if (props.type === "view" || props.type === "edit") {
+    if (props.type == "edit") {
       loadSystemUserData(id, setValues);
     }
   }, [id]);
@@ -527,7 +527,7 @@ export default function SystemUser(props) {
               size="large"
               startIcon={<EditIcon />}
               onClick={() =>
-                navi(`${AppRoutes.system_user_edit.path.replace(":id", id)}}`)
+                navi(`${AppRoutes.system_user_edit.path.replace(":id", id)}`)
               }
             >
               Edit
