@@ -295,7 +295,7 @@ export default function SystemUser(props) {
             id="firstName"
             name="firstName"
             label="First Name"
-            placeholder="First Name"
+            placeholder="Please Enter Your First Name"
             variant="filled"
             fullWidth
             size="small"
@@ -314,7 +314,7 @@ export default function SystemUser(props) {
             id="lastName"
             name="lastName"
             label="Last Name"
-            placeholder="Last Name"
+            placeholder="Please Enter Your Last Name"
             variant="filled"
             fullWidth
             size="small"
@@ -333,7 +333,7 @@ export default function SystemUser(props) {
             id="address"
             name="address"
             label="Address"
-            placeholder="Address"
+            placeholder="No: 00 , road ,city"
             multiline
             variant="filled"
             fullWidth
@@ -352,8 +352,8 @@ export default function SystemUser(props) {
             required
             id="email"
             name="email"
-            label="E-mail"
-            placeholder="E-mail"
+            label="Email"
+            placeholder="example@.com"
             variant="filled"
             fullWidth
             size="small"
@@ -397,7 +397,7 @@ export default function SystemUser(props) {
             id="mobileNo"
             name="mobileNo"
             label="Mobile No:"
-            placeholder="Mobile No:"
+            placeholder="+94xxxxxxxxx"
             variant="filled"
             fullWidth
             size="small"
@@ -415,7 +415,7 @@ export default function SystemUser(props) {
             id="officeNo"
             name="officeNo"
             label="Office No:"
-            placeholder="Office No:"
+            placeholder="0xxxxxxxxx"
             variant="filled"
             fullWidth
             size="small"
@@ -434,7 +434,7 @@ export default function SystemUser(props) {
             id="userName"
             name="userName"
             label="Username"
-            placeholder="Username"
+            placeholder="Please Enter Username"
             variant="filled"
             fullWidth
             size="small"
@@ -454,7 +454,7 @@ export default function SystemUser(props) {
               name="password"
               label={props.type == "edit" ? "Update password" : "Password"}
               placeholder={
-                props.type == "edit" ? "Update password" : "Enter new password"
+                props.type == "edit" ? "Please Enter New Password" : "Please Enter Password"
               }
               variant="filled"
               fullWidth
