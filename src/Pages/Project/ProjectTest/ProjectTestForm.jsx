@@ -166,6 +166,7 @@ export default function ProjectServicesForm(props) {
             maxRows={4}
             fullWidth
             size="small"
+            variant="filled"
             value={values.testName} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={modeType === "view"}
@@ -181,9 +182,10 @@ export default function ProjectServicesForm(props) {
             id="status"
             name="status"
             select
-            label="Status"
+            label="Result"
             fullWidth
             size="small"
+            variant="filled"
             value={values.status} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={modeType === "view"}
@@ -208,6 +210,7 @@ export default function ProjectServicesForm(props) {
             label="Conducted By"
             fullWidth
             size="small"
+            variant="filled"
             onClick={() => {
               if (!values.selectedEmployee?.firstName && modeType !== "view") {
                 setOpenEmployee(true);
@@ -252,6 +255,7 @@ export default function ProjectServicesForm(props) {
             label="Conducted Date"
             fullWidth
             size="small"
+            variant="filled"
             value={values.conductedDate} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={modeType === "view"}
@@ -259,6 +263,22 @@ export default function ProjectServicesForm(props) {
             InputLabelProps={{ shrink: true }}
             error={touched.conductedDate && errors.conductedDate}
             helperText={touched.conductedDate ? errors.conductedDate : ""}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <FormTextField
+            placeholder="Please Enter Your Comment"
+            id="c_comment"
+            name="comment"
+            label="Comment"
+            multiline
+            rows={4}
+            fullWidth
+            size="small"
+            value={values.comment} //set value using formikß
+            onChange={handleChange} //get onchange value using formik
+            disabled={props.type === "view"}
+            variant="filled"
           />
         </Grid>
       </Grid>
