@@ -77,6 +77,7 @@ export default function ProjectServicesForm(props) {
       result: "",
       conductedBy: "",
       conductedDate: "",
+      status:"",
 
       selectedEmployee: {
         id: null,
@@ -84,7 +85,7 @@ export default function ProjectServicesForm(props) {
       },
     },
 
-    validationSchema: addProjectValidation,
+   // validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
       setLoading(true);
@@ -96,7 +97,7 @@ export default function ProjectServicesForm(props) {
             conductedBy: values.selectedEmployee.id,
             conductedDate: values.conductedDate,
 
-            passed: values.result,
+            passed: values.status,
           })
           .then(() => {
             setLoading(false);
@@ -245,19 +246,19 @@ export default function ProjectServicesForm(props) {
           <FormTextField
             required
             type="date"
-            placeholder="Select the Due Date"
-            id="dueDate"
-            name="dueDate"
-            label="Due Date"
+            placeholder="Select the Conduct Date"
+            id="conductedDate"
+            name="conductedDate"
+            label="Conducted Date"
             fullWidth
             size="small"
-            value={values.startDate} //set value using formik
+            value={values.conductedDate} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={modeType === "view"}
             onBlur={handleBlur}
             InputLabelProps={{ shrink: true }}
-            error={touched.dueDate && errors.dueDate}
-            helperText={touched.dueDate ? errors.dueDate : ""}
+            error={touched.conductedDate && errors.conductedDate}
+            helperText={touched.conductedDate ? errors.conductedDate : ""}
           />
         </Grid>
       </Grid>
