@@ -12,8 +12,9 @@ import RequireAuth from './auth/RequireAuth';
 
 
 
-
 export default function App() {
+
+
     let routes = [];
     Object.keys(AppRoutes).forEach((name) => {
         // NOTE : This is a small hack to mimik the functionality of the login page for the interim presentation.

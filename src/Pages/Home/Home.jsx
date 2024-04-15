@@ -3,8 +3,21 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import imagePath from "../Login/solar-panel-cell-on-dramatic-sunset-sky-background-free-photo.jpg";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
+// import * as testService from "../../services/projectTestService";
 
 const Home = () => {
+  // testService.addTest({
+  //   "projectId": 1,
+  //   "name": "string",
+  //   "passed": 0,
+  //   "conductedBy": 3,
+  //   "conductedDate": "2024-04-15T07:56:27.622Z",
+  //   "comments": "string"
+  // }).then((res) => {
+  //   console.log(res);
+  // });
+
+
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle("Home");
   setSubtitle("Welcome to RIVIDCO PROJECTS!");

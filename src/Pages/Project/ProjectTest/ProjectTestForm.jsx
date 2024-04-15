@@ -51,7 +51,7 @@ export default function ProjectServicesForm(props) {
     ]);
   }
 
-  //const { id } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     loadStatusType();
@@ -61,23 +61,23 @@ export default function ProjectServicesForm(props) {
     }
   }, []);
 
-  useEffect(()=>{
-    if(props.type === "add"){
+  useEffect(() => {
+    if (props.type === "add") {
       setValues({
         testName: "",
-      //result: "",
-      conductedBy: "",
-      conductedDate: "",
-      status: "",
-      comment: "",
+        //result: "",
+        conductedBy: "",
+        conductedDate: "",
+        status: "",
+        comment: "",
 
-      selectedEmployee: {
-        id: null,
-        firstName: null,
-      },
+        selectedEmployee: {
+          id: null,
+          firstName: null,
+        },
       })
     }
-  },[])
+  }, [])
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle("Project Tests");
@@ -122,6 +122,7 @@ export default function ProjectServicesForm(props) {
         projectTestService
           .addTest({
             name: values.testName,
+            projectId: id,
             conductedBy: values.selectedEmployee.id,
             conductedDate: values.conductedDate,
             comments: values.comment,
@@ -129,7 +130,7 @@ export default function ProjectServicesForm(props) {
           })
           .then(() => {
             setLoading(false);
-            navigate(AppRoutes.project_test_list.path);
+            //navigate(AppRoutes.project_test_list.path.replace(":id", testId));
           })
           .catch((error) => {
             console.error(error);
@@ -169,8 +170,8 @@ export default function ProjectServicesForm(props) {
         {modeType === "add"
           ? "Add Test"
           : modeType === "view"
-          ? "View Test"
-          : "Edit Test"}
+            ? "View Test"
+            : "Edit Test"}
       </Typography>
       <Box
         component="form"
