@@ -152,7 +152,7 @@ const Login = () => {
                             }}
                             error={usernameError}
                             helperText={usernameError && 'Username is required'}
-                            sx={{ borderRadius: '8px', border: 'none', backgroundColor: 'rgba(227, 227, 227, 0.6)', '& .MuiInputBase-root': { borderRadius: '8px' } }}
+                            sx={{ borderRadius: '8px', border: 'none', backgroundColor: 'rgba(227, 227, 227, 0.5)', '& .MuiInputBase-root': { borderRadius: '8px' } }}
                         />
                     </Grid>
 
@@ -172,7 +172,7 @@ const Login = () => {
                             }}
                             error={passwordError}
                             helperText={passwordError && 'Password is required'}
-                            sx={{ borderRadius: '8px', border: 'none', backgroundColor: 'rgba(227, 227, 227, 0.6)', '& .MuiInputBase-root': { borderRadius: '8px' } }}
+                            sx={{ borderRadius: '8px', border: 'none', backgroundColor: 'rgba(227, 227, 227, 0.5)', '& .MuiInputBase-root': { borderRadius: '8px' } }}
                         />
                     </Grid>
 
