@@ -59,3 +59,73 @@ export async function deleteTask(id) {
     console.error(error)
   }
 }
+
+export async function listTasksByCategory(category, page, itemsPerPage) {
+  const tasks = []
+
+  try {
+    const response = await get(`${TASK_URL}/category`, {
+      category,
+      page,
+      pageSize: itemsPerPage,
+    })
+    response?.data?.forEach((task) => {
+      tasks.push(task)
+    })
+    console.log(tasks)
+  } catch (error) {
+    console.error(error)
+  }
+
+  return tasks
+}
+
+export async function listTasksByUrgencyLevel(
+  urgencyLevel,
+  page,
+  itemsPerPage
+) {
+  const tasks = []
+
+  try {
+    const response = await get(`${TASK_URL}/urgencylevel`, {
+      urgencyLevel,
+      page,
+      pageSize: itemsPerPage,
+    })
+    response?.data?.forEach((task) => {
+      tasks.push(task)
+    })
+    console.log(tasks)
+  } catch (error) {
+    console.error(error)
+  }
+
+  return tasks
+}
+
+export async function listTasksByCategoryAndUrgencyLevel(
+  category,
+  urgencyLevel,
+  page,
+  itemsPerPage
+) {
+  const tasks = []
+
+  try {
+    const response = await get(`${TASK_URL}/category+urgencylevel`, {
+      category,
+      urgencyLevel,
+      page,
+      pageSize: itemsPerPage,
+    })
+    response?.data?.forEach((task) => {
+      tasks.push(task)
+    })
+    console.log(tasks)
+  } catch (error) {
+    console.error(error)
+  }
+
+  return tasks
+}
