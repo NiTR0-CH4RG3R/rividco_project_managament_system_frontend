@@ -20,23 +20,56 @@ import WarrentyField from "../../../Components/WarrentyField/WarrentyField";
 import FormButton from "../../../Components/StyledComponents/FormButton";
 import EditIcon from "@mui/icons-material/Edit";
 //import { Typography } from "@mui/material/styles/createTypography";
+import * as projectItemServices from "../../../services/projectItemServices";
+
 
 export default function ProjectItemsForm(props) {
+  const { itemsId } = props;
   const [statusType, setStatusType] = useState([]);
   const [modeType, setModeType] = useState(props.type);
 
 
-  function loadProjectData(id) {
+  function loadProjectItemData(itemsId,setValues) {
     //add here
+    projectItemServices
+      .getitem(itemsId)
+      .then((items) => {
+        setValues(items);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const { id } = useParams();
 
   useEffect(() => {
+    
     if (modeType !== "add") {
-      loadProjectData(id);
+      loadProjectItemData(itemsId,setValues);
     }
   }, []);
+  
+
+  useEffect(() => {
+    if (props.type === "add") {
+      setValues({
+      vendorItem: "",
+      status: "",
+      comment: "",
+      dueDate: "",
+
+      selectedVendorItem: {
+        userId: null,
+        id: null,
+        title: null,
+        completed: true,
+      },
+
+      })
+    }
+  }, [])
+
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle("Project items");
@@ -57,29 +90,68 @@ export default function ProjectItemsForm(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
+    setValues
     
   } = useFormik({
     initialValues: {
 
       vendorItem: "",
-      status: "",
+      description: "",
       comment: "",
-      dueDate: "",
+      warrantyPeriod: "",
+      serialNumber:"",
       
-      selectedVendorItem: {
-        userId: null,
+      selectedVendorItem: {        
         id: null,
-        title: null,
-        completed: true,
+        
       },
 
     },
 
-    validationSchema: addProjectValidation,
+    //validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
       setLoading(true);
       //Send values to the backend
+      if (modeType === "add") {
+        projectItemServices
+          .addItem({
+            
+
+            comments: values.comment,
+         
+          })
+          .then(() => {
+            setLoading(false);
+            navigate(AppRoutes.project_items_list.path.replace(":id", itemsId));
+          
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(error);
+            setLoading(false);
+          });
+      } else if (modeType === "edit") {
+        projectItemServices
+          .updateItem(
+            {
+              
+
+
+
+            },
+            itemsId
+          )
+          .then(() => {
+            setLoading(false);
+            navigate(AppRoutes.project_items_list.path);
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(error);
+            setLoading(false);
+          });
+      }
     },
   });
 
@@ -123,6 +195,7 @@ export default function ProjectItemsForm(props) {
                 setOpenVendorItem(true);
               }
             }}
+            variant="filled"
             value={values.selectedVendorItem?.title ?? ""}
             InputProps={{
               endAdornment: (
@@ -170,6 +243,8 @@ export default function ProjectItemsForm(props) {
             onBlur={handleBlur}
             error={touched.description && errors.description}
             helperText={touched.description ? errors.description : ""}
+            variant="filled"
+
           />
         </Grid>
 
@@ -183,6 +258,8 @@ export default function ProjectItemsForm(props) {
             onBlur={handleBlur}
             fullWidth={true}
             size="small"
+            variant="filled"
+
           />
         </Grid>
        
@@ -203,6 +280,8 @@ export default function ProjectItemsForm(props) {
             onBlur={handleBlur}
             error={touched.comment && errors.comment}
             helperText={touched.comment ? errors.comment : ""}
+            variant="filled"
+
           />
         </Grid>
         </Grid>
