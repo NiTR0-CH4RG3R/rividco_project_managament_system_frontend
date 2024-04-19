@@ -142,7 +142,7 @@ function TaskStatusForm(props) {
       }}
     >
       {/* ---------------- Status form ------------------ */}
-      <Grid>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
           <FormTextField
             required
@@ -192,7 +192,7 @@ function TaskStatusForm(props) {
         {modeType !== 'view' && (
           <>
             <FormClearButton
-              variant="contained"
+              variant="outlined"
               size="large"
               sx={{
                 mr: 2,
