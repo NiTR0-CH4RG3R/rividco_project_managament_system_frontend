@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import IconButton from '@mui/material/IconButton'
 
 export default function ProjectItemsPopup(props) {
-  const { openPopUp, setOpenPopup, type } = props
+  const { openPopUp, setOpenPopup, type, itemsId } = props
   const handleClose = () => {
     setOpenPopup(false);
   };
@@ -25,7 +25,7 @@ export default function ProjectItemsPopup(props) {
           <CloseIcon />
         </IconButton>
       <DialogContent>
-        <ProjectItemsForm type={type} />
+        <ProjectItemsForm itemsId={itemsId} type={type} />
       </DialogContent>
     </Dialog>
   )
