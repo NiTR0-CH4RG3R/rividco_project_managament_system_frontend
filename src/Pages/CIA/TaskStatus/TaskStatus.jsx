@@ -9,8 +9,8 @@ import { useParams } from 'react-router-dom'
 
 const columns = [
   { id: 'status', label: 'Task Status', align: 'left' },
-  { id: 'lastUpdatedBy', label: 'Lastupdated By', align: 'left' },
-  { id: 'lastUpdatedDateTime', label: 'Lastupdated Date', align: 'left' },
+  { id: 'lastUpdatedBy', label: 'Last Updated By', align: 'left' },
+  { id: 'lastUpdatedDateTime', label: 'Last Updated Date', align: 'left' },
   { id: 'comments', label: 'Comment', align: 'left' },
 ]
 
