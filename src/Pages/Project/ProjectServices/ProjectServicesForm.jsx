@@ -219,6 +219,8 @@ export default function ProjectServicesForm(props) {
             InputLabelProps={{ shrink: true }}
             error={touched.plannedDate && errors.plannedDate}
             helperText={touched.plannedDate ? errors.plannedDate : ""}
+            variant="filled"
+
           />
         </Grid>
 
@@ -237,6 +239,8 @@ export default function ProjectServicesForm(props) {
             onBlur={handleBlur}
             error={touched.status && errors.status}
             helperText={touched.status ? errors.status : ""}
+            variant="filled"
+
           >
             {statusType.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -255,6 +259,7 @@ export default function ProjectServicesForm(props) {
             label="Conducted By"
             fullWidth
             size="small"
+            variant="filled"
             onClick={() => {
               if (!values.selectedEmployee?.firstName && modeType !== "view") {
                 setOpenEmployee(true);
@@ -306,7 +311,8 @@ export default function ProjectServicesForm(props) {
             InputLabelProps={{ shrink: true }}
             error={touched.conductedDate && errors.conductedDate}
             helperText={touched.conductedDate ? errors.conductedDate : ""}
-          
+            variant="filled"
+
           />
         </Grid>
 
@@ -319,6 +325,7 @@ export default function ProjectServicesForm(props) {
             label="Priorty"
             fullWidth
             size="small"
+            variant="filled"
             value={values.priority} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={modeType === "view"}
@@ -351,6 +358,7 @@ export default function ProjectServicesForm(props) {
             onBlur={handleBlur}
             error={touched.description && errors.description}
             helperText={touched.description ? errors.description : ""}
+            variant="filled"
           />
         </Grid>
 
@@ -371,6 +379,7 @@ export default function ProjectServicesForm(props) {
             onBlur={handleBlur}
             error={touched.serviceLevel && errors.serviceLevel}
             helperText={touched.serviceLevel ? errors.serviceLevel : ""}
+            variant="filled"
           />
         </Grid>
 
