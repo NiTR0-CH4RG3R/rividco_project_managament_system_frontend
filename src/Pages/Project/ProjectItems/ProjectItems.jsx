@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTopbarContext } from "../../../Contexts/TopbarContext";
 import ProjectItemsPopup from "../ProjectItems/ProjectItemsPopup";
 import ListPage from "../../../Components/ListPage/ListPage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
+import * as projectItemServices from "../../../services/projectItemServices";
+
 
 const columns = [
   { id: "vendorItem", label: "Vendor Item", align: "left" },
@@ -18,7 +20,11 @@ export default function ProjectItems() {
   setSubtitle("You can view and manage all the project items here.");
 
   const [openPopUp, setOpenPopup] = useState(false);
+  const [itemsId, setItemsId] = useState(null);
   const [modeType, setModeType] = useState();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const { id } = useParams();
 
   const [rows, setRows] = useState([
     {
@@ -29,6 +35,23 @@ export default function ProjectItems() {
       comment: "comment 1",
     },
   ]);
+
+  useEffect(() => {
+    setPage(0);
+    setRowsPerPage(5);
+  }, []);
+
+  useEffect(() => {
+    projectItemServices
+      .listItems(id, page + 1, rowsPerPage)
+      .then((item) => {
+        setRows(item);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id, page, rowsPerPage]);
+
 
   const navigate = useNavigate();
 
@@ -48,6 +71,7 @@ export default function ProjectItems() {
         onRowClick={(e, id) => {
           setModeType("view");
           setOpenPopup(true);
+          setItemsId(id);
         }}
         onAddButtonClick={(e) => {
           setModeType("add");
@@ -73,6 +97,7 @@ export default function ProjectItems() {
         openPopUp={openPopUp}
         setOpenPopup={setOpenPopup}
         type={modeType}
+        itemsId={itemsId}
       />
     </>
   );
