@@ -173,6 +173,8 @@ export default function ProjectResourcesForm(props) {
             onBlur={handleBlur}
             error={touched.resourceName && errors.resourceName}
             helperText={touched.resourceName ? errors.resourceName : ""}
+            variant="filled"
+
           />
         </Grid>
 
@@ -192,6 +194,8 @@ export default function ProjectResourcesForm(props) {
             onBlur={handleBlur}
             error={touched.category && errors.category}
             helperText={touched.category ? errors.category : ""}
+            variant="filled"
+
           >
             {categoryType.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -218,6 +222,8 @@ export default function ProjectResourcesForm(props) {
             onBlur={handleBlur}
             error={touched.comment && errors.comment}
             helperText={touched.comment ? errors.comment : ""}
+            variant="filled"
+
           />
           
         
