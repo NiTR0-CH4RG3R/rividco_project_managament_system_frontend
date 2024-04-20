@@ -141,6 +141,7 @@ export default function ProjectServicesForm(props) {
           })
           .then(() => {
             setLoading(false);
+            props.handleClose();
             //navigate(AppRoutes.project_test_list.path.replace(":id", testId));
 
           })
@@ -148,6 +149,7 @@ export default function ProjectServicesForm(props) {
             console.error(error);
             alert(error);
             setLoading(false);
+            props.handleClose();
           });
       } else if (modeType === "edit") {
         projectTestService
@@ -164,6 +166,7 @@ export default function ProjectServicesForm(props) {
           )
           .then(() => {
             setLoading(false);
+            props.handleClose();
             //navigate(AppRoutes.project_test_list.path);
 
           })
@@ -171,6 +174,7 @@ export default function ProjectServicesForm(props) {
             console.error(error);
             alert(error);
             setLoading(false);
+            props.handleClose();
           });
       }
     },

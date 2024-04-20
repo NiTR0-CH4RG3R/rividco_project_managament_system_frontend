@@ -119,15 +119,15 @@ export default function Project(props) {
     props.type === "add"
       ? "Add a new Project"
       : props.type === "edit"
-      ? "Edit Project"
-      : `View Project`
+        ? "Edit Project"
+        : `View Project`
   );
   setSubtitle(
     props.type === "add"
       ? "You can add a new project here."
       : props.type === "edit"
-      ? `You can edit project id:#${id} details here.`
-      : `You can view project id:#${id} details here.`
+        ? `You can edit project id:#${id} details here.`
+        : `You can view project id:#${id} details here.`
   );
 
   const [loading, setLoading] = useState(false);
@@ -192,7 +192,7 @@ export default function Project(props) {
       },
     },
 
-    validationSchema: addProjectValidation,
+    //validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
       setSuccessMessageOpen(true);
@@ -256,21 +256,21 @@ export default function Project(props) {
       alignItems="center"
       flexDirection="column"
       padding={5}
-      
-      
-      
+
+
+
     >
       <Grid
         container
         component={Paper}
         sx={{
           p: 2,
-          
-          
+
+
           borderRadius: 3,
           "& .MuiGrid-item": {
             padding: 1,
-            
+
           },
         }}
         elevation={3}
