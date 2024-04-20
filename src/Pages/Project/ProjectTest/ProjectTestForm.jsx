@@ -273,7 +273,7 @@ export default function ProjectServicesForm(props) {
               }}
               value={values.selectedEmployee?.firstName ?? ""}
               InputProps={{
-                endAdornment: (
+                endAdornment: modeType !== "view" && (
                   <IconButton
                     onClick={() => setFieldValue("selectedEmployee", "")}
                     sx={{
