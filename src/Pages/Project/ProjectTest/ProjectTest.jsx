@@ -44,7 +44,16 @@ export default function ProjectTest() {
     projectTestService
       .listTests(id, page + 1, rowsPerPage)
       .then((test) => {
-        setRows(test);
+        setRows(
+          test.map((test) => ({
+            id: test.id,
+            testName: test.name,
+            result: test.passed,
+            conductedBy: test.conductedBy,
+            conductedDate: test.conductedDate,
+            comment: test.comments,
+          }))
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -64,7 +73,7 @@ export default function ProjectTest() {
           onSearchChange: (e) => {
             console.log(e.target.value);
           },
-          onSearchClick: (e) => {},
+          onSearchClick: (e) => { },
         }}
         onRowClick={(e, id) => {
           setModeType("view");
@@ -89,7 +98,7 @@ export default function ProjectTest() {
           },
         }}
         disableSearchBar
-        // customUpperBar={<UpperBar />}
+      // customUpperBar={<UpperBar />}
       />
       <ProjectTestPopup
         openPopUp={openPopUp}
