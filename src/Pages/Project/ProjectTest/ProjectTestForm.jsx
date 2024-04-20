@@ -30,7 +30,19 @@ export default function ProjectServicesForm(props) {
     projectTestService
       .getTest(testId)
       .then((test) => {
-        setValues(test);
+        console.log(test);
+      
+        setValues({
+          testName:test.name,
+          conductedDate:test.conductedDate,
+          status:test.passed,
+          comment:test.comments,
+  
+          selectedEmployee: {
+            id: test.conductedBy,
+            //firstName: null,
+          },
+        })
       })
       .catch((error) => {
         console.log(error);
