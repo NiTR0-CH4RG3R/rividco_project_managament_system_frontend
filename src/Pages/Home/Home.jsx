@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Grid, Item } from "react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import imagePath from "../Login/solar-panel-cell-on-dramatic-sunset-sky-background-free-photo.jpg";
@@ -37,7 +37,7 @@ const Home = () => {
         <div
           style={{
             position: "fixed",
-            marginTop: "-21%",
+            marginTop: "-23%",
             marginLeft: "-5%",
             width: "100vw",
             height: "100vh",
