@@ -122,9 +122,9 @@ export default function Project(props) {
 
 
               setValues({
-                startDate: project.startDate.substring(0, project.startDate.lastIndexOf("T")),
+                startDate: project.startDate?.substring(0, project.startDate.lastIndexOf("T")),
                 description: project.description,
-                warantyPeriod: project.systemWarrentyPeriod,
+                warantyPeriod: project.systemWarrantyPeriod,
                 status: project.status,
                 estimatedCost: project.estimatedCost,
                 location: project.locationCoordinates,
@@ -203,6 +203,7 @@ export default function Project(props) {
   }, []);
 
   useEffect(() => {
+
     if (props.type === "add") {
       setValues({
         startDate: "",
@@ -329,7 +330,7 @@ export default function Project(props) {
             startDate: values.startDate,
             address: values.location,
             coordinatorId: values.selectedEmployee.id,
-            systemWarrentyPeriod: values.warantyPeriod,
+            systemWarrantyPeriod: values.warantyPeriod,
             status: values.status,
             estimatedCost: values.estimatedCost,
             referencedBy: values.selectedReferenceBy.id,
@@ -369,6 +370,8 @@ export default function Project(props) {
   });
 
   const navigate = useNavigate();
+
+  console.log(values);
 
   return (
     <Box
@@ -489,6 +492,7 @@ export default function Project(props) {
             name="warantyPeriod"
             onChange={handleChange}
             disabled={props.type === "view"}
+            value={values.warantyPeriod}
             onBlur={handleBlur}
             fullWidth={true}
             size="small"

@@ -3,10 +3,18 @@ import FormTextField from '../StyledComponents/FormTextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 
-export default function WarrentyField({ required, name, onChange, disabled, onBlur, error, helperText, fullWidth, ...props }) {
+export default function WarrentyField({ required, name, onChange, disabled, onBlur, error, helperText, fullWidth, value, ...props }) {
 
     const [unit, setUnit] = useState('months');
     const [displayWarrenty, setDisplayWarrenty] = useState(0);
+
+    if (disabled === true && value !== displayWarrenty) {
+        if (unit === 'months') {
+            setDisplayWarrenty(value);
+        } else {
+            setDisplayWarrenty(value / 12);
+        }
+    }
 
     return (
         <FormControl
@@ -31,9 +39,10 @@ export default function WarrentyField({ required, name, onChange, disabled, onBl
                     }
 
                 }}
-                sx={{ width: fullWidth === true ? `calc(100% - 100px)` : 'default',
+                sx={{
+                    width: fullWidth === true ? `calc(100% - 100px)` : 'default',
                     '& .MuiInputBase-root': {
-                        borderTopRightRadius: 0,borderBottomRightRadius:0
+                        borderTopRightRadius: 0, borderBottomRightRadius: 0
                     },
                 }}
                 onAbort={onChange}
@@ -49,9 +58,11 @@ export default function WarrentyField({ required, name, onChange, disabled, onBl
                 value={unit}
                 disabled={disabled}
                 defaultValue={'months'}
-                sx={{ width: '100px' ,'& .MuiInputBase-root': {
-                    borderTopLeftRadius: 0,borderBottomLeftRadius:0
-                },}}
+                sx={{
+                    width: '100px', '& .MuiInputBase-root': {
+                        borderTopLeftRadius: 0, borderBottomLeftRadius: 0
+                    },
+                }}
                 onChange={(e) => {
                     setUnit(e.target.value);
                     if (e.target.value === 'months') {
