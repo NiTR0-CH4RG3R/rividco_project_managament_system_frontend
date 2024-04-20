@@ -122,10 +122,7 @@ export default function Project(props) {
 
 
               setValues({
-                // startDate: project.startDate.substring(
-                //   0,
-                //   project.startDate.lastIndexOf("T")
-                // ),
+                startDate: project.startDate.substring(0, project.startDate.lastIndexOf("T")),
                 description: project.description,
                 warantyPeriod: project.systemWarrentyPeriod,
                 status: project.status,
@@ -134,10 +131,7 @@ export default function Project(props) {
                 electricityTariffStructure: project.electricityTariffStructure,
                 electricityAccountNumber: project.electricityAccountNumber,
                 electricityBoardArea: project.electricityBoardArea,
-                // commisionDate: project.commisionDate.substring(
-                //   0,
-                //   project.commisionDate.lastIndexOf("T")
-                // ),
+                commisionDate: project.commissionDate?.substring(0, project.commissionDate.lastIndexOf("T")),
                 identificationNumber: project.projectIdentificationNumber,
                 comment: project.comments,
                 selectedCustomer: {
