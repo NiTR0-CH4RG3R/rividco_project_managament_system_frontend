@@ -87,14 +87,14 @@ export default function ProjectTest() {
         tablePaginationProps={{
           rowsPerPageOptions: [5, 10, 25, 100],
           component: "div",
-          rowsPerPage: 5,
-          page: 0,
+          rowsPerPage: rowsPerPage,
+          page: page,
           count: 100,
           onPageChange: (e, page) => {
-            console.log(page);
+            setPage(page);
           },
           onRowsPerPageChange: (e) => {
-            console.log(e.target.value);
+            setRowsPerPage(e.target.value);
           },
         }}
         disableSearchBar
