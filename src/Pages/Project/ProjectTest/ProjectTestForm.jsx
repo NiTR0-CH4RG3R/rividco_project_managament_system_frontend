@@ -24,7 +24,7 @@ export default function ProjectServicesForm(props) {
   const { testId } = props;
   const [statusType, setResultType] = useState([]);
   const [modeType, setModeType] = useState(props.type);
-  
+
 
   function loadProjectTestData(testId, setValues) {
     //add here
@@ -32,10 +32,11 @@ export default function ProjectServicesForm(props) {
       .getTest(testId)
       .then((test) => {
         console.log(test);
+        console.log(test.conductedDate.substring(0, test.conductedDate.lastIndexOf("T")));
 
         setValues({
           testName: test.name,
-          conductedDate: test.conductedDate,
+          conductedDate: test.conductedDate.substring(0, test.conductedDate.lastIndexOf("T")),
           status: test.passed,
           comment: test.comments,
 
@@ -141,7 +142,7 @@ export default function ProjectServicesForm(props) {
           .then(() => {
             setLoading(false);
             //navigate(AppRoutes.project_test_list.path.replace(":id", testId));
-            
+
           })
           .catch((error) => {
             console.error(error);
@@ -164,7 +165,7 @@ export default function ProjectServicesForm(props) {
           .then(() => {
             setLoading(false);
             //navigate(AppRoutes.project_test_list.path);
-            
+
           })
           .catch((error) => {
             console.error(error);
@@ -179,13 +180,13 @@ export default function ProjectServicesForm(props) {
 
   return (
     <>
-    
+
       <Typography sx={{ fontSize: "large", pb: 2, pt: 2 }}>
         {modeType === "add"
           ? "Add Test"
           : modeType === "view"
-          ? "View Test"
-          : "Edit Test"}
+            ? "View Test"
+            : "Edit Test"}
       </Typography>
       <Box
         component="form"
@@ -379,7 +380,7 @@ export default function ProjectServicesForm(props) {
           sendData={setFieldValue}
         />
       </Box>
-    
+
     </>
   );
 }
