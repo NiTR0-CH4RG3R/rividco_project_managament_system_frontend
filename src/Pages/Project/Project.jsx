@@ -92,18 +92,18 @@ export default function Project(props) {
   // }
 
   function loadProjectData(id, setValues) {
-    
+
     projectService
       .getProject(id)
       .then((project) => {
-        
+
         Promise.all([
-          
+
           customerService.getCustomer(project.customerId),
-          
+
           systemUserService.getSystemUser(project.coordinatorId),
           systemUserService.getSystemUser(project.salesPerson),
-          
+
           customerService.getCustomer(project.referencedBy),
         ])
           .then(
@@ -113,13 +113,13 @@ export default function Project(props) {
               salesPersonData,
               referenceByData,
             ]) => {
-              
+
               console.log("Customer Data:", customerData);
               console.log("Coordinator Data:", coordinatorData);
               console.log("Sales Person Data:", salesPersonData);
               console.log("Reference By Data:", referenceByData);
 
-              
+
 
               setValues({
                 // startDate: project.startDate.substring(
@@ -142,7 +142,7 @@ export default function Project(props) {
                 comment: project.comments,
                 selectedCustomer: {
                   id: project.customerId,
-                  firstName: customerData.firstName, 
+                  firstName: customerData.firstName,
                 },
                 selectedEmployee: {
                   id: project.coordinatorId,
@@ -150,11 +150,11 @@ export default function Project(props) {
                 },
                 selectedReferenceBy: {
                   id: project.referencedBy,
-                  firstName: referenceByData.firstName, 
+                  firstName: referenceByData.firstName,
                 },
                 selectedSalesPerson: {
                   id: project.salesPerson,
-                  firstName: salesPersonData.firstName, 
+                  firstName: salesPersonData.firstName,
                 },
               });
             }
@@ -251,15 +251,15 @@ export default function Project(props) {
     props.type === "add"
       ? "Add a new Project"
       : props.type === "edit"
-      ? "Edit Project"
-      : `View Project`
+        ? "Edit Project"
+        : `View Project`
   );
   setSubtitle(
     props.type === "add"
       ? "You can add a new project here."
       : props.type === "edit"
-      ? `You can edit project id:#${id} details here.`
-      : `You can view project id:#${id} details here.`
+        ? `You can edit project id:#${id} details here.`
+        : `You can view project id:#${id} details here.`
   );
 
   const [loading, setLoading] = useState(false);
@@ -492,7 +492,7 @@ export default function Project(props) {
         <Grid item xs={6}>
           <WarrentyField
             //required={true}
-            name="warrantyPeriod"
+            name="warantyPeriod"
             onChange={handleChange}
             disabled={props.type === "view"}
             onBlur={handleBlur}
@@ -558,7 +558,7 @@ export default function Project(props) {
             }}
             value={values.selectedReferenceBy?.firstName ?? ""}
             InputProps={{
-              endAdornment:props.type !== "view" && (
+              endAdornment: props.type !== "view" && (
                 <IconButton
                   onClick={() => setFieldValue("selectedReferenceBy", "")}
                   sx={{
@@ -622,7 +622,7 @@ export default function Project(props) {
             }}
             value={values.selectedEmployee?.firstName ?? ""}
             InputProps={{
-              endAdornment: props.type !== "view" &&(
+              endAdornment: props.type !== "view" && (
                 <IconButton
                   onClick={() => setFieldValue("selectedEmployee", "")}
                   sx={{
@@ -731,7 +731,7 @@ export default function Project(props) {
             label="Commision Date"
             fullWidth
             size="small"
-            value={values.startDate} //set value using formik
+            value={values.commisionDate} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={props.type === "view"}
             onBlur={handleBlur}
@@ -774,7 +774,7 @@ export default function Project(props) {
             }}
             value={values.selectedSalesPerson?.firstName ?? ""}
             InputProps={{
-              endAdornment: props.type !== "view" &&(
+              endAdornment: props.type !== "view" && (
                 <IconButton
                   onClick={() => setFieldValue("selectedSalesPerson", "")}
                   sx={{
