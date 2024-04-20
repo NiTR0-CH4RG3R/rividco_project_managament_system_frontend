@@ -17,7 +17,6 @@ const Home = () => {
   //   console.log(res);
   // });
 
-
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle("Home");
   setSubtitle("Welcome to RIVIDCO PROJECTS!");
@@ -41,7 +40,7 @@ const Home = () => {
           marginLeft: "-5%",
           width: "100vw",
           height: "100vh",
-          opacity: "60%",
+          opacity: "50%",
         }}
       >
         <img
@@ -51,10 +50,48 @@ const Home = () => {
         />
       </div>
 
-      <div style={{ position: "fixed", bottom: 0, right: 0, margin: "5%" }}>
+      <div
+        style={{
+          position: "fixed",
+          marginTop: "-20%",
+          marginLeft: "0%",
+          width: "75vw",
+          height: "100vh",
+          opacity: "100%",
+        }}
+      >
         <Typography
           variant="h1"
-          style={{ marginBottom: "5px", fontWeight: "bold" }}
+          style={{
+            fontWeight: "bold",
+            fontSize: "75px",
+          }}
+        >
+          <p style={{ textAlign: "center", color: "#071024" }}>
+            Welcome to the Rividco
+          </p>
+        </Typography>
+      </div>
+
+      <div
+        style={{
+          position: "fixed",
+          marginTop: "-7%",
+          marginLeft: "0%",
+          width: "75vw",
+          height: "100vh",
+          opacity: "80%",
+        }}
+      >
+        <Typography
+          variant="h1"
+          style={{
+            marginBottom: "5px",
+            fontSize: "60px",
+            fontWeight: "Bold",
+            textAlign: "center",
+            color: "#071024",
+          }}
         >
           {currentTime.toLocaleTimeString([], {
             hour: "2-digit",
@@ -62,7 +99,15 @@ const Home = () => {
             hour12: true,
           })}
         </Typography>
-        <Typography variant="h4" style={{ fontWeight: "bold" }}>
+        <Typography
+          variant="h1"
+          style={{
+            fontWeight: "bold",
+            textAlign: "center",
+            color: "#071024",
+            fontSize: "30px",
+          }}
+        >
           {currentTime.toLocaleDateString(undefined, {
             weekday: "long",
             year: "numeric",
