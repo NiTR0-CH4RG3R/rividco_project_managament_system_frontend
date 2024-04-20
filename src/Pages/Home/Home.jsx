@@ -54,7 +54,7 @@ const Home = () => {
         <div
           style={{
             position: "fixed",
-            marginTop: "-20%",
+            marginTop: "-18%",
             marginLeft: "0%",
             width: "75vw",
             height: "100vh",
@@ -65,7 +65,7 @@ const Home = () => {
             variant="h1"
             style={{
               fontWeight: "bold",
-              fontSize: "75px",
+              fontSize: "65px",
             }}
           >
             <p style={{ textAlign: "center", color: "#071024" }}>
