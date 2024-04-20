@@ -24,6 +24,7 @@ export default function ProjectServicesForm(props) {
   const { testId } = props;
   const [statusType, setResultType] = useState([]);
   const [modeType, setModeType] = useState(props.type);
+  
 
   function loadProjectTestData(testId, setValues) {
     //add here
@@ -31,18 +32,18 @@ export default function ProjectServicesForm(props) {
       .getTest(testId)
       .then((test) => {
         console.log(test);
-      
+
         setValues({
-          testName:test.name,
-          conductedDate:test.conductedDate,
-          status:test.passed,
-          comment:test.comments,
-  
+          testName: test.name,
+          conductedDate: test.conductedDate,
+          status: test.passed,
+          comment: test.comments,
+
           selectedEmployee: {
             id: test.conductedBy,
             //firstName: null,
           },
-        })
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -53,11 +54,11 @@ export default function ProjectServicesForm(props) {
     //load status type from the backend
     setResultType([
       {
-        value: true,
+        value: 1,
         label: "Pass",
       },
       {
-        value: false,
+        value: 0,
         label: "Fail",
       },
     ]);
@@ -77,8 +78,6 @@ export default function ProjectServicesForm(props) {
     if (props.type === "add") {
       setValues({
         testName: "",
-        //result: "",
-        conductedBy: "",
         conductedDate: "",
         status: "",
         comment: "",
@@ -87,9 +86,9 @@ export default function ProjectServicesForm(props) {
           id: null,
           firstName: null,
         },
-      })
+      });
     }
-  }, [])
+  }, []);
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle("Project Tests");
@@ -113,8 +112,6 @@ export default function ProjectServicesForm(props) {
   } = useFormik({
     initialValues: {
       testName: "",
-      //result: "",
-      conductedBy: "",
       conductedDate: "",
       status: "",
       comment: "",
@@ -131,6 +128,7 @@ export default function ProjectServicesForm(props) {
       setLoading(true);
       //Send values to the backend
       if (modeType === "add") {
+        //console.log(values);
         projectTestService
           .addTest({
             name: values.testName,
@@ -143,6 +141,7 @@ export default function ProjectServicesForm(props) {
           .then(() => {
             setLoading(false);
             //navigate(AppRoutes.project_test_list.path.replace(":id", testId));
+            
           })
           .catch((error) => {
             console.error(error);
@@ -154,6 +153,7 @@ export default function ProjectServicesForm(props) {
           .updateTest(
             {
               name: values.testName,
+              projectId: id,
               conductedBy: values.selectedEmployee.id,
               conductedDate: values.conductedDate,
               comments: values.comment,
@@ -163,7 +163,8 @@ export default function ProjectServicesForm(props) {
           )
           .then(() => {
             setLoading(false);
-            navigate(AppRoutes.project_test_list.path);
+            //navigate(AppRoutes.project_test_list.path);
+            
           })
           .catch((error) => {
             console.error(error);
@@ -178,12 +179,13 @@ export default function ProjectServicesForm(props) {
 
   return (
     <>
+    
       <Typography sx={{ fontSize: "large", pb: 2, pt: 2 }}>
         {modeType === "add"
           ? "Add Test"
           : modeType === "view"
-            ? "View Test"
-            : "Edit Test"}
+          ? "View Test"
+          : "Edit Test"}
       </Typography>
       <Box
         component="form"
@@ -377,6 +379,7 @@ export default function ProjectServicesForm(props) {
           sendData={setFieldValue}
         />
       </Box>
+    
     </>
   );
 }
