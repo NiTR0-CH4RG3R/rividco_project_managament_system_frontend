@@ -19,7 +19,7 @@ const Home = () => {
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle("Home");
-  setSubtitle("Welcome to RIVIDCO PROJECTS!");
+  //setSubtitle("Welcome to RIVIDCO PROJECTS!");
 
   const [currentTime, setDateTime] = useState(new Date());
 
@@ -69,7 +69,7 @@ const Home = () => {
             }}
           >
             <p style={{ textAlign: "center", color: "#071024" }}>
-              Welcome to the Rividco
+              Welcome to RIVIDCO PROJECTS!
             </p>
           </Typography>
         </div>
