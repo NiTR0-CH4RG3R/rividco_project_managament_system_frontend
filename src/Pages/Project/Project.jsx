@@ -35,6 +35,7 @@ import MuiAlert from "@mui/material/Alert";
 import Slide from "@mui/material/Slide";
 import ProjectViewButton from "../../Components/StyledComponents/ProjectViewButton";
 
+
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
   function loadProjectData(id, setValues) {
@@ -43,6 +44,7 @@ export default function Project(props) {
       .getProject(id)
       .then((project) => {
         setValues(project);
+        console.log(project);
       })
       .catch((error) => {
         console.log(error);
@@ -53,12 +55,28 @@ export default function Project(props) {
     //load status type from the backend
     setStatusType([
       {
-        value: "On going",
-        label: "On going",
+        value: "Active",
+        label: "Active",
       },
       {
         value: "Done",
         label: "Done",
+      },
+      {
+        value: "Onhold",
+        label: "Onhold",
+      },
+      {
+        value: "WaitingFor",
+        label: "WaitingFor",
+      },
+      {
+        value: "Invalid",
+        label: "Invalid",
+      },
+      {
+        value: "Rejected",
+        label: "Rejected",
       },
     ]);
   }
@@ -156,15 +174,12 @@ export default function Project(props) {
     setValues,
   } = useFormik({
     initialValues: {
-      //customer: "",
       startDate: "",
       description: "",
       warantyPeriod: "",
       status: "",
       estimatedCost: "",
       location: "",
-      //referencedBy: "",
-      //coordinator: "",
       electricityTariffStructure: "",
       electricityAccountNumber: "",
       electricityBoardArea: "",
@@ -192,9 +207,10 @@ export default function Project(props) {
       },
     },
 
-    //validationSchema: addProjectValidation,
+    validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
+      console.log(values);
       setSuccessMessageOpen(true);
       setLoading(true);
       if (props.type === "add") {
@@ -209,7 +225,7 @@ export default function Project(props) {
             status: values.status,
             estimatedCost: values.estimatedCost,
             referencedBy: values.selectedReferenceBy.id,
-            locationCoordinates: "0,0",
+            locationCoordinates:values.location,
             electricityTariffStructure: values.electricityTariffStructure,
             electricityAccountNumber: values.electricityAccountNumber,
             electricityBoardArea: values.electricityBoardArea,
@@ -220,7 +236,8 @@ export default function Project(props) {
           })
           .then(() => {
             setLoading(false);
-            navigate(AppRoutes.project_list.path);
+            //navigate(AppRoutes.project_list.path);
+            console.log("done");
           })
           .catch((error) => {
             console.error(error);
