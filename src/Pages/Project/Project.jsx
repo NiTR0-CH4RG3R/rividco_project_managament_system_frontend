@@ -34,17 +34,134 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Slide from "@mui/material/Slide";
 import ProjectViewButton from "../../Components/StyledComponents/ProjectViewButton";
-
+import * as customerService from "../../services/customerService";
+import * as systemUserService from "../../services/systemUserService";
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
+  // function loadProjectData(id, setValues) {
+  //   //Load data
+  //   projectService
+  //     .getProject(id)
+  //     .then((project) => {
+  //       //setValues(project);
+  //       console.log(project);
+  //       setValues({
+  //         startDate: project.startDate.substring(
+  //           0,
+  //           project.startDate.lastIndexOf("T")
+  //         ),
+  //         description: project.description,
+  //         warantyPeriod: project.systemWarrentyPeriod,
+  //         status: project.status,
+  //         estimatedCost: project.estimatedCost,
+  //         location: project.locationCoordinates,
+  //         electricityTariffStructure: project.electricityTariffStructure,
+  //         electricityAccountNumber: project.electricityAccountNumber,
+  //         electricityBoardArea: project.electricityBoardArea,
+  //         commisionDate: project.commisionDate.substring(
+  //           0,
+  //           project.commisionDate.lastIndexOf("T")
+  //         ),
+  //         identificationNumber: project.projectIdentificationNumber,
+  //         comment: project.comments,
+
+  //         selectedCustomer: {
+  //           id: project.customerId,
+  //           firstName: null,
+  //         },
+
+  //         selectedEmployee: {
+  //           id:project.coordinatorId,
+  //           firstName: null,
+  //         },
+
+  //         selectedReferenceBy: {
+  //           id:project.referencedBy,
+  //           firstName: null,
+  //         },
+  //         selectedSalesPerson: {
+  //           id: project.salesPerson,
+  //           firstName: null,
+  //         },
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
+
   function loadProjectData(id, setValues) {
-    //Load data
+    
     projectService
       .getProject(id)
       .then((project) => {
-        setValues(project);
-        console.log(project);
+        
+        Promise.all([
+          
+          customerService.getCustomer(project.customerId),
+          
+          systemUserService.getSystemUser(project.coordinatorId),
+          systemUserService.getSystemUser(project.salesPerson),
+          
+          customerService.getCustomer(project.referencedBy),
+        ])
+          .then(
+            ([
+              customerData,
+              coordinatorData,
+              salesPersonData,
+              referenceByData,
+            ]) => {
+              
+              console.log("Customer Data:", customerData);
+              console.log("Coordinator Data:", coordinatorData);
+              console.log("Sales Person Data:", salesPersonData);
+              console.log("Reference By Data:", referenceByData);
+
+              
+
+              setValues({
+                // startDate: project.startDate.substring(
+                //   0,
+                //   project.startDate.lastIndexOf("T")
+                // ),
+                description: project.description,
+                warantyPeriod: project.systemWarrentyPeriod,
+                status: project.status,
+                estimatedCost: project.estimatedCost,
+                location: project.locationCoordinates,
+                electricityTariffStructure: project.electricityTariffStructure,
+                electricityAccountNumber: project.electricityAccountNumber,
+                electricityBoardArea: project.electricityBoardArea,
+                // commisionDate: project.commisionDate.substring(
+                //   0,
+                //   project.commisionDate.lastIndexOf("T")
+                // ),
+                identificationNumber: project.projectIdentificationNumber,
+                comment: project.comments,
+                selectedCustomer: {
+                  id: project.customerId,
+                  firstName: customerData.firstName, 
+                },
+                selectedEmployee: {
+                  id: project.coordinatorId,
+                  firstName: coordinatorData.firstName,
+                },
+                selectedReferenceBy: {
+                  id: project.referencedBy,
+                  firstName: referenceByData.firstName, 
+                },
+                selectedSalesPerson: {
+                  id: project.salesPerson,
+                  firstName: salesPersonData.firstName, 
+                },
+              });
+            }
+          )
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -94,15 +211,12 @@ export default function Project(props) {
   useEffect(() => {
     if (props.type === "add") {
       setValues({
-        //customer: "",
         startDate: "",
         description: "",
         warantyPeriod: "",
         status: "",
         estimatedCost: "",
         location: "",
-        //referencedBy: "",
-        //coordinator: "",
         electricityTariffStructure: "",
         electricityAccountNumber: "",
         electricityBoardArea: "",
@@ -137,15 +251,15 @@ export default function Project(props) {
     props.type === "add"
       ? "Add a new Project"
       : props.type === "edit"
-        ? "Edit Project"
-        : `View Project`
+      ? "Edit Project"
+      : `View Project`
   );
   setSubtitle(
     props.type === "add"
       ? "You can add a new project here."
       : props.type === "edit"
-        ? `You can edit project id:#${id} details here.`
-        : `You can view project id:#${id} details here.`
+      ? `You can edit project id:#${id} details here.`
+      : `You can view project id:#${id} details here.`
   );
 
   const [loading, setLoading] = useState(false);
@@ -225,7 +339,7 @@ export default function Project(props) {
             status: values.status,
             estimatedCost: values.estimatedCost,
             referencedBy: values.selectedReferenceBy.id,
-            locationCoordinates:values.location,
+            locationCoordinates: values.location,
             electricityTariffStructure: values.electricityTariffStructure,
             electricityAccountNumber: values.electricityAccountNumber,
             electricityBoardArea: values.electricityBoardArea,
@@ -236,7 +350,7 @@ export default function Project(props) {
           })
           .then(() => {
             setLoading(false);
-            //navigate(AppRoutes.project_list.path);
+            navigate(AppRoutes.project_list.path);
             console.log("done");
           })
           .catch((error) => {
@@ -273,9 +387,6 @@ export default function Project(props) {
       alignItems="center"
       flexDirection="column"
       padding={5}
-
-
-
     >
       <Grid
         container
@@ -283,11 +394,9 @@ export default function Project(props) {
         sx={{
           p: 2,
 
-
           borderRadius: 3,
           "& .MuiGrid-item": {
             padding: 1,
-
           },
         }}
         elevation={3}
@@ -311,7 +420,7 @@ export default function Project(props) {
             }}
             value={values.selectedCustomer?.firstName ?? ""}
             InputProps={{
-              endAdornment: (
+              endAdornment: props.type !== "view" && (
                 <IconButton
                   onClick={() => setFieldValue("selectedCustomer", "")}
                   sx={{
@@ -449,7 +558,7 @@ export default function Project(props) {
             }}
             value={values.selectedReferenceBy?.firstName ?? ""}
             InputProps={{
-              endAdornment: (
+              endAdornment:props.type !== "view" && (
                 <IconButton
                   onClick={() => setFieldValue("selectedReferenceBy", "")}
                   sx={{
@@ -513,7 +622,7 @@ export default function Project(props) {
             }}
             value={values.selectedEmployee?.firstName ?? ""}
             InputProps={{
-              endAdornment: (
+              endAdornment: props.type !== "view" &&(
                 <IconButton
                   onClick={() => setFieldValue("selectedEmployee", "")}
                   sx={{
@@ -665,7 +774,7 @@ export default function Project(props) {
             }}
             value={values.selectedSalesPerson?.firstName ?? ""}
             InputProps={{
-              endAdornment: (
+              endAdornment: props.type !== "view" &&(
                 <IconButton
                   onClick={() => setFieldValue("selectedSalesPerson", "")}
                   sx={{

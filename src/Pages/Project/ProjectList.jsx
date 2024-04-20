@@ -46,7 +46,7 @@ export default function ProjectList() {
       .catch((error) => {
         console.log(error);
       });
-  }, [page, setRows]);
+  }, [page, rowsPerPage]);
 
   const navigate = useNavigate();
 
@@ -71,8 +71,8 @@ export default function ProjectList() {
       tablePaginationProps={{
         rowsPerPageOptions: [5, 10, 25, 100],
         component: "div",
-        rowsPerPage: 5,
-        page: 0,
+        rowsPerPage: rowsPerPage,
+        page: page,
         count: 100,
         onPageChange: (e, page) => {
           setPage(page);
