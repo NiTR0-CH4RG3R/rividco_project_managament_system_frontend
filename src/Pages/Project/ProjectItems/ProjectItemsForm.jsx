@@ -54,16 +54,16 @@ export default function ProjectItemsForm(props) {
   useEffect(() => {
     if (props.type === "add") {
       setValues({
-      vendorItem: "",
-      status: "",
-      comment: "",
-      dueDate: "",
-
-      selectedVendorItem: {
+        moduleNumber: "",
+        comment: "",
+        warrantyPeriod: "",
+        serialNumber:"",
         
-        id: null,
-        productName:null,
-      },
+        selectedVendorItem: {        
+          id: null,
+          productName:null,
+          
+        },
 
       })
     }
@@ -94,17 +94,16 @@ export default function ProjectItemsForm(props) {
   } = useFormik({
     initialValues: {
 
-      vendorItem: "",
-      description: "",
-      comment: "",
-      warrantyPeriod: "",
-      serialNumber:"",
-      
-      selectedVendorItem: {        
-        id: null,
-        productName:null,
+      moduleNumber: "",
+        comment: "",
+        warrantyPeriod: "",
+        serialNumber:"",
         
-      },
+        selectedVendorItem: {        
+          id: null,
+          productName:null,
+          
+        },
 
     },
 
@@ -116,7 +115,10 @@ export default function ProjectItemsForm(props) {
       if (modeType === "add") {
         projectItemServices
           .addItem({
-            
+            vendorItemId:values.selectedVendorItem.id,
+            projectId:id,
+
+
 
             comments: values.comment,
          
@@ -228,21 +230,40 @@ export default function ProjectItemsForm(props) {
         <Grid item xs={12}>
           <FormTextField
           
-            required
-            placeholder="Please Enter The Description"
-            id="description"
-            name="description"
-            label="Description"
-            multiline
-            maxRows={4}
+            
+            placeholder="Please Enter The Module Number"
+            id="moduleNumber"
+            name="moduleNumber"
+            label="Module Number"
             fullWidth
             size="small"
-            value={values.description} //set value using formik
+            value={values.moduleNumber} //set value using formik
             onChange={handleChange} //get onchange value using formik
             disabled={modeType === "view"}
             onBlur={handleBlur}
-            error={touched.description && errors.description}
-            helperText={touched.description ? errors.description : ""}
+            error={touched.moduleNumber && errors.moduleNumber}
+            helperText={touched.moduleNumber ? errors.moduleNumber : ""}
+            variant="filled"
+
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormTextField
+          
+            
+            placeholder="Please Enter The Serial Number"
+            id="serialNumber"
+            name="serialNumber"
+            label="Module Number"
+            fullWidth
+            size="small"
+            value={values.serialNumber} //set value using formik
+            onChange={handleChange} //get onchange value using formik
+            disabled={modeType === "view"}
+            onBlur={handleBlur}
+            error={touched.serialNumber && errors.serialNumber}
+            helperText={touched.serialNumber ? errors.serialNumber : ""}
             variant="filled"
 
           />
