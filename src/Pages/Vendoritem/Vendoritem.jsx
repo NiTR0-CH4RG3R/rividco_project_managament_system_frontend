@@ -24,6 +24,7 @@ import * as vendorItemService from "../../services/vendorItemService";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Slide from "@mui/material/Slide";
+import * as vendorService from "../../services/vendorService";
 
 export default function Vendoritem(props) {
   const { id } = useParams();
@@ -31,7 +32,21 @@ export default function Vendoritem(props) {
     vendorItemService
       .getVendorItem(id)
       .then((vendorItem) => {
-        setValues(vendorItem);
+        vendorService.getVendor(vendorItem.vendorId).then((vendor) => {
+          setValues({
+            product_name: vendorItem.productName,
+            price: vendorItem.price,
+            warranty_duration: vendorItem.warrantyDuration,
+            capacity: vendorItem.capacity,
+            brand: vendorItem.brand,
+            productCode: vendorItem.productCode,
+            comments: vendorItem.comments,
+            selectedVendor: {
+              id: vendorItem.vendorId,
+              name: vendor.name,
+            },
+          });
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -212,7 +227,7 @@ export default function Vendoritem(props) {
             }}
             value={values.selectedVendor?.name ?? ""}
             InputProps={{
-              endAdornment: (
+              endAdornment: props.type !== "view" && (
                 <IconButton
                   onClick={() => setFieldValue("selectedVendor", "")}
                   sx={{
