@@ -276,6 +276,7 @@ export default function Vendoritem(props) {
             required={true}
             name="warranty_duration"
             label="Warranty duration"
+            value={values.warranty_duration}
             onChange={handleChange}
             disabled={props.type === "view"}
             onBlur={handleBlur}
