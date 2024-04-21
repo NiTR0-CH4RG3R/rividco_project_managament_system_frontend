@@ -44,6 +44,7 @@ export default function VendorList() {
     vendorItemService
       .listVendorItems(page + 1, rowsPerPage)
       .then((Vendoritems) => {
+        console.log(Vendoritem);
         setRows(Vendoritems);
       })
 
