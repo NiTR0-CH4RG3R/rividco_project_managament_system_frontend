@@ -39,57 +39,7 @@ import * as systemUserService from "../../services/systemUserService";
 
 export default function Project(props) {
   const [statusType, setStatusType] = useState([]);
-  // function loadProjectData(id, setValues) {
-  //   //Load data
-  //   projectService
-  //     .getProject(id)
-  //     .then((project) => {
-  //       //setValues(project);
-  //       console.log(project);
-  //       setValues({
-  //         startDate: project.startDate.substring(
-  //           0,
-  //           project.startDate.lastIndexOf("T")
-  //         ),
-  //         description: project.description,
-  //         warantyPeriod: project.systemWarrentyPeriod,
-  //         status: project.status,
-  //         estimatedCost: project.estimatedCost,
-  //         location: project.locationCoordinates,
-  //         electricityTariffStructure: project.electricityTariffStructure,
-  //         electricityAccountNumber: project.electricityAccountNumber,
-  //         electricityBoardArea: project.electricityBoardArea,
-  //         commisionDate: project.commisionDate.substring(
-  //           0,
-  //           project.commisionDate.lastIndexOf("T")
-  //         ),
-  //         identificationNumber: project.projectIdentificationNumber,
-  //         comment: project.comments,
-
-  //         selectedCustomer: {
-  //           id: project.customerId,
-  //           firstName: null,
-  //         },
-
-  //         selectedEmployee: {
-  //           id:project.coordinatorId,
-  //           firstName: null,
-  //         },
-
-  //         selectedReferenceBy: {
-  //           id:project.referencedBy,
-  //           firstName: null,
-  //         },
-  //         selectedSalesPerson: {
-  //           id: project.salesPerson,
-  //           firstName: null,
-  //         },
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
+ 
 
   function loadProjectData(id, setValues) {
     projectService
@@ -110,10 +60,7 @@ export default function Project(props) {
               salesPersonData,
               referenceByData,
             ]) => {
-              console.log("Customer Data:", customerData);
-              console.log("Coordinator Data:", coordinatorData);
-              console.log("Sales Person Data:", salesPersonData);
-              console.log("Reference By Data:", referenceByData);
+              
 
               setValues({
                 startDate: project.startDate?.substring(
