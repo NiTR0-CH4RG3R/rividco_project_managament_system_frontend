@@ -25,6 +25,7 @@ export default function ProjectItems() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { id } = useParams();
+  
 
   const [rows, setRows] = useState([
     {
@@ -46,12 +47,13 @@ export default function ProjectItems() {
       .listItems(id, page + 1, rowsPerPage)
       .then((items) => {
         setRows([]);
-        console.log(items);
+        
 
         items.forEach((item) => {
           vendorItemService.getVendorItem(item.vendorItemId).then((vendorItem) => {
             setRows(prev => [...prev,
             {
+              id:item.id,
               vendorItem: vendorItem.productName,
               serialNumber: item.serialNo,
               warrantyPeriod: item.warrantyDuration,
