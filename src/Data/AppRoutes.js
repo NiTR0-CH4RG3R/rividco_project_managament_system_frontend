@@ -81,7 +81,7 @@ export const AppRoutes = {
     path: '/project/view/:id/test',
     component: <ProjectTest />,
   },
-  project_items_list: { path: '/project/items', component: <ProjectItems /> },
+  project_items_list: { path: '/project/:id/items', component: <ProjectItems /> },
   project_services_list: {
     path: '/project/service',
     component: <ProjectServices />,
