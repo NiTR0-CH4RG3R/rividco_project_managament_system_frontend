@@ -60,10 +60,9 @@ export default function ProjectItemsForm(props) {
       dueDate: "",
 
       selectedVendorItem: {
-        userId: null,
+        
         id: null,
-        title: null,
-        completed: true,
+        productName:null,
       },
 
       })
@@ -103,6 +102,7 @@ export default function ProjectItemsForm(props) {
       
       selectedVendorItem: {        
         id: null,
+        productName:null,
         
       },
 
@@ -191,18 +191,18 @@ export default function ProjectItemsForm(props) {
             fullWidth
             size="small"
             onClick={() => {
-              if (!values.selectedVendorItem?.title && modeType !== "view") {
+              if (!values.selectedVendorItem?.productName && modeType !== "view") {
                 setOpenVendorItem(true);
               }
             }}
             variant="filled"
-            value={values.selectedVendorItem?.title ?? ""}
+            value={values.selectedVendorItem?.productName ?? ""}
             InputProps={{
               endAdornment: (
                 <IconButton
                   onClick={() => setFieldValue("selectedVendorItem", "")}
                   sx={{
-                    visibility: values.selectedVendorItem?.title
+                    visibility: values.selectedVendorItem?.productName
                       ? "visible"
                       : "hidden",
                   }}
@@ -214,11 +214,11 @@ export default function ProjectItemsForm(props) {
             disabled={modeType === "view"}
             onBlur={handleBlur}
             error={
-              touched.selectedVendorItem?.title && errors.selectedVendorItem?.title
+              touched.selectedVendorItem?.productName && errors.selectedVendorItem?.productName
             }
             helperText={
-              touched.selectedVendorItem?.title
-                ? errors.selectedVendorItem?.title
+              touched.selectedVendorItem?.productName
+                ? errors.selectedVendorItem?.productName
                 : ""
             }
           />

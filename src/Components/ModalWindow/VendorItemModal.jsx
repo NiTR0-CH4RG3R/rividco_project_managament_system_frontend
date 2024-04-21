@@ -31,6 +31,7 @@ export default function VendorItemModal(props) {
      vendorItemService
      .listVendorItems(page + 1, rowsPerPage)
      .then((item)=>{
+      console.log(item);
       setRows(item);
      })
   }, [])
