@@ -928,7 +928,7 @@ export default function Project(props) {
               color="primary"
               startIcon={<EditIcon />}
               onClick={() =>
-                navigate(`${AppRoutes.project_edit.path.replace(":id", id)}}`)
+                navigate(`${AppRoutes.project_edit.path.replace(":id", id)}`)
               }
             >
               Edit
