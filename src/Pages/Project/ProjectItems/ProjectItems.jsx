@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useTopbarContext } from "../../../Contexts/TopbarContext";
 import ProjectItemsPopup from "../ProjectItems/ProjectItemsPopup";
 import ListPage from "../../../Components/ListPage/ListPage";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as projectItemServices from "../../../services/projectItemServices";
+import * as vendorItemService from "../../../services/vendorItemService";
 
 
 const columns = [
   { id: "vendorItem", label: "Vendor Item", align: "left" },
   { id: "serialNumber", label: "Serial Number", align: "left" },
   { id: "warrantyPeriod", label: "Warranty Period", align: "left" },
-  { id: "conductedDate", label: "Conducted Date", align: "left" },
   { id: "comment", label: "Comment", align: "center" },
 ];
 
@@ -44,9 +44,22 @@ export default function ProjectItems() {
   useEffect(() => {
     projectItemServices
       .listItems(id, page + 1, rowsPerPage)
-      .then((item) => {
-        console.log(item);
-        setRows(item);
+      .then((items) => {
+        setRows([]);
+        console.log(items);
+
+        items.forEach((item) => {
+          vendorItemService.getVendorItem(item.vendorItemId).then((vendorItem) => {
+            setRows(prev => [...prev,
+            {
+              vendorItem: vendorItem.productName,
+              serialNumber: item.serialNo,
+              warrantyPeriod: item.warrantyDuration,
+              comment: item.comments
+            }]);
+          });
+        });
+
       })
       .catch((error) => {
         console.log(error);
@@ -67,7 +80,7 @@ export default function ProjectItems() {
           onSearchChange: (e) => {
             console.log(e.target.value);
           },
-          onSearchClick: (e) => {},
+          onSearchClick: (e) => { },
         }}
         onRowClick={(e, id) => {
           setModeType("view");
@@ -92,7 +105,7 @@ export default function ProjectItems() {
           },
         }}
         disableSearchBar
-        // customUpperBar={<UpperBar />}
+      // customUpperBar={<UpperBar />}
       />
       <ProjectItemsPopup
         openPopUp={openPopUp}
