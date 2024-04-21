@@ -147,7 +147,19 @@ export default function Vendoritem(props) {
           });
       } else if (props.type === "edit") {
         vendorItemService
-          .updateVendorItem(values, id)
+          .updateVendorItem(
+            {
+              productName: values.product_name,
+              price: values.price,
+              vendorId: values.selectedVendor.id,
+              warrantyDuration: values.warranty_duration,
+              capacity: values.capacity,
+              brand: values.brand,
+              productCode: values.productCode,
+              comments: values.comments,
+            },
+            id
+          )
           .then(() => {
             setLoading(false);
             navigation(AppRoutes.vendor_item_list.path);
