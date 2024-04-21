@@ -41,7 +41,7 @@ export default function ProjectList() {
     projectService
       .listProjects(page + 1, rowsPerPage)
       .then((projects) => {
-        console.log(projects);
+        
         setRows(projects);
       })
       .catch((error) => {

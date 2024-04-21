@@ -45,6 +45,7 @@ export default function ProjectItems() {
     projectItemServices
       .listItems(id, page + 1, rowsPerPage)
       .then((item) => {
+        console.log(item);
         setRows(item);
       })
       .catch((error) => {

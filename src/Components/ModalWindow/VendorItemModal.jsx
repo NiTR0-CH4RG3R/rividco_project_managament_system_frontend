@@ -23,19 +23,16 @@ export default function VendorItemModal(props) {
 
   const [rows, setRows] = useState([])
   const [loadidng, setLoading] = useState(false)
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     setLoading(true)
-    /* vendorItemService
-      .listAllVendorItem()
-      .then((vendorItem) => {
-        setRows(vendorItem);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });*/
+     vendorItemService
+     .listVendorItems(page + 1, rowsPerPage)
+     .then((item)=>{
+      setRows(item);
+     })
   }, [])
 
   return (
