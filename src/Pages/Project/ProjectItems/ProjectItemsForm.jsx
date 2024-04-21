@@ -99,6 +99,7 @@ export default function ProjectItemsForm(props) {
 
     onSubmit: (values) => {
       setLoading(true);
+      console.log(values);
       //Send values to the backend
       if (modeType === "add") {
         projectItemServices
@@ -229,7 +230,7 @@ export default function ProjectItemsForm(props) {
               placeholder="Please Enter The Serial Number"
               id="serialNumber"
               name="serialNumber"
-              label="Module Number"
+              label="Serial Number"
               fullWidth
               size="small"
               value={values.serialNumber} //set value using formik
@@ -244,12 +245,13 @@ export default function ProjectItemsForm(props) {
 
           <Grid item xs={12}>
             <WarrentyField
-              //required={true}
+              
               name="warrantyPeriod"
               onChange={handleChange}
               disabled={modeType === "view"}
               onBlur={handleBlur}
               fullWidth={true}
+              value={values.warrantyPeriod}
               size="small"
               variant="filled"
             />
@@ -257,7 +259,7 @@ export default function ProjectItemsForm(props) {
 
           <Grid item xs={12}>
             <FormTextField
-              required
+              
               placeholder="Please Enter Comments"
               id="comment"
               name="comment"
