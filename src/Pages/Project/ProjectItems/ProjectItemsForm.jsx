@@ -22,14 +22,12 @@ import EditIcon from "@mui/icons-material/Edit";
 //import { Typography } from "@mui/material/styles/createTypography";
 import * as projectItemServices from "../../../services/projectItemServices";
 
-
 export default function ProjectItemsForm(props) {
   const { itemsId } = props;
   const [statusType, setStatusType] = useState([]);
   const [modeType, setModeType] = useState(props.type);
 
-
-  function loadProjectItemData(itemsId,setValues) {
+  function loadProjectItemData(itemsId, setValues) {
     //add here
     projectItemServices
       .getitem(itemsId)
@@ -44,12 +42,10 @@ export default function ProjectItemsForm(props) {
   const { id } = useParams();
 
   useEffect(() => {
-    
     if (modeType !== "add") {
-      loadProjectItemData(itemsId,setValues);
+      loadProjectItemData(itemsId, setValues);
     }
   }, []);
-  
 
   useEffect(() => {
     if (props.type === "add") {
@@ -57,18 +53,15 @@ export default function ProjectItemsForm(props) {
         moduleNumber: "",
         comment: "",
         warrantyPeriod: "",
-        serialNumber:"",
-        
-        selectedVendorItem: {        
+        serialNumber: "",
+
+        selectedVendorItem: {
           id: null,
-          productName:null,
-          
+          productName: null,
         },
-
-      })
+      });
     }
-  }, [])
-
+  }, []);
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle("Project items");
@@ -77,7 +70,6 @@ export default function ProjectItemsForm(props) {
   const [loading, setLoading] = useState(false);
   //for modal
   const [openVendorItem, setOpenVendorItem] = useState(false);
-
 
   //set initial values in formik
   const {
@@ -89,22 +81,18 @@ export default function ProjectItemsForm(props) {
     handleSubmit,
     handleReset,
     setFieldValue,
-    setValues
-    
+    setValues,
   } = useFormik({
     initialValues: {
-
       moduleNumber: "",
-        comment: "",
-        warrantyPeriod: "",
-        serialNumber:"",
-        
-        selectedVendorItem: {        
-          id: null,
-          productName:null,
-          
-        },
+      comment: "",
+      warrantyPeriod: "",
+      serialNumber: "",
 
+      selectedVendorItem: {
+        id: null,
+        productName: null,
+      },
     },
 
     //validationSchema: addProjectValidation,
@@ -115,18 +103,16 @@ export default function ProjectItemsForm(props) {
       if (modeType === "add") {
         projectItemServices
           .addItem({
-            vendorItemId:values.selectedVendorItem.id,
-            projectId:id,
-
-
-
+            vendorItemId: values.selectedVendorItem.id,
+            projectId: id,
+            moduleNo: values.moduleNumber,
+            serialNo: values.serialNumber,
+            warrantyDuration: values.warrantyPeriod,
             comments: values.comment,
-         
           })
           .then(() => {
             setLoading(false);
             navigate(AppRoutes.project_items_list.path.replace(":id", itemsId));
-          
           })
           .catch((error) => {
             console.error(error);
@@ -135,15 +121,7 @@ export default function ProjectItemsForm(props) {
           });
       } else if (modeType === "edit") {
         projectItemServices
-          .updateItem(
-            {
-              
-
-
-
-            },
-            itemsId
-          )
+          .updateItem({}, itemsId)
           .then(() => {
             setLoading(false);
             navigate(AppRoutes.project_items_list.path);
@@ -161,206 +139,194 @@ export default function ProjectItemsForm(props) {
 
   return (
     <>
-   <Typography sx={{fontSize:'large',pb:2,pt:2}}>
-  {modeType === "add"
-    ? "Add Items"
-    : modeType === "view"
-    ? "View Items"
-    : "Edit Items"
-  }
-</Typography>
+      <Typography sx={{ fontSize: "large", pb: 2, pt: 2 }}>
+        {modeType === "add"
+          ? "Add Items"
+          : modeType === "view"
+          ? "View Items"
+          : "Edit Items"}
+      </Typography>
 
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      onReset={handleReset}
-      noValidate
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection="column"
-      width={"100%"}
-    >
-      <Grid container spacing={2}>
-
-      <Grid item xs={12}>
-          <FormTextField
-            required
-            placeholder="Vendor Item"
-            id="vendorItem"
-            name="vendorItem"
-            label="Select the Vendor Item"
-            fullWidth
-            size="small"
-            onClick={() => {
-              if (!values.selectedVendorItem?.productName && modeType !== "view") {
-                setOpenVendorItem(true);
-              }
-            }}
-            variant="filled"
-            value={values.selectedVendorItem?.productName ?? ""}
-            InputProps={{
-              endAdornment: (
-                <IconButton
-                  onClick={() => setFieldValue("selectedVendorItem", "")}
-                  sx={{
-                    visibility: values.selectedVendorItem?.productName
-                      ? "visible"
-                      : "hidden",
-                  }}
-                >
-                  <GridClearIcon />
-                </IconButton>
-              ),
-            }}
-            disabled={modeType === "view"}
-            onBlur={handleBlur}
-            error={
-              touched.selectedVendorItem?.productName && errors.selectedVendorItem?.productName
-            }
-            helperText={
-              touched.selectedVendorItem?.productName
-                ? errors.selectedVendorItem?.productName
-                : ""
-            }
-          />
-        </Grid>
-
-        
-        <Grid item xs={12}>
-          <FormTextField
-          
-            
-            placeholder="Please Enter The Module Number"
-            id="moduleNumber"
-            name="moduleNumber"
-            label="Module Number"
-            fullWidth
-            size="small"
-            value={values.moduleNumber} //set value using formik
-            onChange={handleChange} //get onchange value using formik
-            disabled={modeType === "view"}
-            onBlur={handleBlur}
-            error={touched.moduleNumber && errors.moduleNumber}
-            helperText={touched.moduleNumber ? errors.moduleNumber : ""}
-            variant="filled"
-
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <FormTextField
-          
-            
-            placeholder="Please Enter The Serial Number"
-            id="serialNumber"
-            name="serialNumber"
-            label="Module Number"
-            fullWidth
-            size="small"
-            value={values.serialNumber} //set value using formik
-            onChange={handleChange} //get onchange value using formik
-            disabled={modeType === "view"}
-            onBlur={handleBlur}
-            error={touched.serialNumber && errors.serialNumber}
-            helperText={touched.serialNumber ? errors.serialNumber : ""}
-            variant="filled"
-
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-        
-          <WarrentyField
-            //required={true}
-            name="warrantyPeriod"
-            onChange={handleChange}
-            disabled={modeType === "view"}
-            onBlur={handleBlur}
-            fullWidth={true}
-            size="small"
-            variant="filled"
-
-          />
-        </Grid>
-       
-        <Grid item xs={12}>
-          <FormTextField
-            required
-            placeholder="Please Enter Comments"
-            id="comment"
-            name="comment"
-            label="Comment"
-            multiline
-            maxRows={4}
-            fullWidth
-            size="small"
-            value={values.comment} //set value using formik
-            onChange={handleChange} //get onchange value using formik
-            disabled={modeType === "view"}
-            onBlur={handleBlur}
-            error={touched.comment && errors.comment}
-            helperText={touched.comment ? errors.comment : ""}
-            variant="filled"
-
-          />
-        </Grid>
-        </Grid>
-      <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
-        {modeType !== "view" && (
-          <>
-
-            
-            <FormClearButton
-              variant="outlined"
-              size="large"
-              sx={{
-                mr: 2,
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        onReset={handleReset}
+        noValidate
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+        width={"100%"}
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <FormTextField
+              required
+              placeholder="Vendor Item"
+              id="vendorItem"
+              name="vendorItem"
+              label="Select the Vendor Item"
+              fullWidth
+              size="small"
+              onClick={() => {
+                if (
+                  !values.selectedVendorItem?.productName &&
+                  modeType !== "view"
+                ) {
+                  setOpenVendorItem(true);
+                }
               }}
-              color="primary"
-              startIcon={<ClearAllIcon />}
-              type="reset"
-            >
-              Clear
-            </FormClearButton>
+              variant="filled"
+              value={values.selectedVendorItem?.productName ?? ""}
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    onClick={() => setFieldValue("selectedVendorItem", "")}
+                    sx={{
+                      visibility: values.selectedVendorItem?.productName
+                        ? "visible"
+                        : "hidden",
+                    }}
+                  >
+                    <GridClearIcon />
+                  </IconButton>
+                ),
+              }}
+              disabled={modeType === "view"}
+              onBlur={handleBlur}
+              error={
+                touched.selectedVendorItem?.productName &&
+                errors.selectedVendorItem?.productName
+              }
+              helperText={
+                touched.selectedVendorItem?.productName
+                  ? errors.selectedVendorItem?.productName
+                  : ""
+              }
+            />
+          </Grid>
 
-            <FormSaveLoadingButton
-              color="primary"
-              type="submit"
-              size="large"
-              loading={loading}
-              loadingPosition="start"
-              startIcon={<SaveIcon />}
-              variant="contained"
-            >
-              <span>Save</span>
-            </FormSaveLoadingButton>
-          </>
-        )}
+          <Grid item xs={12}>
+            <FormTextField
+              placeholder="Please Enter The Module Number"
+              id="moduleNumber"
+              name="moduleNumber"
+              label="Module Number"
+              fullWidth
+              size="small"
+              value={values.moduleNumber} //set value using formik
+              onChange={handleChange} //get onchange value using formik
+              disabled={modeType === "view"}
+              onBlur={handleBlur}
+              error={touched.moduleNumber && errors.moduleNumber}
+              helperText={touched.moduleNumber ? errors.moduleNumber : ""}
+              variant="filled"
+            />
+          </Grid>
 
-      {modeType === "view" && (
-          <>
-            <FormButton
-              variant="contained"
-              size="large"
-              color="primary"
-              startIcon={<EditIcon />}
-              onClick={() => setModeType("edit")}
-            >
-              Edit
-            </FormButton>
-          </>
-        )}
-        
+          <Grid item xs={12}>
+            <FormTextField
+              placeholder="Please Enter The Serial Number"
+              id="serialNumber"
+              name="serialNumber"
+              label="Module Number"
+              fullWidth
+              size="small"
+              value={values.serialNumber} //set value using formik
+              onChange={handleChange} //get onchange value using formik
+              disabled={modeType === "view"}
+              onBlur={handleBlur}
+              error={touched.serialNumber && errors.serialNumber}
+              helperText={touched.serialNumber ? errors.serialNumber : ""}
+              variant="filled"
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <WarrentyField
+              //required={true}
+              name="warrantyPeriod"
+              onChange={handleChange}
+              disabled={modeType === "view"}
+              onBlur={handleBlur}
+              fullWidth={true}
+              size="small"
+              variant="filled"
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <FormTextField
+              required
+              placeholder="Please Enter Comments"
+              id="comment"
+              name="comment"
+              label="Comment"
+              multiline
+              maxRows={4}
+              fullWidth
+              size="small"
+              value={values.comment} //set value using formik
+              onChange={handleChange} //get onchange value using formik
+              disabled={modeType === "view"}
+              onBlur={handleBlur}
+              error={touched.comment && errors.comment}
+              helperText={touched.comment ? errors.comment : ""}
+              variant="filled"
+            />
+          </Grid>
+        </Grid>
+        <Box display="flex" pt={3} width="100%" justifyContent="flex-end">
+          {modeType !== "view" && (
+            <>
+              <FormClearButton
+                variant="outlined"
+                size="large"
+                sx={{
+                  mr: 2,
+                }}
+                color="primary"
+                startIcon={<ClearAllIcon />}
+                type="reset"
+              >
+                Clear
+              </FormClearButton>
+
+              <FormSaveLoadingButton
+                color="primary"
+                type="submit"
+                size="large"
+                loading={loading}
+                loadingPosition="start"
+                startIcon={<SaveIcon />}
+                variant="contained"
+              >
+                <span>Save</span>
+              </FormSaveLoadingButton>
+            </>
+          )}
+
+          {modeType === "view" && (
+            <>
+              <FormButton
+                variant="contained"
+                size="large"
+                color="primary"
+                startIcon={<EditIcon />}
+                onClick={() => setModeType("edit")}
+              >
+                Edit
+              </FormButton>
+            </>
+          )}
+        </Box>
+
+        <VendorItemModal
+          openVendorItem={openVendorItem}
+          setOpenVendorItem={setOpenVendorItem}
+          sendData={setFieldValue}
+        />
       </Box>
-
-      <VendorItemModal
-        openVendorItem={openVendorItem}
-        setOpenVendorItem={setOpenVendorItem}
-        sendData={setFieldValue}
-      />
-    
-    </Box>
     </>
   );
 }
