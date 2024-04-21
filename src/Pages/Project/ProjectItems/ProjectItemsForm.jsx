@@ -112,7 +112,7 @@ export default function ProjectItemsForm(props) {
 
     onSubmit: (values) => {
       setLoading(true);
-      console.log(values);
+      
       //Send values to the backend
       if (modeType === "add") {
         projectItemServices
@@ -126,7 +126,7 @@ export default function ProjectItemsForm(props) {
           })
           .then(() => {
             setLoading(false);
-            console.log("done");
+            
             props.handleClose();
             //navigate(AppRoutes.project_items_list.path.replace(":id", itemsId));
           })
