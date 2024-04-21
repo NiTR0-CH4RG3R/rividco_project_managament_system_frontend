@@ -122,7 +122,17 @@ export default function ProjectItemsForm(props) {
           });
       } else if (modeType === "edit") {
         projectItemServices
-          .updateItem({}, itemsId)
+          .updateItem(
+            {
+              vendorItemId: values.selectedVendorItem.id,
+              projectId: id,
+              moduleNo: values.moduleNumber,
+              serialNo: values.serialNumber,
+              warrantyDuration: values.warrantyPeriod,
+              comments: values.comment,
+            },
+            itemsId
+          )
           .then(() => {
             setLoading(false);
             navigate(AppRoutes.project_items_list.path);
@@ -245,7 +255,6 @@ export default function ProjectItemsForm(props) {
 
           <Grid item xs={12}>
             <WarrentyField
-              
               name="warrantyPeriod"
               onChange={handleChange}
               disabled={modeType === "view"}
@@ -259,7 +268,6 @@ export default function ProjectItemsForm(props) {
 
           <Grid item xs={12}>
             <FormTextField
-              
               placeholder="Please Enter Comments"
               id="comment"
               name="comment"
