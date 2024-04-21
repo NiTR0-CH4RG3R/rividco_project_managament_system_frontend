@@ -92,13 +92,10 @@ export default function Project(props) {
   // }
 
   function loadProjectData(id, setValues) {
-
     projectService
       .getProject(id)
       .then((project) => {
-
         Promise.all([
-
           customerService.getCustomer(project.customerId),
 
           systemUserService.getSystemUser(project.coordinatorId),
@@ -113,16 +110,16 @@ export default function Project(props) {
               salesPersonData,
               referenceByData,
             ]) => {
-
               console.log("Customer Data:", customerData);
               console.log("Coordinator Data:", coordinatorData);
               console.log("Sales Person Data:", salesPersonData);
               console.log("Reference By Data:", referenceByData);
 
-
-
               setValues({
-                startDate: project.startDate?.substring(0, project.startDate.lastIndexOf("T")),
+                startDate: project.startDate?.substring(
+                  0,
+                  project.startDate.lastIndexOf("T")
+                ),
                 description: project.description,
                 warantyPeriod: project.systemWarrantyPeriod,
                 status: project.status,
@@ -131,7 +128,10 @@ export default function Project(props) {
                 electricityTariffStructure: project.electricityTariffStructure,
                 electricityAccountNumber: project.electricityAccountNumber,
                 electricityBoardArea: project.electricityBoardArea,
-                commisionDate: project.commissionDate?.substring(0, project.commissionDate.lastIndexOf("T")),
+                commisionDate: project.commissionDate?.substring(
+                  0,
+                  project.commissionDate.lastIndexOf("T")
+                ),
                 identificationNumber: project.projectIdentificationNumber,
                 comment: project.comments,
                 selectedCustomer: {
@@ -203,7 +203,6 @@ export default function Project(props) {
   }, []);
 
   useEffect(() => {
-
     if (props.type === "add") {
       setValues({
         startDate: "",
@@ -246,15 +245,15 @@ export default function Project(props) {
     props.type === "add"
       ? "Add a new Project"
       : props.type === "edit"
-        ? "Edit Project"
-        : `View Project`
+      ? "Edit Project"
+      : `View Project`
   );
   setSubtitle(
     props.type === "add"
       ? "You can add a new project here."
       : props.type === "edit"
-        ? `You can edit project id:#${id} details here.`
-        : `You can view project id:#${id} details here.`
+      ? `You can edit project id:#${id} details here.`
+      : `You can view project id:#${id} details here.`
   );
 
   const [loading, setLoading] = useState(false);
@@ -355,7 +354,28 @@ export default function Project(props) {
           });
       } else if (props.type === "edit") {
         projectService
-          .updateProject(values, id)
+          .updateProject(
+            {
+              customerId: values.selectedCustomer.id,
+              description: values.description,
+              startDate: values.startDate,
+              address: values.location,
+              coordinatorId: values.selectedEmployee.id,
+              systemWarrantyPeriod: values.warantyPeriod,
+              status: values.status,
+              estimatedCost: values.estimatedCost,
+              referencedBy: values.selectedReferenceBy.id,
+              locationCoordinates: values.location,
+              electricityTariffStructure: values.electricityTariffStructure,
+              electricityAccountNumber: values.electricityAccountNumber,
+              electricityBoardArea: values.electricityBoardArea,
+              commissionDate: values.commisionDate,
+              projectIdentificationNumber: values.identificationNumber,
+              salesPerson: values.selectedSalesPerson.id,
+              comments: values.comment,
+            },
+            id
+          )
           .then(() => {
             setLoading(false);
             navigate(AppRoutes.project_list.path);
