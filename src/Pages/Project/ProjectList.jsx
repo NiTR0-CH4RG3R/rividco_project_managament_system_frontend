@@ -6,7 +6,7 @@ import { AppRoutes } from "../../Data/AppRoutes";
 import * as projectService from "../../services/projectService";
 
 const columns = [
-  { id: "projectIdentificationNumber", label: "First Name", align: "left" },
+  { id: "projectIdentificationNumber", label: "Project Id Number", align: "left" },
   { id: "customerId", label: "Customer", align: "left" },
   { id: "address", label: "Location", align: "left" },
   { id: "salesPerson", label: "Sales Person", align: "left" },
@@ -41,6 +41,7 @@ export default function ProjectList() {
     projectService
       .listProjects(page + 1, rowsPerPage)
       .then((projects) => {
+        console.log(projects);
         setRows(projects);
       })
       .catch((error) => {
