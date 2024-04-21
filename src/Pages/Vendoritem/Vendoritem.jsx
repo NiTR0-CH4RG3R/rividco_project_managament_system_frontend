@@ -124,6 +124,7 @@ export default function Vendoritem(props) {
     onSubmit: (values) => {
       setSuccessMessageOpen(true);
       setLoading(true);
+      console.log(values);
       if (props.type === "add") {
         vendorItemService
           .addVendorItem({
@@ -139,6 +140,7 @@ export default function Vendoritem(props) {
           .then(() => {
             setLoading(false);
             navigation(AppRoutes.vendor_item_list.path);
+            console.log("hello");
           })
           .catch((error) => {
             console.error(error);
