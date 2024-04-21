@@ -9,7 +9,6 @@ import Vendoritem from "./Vendoritem";
 const columns = [
   { id: "productName", label: "Item Name", align: "left" },
   { id: "vendorId", label: "Vendor", align: "left" },
-  { id: "address", label: "Vendor Address", align: "left" },
   { id: "price", label: "Price", align: "right" },
   { id: "capacity", label: "Capacity", align: "right" },
   { id: "warrantyDuration", label: "Warrenty Duration", align: "right" },
@@ -44,7 +43,7 @@ export default function VendorList() {
     vendorItemService
       .listVendorItems(page + 1, rowsPerPage)
       .then((Vendoritems) => {
-        console.log(Vendoritem);
+        console.log(Vendoritems);
         setRows(Vendoritems);
       })
 
