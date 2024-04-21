@@ -32,7 +32,17 @@ export default function ProjectItemsForm(props) {
     projectItemServices
       .getitem(itemsId)
       .then((items) => {
-        setValues(items);
+        setValues({
+          moduleNumber:items.moduleNo,
+          comment:items.comments,
+          warrantyPeriod:items.warrantyDuration,
+          serialNumber:items.serialNo,
+  
+          selectedVendorItem: {
+            id:null,
+            productName: null,
+          },
+        });
       })
       .catch((error) => {
         console.log(error);
