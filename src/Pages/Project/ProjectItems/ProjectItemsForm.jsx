@@ -123,12 +123,15 @@ export default function ProjectItemsForm(props) {
           })
           .then(() => {
             setLoading(false);
-            navigate(AppRoutes.project_items_list.path.replace(":id", itemsId));
+            console.log("done");
+            props.handleClose();
+            //navigate(AppRoutes.project_items_list.path.replace(":id", itemsId));
           })
           .catch((error) => {
             console.error(error);
             alert(error);
             setLoading(false);
+            props.handleClose();
           });
       } else if (modeType === "edit") {
         projectItemServices

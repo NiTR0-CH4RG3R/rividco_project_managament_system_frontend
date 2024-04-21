@@ -25,7 +25,7 @@ export default function ProjectItemsPopup(props) {
           <CloseIcon />
         </IconButton>
       <DialogContent>
-        <ProjectItemsForm itemsId={itemsId} type={type} />
+        <ProjectItemsForm itemsId={itemsId} type={type} handleClose={handleClose} />
       </DialogContent>
     </Dialog>
   )
