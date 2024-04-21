@@ -31,10 +31,7 @@ export default function ProjectServicesForm(props) {
     projectTestService
       .getTest(testId)
       .then((test) => {
-        console.log(test);
-        console.log(
-          test.conductedDate.substring(0, test.conductedDate.lastIndexOf("T"))
-        );
+        
 
         systemUserService.getSystemUser(test.conductedBy).then((user) => {
           setValues({

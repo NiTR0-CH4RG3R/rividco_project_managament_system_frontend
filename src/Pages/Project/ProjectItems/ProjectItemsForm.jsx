@@ -21,6 +21,7 @@ import FormButton from "../../../Components/StyledComponents/FormButton";
 import EditIcon from "@mui/icons-material/Edit";
 //import { Typography } from "@mui/material/styles/createTypography";
 import * as projectItemServices from "../../../services/projectItemServices";
+import * as vendorItemServices from "../../../services/vendorItemService";
 
 export default function ProjectItemsForm(props) {
   const { itemsId } = props;
@@ -32,17 +33,19 @@ export default function ProjectItemsForm(props) {
     projectItemServices
       .getitem(itemsId)
       .then((items) => {
-        setValues({
+
+        vendorItemServices.getVendorItem(items.id).then((item)=>{setValues({
           moduleNumber:items.moduleNo,
           comment:items.comments,
           warrantyPeriod:items.warrantyDuration,
           serialNumber:items.serialNo,
   
           selectedVendorItem: {
-            id:null,
-            productName: null,
+            id:items.id,
+            productName:item.productName,
           },
-        });
+        });})
+        
       })
       .catch((error) => {
         console.log(error);
@@ -203,7 +206,7 @@ export default function ProjectItemsForm(props) {
               variant="filled"
               value={values.selectedVendorItem?.productName ?? ""}
               InputProps={{
-                endAdornment: (
+                endAdornment: modeType !== "view" &&  (
                   <IconButton
                     onClick={() => setFieldValue("selectedVendorItem", "")}
                     sx={{
