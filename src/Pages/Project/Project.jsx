@@ -265,7 +265,7 @@ export default function Project(props) {
     validationSchema: addProjectValidation,
 
     onSubmit: (values) => {
-      console.log(values);
+      
       setSuccessMessageOpen(true);
       setLoading(true);
       if (props.type === "add") {
@@ -292,7 +292,7 @@ export default function Project(props) {
           .then(() => {
             setLoading(false);
             navigate(AppRoutes.project_list.path);
-            console.log("done");
+            
           })
           .catch((error) => {
             console.error(error);
