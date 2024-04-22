@@ -22,6 +22,8 @@ import EditIcon from "@mui/icons-material/Edit";
 //import { Typography } from "@mui/material/styles/createTypography";
 import * as projectItemServices from "../../../services/projectItemServices";
 import * as vendorItemServices from "../../../services/vendorItemService";
+import { projectItemValidation } from "../../../Validation/ProjectItemValidation";
+
 
 export default function ProjectItemsForm(props) {
   const { itemsId } = props;
@@ -108,7 +110,7 @@ export default function ProjectItemsForm(props) {
       },
     },
 
-    //validationSchema: addProjectValidation,
+    validationSchema:projectItemValidation ,
 
     onSubmit: (values) => {
       setLoading(true);
