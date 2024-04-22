@@ -5,6 +5,7 @@ import ListPage from "../../Components/ListPage/ListPage";
 import { AppRoutes } from "../../Data/AppRoutes";
 import * as vendorItemService from "../../services/vendorItemService";
 import Vendoritem from "./Vendoritem";
+import * as vendorService from "../../services/vendorService";
 
 const columns = [
   { id: "productName", label: "Item Name", align: "left" },
@@ -39,14 +40,41 @@ export default function VendorList() {
     setRowsPerPage(5);
   }, []);
 
+  // useEffect(() => {
+  //   vendorItemService
+  //     .listVendorItems(page + 1, rowsPerPage)
+  //     .then((Vendoritems) => {
+  //       console.log(Vendoritems);
+  //       setRows(Vendoritems);
+  //     })
+
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, [page, rowsPerPage]);
+
   useEffect(() => {
     vendorItemService
       .listVendorItems(page + 1, rowsPerPage)
       .then((Vendoritems) => {
-        console.log(Vendoritems);
-        setRows(Vendoritems);
+        Promise.all(
+          Vendoritems.map((item) => vendorService.getVendor(item.vendorId))
+        )
+          .then((vendors) => {
+            setRows(
+              Vendoritems.map((item, index) => ({
+                id: item.id,
+                productName: item.productName,
+                vendorId: vendors[index].name,
+                address: item.address,
+                price: item.price,
+                capacity: item.capacity,
+                warrantyDuration: item.warrantyDuration,
+              }))
+            );
+          })
+          .catch((error) => console.log(error));
       })
-
       .catch((error) => {
         console.log(error);
       });
