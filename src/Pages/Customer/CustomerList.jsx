@@ -20,12 +20,12 @@ export default function CustomerList() {
 
   const [rows, setRows] = useState([
     {
-      id: 0,
-      firstName: "John",
-      lastName: "Doe",
-      category: "CUSTOMER",
-      address: "No. 380, Walawwaththa, Dadalla, Galle",
-      contact: "1234567890",
+      id: "Loading...",
+      firstName: "Loading...",
+      lastName: "Loading...",
+      category: "Loading...",
+      address: "Loading...",
+      contact: "Loading...",
     },
   ]);
   const [page, setPage] = useState(0);
