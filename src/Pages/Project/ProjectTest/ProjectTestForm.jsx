@@ -329,7 +329,7 @@ export default function ProjectServicesForm(props) {
               size="small"
               value={values.comment} //set value using formikß
               onChange={handleChange} //get onchange value using formik
-              disabled={props.type === "view"}
+              disabled={modeType === "view"}
               variant="filled"
             />
           </Grid>
