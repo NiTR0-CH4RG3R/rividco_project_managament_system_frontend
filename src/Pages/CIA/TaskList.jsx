@@ -9,6 +9,8 @@ import FormTextField from '../../Components/StyledComponents/FormTextField'
 import { categories, urgencies } from './TaskData'
 import { useFormik } from 'formik'
 import { Box, Grid, MenuItem, Paper } from '@mui/material'
+import * as customerService from '../../services/customerService'
+import * as systemUserService from '../../services/systemUserService'
 
 const columns = [
   { id: 'id', label: 'Id', align: 'left' },
@@ -27,12 +29,13 @@ export default function TaskList() {
 
   const [rows, setRows] = useState([
     {
-      id: "Loading...",
-      category: "Loading...",
-      requestedBy: "Loading...",
-      callback: "Loading...",
-      assignedTo: "Loading...",
-      status: "Loading...",
+      id: 'Loading...',
+      category: 'Loading...',
+      requestedBy: 'Loading...',
+      callBackNumber: 'Loading...',
+      assignedTo: 'Loading...',
+      status: 'Loading...',
+      urgencyLevel: 'Loading...',
     },
   ])
 
@@ -85,7 +88,32 @@ export default function TaskList() {
       taskService
         .listTasks(page + 1, rowsPerPage)
         .then((task) => {
-          setRows(task)
+          //setRows(task)
+          Promise.all(
+            task.map((item) => {
+              return Promise.all([
+                customerService.getCustomer(item.requestedBy),
+                systemUserService.getSystemUser(item.assignedTo),
+              ])
+            })
+          )
+            .then((results) => {
+              setRows(
+                task.map((item, index) => {
+                  const [customer, employee] = results[index]
+                  return {
+                    id: item.id,
+                    category: item.category,
+                    requestedBy: customer.firstName,
+                    callBackNumber: item.callBackNumber,
+                    status: item.status,
+                    urgencyLevel: item.urgencyLevel,
+                    assignedTo: employee.firstName,
+                  }
+                })
+              )
+            })
+            .catch((error) => console.log(error))
         })
         .catch((error) => {
           console.log(error)
@@ -94,7 +122,32 @@ export default function TaskList() {
       taskService
         .listTasksByUrgencyLevel(urgencyLevel, page + 1, rowsPerPage)
         .then((task) => {
-          setRows(task)
+          //setRows(task)
+          Promise.all(
+            task.map((item) => {
+              return Promise.all([
+                customerService.getCustomer(item.requestedBy),
+                systemUserService.getSystemUser(item.assignedTo),
+              ])
+            })
+          )
+            .then((results) => {
+              setRows(
+                task.map((item, index) => {
+                  const [customer, employee] = results[index]
+                  return {
+                    id: item.id,
+                    category: item.category,
+                    requestedBy: customer.firstName,
+                    callBackNumber: item.callBackNumber,
+                    status: item.status,
+                    urgencyLevel: item.urgencyLevel,
+                    assignedTo: employee.firstName,
+                  }
+                })
+              )
+            })
+            .catch((error) => console.log(error))
         })
         .catch((error) => {
           console.log(error)
@@ -103,7 +156,32 @@ export default function TaskList() {
       taskService
         .listTasksByCategory(category, page + 1, rowsPerPage)
         .then((task) => {
-          setRows(task)
+          //setRows(task)
+          Promise.all(
+            task.map((item) => {
+              return Promise.all([
+                customerService.getCustomer(item.requestedBy),
+                systemUserService.getSystemUser(item.assignedTo),
+              ])
+            })
+          )
+            .then((results) => {
+              setRows(
+                task.map((item, index) => {
+                  const [customer, employee] = results[index]
+                  return {
+                    id: item.id,
+                    category: item.category,
+                    requestedBy: customer.firstName,
+                    callBackNumber: item.callBackNumber,
+                    status: item.status,
+                    urgencyLevel: item.urgencyLevel,
+                    assignedTo: employee.firstName,
+                  }
+                })
+              )
+            })
+            .catch((error) => console.log(error))
         })
         .catch((error) => {
           console.log(error)
@@ -117,7 +195,32 @@ export default function TaskList() {
           rowsPerPage
         )
         .then((task) => {
-          setRows(task)
+          //setRows(task)
+          Promise.all(
+            task.map((item) => {
+              return Promise.all([
+                customerService.getCustomer(item.requestedBy),
+                systemUserService.getSystemUser(item.assignedTo),
+              ])
+            })
+          )
+            .then((results) => {
+              setRows(
+                task.map((item, index) => {
+                  const [customer, employee] = results[index]
+                  return {
+                    id: item.id,
+                    category: item.category,
+                    requestedBy: customer.firstName,
+                    callBackNumber: item.callBackNumber,
+                    status: item.status,
+                    urgencyLevel: item.urgencyLevel,
+                    assignedTo: employee.firstName,
+                  }
+                })
+              )
+            })
+            .catch((error) => console.log(error))
         })
         .catch((error) => {
           console.log(error)
