@@ -2,14 +2,16 @@ import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import useAuthContext from './useAuthContext';
 import * as authService from '../services/authService';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 
 export default function PersistLogin() {
     const { auth, setAuth } = useAuthContext();
     const [isLoading, setIsLoading] = useState(true);
+    const [persist] = useLocalStorage('persist', false);
 
     useEffect(() => {
-        const validateRefreshToken = async () => {
+        const verifyRefreshToken = async () => {
             try {
                 const user = await authService.refresh();
                 setAuth(user);
@@ -21,13 +23,17 @@ export default function PersistLogin() {
             }
         };
 
-        if (!auth.accessToken) {
-            validateRefreshToken();
-        } else {
-            setIsLoading(false);
-        }
+        !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
     }, []);
 
-    if (isLoading) return <div>Loading...</div>;
-    else return <Outlet />;
+    return (
+        <>
+            {!persist
+                ? <Outlet />
+                : isLoading
+                    ? <p>Loading...</p>
+                    : <Outlet />
+            }
+        </>
+    );
 }
