@@ -10,7 +10,7 @@ const columns = [
   { id: "lastName", label: "Last Name", align: "left" },
   { id: "role", label: "Role", align: "left" },
   { id: "address", label: "Address", align: "left" },
-  { id: "phone01", label: "Contact Number" , align: "left"},
+  { id: "phone01", label: "Contact Number", align: "left" },
 ];
 
 export default function SystemUserList() {
@@ -20,12 +20,12 @@ export default function SystemUserList() {
 
   const [rows, setRows] = useState([
     {
-      id: 0,
-      firstName: "John",
-      lastName: "Doe",
-      role: "ADMIN",
-      status: "ACTIVE",
-      contact: "1234567890",
+      id: "Loading...",
+      firstName: "Loading...",
+      lastName: "Loading...",
+      role: "Loading...",
+      status: "Loading...",
+      contact: "Loading...",
     },
   ]);
 
@@ -59,7 +59,7 @@ export default function SystemUserList() {
       }}
       onRowClick={(e, id) => {
         console.log(id);
-        navigate(AppRoutes.system_user_view.path.replace(':id', id))
+        navigate(AppRoutes.system_user_view.path.replace(":id", id));
       }}
       onAddButtonClick={(e) => {
         navigate(AppRoutes.system_user_add.path);
