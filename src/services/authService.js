@@ -39,3 +39,12 @@ export const refresh = async () => {
 
     return user;
 }
+
+export const logout = async () => {
+    try {
+        await post(`${AUTH_URL}/logout`);
+    }
+    catch (error) {
+        console.error('Error logging out: ', error);
+    }
+}
