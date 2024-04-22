@@ -29,11 +29,11 @@ export default function ProjectItems() {
 
   const [rows, setRows] = useState([
     {
-      vendorItem: "item 1",
-      serialNumber: "111QWERT",
-      warrantyPeriod: "2 Months",
-      conductedDate: "09/09/2023",
-      comment: "comment 1",
+      vendorItem: "Loading...",
+      serialNumber: "Loading...",
+      warrantyPeriod: "Loading...",
+      conductedDate: "Loading...",
+      comment: "Loading...",
     },
   ]);
 
