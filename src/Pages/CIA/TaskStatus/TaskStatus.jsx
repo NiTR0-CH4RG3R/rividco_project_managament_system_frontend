@@ -6,6 +6,7 @@ import * as taskStatusService from '../../../services/taskStatusService'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+//import * as systemUserService from '../../../services/systemUserService'
 
 const columns = [
   { id: 'status', label: 'Task Status', align: 'left' },
@@ -28,10 +29,10 @@ function TaskStatus() {
 
   const [rows, setRows] = React.useState([
     {
-      status: 'Active',
-      lastUpdatedBy: 'john silva',
-      lastUpdatedDateTime: '2024-01-30',
-      comments: 'This task is in active status',
+      status: 'Loading...',
+      lastUpdatedBy: 'Loading...',
+      lastUpdatedDateTime: 'Loading...',
+      comments: 'Loading...',
     },
   ])
 
@@ -45,6 +46,20 @@ function TaskStatus() {
       .listTaskStatus(id, page + 1, rowsPerPage)
       .then((taskstatus) => {
         setRows(taskstatus)
+        /* Promise.all(
+          taskstatus.map((item) =>
+            systemUserService.getSystemUser(item.lastUpdatedBy)
+          )
+        ).then((results) => {
+          setRows(
+            taskstatus.map((item, index) => ({
+              status: item.status,
+              lastUpdatedBy: results[index].firstName,
+              lastUpdatedDateTime: item.lastUpdatedDateTime,
+              comments: item.comments,
+            }))
+          )
+        }) */
       })
       .catch((error) => {
         console.log(error)
