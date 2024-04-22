@@ -1,4 +1,4 @@
-import { secretPost } from "../api/axios";
+import { secretPost, post } from "../api/axios";
 import { jwtDecode } from "jwt-decode";
 
 const AUTH_URL = '/Authentication'
@@ -11,7 +11,8 @@ export const login = async (username, password) => {
         const accessToken = response?.data;
         user.accessToken = accessToken;
         const decoded = jwtDecode(accessToken);
-        user.userId = decoded.unique_name;
+        if (!decoded.userId) user.userId = decoded.unique_name; // This is for backward compatibility with the old API
+        else user.userId = decoded.userId;
         user.roles = typeof (decoded.role) === 'string' ? [decoded.role] : decoded.role;
     }
     catch (error) {
@@ -25,12 +26,12 @@ export const refresh = async () => {
     const user = { userId: undefined, accessToken: undefined, roles: [] }
 
     try {
-        const response = await secretPost(`${AUTH_URL}/refresh`);
+        const response = await post(`${AUTH_URL}/refresh`);
         const accessToken = response?.data;
         user.accessToken = accessToken;
         const decoded = jwtDecode(accessToken);
         user.userId = decoded.userId;
-        user.roles = decoded.roles;
+        user.roles = typeof (decoded.role) === 'string' ? [decoded.role] : decoded.role;
     }
     catch (error) {
         console.error('Error logging in: ', error);
