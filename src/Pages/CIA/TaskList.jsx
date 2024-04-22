@@ -27,12 +27,12 @@ export default function TaskList() {
 
   const [rows, setRows] = useState([
     {
-      id: 0,
-      category: 'Complaint',
-      requestedBy: 'Jane Doe',
-      callback: '091 2222222',
-      assignedTo: 'Jone Doe',
-      status: 'ACTIVE',
+      id: "Loading...",
+      category: "Loading...",
+      requestedBy: "Loading...",
+      callback: "Loading...",
+      assignedTo: "Loading...",
+      status: "Loading...",
     },
   ])
 
