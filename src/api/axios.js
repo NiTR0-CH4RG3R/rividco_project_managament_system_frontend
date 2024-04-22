@@ -8,7 +8,8 @@ const axios = Axios.create({
     baseURL: baseURL,
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 });
 
 
