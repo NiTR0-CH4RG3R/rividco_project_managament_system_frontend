@@ -25,11 +25,11 @@ export default function VendorList() {
   const [rows, setRows] = useState([
     {
       id: 0,
-      vendorRegistrationNumber: "V001",
-      name: "NC Enterprices",
-      address: "No. 380, Walawwaththa, Dadalla, Galle",
-      email: "idontknow@gmail.com",
-      phone01: "1234567890",
+      vendorRegistrationNumber: "Loading...",
+      name: "Loading...",
+      address: "Loading...",
+      email: "Loading...",
+      phone01: "Loading...",
     },
   ]);
 
