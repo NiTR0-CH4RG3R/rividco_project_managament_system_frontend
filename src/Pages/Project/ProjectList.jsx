@@ -20,12 +20,12 @@ export default function ProjectList() {
 
   const [rows, setRows] = useState([
     {
-      id: 0,
-      identificationNo: "P001",
-      customer: "Jane Doe",
-      location: "No. 380, Walawwaththa, Dadalla, Galle",
-      salesPerson: "Jone Doe",
-      status: "ACTIVE",
+      projectIdentificationNumber: "Loading...",
+      identificationNo: "Loading...",
+      customerId: "Loading...",
+      address: "Loading...",
+      salesPerson: "Loading...",
+      status: "Loading...",
     },
   ]);
 
