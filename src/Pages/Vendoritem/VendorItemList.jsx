@@ -22,12 +22,12 @@ export default function VendorList() {
   const [rows, setRows] = useState([
     {
       id: 0,
-      productName: "Converter",
-      vendorId: "NC Enterprices",
-      address: "No. 380, Walawwaththa, Dadalla, Galle",
-      price: 800.0,
-      capacity: 180.0,
-      warrantyDuration: 360,
+      productName: "Loading...",
+      vendorId: "Loading...",
+      address: "Loading...",
+      price: "Loading...",
+      capacity: "Loading...",
+      warrantyDuration: "Loading...",
     },
   ]);
 
