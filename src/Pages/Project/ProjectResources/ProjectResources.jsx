@@ -21,10 +21,10 @@ export default function ProjectResources() {
 
   const [rows, setRows] = useState([
     {
-      resourceName: "Resourece 1",
-      addedBy: "User 1",
-      addedDate: "02/01/2024",
-      comment: "comment 1",
+      resourceName: "Loading...",
+      addedBy: "Loading...",
+      addedDate: "Loading...",
+      comment: "Loading...",
     },
   ]);
 
