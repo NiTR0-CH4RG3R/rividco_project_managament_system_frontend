@@ -8,13 +8,9 @@ import Missing from './Pages/Missing/Missing';
 import Login from './Pages/Login/Login';
 import AuthContextProvider from './auth/AuthContextProvider';
 import RequireAuth from './auth/RequireAuth';
-
-
-
+import PersistLogin from './auth/PersistLogin';
 
 export default function App() {
-
-
     let routes = [];
     Object.keys(AppRoutes).forEach((name) => {
         // NOTE : This is a small hack to mimik the functionality of the login page for the interim presentation.
@@ -34,13 +30,15 @@ export default function App() {
                     <CssBaseline />
                     <Routes>
                         <Route path='/login' element={<Login />} />
-                        <Route element={<RequireAuth allowedRoles={['User']} />} >
-                            <Route path='/' element={<Layout />}>
-                                {routes.map((route) => (
-                                    <Route key={route} path={route.path} element={route.component} />
-                                ))}
+                        <Route element={<PersistLogin />} >
+                            <Route element={<RequireAuth allowedRoles={['User']} />} >
+                                <Route path='/' element={<Layout />}>
+                                    {routes.map((route) => (
+                                        <Route key={route} path={route.path} element={route.component} />
+                                    ))}
+                                </Route>
+                                <Route path='*' element={<Missing />} />
                             </Route>
-                            <Route path='*' element={<Missing />} />
                         </Route>
                     </Routes>
                 </ThemeProvider>

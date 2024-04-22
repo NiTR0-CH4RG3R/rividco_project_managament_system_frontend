@@ -26,7 +26,7 @@ export const refresh = async () => {
     const user = { userId: undefined, accessToken: undefined, roles: [] }
 
     try {
-        const response = await post(`${AUTH_URL}/refresh`);
+        const response = await secretPost(`${AUTH_URL}/refresh`);
         const accessToken = response?.data;
         user.accessToken = accessToken;
         const decoded = jwtDecode(accessToken);
