@@ -18,6 +18,7 @@ import Avatar from "./Avatar";
 import SystemUser from "../../Pages/SystemUser/SystemUser";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { getSystemUser } from "../../services/systemUserService";
+import * as authService from "../../services/authService";
 
 export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const colorMode = useContext(ColorModeContext);
@@ -72,6 +73,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   };
   //add the function
   const handleLogoutButtonClick = () => {
+    authService.logout();
     navigate("/login");
   };
 
@@ -151,7 +153,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
               color: "#071024",
               p: 1,
               display: homebuttonVisible ? "" : "none",
-              mr:2,
+              mr: 2,
             }}
             onClick={handleHomeButtonClick}
           >
