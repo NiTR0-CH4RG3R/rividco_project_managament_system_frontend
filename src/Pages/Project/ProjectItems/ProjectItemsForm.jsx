@@ -151,7 +151,8 @@ export default function ProjectItemsForm(props) {
           )
           .then(() => {
             setLoading(false);
-            navigate(AppRoutes.project_items_list.path);
+            //navigate(AppRoutes.project_items_list.path);
+            props.handleClose();
           })
           .catch((error) => {
             console.error(error);
