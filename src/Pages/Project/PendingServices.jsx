@@ -22,11 +22,11 @@ export default function PendingServices() {
 
   const [rows, setRows] = useState([
     {
-      description: "description 1",
-      status: "pending",
-      conductedBy: "user 1",
-      conductedDate: "02/01/2024",
-      dueDate: "02/01/2024",
+      description: "Loading...",
+      status: "Loading...",
+      conductedBy: "Loading...",
+      conductedDate: "Loading...",
+      dueDate: "Loading...",
     },
   ]);
 
