@@ -27,11 +27,11 @@ export default function ProjectTest() {
 
   const [rows, setRows] = useState([
     {
-      testName: "test 1",
-      result: "pass",
-      conductedBy: "user 1",
-      conductedDate: "02/01/2024",
-      comment: "comment",
+      testName: "Loading...",
+      result: "Loading...",
+      conductedBy: "Loading...",
+      conductedDate: "Loading...",
+      comment: "Loading...",
     },
   ]);
 
