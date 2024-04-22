@@ -129,17 +129,15 @@ function TaskStatusForm(props) {
 
   return (
     <Box
-      component="form"
-      onReset={handleReset}
-      onSubmit={handleSubmit}
-      display="flex"
-      flexDirection="column"
-      width={'100%'}
-      sx={{
-        '& .MuiTextField-root': {
-          margin: 1,
-        },
-      }}
+    component="form"
+    onSubmit={handleSubmit}
+    onReset={handleReset}
+    noValidate
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="column"
+    width={"100%"}
     >
       {/* ---------------- Status form ------------------ */}
       <Grid container spacing={2}>
