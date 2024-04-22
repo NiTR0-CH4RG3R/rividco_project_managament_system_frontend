@@ -20,6 +20,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import FormButton from "../../../Components/StyledComponents/FormButton";
 import * as projectTestService from "../../../services/projectTestService";
 import * as systemUserService from "../../../services/systemUserService";
+import { projectTestValidation } from "./ProjectTestValidation";
+
 
 export default function ProjectServicesForm(props) {
   const { testId } = props;
@@ -126,7 +128,7 @@ export default function ProjectServicesForm(props) {
       },
     },
 
-    // validationSchema: addProjectValidation,
+    validationSchema: projectTestValidation,
 
     onSubmit: (values) => {
       setLoading(true);
@@ -196,7 +198,7 @@ export default function ProjectServicesForm(props) {
         component="form"
         onSubmit={handleSubmit}
         onReset={handleReset}
-        //noValidate
+        noValidate
         display="flex"
         justifyContent="center"
         alignItems="center"
