@@ -22,6 +22,7 @@ import Test from '../Pages/Test/Test'
 import CommisionReport from '../Pages/Project/CommisionReport'
 import TaskResourceList from '../Pages/CIA/TaskResourceList'
 import TaskResources from '../Pages/CIA/TaskResources'
+import TaskResourcesList from '../Pages/CIA/TaskResources/TaskResourcesList'
 
 export const AppRoutes = {
   home: { path: '/', component: <Home /> },
@@ -106,11 +107,11 @@ export const AppRoutes = {
   cia_edit: { path: '/cia/edit/:id', component: <Task type="edit" /> },
   cia_resources_add: {
     path: '/cia/resource/add/:id',
-    component: <TaskResourceList />,
+    component: <TaskResourcesList />,
   },
   cia_resources_view: {
     path: '/cia/resource/view/:id',
-    component: <TaskResourceList />,
+    component: <TaskResourcesList />,
   },
   cia_status: { path: '/cia/view/:id/status', component: <TaskStatus /> },
 
