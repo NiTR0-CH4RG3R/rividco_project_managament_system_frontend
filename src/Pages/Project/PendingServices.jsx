@@ -155,7 +155,7 @@ export default function PendingServices() {
                 onSearchChange: (e) => {
                   console.log(e.target.value)
                 },
-                onSearchClick: (e) => {},
+                onSearchClick: (e) => { },
               }}
               onRowClick={(e, id) => {
                 setModeType('view')
@@ -179,7 +179,8 @@ export default function PendingServices() {
                 },
               }}
               disableSearchBar
-              // customUpperBar={<UpperBar />}
+              disableAddButton
+            // customUpperBar={<UpperBar />}
             />
             <ProjectServicesPopup
               openPopUp={openPopUp}
