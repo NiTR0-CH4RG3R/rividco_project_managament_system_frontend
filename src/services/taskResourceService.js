@@ -1,8 +1,8 @@
-import { get, post, put, del } from '../api/axios'
+import { get, post, put, del, upload } from '../api/axios'
 
 const TASKRESOURCE_URL = '/TaskResource'
 
-export async function listTaskResourceService(taskId , page, itemsPerPage) {
+export async function listTaskResourceService(taskId, page, itemsPerPage) {
 
     const taskresources = []
 
@@ -46,4 +46,31 @@ export async function addTaskResource(taskresource) {
     }
 
     return addedtaskresource
+}
+
+export async function updateTaskResource(taskresource) {
+    let updatedtaskresource = {}
+
+    try {
+        const response = await put(`${TASKRESOURCE_URL}/${taskresource.id}`, taskresource)
+        updatedtaskresource = response?.data
+    } catch (error) {
+        console.error(error)
+    }
+
+    return updatedtaskresource
+}
+
+export async function uploadTaskResource(filepath) {
+
+    const file = new File([filepath], filepath);
+
+    try {
+        const response = await upload(`${TASKRESOURCE_URL}/upload`, { formFile: file });
+        return response?.data;
+    } catch (error) {
+        console.error(error)
+    }
+
+    return null;
 }
