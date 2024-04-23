@@ -29,6 +29,22 @@ export const post = async (url, data, params) => { return await axios.post(url, 
 export const put = async (url, data, params) => { return await axios.put(url, data, { params }) };
 export const del = async (url, params) => { return await axios.delete(url, { params }) };
 
+export const upload = async (url, data, params) => {
+    return await axios.post(url, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        params
+    });
+}
+
+export const download = async (url, params) => {
+    return await axios.get(url, {
+        responseType: 'blob',
+        params
+    });
+}
+
 export const secretGet = async (url, params) => { return await secretAxios.get(url, { params }) };
 export const secretPost = async (url, data, params) => { return await secretAxios.post(url, data, { params }) };
 
