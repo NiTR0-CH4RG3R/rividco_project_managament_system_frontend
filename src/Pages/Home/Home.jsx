@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import imagePath from "../Login/solar-panel-cell-on-dramatic-sunset-sky-background-free-photo.jpg";
+import logo from "../../Components/SideNavigationPanel/blueLogoAsset 1.png";
 import { useTopbarContext } from "../../Contexts/TopbarContext";
 // import * as testService from "../../services/projectTestService";
 
@@ -38,11 +39,16 @@ const Home = () => {
       overflow="hidden"
       width="100%"
       height="100%"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
     >
       <Box
         position={"fixed"}
         width={"100vw"}
         height={"100vh"}
+        zIndex={-1}
       >
         <img
           src={imagePath}
@@ -52,10 +58,12 @@ const Home = () => {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            opacity: "70%",
+            opacity: "50%",
           }}
         />
       </Box>
+      <Typography variant="h2" fontWeight={'bold'}>WELCOME TO</Typography>
+      <img src={logo} alt="companyLogo" style={{ width: "50%", maxWidth: '500px', marginTop: '10px', objectFit: 'contain' }} />
       <Box
         position={"fixed"}
         bottom={"50px"}
@@ -70,7 +78,6 @@ const Home = () => {
         borderRadius={"10px"}
         boxShadow={"0 0 10px 5px rgba(0, 0, 0, 0.5)"}
       >
-        <Typography variant="h1" fontWeight={'bold'}>WELCOME</Typography>
         <Typography variant="h1" fontWeight={'bold'}>
           {currentTime.toLocaleTimeString([], {
             hour: "2-digit",
