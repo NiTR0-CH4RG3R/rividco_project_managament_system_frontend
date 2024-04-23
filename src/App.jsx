@@ -31,7 +31,7 @@ export default function App() {
                     <Routes>
                         <Route path='/login' element={<Login />} />
                         <Route element={<PersistLogin />} >
-                            <Route element={<RequireAuth allowedRoles={['User']} />} >
+                            <Route element={<RequireAuth allowedRoles={['User', 'Admin']} />} >
                                 <Route path='/' element={<Layout />}>
                                     {routes.map((route) => (
                                         <Route key={route} path={route.path} element={route.component} />

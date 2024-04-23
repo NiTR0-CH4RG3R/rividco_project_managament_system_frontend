@@ -18,6 +18,8 @@ import * as systemUserService from "../../services/systemUserService";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Slide from "@mui/material/Slide";
+import useFileManager from "../../hooks/useFileManager";
+
 
 const roles = [
   {
@@ -33,6 +35,8 @@ const roles = [
 export default function SystemUser(props) {
   const { id } = useParams();
   const { setTitle, setSubtitle } = useTopbarContext();
+
+  const { getFileURL } = useFileManager();
 
   function loadSystemUserData(id, setValues) {
     systemUserService
@@ -50,6 +54,7 @@ export default function SystemUser(props) {
           password: systemUser.password,
           comment: systemUser.comments,
         };
+        setImagePreview(getFileURL(systemUser.profilePicture));
         setValues(systemUserValues);
       })
       .catch((error) => {
@@ -60,15 +65,15 @@ export default function SystemUser(props) {
     props.type === "add"
       ? "Add a new System User"
       : props.type === "edit"
-      ? "Edit System User"
-      : `View System User`
+        ? "Edit System User"
+        : `View System User`
   );
   setSubtitle(
     props.type === "add"
       ? "You can add new system user here."
       : props.type === "edit"
-      ? `You can edit system user id:#${id} details here.`
-      : `You can view system user id:#${id} details here.`
+        ? `You can edit system user id:#${id} details here.`
+        : `You can view system user id:#${id} details here.`
   );
 
   //const ProfilePictureUploader = () => {
@@ -106,6 +111,7 @@ export default function SystemUser(props) {
     //Display the uploaded image
     if (file) {
       //console.log('Profile picture saved:', file)
+      systemUserService.uploadSystemUserAvatar(file);
       setImagePreview(URL.createObjectURL(file));
 
       // Reset file state after saving
@@ -199,9 +205,14 @@ export default function SystemUser(props) {
     validationSchema: SystemUserValidation,
   });
 
+
+
   useEffect(() => {
+
     if (props.type !== "add") {
       loadSystemUserData(id, setValues);
+
+
     }
   }, [id]);
 

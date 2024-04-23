@@ -78,3 +78,11 @@ export async function updateSystemUser(systemUser, id) {
     console.error(error)
   }
 }
+
+export async function uploadSystemUserAvatar(file) {
+  try {
+    return await post(`${SYSTEMUSER_URL}/upload`, { formFile: file })
+  } catch (error) {
+    console.error(error)
+  }
+}
