@@ -53,13 +53,14 @@ export default function ListPage({
     onSearchChange: (e) => {
       console.log(e.target.value);
     },
-    onSearchClick: (e) => {},
+    onSearchClick: (e) => { },
   },
-  onRowClick = (e, id) => {},
-  onAddButtonClick = (e) => {},
+  onRowClick = (e, id) => { },
+  onAddButtonClick = (e) => { },
   tablePaginationProps = {},
   disableSearchBar = false,
   customUpperBar = undefined,
+  disableAddButton = false,
 
   tiptitle,
 }) {
@@ -138,30 +139,32 @@ export default function ListPage({
         <TablePagination {...tablePaginationProps} />
       </Paper>
 
-      <Box width="100%" display="flex" justifyContent="flex-end" mt={5}>
-        <Tooltip title={tiptitle}>
-          <IconButton
-            type="button"
-            sx={{
-              position: "fixed",
-              bottom: "5%",
-              right: "2%",
-              boxShadow: 3,
-              backgroundColor: "#071024",
-              color: "#FFFFFF",
-              p: 2,
-              "&:hover": {
-                backgroundColor: "#0a538f",
+      {!disableAddButton &&
+        <Box width="100%" display="flex" justifyContent="flex-end" mt={5}>
+          <Tooltip title={tiptitle}>
+            <IconButton
+              type="button"
+              sx={{
+                position: "fixed",
+                bottom: "5%",
+                right: "2%",
+                boxShadow: 3,
+                backgroundColor: "#071024",
                 color: "#FFFFFF",
-                transform: "scale(1.1)",
-              },
-            }}
-            onClick={onAddButtonClick}
-          >
-            <Add />
-          </IconButton>
-        </Tooltip>
-      </Box>
+                p: 2,
+                "&:hover": {
+                  backgroundColor: "#0a538f",
+                  color: "#FFFFFF",
+                  transform: "scale(1.1)",
+                },
+              }}
+              onClick={onAddButtonClick}
+            >
+              <Add />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      }
     </Box>
   );
 }
