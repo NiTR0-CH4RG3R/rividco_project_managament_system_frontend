@@ -1,4 +1,4 @@
-import { get, post, put, del } from '../api/axios'
+import { get, post, put } from '../api/axios'
 
 const SYSTEMUSER_URL = '/SystemUser'
 
