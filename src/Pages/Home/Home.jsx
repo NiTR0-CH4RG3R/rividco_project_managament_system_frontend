@@ -21,7 +21,7 @@ const Home = () => {
 
   const { setTitle, setSubtitle } = useTopbarContext();
   setTitle("Home");
-  setSubtitle("You can view Rividco Home page");
+  //setSubtitle("You can view Rividco Home page");
 
   const [currentTime, setDateTime] = useState(new Date());
 
