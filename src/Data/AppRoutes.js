@@ -106,7 +106,7 @@ export const AppRoutes = {
   cia_edit: { path: '/cia/edit/:id', component: <Task type="edit" /> },
   cia_resources_add: {
     path: '/cia/resource/add/:id',
-    component: <TaskResources type="add" />,
+    component: <TaskResourceList />,
   },
   cia_resources_view: {
     path: '/cia/resource/view/:id',
