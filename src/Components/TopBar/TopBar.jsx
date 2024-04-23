@@ -19,6 +19,7 @@ import SystemUser from "../../Pages/SystemUser/SystemUser";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { getSystemUser } from "../../services/systemUserService";
 import * as authService from "../../services/authService";
+import useFileManager from "../../hooks/useFileManager";
 
 export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const colorMode = useContext(ColorModeContext);
@@ -36,14 +37,16 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   const [systemUserLastName, setSystemUserLastName] = useState("");
   const [systemUserRole, setSystemUserRole] = useState("");
   const [systemUserImageLink, setSystemUserImageLink] = useState("");
-
+  const { getFileURL } = useFileManager();
   useEffect(() => {
+
+
     const fetchSystemUserData = async () => {
       try {
         const systemUser = await getSystemUser(userId);
         setSystemUserFirstName(systemUser.firstName);
         setSystemUserLastName(systemUser.lastName);
-        setSystemUserImageLink(systemUser.profilePicture);
+        setSystemUserImageLink(getFileURL(systemUser.profilePicture));
         setSystemUserRole(systemUser.role);
       } catch (error) {
         console.error("Error fetching system user data:", error);
@@ -65,7 +68,7 @@ export default function TopBar({ drawerWidth = 254, topbarHeight = 64 }) {
   }, [location.pathname]);
 
   const handleAccountButtonClick = () => {
-    navigate(AppRoutes.system_user_view.path);
+    navigate(AppRoutes.system_user_view.path.replace(":id", userId));
   };
 
   const handleBackButtonClick = () => {
