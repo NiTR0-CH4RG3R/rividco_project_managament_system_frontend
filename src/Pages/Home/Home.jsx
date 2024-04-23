@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Grid, Item } from "react";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import imagePath from "../Login/solar-panel-cell-on-dramatic-sunset-sky-background-free-photo.jpg";
@@ -32,93 +33,150 @@ const Home = () => {
   }, []);
 
   return (
-    <>
-      <Container>
-        <div
+    <Box
+      objectFit="cover"
+      overflow="hidden"
+      width="100%"
+      height="100%"
+    >
+      <Box
+        position={"fixed"}
+        width={"100vw"}
+        height={"100vh"}
+      >
+        <img
+          src={imagePath}
+          alt="companyLogo"
           style={{
-            position: "fixed",
-            marginTop: "-23%",
-            marginLeft: "-5%",
-            width: "100vw",
-            height: "100vh",
-            opacity: "50%",
+            overflow: "hidden",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            opacity: "70%",
           }}
-        >
-          <img
-            src={imagePath}
-            alt="companyLogo"
-            style={{ overflow: "hidden", width: "100%", height: "100%" }}
-          />
-        </div>
+        />
+      </Box>
+      <Box
+        position={"fixed"}
+        bottom={"50px"}
+        right={"50px"}
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"center"}
+        alignItems={"flex-end"}
+        color={"white"}
+        backgroundColor={"rgba(0, 0, 0, 0.5)"}
+        padding={"20px"}
+        borderRadius={"10px"}
+        boxShadow={"0 0 10px 5px rgba(0, 0, 0, 0.5)"}
+      >
+        <Typography variant="h1" fontWeight={'bold'}>WELCOME</Typography>
+        <Typography variant="h1" fontWeight={'bold'}>
+          {currentTime.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          })}
+        </Typography>
+        <Typography variant="h5" fontWeight={'bold'}>
+          {currentTime.toLocaleDateString(undefined, {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </Typography>
+      </Box>
 
-        <div
-          style={{
-            position: "fixed",
-            marginTop: "-18%",
-            marginLeft: "0%",
-            width: "75vw",
-            height: "100vh",
-            opacity: "100%",
-          }}
-        >
-          <Typography
-            variant="h1"
-            style={{
-              fontWeight: "bold",
-              fontSize: "65px",
-            }}
-          >
-            <p style={{ textAlign: "center", color: "#071024" }}>
-              Welcome to RIVIDCO PROJECTS!
-            </p>
-          </Typography>
-        </div>
+    </Box>
 
-        <div
-          style={{
-            position: "fixed",
-            marginTop: "-7%",
-            marginLeft: "0%",
-            width: "75vw",
-            height: "100vh",
-            opacity: "80%",
-          }}
-        >
-          <Typography
-            variant="h1"
-            style={{
-              marginBottom: "5px",
-              fontSize: "60px",
-              fontWeight: "Bold",
-              textAlign: "center",
-              color: "#071024",
-            }}
-          >
-            {currentTime.toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: true,
-            })}
-          </Typography>
-          <Typography
-            variant="h1"
-            style={{
-              fontWeight: "bold",
-              textAlign: "center",
-              color: "#071024",
-              fontSize: "30px",
-            }}
-          >
-            {currentTime.toLocaleDateString(undefined, {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </Typography>
-        </div>
-      </Container>
-    </>
+    // <>
+    //   <Container>
+    //     <div
+    //       style={{
+    //         position: "fixed",
+    //         marginTop: "-23%",
+    //         marginLeft: "-5%",
+    //         width: "100vw",
+    //         height: "100vh",
+    //         opacity: "50%",
+    //       }}
+    //     >
+    //       <img
+    //         src={imagePath}
+    //         alt="companyLogo"
+    //         style={{ overflow: "hidden", width: "100%", height: "100%" }}
+    //       />
+    //     </div>
+
+    //     <div
+    //       style={{
+    //         position: "fixed",
+    //         marginTop: "-18%",
+    //         marginLeft: "0%",
+    //         width: "75vw",
+    //         height: "100vh",
+    //         opacity: "100%",
+    //       }}
+    //     >
+    //       <Typography
+    //         variant="h1"
+    //         style={{
+    //           fontWeight: "bold",
+    //           fontSize: "65px",
+    //         }}
+    //       >
+    //         <p style={{ textAlign: "center", color: "#071024" }}>
+    //           Welcome to RIVIDCO PROJECTS!
+    //         </p>
+    //       </Typography>
+    //     </div>
+
+    //     <div
+    //       style={{
+    //         position: "fixed",
+    //         marginTop: "-7%",
+    //         marginLeft: "0%",
+    //         width: "75vw",
+    //         height: "100vh",
+    //         opacity: "80%",
+    //       }}
+    //     >
+    //       <Typography
+    //         variant="h1"
+    //         style={{
+    //           marginBottom: "5px",
+    //           fontSize: "60px",
+    //           fontWeight: "Bold",
+    //           textAlign: "center",
+    //           color: "#071024",
+    //         }}
+    //       >
+    //         {currentTime.toLocaleTimeString([], {
+    //           hour: "2-digit",
+    //           minute: "2-digit",
+    //           hour12: true,
+    //         })}
+    //       </Typography>
+    //       <Typography
+    //         variant="h1"
+    //         style={{
+    //           fontWeight: "bold",
+    //           textAlign: "center",
+    //           color: "#071024",
+    //           fontSize: "30px",
+    //         }}
+    //       >
+    //         {currentTime.toLocaleDateString(undefined, {
+    //           weekday: "long",
+    //           year: "numeric",
+    //           month: "long",
+    //           day: "numeric",
+    //         })}
+    //       </Typography>
+    //     </div>
+    //   </Container>
+    // </>
   );
 };
 
